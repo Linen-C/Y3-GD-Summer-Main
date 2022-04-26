@@ -6,16 +6,16 @@ using UnityEngine.UI;
 public class PlayerCTRL : MonoBehaviour
 {
     // 変数
-    public float moveSpeed;     // 移動速度
-    public GameCTRL gameCTRL;   // ゲームコントローラー
-    public int defWeponCooldown;   // クールダウン仮
+    public float moveSpeed;        // 移動速度
+    public GameCTRL gameCTRL;      // ゲームコントローラー
+    public int needWeponCharge;   // クールダウン仮
 
     // キャンパス
     public Text cooldownText;   // クールダウン表示用
 
     // 定数
-    private float cashTime = 0; // 先行入力用のキャッシュタイム
-    private int weponCooldown = 0;  // クールダウン仮
+    private int weponCharge = 1;      // クールダウン仮
+    private bool coolDownReset = false; // クールダウンのリセットフラグ
 
     // コンポーネント
     Rigidbody2D body;
@@ -24,41 +24,48 @@ public class PlayerCTRL : MonoBehaviour
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
-        weponCooldown = defWeponCooldown;
     }
 
 
     void Update()
     {
+        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
         // 移動
+        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
         body.velocity = new Vector2(
             Input.GetAxis("Horizontal") * moveSpeed, Input.GetAxis("Vertical") * moveSpeed);
 
-
-        if (gameCTRL.Metronome() && weponCooldown > 0)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            weponCooldown--;
+            Debug.Log("doge");
         }
-        cooldownText.text = "COOL:" + weponCooldown;
 
+        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
 
-        if (gameCTRL.SendSignal())
+        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+        // 攻撃・クールダウン
+        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+        if (Input.GetMouseButtonDown(0) && weponCharge == needWeponCharge && gameCTRL.SendSignal())
         {
-            if (Input.GetMouseButtonDown(0))
+            Debug.Log("ATTACK");
+            coolDownReset = true;
+        }
+
+        if (gameCTRL.Metronome())
+        {
+            if (coolDownReset == true)
             {
-                cashTime = 0.2f;
+                weponCharge = 1;
+                coolDownReset = false;
+            }
+            else if (weponCharge < needWeponCharge)
+            {
+                weponCharge++;
             }
         }
+        cooldownText.text = "COOL:" + weponCharge;
+        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
 
-        if (weponCooldown == 0 && gameCTRL.Metronome())
-        {
-            if (cashTime >= 0.0f)
-            {
-                Debug.Log("ATTACK");
-                weponCooldown = defWeponCooldown;
-            }
-        }
-
-        if (cashTime >= 0.0f) { cashTime -= Time.deltaTime; }
     }
+
 }

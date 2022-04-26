@@ -413,7 +413,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 15
   gameCTRL: {fileID: 1784820707}
-  defWeponCooldown: 4
+  needWeponCharge: 4
   cooldownText: {fileID: 1410366323}
 --- !u!70 &444358876
 CapsuleCollider2D:
@@ -1161,7 +1161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0666a689f20f1e54e87726f13117c2c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bpm: 60
+  bpm: 120
   bpmText: {fileID: 1619903086}
   timingText: {fileID: 1153238230}
   metronomeText: {fileID: 2074526216}

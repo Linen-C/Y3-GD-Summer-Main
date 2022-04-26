@@ -16,6 +16,7 @@ public class GameCTRL : MonoBehaviour
     // 定数
     private float timing = 0.0f;    // メトロノーム用
     private bool metronome = false; // メトロノームシグナル
+    private bool metronomeFlap = false;
     private bool doSignal = false;  // シグナル送信用
 
     // コンポーネント
@@ -36,21 +37,26 @@ public class GameCTRL : MonoBehaviour
             doSignal = true;
             timingText.text = "true";
         }
-        
-        if (timing <= 0.0f)
+
+        if (timing <= 0.0f && metronomeFlap == false)
         {
             metronome = true;
             metronomeText.text = "PULSE";
+            metronomeFlap = true;
         }
         else
         {
             metronome = false;
-            metronomeText.text = "";
+            if (metronomeFlap == false)
+            {
+                metronomeText.text = "";
+            }
         }
 
         if (timing <= -0.2f)
         {
             doSignal = false;
+            metronomeFlap = false;
             BpmReset();
             timingText.text = "false";
         }
