@@ -9,6 +9,7 @@ public class PlayerCTRL : MonoBehaviour
     public float moveSpeed;        // 移動速度
     public GameCTRL gameCTRL;      // ゲームコントローラー
     public int needWeponCharge;   // クールダウン仮
+    public GameObject Cursor;   // カーソル取得(多分これが一番早い)
 
     // キャンパス
     public Text cooldownText;   // クールダウン表示用
@@ -38,14 +39,17 @@ public class PlayerCTRL : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Debug.Log("doge");
+            //var rot = Cursor.transform.rotation;
+            body.AddForce(transform.right * 50.0f, ForceMode2D.Impulse);
         }
 
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
 
+
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
         // 攻撃・クールダウン
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-        if (Input.GetMouseButtonDown(0) && weponCharge == needWeponCharge && gameCTRL.SendSignal())
+        if (Input.GetMouseButtonDown(0) && (weponCharge == needWeponCharge) && gameCTRL.SendSignal())
         {
             Debug.Log("ATTACK");
             coolDownReset = true;
@@ -66,6 +70,29 @@ public class PlayerCTRL : MonoBehaviour
         cooldownText.text = "COOL:" + weponCharge;
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
 
+
+        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+        // カーソル回転
+        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+
+        // 自分の位置
+        Vector2 transPos = transform.position;
+        //Debug.Log("tX" + transPos.x + "_" + "tY" + transPos.y);
+
+        // スクリーン座標系のマウス座標をワールド座標系に修正
+        Vector2 mouseRawPos = Input.mousePosition;
+        Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(mouseRawPos);
+        //Debug.Log("mX" + mouseWorldPos.x + "_"+ "mY" + mouseWorldPos.y);
+
+        // ベクトルを計算
+        Vector2 diff = (mouseWorldPos - transPos).normalized;
+
+        // 回転に代入
+        var curRot = Quaternion.FromToRotation(Vector3.up, diff);
+
+        // カーソルくんにパス
+        Cursor.GetComponent<Transform>().rotation = curRot;
+        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     }
 
 }

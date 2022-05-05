@@ -14,6 +14,10 @@ public class PlayerCURSOR : MonoBehaviour
 
     void Update()
     {
+        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+        // カーソル回転
+        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+
         // 自分の位置
         Vector2 transPos = transform.position;
         //Debug.Log("tX" + transPos.x + "_" + "tY" + transPos.y);
@@ -28,5 +32,19 @@ public class PlayerCURSOR : MonoBehaviour
 
         // 回転に代入
         transform.rotation = Quaternion.FromToRotation(Vector3.up, diff);
+        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+
+        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+        // 攻撃発生
+        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+
+        /*
+         *１）攻撃シグナルを受け取る
+         *２）武器情報を受け取る
+         *３）攻撃関数を呼び出し
+         *４）武器情報を元に攻撃を発生させる
+         */
+
+        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     }
 }
