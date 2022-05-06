@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerCTRL : MonoBehaviour
 {
-    // 変数
+    // パブリック変数
     public float moveSpeed;        // 移動速度
     public GameCTRL gameCTRL;      // ゲームコントローラー
     public int needWeponCharge;   // クールダウン仮
@@ -14,7 +14,7 @@ public class PlayerCTRL : MonoBehaviour
     // キャンパス
     public Text cooldownText;   // クールダウン表示用
 
-    // 定数
+    // プライベート変数
     private int weponCharge = 1;      // クールダウン仮
     private bool coolDownReset = false; // クールダウンのリセットフラグ
 
@@ -30,47 +30,34 @@ public class PlayerCTRL : MonoBehaviour
 
     void Update()
     {
+        Move();
+        CursorRot();
+        Attack();
+    }
+
+
+    void Move()
+    {
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
         // 移動
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
         body.velocity = new Vector2(
             Input.GetAxis("Horizontal") * moveSpeed, Input.GetAxis("Vertical") * moveSpeed);
 
+        /*
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Debug.Log("doge");
             //var rot = Cursor.transform.rotation;
             body.AddForce(transform.right * 50.0f, ForceMode2D.Impulse);
         }
-
+        */
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+    }
 
 
-        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-        // 攻撃・クールダウン
-        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-        if (Input.GetMouseButtonDown(0) && (weponCharge == needWeponCharge) && gameCTRL.SendSignal())
-        {
-            Debug.Log("ATTACK");
-            coolDownReset = true;
-        }
-
-        if (gameCTRL.Metronome())
-        {
-            if (coolDownReset == true)
-            {
-                weponCharge = 1;
-                coolDownReset = false;
-            }
-            else if (weponCharge < needWeponCharge)
-            {
-                weponCharge++;
-            }
-        }
-        cooldownText.text = "COOL:" + weponCharge;
-        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-
-
+    void CursorRot()
+    {
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
         // カーソル回転
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
@@ -95,4 +82,52 @@ public class PlayerCTRL : MonoBehaviour
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     }
 
+
+    void Attack()
+    {
+        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+        // 攻撃・クールダウン
+        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+        if (Input.GetMouseButtonDown(0) && (weponCharge == needWeponCharge) && gameCTRL.SendSignal())
+        {
+            Debug.Log("ATTACK");
+            UseWepon();
+            coolDownReset = true;
+        }
+
+        if (gameCTRL.Metronome())
+        {
+            if (coolDownReset == true)
+            {
+                weponCharge = 1;
+                coolDownReset = false;
+            }
+            else if (weponCharge < needWeponCharge)
+            {
+                weponCharge++;
+            }
+        }
+        cooldownText.text = "COOL:" + weponCharge;
+        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+    }
+
+    void UseWepon()
+    {
+
+
+
+        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+        // 攻撃発生
+        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+
+
+
+        /*
+         *１）関数呼び出し
+         *２）武器情報を受け取る
+         *３）武器情報を元に攻撃を発生させる
+         */
+
+        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+    }
 }
