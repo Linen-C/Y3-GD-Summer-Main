@@ -10,7 +10,8 @@ public class TestScrept : MonoBehaviour
     void Start()
     {
         // ファイルパスを指定(Assetsから始まるっぽい)
-        string filePath = Application.dataPath + @"\Screpts\File\test.txt";
+        //string filePath = Application.dataPath + @"\Screpts\File\test.txt";
+        string filePath = Application.dataPath + @"\Files\test.txt";
 
         // データストリームで読み出し
         StreamReader sr = new StreamReader(filePath, Encoding.UTF8);

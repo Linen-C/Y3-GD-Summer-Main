@@ -18,6 +18,8 @@ public class PlayerCTRL : MonoBehaviour
     private int weponCharge = 1;      // クールダウン仮
     private bool coolDownReset = false; // クールダウンのリセットフラグ
 
+    private float dogeTimer = 0;
+
     // コンポーネント
     Rigidbody2D body;
 
@@ -30,9 +32,9 @@ public class PlayerCTRL : MonoBehaviour
 
     void Update()
     {
-        Move();
         CursorRot();
         Attack();
+        Move();
     }
 
 
@@ -44,14 +46,21 @@ public class PlayerCTRL : MonoBehaviour
         body.velocity = new Vector2(
             Input.GetAxis("Horizontal") * moveSpeed, Input.GetAxis("Vertical") * moveSpeed);
 
-        /*
-        if (Input.GetKeyDown(KeyCode.Space))
+
+
+
+        if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             Debug.Log("doge");
-            //var rot = Cursor.transform.rotation;
-            body.AddForce(transform.right * 50.0f, ForceMode2D.Impulse);
+            dogeTimer = 0.2f;
         }
-        */
+
+        if (dogeTimer > 0.0f)
+        {
+            body.AddForce(new Vector2(30.0f, 0f), ForceMode2D.Impulse);
+            dogeTimer -= Time.deltaTime;
+        }
+
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     }
 
@@ -119,8 +128,6 @@ public class PlayerCTRL : MonoBehaviour
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
         // 攻撃発生
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-
-
 
         /*
          *１）関数呼び出し
