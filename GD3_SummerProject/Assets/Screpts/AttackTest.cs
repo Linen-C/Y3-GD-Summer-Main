@@ -20,17 +20,18 @@ public class AttackTest : MonoBehaviour
         coll = GetComponent<BoxCollider2D>();
 
         coll.enabled = false;
-        time = defTime;
     }
 
     void Update()
     {
+        /*
         if(Input.GetKeyDown(KeyCode.Space) && (time < 0))
         {
             coll.enabled = true;
             time = defTime;
             Debug.Log("ãNìÆ");
         }
+        */
 
         if (time > 0)
         {
@@ -40,10 +41,19 @@ public class AttackTest : MonoBehaviour
         {
             coll.enabled = false;
         }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            transform.localPosition = new Vector3(0.0f, 3.0f, 0.0f);
+            transform.localScale = new Vector3(1.0f, 3.0f, 1.0f);
+        }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void Attacking()
     {
-        Destroy(gameObject);
+        coll.enabled = true;
+        time = defTime;
+        Debug.Log("îªíËî≠ê∂");
     }
+
 }

@@ -7,6 +7,9 @@ using System.Text;
 
 public class TestScrept : MonoBehaviour
 {
+    public string weponName;
+    public string coolDown;
+
     void Start()
     {
         // ファイルパスを指定(Assetsから始まるっぽい)
@@ -16,11 +19,17 @@ public class TestScrept : MonoBehaviour
         // データストリームで読み出し
         StreamReader sr = new StreamReader(filePath, Encoding.UTF8);
 
+        weponName = sr.ReadLine();
+
+        /*
         // 中身がなくなるまで繰り返す
         while (!sr.EndOfStream)
         {
-            // デバッグ出力ぅ
+            // デバッグ出力
             Debug.Log("読み込み内容：" + sr.ReadLine());
         }
+        */
+
+        sr.Close();
     }
 }

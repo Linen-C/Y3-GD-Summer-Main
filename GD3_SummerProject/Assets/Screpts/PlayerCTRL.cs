@@ -10,6 +10,8 @@ public class PlayerCTRL : MonoBehaviour
     public GameCTRL gameCTRL;      // ゲームコントローラー
     public int needWeponCharge;   // クールダウン仮
     public GameObject Cursor;   // カーソル取得(多分これが一番早い)
+    public float dashPower; // ダッシュパワー
+    public PlayerWeapon weapon;   // 攻撃のテスト用
 
     // キャンパス
     public Text cooldownText;   // クールダウン表示用
@@ -17,8 +19,7 @@ public class PlayerCTRL : MonoBehaviour
     // プライベート変数
     private int weponCharge = 1;      // クールダウン仮
     private bool coolDownReset = false; // クールダウンのリセットフラグ
-
-    private float dogeTimer = 0;
+    private float dogeTimer = 0;    // 回避用のタイマー
 
     // コンポーネント
     Rigidbody2D body;
@@ -32,32 +33,43 @@ public class PlayerCTRL : MonoBehaviour
 
     void Update()
     {
-        CursorRot();
+
+        var padName = Input.GetJoystickNames();
+        if (padName[0] == "") { CursorRotMouse(); }
+        else { CursorRotStick(); }
+
         Attack();
         Move();
-    }
 
+        if (Input.GetMouseButtonDown(1))
+        {
+            needWeponCharge = weapon.SwapoWeapon(); // 必要クールダウン上書き   
+            weponCharge = 0;    // 現クールダウンを上書き
+        }
+    }
 
     void Move()
     {
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
         // 移動
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+
         body.velocity = new Vector2(
             Input.GetAxis("Horizontal") * moveSpeed, Input.GetAxis("Vertical") * moveSpeed);
 
+        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+        // 回避
+        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
 
-
-
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.JoystickButton4)) && gameCTRL.SendSignal())
         {
             Debug.Log("doge");
-            dogeTimer = 0.2f;
+            dogeTimer = 0.1f;
         }
 
         if (dogeTimer > 0.0f)
         {
-            body.AddForce(new Vector2(30.0f, 0f), ForceMode2D.Impulse);
+            body.AddForce(new Vector2(Input.GetAxis("Horizontal") * dashPower, Input.GetAxis("Vertical") * dashPower), ForceMode2D.Impulse);
             dogeTimer -= Time.deltaTime;
         }
 
@@ -65,10 +77,10 @@ public class PlayerCTRL : MonoBehaviour
     }
 
 
-    void CursorRot()
+    void CursorRotMouse()
     {
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-        // カーソル回転
+        // カーソル回転（マウス）
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
 
         // 自分の位置
@@ -88,6 +100,28 @@ public class PlayerCTRL : MonoBehaviour
 
         // カーソルくんにパス
         Cursor.GetComponent<Transform>().rotation = curRot;
+
+        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+    }
+
+    void CursorRotStick()
+    {
+        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+        // カーソル回転（スティック）
+        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+
+        var h = Input.GetAxisRaw("Horizontal2");
+        var v = Input.GetAxisRaw("Vertical2");
+
+        if (h == 0 && v == 0)
+            return;
+
+        float radian = Mathf.Atan2(h, v) * Mathf.Rad2Deg;
+
+        if (radian < 0){ radian += 360; }
+
+        Cursor.GetComponent<Transform>().rotation = Quaternion.Euler(0, 0, radian);
+
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     }
 
@@ -97,10 +131,17 @@ public class PlayerCTRL : MonoBehaviour
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
         // 攻撃・クールダウン
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-        if (Input.GetMouseButtonDown(0) && (weponCharge == needWeponCharge) && gameCTRL.SendSignal())
+
+        if ((Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.JoystickButton5))
+            && (weponCharge == needWeponCharge) && gameCTRL.SendSignal())
         {
             Debug.Log("ATTACK");
-            UseWepon();
+
+            // 注意：仮スクリプト！
+            // ＝＝＝＝＝ ＝＝＝＝＝ //
+            weapon.Attacking();
+            // ＝＝＝＝＝ ＝＝＝＝＝ //
+
             coolDownReset = true;
         }
 
@@ -117,23 +158,19 @@ public class PlayerCTRL : MonoBehaviour
             }
         }
         cooldownText.text = "COOL:" + weponCharge;
+
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     }
 
-    void UseWepon()
+    void GetWepon()
     {
 
-
-
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-        // 攻撃発生
+        // 武器取得
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
 
-        /*
-         *１）関数呼び出し
-         *２）武器情報を受け取る
-         *３）武器情報を元に攻撃を発生させる
-         */
+        needWeponCharge = 2;    // 必要クールダウン上書き
+        weponCharge = 1;    // 現クールダウンを上書き
 
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     }
