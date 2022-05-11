@@ -35,8 +35,8 @@ public class PlayerCTRL : MonoBehaviour
     {
 
         var padName = Input.GetJoystickNames();
-        if (padName[0] == "") { CursorRotMouse(); }
-        else { CursorRotStick(); }
+        if (padName.Length > 0) { CursorRotStick(); }
+        else { CursorRotMouse(); }
 
         Attack();
         Move();
