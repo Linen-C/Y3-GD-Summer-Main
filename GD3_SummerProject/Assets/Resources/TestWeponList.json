@@ -1,0 +1,16 @@
+{
+  "weponList":[
+  {
+    "name": "testBat",
+    "cool": 4,
+    "height": 3,
+    "wideth": 6
+  },
+  {
+    "name": "testSpike",
+    "cool": 2,
+    "height": 6,
+    "wideth": 2
+    }
+  ]
+}
