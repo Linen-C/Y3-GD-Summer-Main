@@ -7,19 +7,30 @@ public class PlayerCTRL : MonoBehaviour
 {
     // パブリック変数
     public float moveSpeed;        // 移動速度
-    public GameCTRL gameCTRL;      // ゲームコントローラー
-    public int needWeponCharge;   // クールダウン仮
-    public GameObject Cursor;   // カーソル取得(多分これが一番早い)
     public float dashPower; // ダッシュパワー
+
+    public int needCharge;  // 遠距離攻撃に必要なチャージ
+    public int nowCharge;   // 現在のチャージ
+
+    // ゲームオブジェクト
+    public GameObject Cursor;   // カーソル取得(多分これが一番早い)
+
+    // スクリプト
+    public GameCTRL gameCTRL;      // ゲームコントローラー
+    public jsonInput inputList; // jsonファイルからの取得
     public PlayerWeapon weapon;   // 攻撃のテスト用
 
     // キャンパス
     public Text cooldownText;   // クールダウン表示用
 
     // プライベート変数
-    private int weponCharge = 1;      // クールダウン仮
+    private int needWeponCharge = 0;   // 必要クールダウン
+    private int weponCharge = 1;      // 現在クールダウン
     private bool coolDownReset = false; // クールダウンのリセットフラグ
     private float dogeTimer = 0;    // 回避用のタイマー
+    WeponList weponList;
+
+    private int weponNo = 0; // 所持している武器番号(0～1)
 
     // コンポーネント
     Rigidbody2D body;
@@ -28,6 +39,10 @@ public class PlayerCTRL : MonoBehaviour
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
+        weponList = inputList.SendList();
+        nowCharge = 0;  // 仮で初期化
+
+        needWeponCharge = weapon.SwapoWeapon(weponList, 0);
     }
 
 
@@ -40,12 +55,42 @@ public class PlayerCTRL : MonoBehaviour
 
         Attack();
         Move();
+        SwapWepon();
+        Shooting();
 
-        if (Input.GetMouseButtonDown(1))
+    }
+
+
+    void Attack()
+    {
+        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+        // 攻撃・クールダウン
+        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+
+        if ((Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.JoystickButton5))
+            && (weponCharge == needWeponCharge) && gameCTRL.SendSignal())
         {
-            needWeponCharge = weapon.SwapoWeapon(); // 必要クールダウン上書き   
-            weponCharge = 0;    // 現クールダウンを上書き
+            Debug.Log("ATTACK");
+            weapon.Attacking();
+
+            coolDownReset = true;
         }
+
+        if (gameCTRL.Metronome())
+        {
+            if (coolDownReset == true)
+            {
+                weponCharge = 1;
+                coolDownReset = false;
+            }
+            else if (weponCharge < needWeponCharge)
+            {
+                weponCharge++;
+            }
+        }
+        cooldownText.text = "COOL:" + weponCharge;
+
+        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     }
 
     void Move()
@@ -75,7 +120,6 @@ public class PlayerCTRL : MonoBehaviour
 
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     }
-
 
     void CursorRotMouse()
     {
@@ -125,53 +169,47 @@ public class PlayerCTRL : MonoBehaviour
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     }
 
-
-    void Attack()
+    void SwapWepon()
     {
-        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-        // 攻撃・クールダウン
-        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-
-        if ((Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.JoystickButton5))
-            && (weponCharge == needWeponCharge) && gameCTRL.SendSignal())
+        if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Q))
         {
-            Debug.Log("ATTACK");
-
-            // 注意：仮スクリプト！
-            // ＝＝＝＝＝ ＝＝＝＝＝ //
-            weapon.Attacking();
-            // ＝＝＝＝＝ ＝＝＝＝＝ //
-
-            coolDownReset = true;
-        }
-
-        if (gameCTRL.Metronome())
-        {
-            if (coolDownReset == true)
+            switch (weponNo)
             {
-                weponCharge = 1;
-                coolDownReset = false;
+                case 0:
+                    weponNo = 1;
+                    break;
+                case 1:
+                    weponNo = 2;
+                break;
+                case 2:
+                    weponNo = 0;
+                break;
+                default:
+                    weponNo = 0;
+                    break;
             }
-            else if (weponCharge < needWeponCharge)
-            {
-                weponCharge++;
-            }
-        }
-        cooldownText.text = "COOL:" + weponCharge;
 
-        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+            needWeponCharge = weapon.SwapoWeapon(weponList, weponNo); // 必要クールダウン上書き   
+            weponCharge = 0;    // 現クールダウンを上書き
+        }
     }
 
-    void GetWepon()
+    void Shooting()
     {
-
-        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-        // 武器取得
-        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-
-        needWeponCharge = 2;    // 必要クールダウン上書き
-        weponCharge = 1;    // 現クールダウンを上書き
-
-        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+        if (gameCTRL.SendSignal())
+        {
+            if (nowCharge == needCharge && Input.GetMouseButton(1))
+            {
+                // 遠距離攻撃発生
+                Debug.Log("遠距離攻撃");
+                nowCharge = 0;
+            }
+        }
     }
+
+    public void GetCharge()
+    {
+        if (nowCharge < needCharge) { nowCharge += 1; }
+    }
+
 }

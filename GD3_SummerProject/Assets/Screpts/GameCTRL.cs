@@ -12,6 +12,7 @@ public class GameCTRL : MonoBehaviour
     public Text bpmText;    // BPM表記
     public Text timingText; // 仮タイミング表記
     public Text metronomeText;  // メトロノームシグナル表示
+    public Image beatImage;
 
     // 定数
     private float timing = 0.0f;    // メトロノーム用
@@ -36,6 +37,7 @@ public class GameCTRL : MonoBehaviour
         {
             doSignal = true;
             timingText.text = "true";
+            beatImage.color = Color.red;
         }
 
         if (timing <= 0.0f && metronomeFlap == false)
@@ -59,6 +61,7 @@ public class GameCTRL : MonoBehaviour
             metronomeFlap = false;
             BpmReset();
             timingText.text = "false";
+            beatImage.color = Color.white;
         }
 
         timing -= Time.deltaTime;

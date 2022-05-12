@@ -1,16 +1,25 @@
 {
-  "weponList":[
-  {
-    "name": "testBat",
-    "cool": 4,
-    "height": 3,
-    "wideth": 6
-  },
-  {
-    "name": "testSpike",
-    "cool": 2,
-    "height": 6,
-    "wideth": 2
+  "weponList": [
+    {
+      "name": "testBat",
+      "cool": 4,
+      "wideth": 4,
+      "height": 2,
+      "offset": 2.5
+    },
+    {
+      "name": "testSpike",
+      "cool": 2,
+      "wideth": 1,
+      "height": 3,
+      "offset": 3.0
+    },
+    {
+      "name": "testLance",
+      "cool": 6,
+      "wideth": 2,
+      "height": 5,
+      "offset": 4.0
     }
   ]
 }

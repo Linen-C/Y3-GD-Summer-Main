@@ -6,13 +6,20 @@ public class EnemyCTRL : MonoBehaviour
 {
     // パブリック変数
     public float moveSpeed;        // 移動速度
-    //public int needWeponCharge;   // クールダウン
+    public int needWeponCharge;   // 必要クールダウン
+    public float knockBackPower;    // かかるノックバックの強さ
+
+    // スクリプト
+    public GameCTRL gameCTRL;
+
     public GameObject Cursor;   // カーソル取得(多分これが一番早い)
     public GameObject Player;   // プレイヤー
 
     // プライベート変数
-    //private int weponCharge = 1;      // クールダウン仮
+    public int weponCharge = 1;      // 現在クールダウン
+    private bool coolDownReset = false; // クールダウンのリセットフラグ
     private Vector2 diff;   // プレイヤーの方向
+    private float knockBack = 0;    // ノックバック時間カウンター
 
     // コンポーネント
     Rigidbody2D body;
@@ -25,11 +32,41 @@ public class EnemyCTRL : MonoBehaviour
 
     void Update()
     {
+        Attack();
         TracePlayer();
         CursorRot();
         Move();
     }
 
+
+    void Attack()
+    {
+        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+        // 攻撃・クールダウン
+        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+
+        if ((weponCharge == needWeponCharge) && gameCTRL.SendSignal() && coolDownReset == false)
+        {
+            Debug.Log("ENEMY_ATTACK");
+
+            coolDownReset = true;
+        }
+
+        if (gameCTRL.Metronome())
+        {
+            if (coolDownReset == true)
+            {
+                weponCharge = 1;
+                coolDownReset = false;
+            }
+            else if (weponCharge < needWeponCharge)
+            {
+                weponCharge++;
+            }
+        }
+
+        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+    }
 
     void TracePlayer()
     {
@@ -67,15 +104,27 @@ public class EnemyCTRL : MonoBehaviour
         // 移動
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
 
-        // プレイヤーに向かって移動するだけのヤツだけど一応関数化
-        body.velocity = new Vector2(diff.x * moveSpeed, diff.y * moveSpeed);
+        if(knockBack > 0.0f)
+        {
+            body.AddForce(new Vector2(
+                -diff.x * knockBackPower,
+                -diff.y * knockBackPower),
+                ForceMode2D.Impulse);
+
+            knockBack -= Time.deltaTime;
+        }
+        else
+        {
+            body.velocity = new Vector2(diff.x * moveSpeed, diff.y * moveSpeed);
+        }
 
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("「いてっ！」");
+        knockBack = 0.1f;
+        //Debug.Log("「いてっ！」");
     }
 
 }

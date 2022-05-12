@@ -42,11 +42,13 @@ public class AttackTest : MonoBehaviour
             coll.enabled = false;
         }
 
+        /*
         if (Input.GetMouseButtonDown(1))
         {
             transform.localPosition = new Vector3(0.0f, 3.0f, 0.0f);
             transform.localScale = new Vector3(1.0f, 3.0f, 1.0f);
         }
+        */
     }
 
     public void Attacking()
