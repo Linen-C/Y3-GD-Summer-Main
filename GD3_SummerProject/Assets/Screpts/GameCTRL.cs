@@ -10,8 +10,6 @@ public class GameCTRL : MonoBehaviour
 
     // キャンバス
     public Text bpmText;    // BPM表記
-    public Text timingText; // 仮タイミング表記
-    public Text metronomeText;  // メトロノームシグナル表示
     public Image beatImage;
 
     // 定数
@@ -36,14 +34,12 @@ public class GameCTRL : MonoBehaviour
         if (timing <= 0.2f)
         {
             doSignal = true;
-            timingText.text = "true";
             beatImage.color = Color.red;
         }
 
         if (timing <= 0.0f && metronomeFlap == false)
         {
             metronome = true;
-            metronomeText.text = "PULSE";
             metronomeFlap = true;
         }
         else
@@ -51,7 +47,6 @@ public class GameCTRL : MonoBehaviour
             metronome = false;
             if (metronomeFlap == false)
             {
-                metronomeText.text = "";
             }
         }
 
@@ -60,7 +55,6 @@ public class GameCTRL : MonoBehaviour
             doSignal = false;
             metronomeFlap = false;
             BpmReset();
-            timingText.text = "false";
             beatImage.color = Color.white;
         }
 

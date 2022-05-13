@@ -8,9 +8,11 @@ public class EnemyCTRL : MonoBehaviour
     public float moveSpeed;        // 移動速度
     public int needWeponCharge;   // 必要クールダウン
     public float knockBackPower;    // かかるノックバックの強さ
+    public float defNonDamageTime;  // デフォルト無敵時間
 
     // スクリプト
-    public GameCTRL gameCTRL;
+    public GameCTRL gameCTRL;   // メトロノーム受け取り用
+    public EnemyWepon ownWepon; // 所持武器
 
     public GameObject Cursor;   // カーソル取得(多分これが一番早い)
     public GameObject Player;   // プレイヤー
@@ -20,6 +22,7 @@ public class EnemyCTRL : MonoBehaviour
     private bool coolDownReset = false; // クールダウンのリセットフラグ
     private Vector2 diff;   // プレイヤーの方向
     private float knockBack = 0;    // ノックバック時間カウンター
+    private float NonDamageTime = 0;    // 無敵時間
 
     // コンポーネント
     Rigidbody2D body;
@@ -36,6 +39,8 @@ public class EnemyCTRL : MonoBehaviour
         TracePlayer();
         CursorRot();
         Move();
+
+        if (NonDamageTime > 0) { NonDamageTime -= Time.deltaTime; }
     }
 
 
@@ -48,6 +53,7 @@ public class EnemyCTRL : MonoBehaviour
         if ((weponCharge == needWeponCharge) && gameCTRL.SendSignal() && coolDownReset == false)
         {
             Debug.Log("ENEMY_ATTACK");
+            ownWepon.Attacking();
 
             coolDownReset = true;
         }
@@ -91,6 +97,11 @@ public class EnemyCTRL : MonoBehaviour
         // カーソル回転
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
 
+        if ((weponCharge == 1) || (weponCharge == needWeponCharge - 1))
+        {
+            return;
+        }
+
         // 回転に代入
         var curRot = Quaternion.FromToRotation(Vector3.up, diff);
 
@@ -123,7 +134,11 @@ public class EnemyCTRL : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        knockBack = 0.1f;
+        if ((collision.gameObject.tag == "PlayerAttack") && (NonDamageTime <= 0.0f))
+        {
+            NonDamageTime = defNonDamageTime;
+            knockBack = 0.1f;
+        }
         //Debug.Log("「いてっ！」");
     }
 

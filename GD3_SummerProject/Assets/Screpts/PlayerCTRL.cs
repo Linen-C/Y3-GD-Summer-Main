@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class PlayerCTRL : MonoBehaviour
 {
     // パブリック変数
+    public int helthPoint;  // 体力
     public float moveSpeed;        // 移動速度
     public float dashPower; // ダッシュパワー
 
@@ -18,9 +19,10 @@ public class PlayerCTRL : MonoBehaviour
     // スクリプト
     public GameCTRL gameCTRL;      // ゲームコントローラー
     public jsonInput inputList; // jsonファイルからの取得
-    public PlayerWeapon weapon;   // 攻撃のテスト用
+    public PlayerWeapon ownWeapon;   // 攻撃のテスト用
 
     // キャンパス
+    public Text hpText;         // 体力表示用
     public Text cooldownText;   // クールダウン表示用
 
     // プライベート変数
@@ -28,7 +30,7 @@ public class PlayerCTRL : MonoBehaviour
     private int weponCharge = 1;      // 現在クールダウン
     private bool coolDownReset = false; // クールダウンのリセットフラグ
     private float dogeTimer = 0;    // 回避用のタイマー
-    WeponList weponList;
+    WeponList getList;
 
     private int weponNo = 0; // 所持している武器番号(0～1)
 
@@ -39,10 +41,11 @@ public class PlayerCTRL : MonoBehaviour
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
-        weponList = inputList.SendList();
+        getList = inputList.SendList();
         nowCharge = 0;  // 仮で初期化
 
-        needWeponCharge = weapon.SwapoWeapon(weponList, 0);
+        Debug.Log("Pl_Get_WeponList：" + getList.weponList.Length);
+        needWeponCharge = ownWeapon.SwapWeapon(getList, 0);
     }
 
 
@@ -58,6 +61,7 @@ public class PlayerCTRL : MonoBehaviour
         SwapWepon();
         Shooting();
 
+        hpText.text = "HP：" + helthPoint.ToString();
     }
 
 
@@ -71,7 +75,7 @@ public class PlayerCTRL : MonoBehaviour
             && (weponCharge == needWeponCharge) && gameCTRL.SendSignal())
         {
             Debug.Log("ATTACK");
-            weapon.Attacking();
+            ownWeapon.Attacking();
 
             coolDownReset = true;
         }
@@ -189,7 +193,7 @@ public class PlayerCTRL : MonoBehaviour
                     break;
             }
 
-            needWeponCharge = weapon.SwapoWeapon(weponList, weponNo); // 必要クールダウン上書き   
+            needWeponCharge = ownWeapon.SwapWeapon(getList, weponNo); // 必要クールダウン上書き   
             weponCharge = 0;    // 現クールダウンを上書き
         }
     }
@@ -212,4 +216,11 @@ public class PlayerCTRL : MonoBehaviour
         if (nowCharge < needCharge) { nowCharge += 1; }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "EnemyAttack")
+        {
+            helthPoint -= 1;
+        }
+    }
 }

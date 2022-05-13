@@ -24,7 +24,7 @@ public class jsonInput : MonoBehaviour
 
     WeponList inputData;
 
-    void Start()
+    void Awake()
     {
         string inputString = Resources.Load<TextAsset>("TestWeponList").ToString();
         inputData = JsonUtility.FromJson<WeponList>(inputString);
@@ -43,6 +43,8 @@ public class jsonInput : MonoBehaviour
         var test = inputData.weponList[0].height + inputData.weponList[1].height;
         Debug.Log(test);
         */
+
+        Debug.Log("jI_WeponList_LoadÅF" + inputData.weponList.Length);
     }
 
     public WeponList SendList()

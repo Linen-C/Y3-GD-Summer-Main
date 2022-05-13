@@ -12,8 +12,9 @@ public class PlayerWeapon : MonoBehaviour
     public Text weponNameText;  // 武器名表示用
 
     // プライベート変数
-    float time = 0.0f;
+    float attakingTime = 0.0f;  // 判定の発生時間
 
+    // スクリプト
     public PlayerCTRL playerctrl;
 
     // コンポーネント
@@ -33,17 +34,19 @@ public class PlayerWeapon : MonoBehaviour
         // 判定発生
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
         
-        if (time > 0) { time -= Time.deltaTime; }
+        if (attakingTime > 0) { attakingTime -= Time.deltaTime; }
         else { coll.enabled = false; }
 
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     }
 
-    public int SwapoWeapon(WeponList wepon,int no)
+    public int SwapWeapon(WeponList wepon,int no)
     {
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
         // 武器切り替え
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+        Debug.Log("Swap_Wepon");
+
         if (no + 1 > wepon.weponList.Length)
         {
             transform.localPosition = new Vector3(
@@ -74,13 +77,13 @@ public class PlayerWeapon : MonoBehaviour
     public void Attacking()
     {
         coll.enabled = true;
-        time = defTime;
-        Debug.Log("判定発生");
+        attakingTime = defTime;
+        Debug.Log("プレイヤー：判定発生");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         playerctrl.GetCharge();
-        Debug.Log("命中");
+        Debug.Log("プレイヤー：命中");
     }
 }
