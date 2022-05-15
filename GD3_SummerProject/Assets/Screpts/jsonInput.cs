@@ -13,6 +13,7 @@ public class WeponList
 public class InputData
 {
     public string name;
+    public string image;
     public int cool;
     public int wideth;
     public int height;
@@ -26,7 +27,7 @@ public class jsonInput : MonoBehaviour
 
     void Awake()
     {
-        string inputString = Resources.Load<TextAsset>("TestWeponList").ToString();
+        string inputString = Resources.Load<TextAsset>("jsons/TestWeponList").ToString();
         inputData = JsonUtility.FromJson<WeponList>(inputString);
 
         /*

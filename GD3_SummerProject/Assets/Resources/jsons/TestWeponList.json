@@ -1,0 +1,28 @@
+{
+  "weponList": [
+    {
+      "name": "testBat",
+      "image":"Images/testgraphv2/bat4-2",
+      "cool": 4,
+      "wideth": 4,
+      "height": 2,
+      "offset": 2.5
+    },
+    {
+      "name": "testSpike",
+      "image":"Images/testgraphv2/spike1-3",
+      "cool": 2,
+      "wideth": 1,
+      "height": 3,
+      "offset": 3.0
+    },
+    {
+      "name": "testLance",
+      "image":"Images/testgraphv2/lance2-5",
+      "cool": 6,
+      "wideth": 2,
+      "height": 5,
+      "offset": 4.0
+    }
+  ]
+}
