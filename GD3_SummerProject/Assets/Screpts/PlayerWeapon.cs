@@ -8,18 +8,21 @@ using UnityEngine.UI;
 public class PlayerWeapon : MonoBehaviour
 {
     // パブリック変数
+    [Header("パブリック変数")]
     public float defTime;   // 攻撃判定の発生時間
-    public Sprite changeTarget;
+    public float attakingTime = 0.0f;  // 判定の発生時間
+
+    // スクリプト
+    [Header("スクリプト")]
+    public PlayerCTRL playerctrl;
+    public SpriteChanger spriteChanger;
 
     // キャンパス
+    [Header("キャンバス")]
     public Text weponNameText;  // 武器名表示用
 
     // プライベート変数
-    float attakingTime = 0.0f;  // 判定の発生時間
-
-    // スクリプト
-    public PlayerCTRL playerctrl;
-    public SpriteChanger spriteChanger;
+    float spriteAlpha = 0.0f;
 
     // コンポーネント
     BoxCollider2D coll;
@@ -38,11 +41,13 @@ public class PlayerWeapon : MonoBehaviour
         // 判定発生
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
         
-        if (attakingTime > 0) { attakingTime -= Time.deltaTime; }
-        else
+        if (attakingTime >= 0){ attakingTime -= Time.deltaTime; }
+        else{ coll.enabled = false; }
+
+        if (spriteAlpha >= 0.0f)
         {
-            spriteChanger.ChangeTransparency(0);
-            coll.enabled = false;
+            spriteChanger.ChangeTransparency(spriteAlpha);
+            spriteAlpha -= Time.deltaTime * 2.0f;
         }
 
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
@@ -53,7 +58,7 @@ public class PlayerWeapon : MonoBehaviour
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
         // 武器切り替え
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-        Debug.Log("Swap_Wepon");
+        //Debug.Log("武器変更");
 
         // バグってた時用の処理
         if (no + 1 > wepon.weponList.Length)
@@ -103,13 +108,16 @@ public class PlayerWeapon : MonoBehaviour
     {
         coll.enabled = true;
         attakingTime = defTime;
-        spriteChanger.ChangeTransparency(255);
-        Debug.Log("プレイヤー：判定発生");
+
+        spriteAlpha = 1.0f;
+
+        //spriteChanger.ChangeTransparency(1.0f);
+        //Debug.Log("プレイヤー：判定発生");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         playerctrl.GetCharge();
-        Debug.Log("プレイヤー：命中");
+        //Debug.Log("プレイヤー：命中");
     }
 }

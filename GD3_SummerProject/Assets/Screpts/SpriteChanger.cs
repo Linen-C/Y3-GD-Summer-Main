@@ -4,25 +4,25 @@ using UnityEngine;
 
 public class SpriteChanger : MonoBehaviour
 {
-    //public Sprite changeTarget;
-
-    SpriteRenderer spriteRenderer;
+    // コンポーネント
+    public SpriteRenderer spriteRenderer;
 
     void Start()
     {
-        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        // どうしてかこの方式だと上手くいかない
+        // spriteRenderer = GetComponent<SpriteRenderer>();
+        //Debug.Log("SpCh：" + spriteRenderer);
     }
 
     
     public void ChangeSprite(Sprite changeTarget,float offset)
     {
-        Debug.Log("SPチェンジャー" + changeTarget.ToString());
         transform.localPosition = new Vector3(0, offset, 0);
         spriteRenderer.sprite = changeTarget;
     }
 
-    public void ChangeTransparency(int alpha)
+    public void ChangeTransparency(float alpha)
     {
-        spriteRenderer.color = new Color(255, 255, 255, alpha);
+        spriteRenderer.color = new Color(1, 1, 1, alpha);
     }
 }

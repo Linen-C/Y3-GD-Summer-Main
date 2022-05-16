@@ -5,23 +5,28 @@ using UnityEngine;
 public class EnemyCTRL : MonoBehaviour
 {
     // パブリック変数
+    [Header("ステータス")]
+    public int helthPoint;  // 体力
+    [Header("移動")]
     public float moveSpeed;        // 移動速度
+    [Header("武器")]
     public int needWeponCharge;   // 必要クールダウン
+    [Header("ノックバックと無敵時間")]
     public float knockBackPower;    // かかるノックバックの強さ
     public float defNonDamageTime;  // デフォルト無敵時間
 
     // スクリプト
+    [Header("スクリプト")]
     public GameCTRL gameCTRL;   // メトロノーム受け取り用
     public EnemyWepon ownWepon; // 所持武器
-
     public GameObject Cursor;   // カーソル取得(多分これが一番早い)
     public GameObject Player;   // プレイヤー
 
     // プライベート変数
-    public int weponCharge = 1;      // 現在クールダウン
+    private int weponCharge = 1;      // 現在クールダウン
     private bool coolDownReset = false; // クールダウンのリセットフラグ
     private Vector2 diff;   // プレイヤーの方向
-    private float knockBack = 0;    // ノックバック時間カウンター
+    private float knockBackCounter = 0;    // ノックバック時間カウンター
     private float NonDamageTime = 0;    // 無敵時間
 
     // コンポーネント
@@ -35,10 +40,13 @@ public class EnemyCTRL : MonoBehaviour
 
     void Update()
     {
+        Move();
+
+        if (!IfIsAlive()) { return; }
+
         Attack();
         TracePlayer();
         CursorRot();
-        Move();
 
         if (NonDamageTime > 0) { NonDamageTime -= Time.deltaTime; }
     }
@@ -52,7 +60,7 @@ public class EnemyCTRL : MonoBehaviour
 
         if ((weponCharge == needWeponCharge) && gameCTRL.SendSignal() && coolDownReset == false)
         {
-            Debug.Log("ENEMY_ATTACK");
+            // Debug.Log("ENEMY_ATTACK");
             ownWepon.Attacking();
 
             coolDownReset = true;
@@ -97,7 +105,7 @@ public class EnemyCTRL : MonoBehaviour
         // カーソル回転
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
 
-        if ((weponCharge == 1) || (weponCharge == needWeponCharge - 1))
+        if (weponCharge == needWeponCharge)
         {
             return;
         }
@@ -115,14 +123,14 @@ public class EnemyCTRL : MonoBehaviour
         // 移動
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
 
-        if(knockBack > 0.0f)
+        if(knockBackCounter > 0.0f)
         {
             body.AddForce(new Vector2(
                 -diff.x * knockBackPower,
                 -diff.y * knockBackPower),
                 ForceMode2D.Impulse);
 
-            knockBack -= Time.deltaTime;
+            knockBackCounter -= Time.deltaTime;
         }
         else
         {
@@ -132,12 +140,23 @@ public class EnemyCTRL : MonoBehaviour
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     }
 
+    bool IfIsAlive()
+    {
+        if(helthPoint > 0) { return true; }
+        else
+        {
+            Destroy(gameObject, defNonDamageTime + 0.1f);
+            return false;
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if ((collision.gameObject.tag == "PlayerAttack") && (NonDamageTime <= 0.0f))
         {
+            helthPoint -= 1;
             NonDamageTime = defNonDamageTime;
-            knockBack = 0.1f;
+            knockBackCounter = 0.1f;
         }
         //Debug.Log("「いてっ！」");
     }

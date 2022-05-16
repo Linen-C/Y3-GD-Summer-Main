@@ -45,7 +45,7 @@ public class jsonInput : MonoBehaviour
         Debug.Log(test);
         */
 
-        Debug.Log("jI_WeponList_Load：" + inputData.weponList.Length);
+        Debug.Log("jsonインプット：" + inputData.weponList.Length);
     }
 
     public WeponList SendList()

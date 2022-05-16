@@ -5,14 +5,16 @@ using UnityEngine.UI;
 
 public class GameCTRL : MonoBehaviour
 {
-    // 変数
+    // パブリック変数
+    [Header("BPM")]
     public float bpm;   // テンポ
 
     // キャンバス
+    [Header("キャンバス")]
     public Text bpmText;    // BPM表記
     public Image beatImage;
 
-    // 定数
+    // プライベート変数
     private float timing = 0.0f;    // メトロノーム用
     private bool metronome = false; // メトロノームシグナル
     private bool metronomeFlap = false;
@@ -34,7 +36,7 @@ public class GameCTRL : MonoBehaviour
         if (timing <= 0.2f)
         {
             doSignal = true;
-            beatImage.color = Color.red;
+            beatImage.color = new Color(1.0f, 0.0f, 0.0f, 0.5f);
         }
 
         if (timing <= 0.0f && metronomeFlap == false)
@@ -55,7 +57,7 @@ public class GameCTRL : MonoBehaviour
             doSignal = false;
             metronomeFlap = false;
             BpmReset();
-            beatImage.color = Color.white;
+            beatImage.color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
         }
 
         timing -= Time.deltaTime;
