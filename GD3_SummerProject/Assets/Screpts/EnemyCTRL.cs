@@ -8,26 +8,26 @@ public class EnemyCTRL : MonoBehaviour
     [Header("ステータス")]
     public int helthPoint;  // 体力
     [Header("移動")]
-    public float moveSpeed;        // 移動速度
+    public float moveSpeed;  // 移動速度
     [Header("武器")]
-    public int needWeponCharge;   // 必要クールダウン
+    public int needWeponCharge;  // 必要クールダウン
     [Header("ノックバックと無敵時間")]
     public float knockBackPower;    // かかるノックバックの強さ
     public float defNonDamageTime;  // デフォルト無敵時間
 
     // スクリプト
     [Header("スクリプト")]
-    public GameCTRL gameCTRL;   // メトロノーム受け取り用
-    public EnemyWepon ownWepon; // 所持武器
-    public GameObject Cursor;   // カーソル取得(多分これが一番早い)
-    public GameObject Player;   // プレイヤー
+    public GameCTRL gameCTRL;    // メトロノーム受け取り用
+    public EnemyWepon ownWepon;  // 所持武器
+    public GameObject Cursor;    // カーソル取得(多分これが一番早い)
+    public GameObject Player;    // プレイヤー
 
     // プライベート変数
-    private int weponCharge = 1;      // 現在クールダウン
-    private bool coolDownReset = false; // クールダウンのリセットフラグ
-    private Vector2 diff;   // プレイヤーの方向
-    private float knockBackCounter = 0;    // ノックバック時間カウンター
-    private float NonDamageTime = 0;    // 無敵時間
+    private int weponCharge = 1;         // 現在クールダウン
+    private bool coolDownReset = false;  // クールダウンのリセットフラグ
+    private Vector2 diff;                // プレイヤーの方向
+    private float knockBackCounter = 0;  // ノックバック時間カウンター
+    private float NonDamageTime = 0;     // 無敵時間
 
     // コンポーネント
     Rigidbody2D body;

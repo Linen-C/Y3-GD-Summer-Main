@@ -117,7 +117,10 @@ public class PlayerWeapon : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        playerctrl.GetCharge();
+        if(collision.tag == "Enemy")
+        {
+            playerctrl.GetCharge();
+        }
         //Debug.Log("プレイヤー：命中");
     }
 }
