@@ -113,7 +113,7 @@ public class PlayerCTRL : MonoBehaviour
                 weponCharge++;
             }
         }
-        cooldownText.text = "C:" + weponCharge + "/" + needWeponCharge;
+        cooldownText.text = "W:" + weponCharge + "/" + needWeponCharge;
 
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     }
@@ -280,7 +280,7 @@ public class PlayerCTRL : MonoBehaviour
                 nowCharge = 0;
             }
         }
-        bulletText.text = "W：" + nowCharge + "/" + needCharge;
+        bulletText.text = "S：" + nowCharge + "/" + needCharge;
     }
 
     // ノックバック

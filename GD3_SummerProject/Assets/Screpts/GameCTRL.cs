@@ -37,6 +37,7 @@ public class GameCTRL : MonoBehaviour
         {
             doSignal = true;
             beatImage.color = new Color(1.0f, 0.0f, 0.0f, 0.5f);
+            beatImage.transform.localScale = new Vector3(1.2f, 1.2f, 1.0f);
         }
 
         if (timing <= 0.0f && metronomeFlap == false)
@@ -49,6 +50,8 @@ public class GameCTRL : MonoBehaviour
             metronome = false;
             if (metronomeFlap == false)
             {
+                beatImage.color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
+                beatImage.transform.localScale = new Vector3(0.8f, 0.8f, 1.0f);
             }
         }
 
@@ -57,7 +60,7 @@ public class GameCTRL : MonoBehaviour
             doSignal = false;
             metronomeFlap = false;
             BpmReset();
-            beatImage.color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
+            
         }
 
         timing -= Time.deltaTime;
