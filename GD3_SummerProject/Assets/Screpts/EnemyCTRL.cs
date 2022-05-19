@@ -14,6 +14,8 @@ public class EnemyCTRL : MonoBehaviour
     [Header("ノックバックと無敵時間")]
     public float knockBackPower;    // かかるノックバックの強さ
     public float defNonDamageTime;  // デフォルト無敵時間
+    [Header("スポーン位置")]
+    [SerializeField] public Vector2 spawnPoint;  // スポーン位置
 
     // スクリプト
     [Header("スクリプト")]
