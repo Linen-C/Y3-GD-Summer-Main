@@ -7,9 +7,9 @@ public class CameraCTRL : MonoBehaviour
     // ゲームオブジェクト
     // public GameObject player;
     [SerializeField] Transform playerTr;
-    [SerializeField] Vector3 cameraDefPos;  // カメラ初期位置
-    [SerializeField] Vector2 cameraMaxPos;  // カメラ右上限界位置
-    [SerializeField] Vector2 cameraMinPos;  // カメラ左下限界位置
+    [SerializeField] Vector3 cameraDefPos;         // カメラ初期位置
+    [SerializeField] public Vector2 cameraMaxPos;  // カメラ右上限界位置
+    [SerializeField] public Vector2 cameraMinPos;  // カメラ左下限界位置
 
     void LateUpdate()
     {
@@ -26,5 +26,11 @@ public class CameraCTRL : MonoBehaviour
 
         // 位置代入
         transform.position = camPos;
+    }
+
+    public void SetNewCamPoint(Vector2 maxPin,Vector2 minPin)
+    {
+        cameraMaxPos = maxPin;
+        cameraMinPos = minPin; 
     }
 }
