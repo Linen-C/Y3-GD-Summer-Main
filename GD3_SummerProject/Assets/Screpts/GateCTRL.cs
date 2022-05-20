@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GateCTRL : MonoBehaviour
 {
-    [SerializeField]public bool doClose;
+    [SerializeField]bool doClose;
 
     BoxCollider2D coll;
     MeshRenderer mr;

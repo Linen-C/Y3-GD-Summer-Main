@@ -5,7 +5,7 @@ using UnityEngine;
 public class AreaCTRL : MonoBehaviour
 {
     [SerializeField] bool clearFlag = false;
-    [SerializeField] GameObject gate;
+    [SerializeField] GateCTRL gateCTRL;
     [SerializeField] Transform enemys;
     [SerializeField] Transform[] enemyList;
 
@@ -22,7 +22,12 @@ public class AreaCTRL : MonoBehaviour
         {
             //Debug.Log("‚¢‚«‚Ä‚é");
         }
-        else { Debug.Log("Ÿr–Å"); }
+        else
+        {
+            gateCTRL.GateOpen();
+            Debug.Log("Ÿr–Å");
+            enabled = false;
+        }
     }
 
     private Transform[] GetEnemyList(Transform parent)

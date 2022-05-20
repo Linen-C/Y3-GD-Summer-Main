@@ -14,13 +14,17 @@ public class EnemyCTRL : MonoBehaviour
     [Header("ノックバックと無敵時間")]
     public float knockBackPower;    // かかるノックバックの強さ
     public float defNonDamageTime;  // デフォルト無敵時間
-    [Header("スポーン位置")]
-    [SerializeField] public Vector2 spawnPoint;  // スポーン位置
+    
+    //[Header("スポーン位置")]
+    //[SerializeField] public Vector2 spawnPoint;  // スポーン位置
 
     // スクリプト
     [Header("スクリプト")]
     public GameCTRL gameCTRL;    // メトロノーム受け取り用
     public EnemyWepon ownWepon;  // 所持武器
+
+    // ゲームオブジェクト
+    [Header("ゲームオブジェクト")]
     public GameObject Cursor;    // カーソル取得(多分これが一番早い)
     public GameObject Player;    // プレイヤー
 
@@ -36,6 +40,13 @@ public class EnemyCTRL : MonoBehaviour
 
     void Start()
     {
+        // キレそう
+        var gcCtrn = GameObject.FindGameObjectWithTag("GameController");
+        gameCTRL = gcCtrn.GetComponent<GameCTRL>();
+
+        // ２回も使いとうなかったわい…
+        Player = GameObject.FindGameObjectWithTag("Player");
+
         body = GetComponent<Rigidbody2D>();
     }
 
