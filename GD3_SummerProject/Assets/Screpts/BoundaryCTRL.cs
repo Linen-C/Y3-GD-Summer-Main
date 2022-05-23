@@ -14,7 +14,7 @@ public class BoundaryCTRL : MonoBehaviour
     void Start()
     {
         GameObject camObj = GameObject.FindGameObjectWithTag("MainCamera");
-        camera = GetComponent<CameraCTRL>();
+        camera = camObj.GetComponent<CameraCTRL>();
         pinMaxPos = pinMax.transform.position;
         pinMinPos = pinMin.transform.position;
     }

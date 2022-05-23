@@ -4,29 +4,28 @@ using UnityEngine;
 
 public class EnemyCTRL : MonoBehaviour
 {
-    // パブリック変数
+    // 変数
     [Header("ステータス")]
-    public int helthPoint;  // 体力
+    [SerializeField] int helthPoint;  // 体力
     [Header("移動")]
-    public float moveSpeed;  // 移動速度
+    [SerializeField] float moveSpeed;  // 移動速度
     [Header("武器")]
-    public int needWeponCharge;  // 必要クールダウン
+    [SerializeField] int needWeponCharge;  // 必要クールダウン
     [Header("ノックバックと無敵時間")]
-    public float knockBackPower;    // かかるノックバックの強さ
-    public float defNonDamageTime;  // デフォルト無敵時間
-    
-    //[Header("スポーン位置")]
-    //[SerializeField] public Vector2 spawnPoint;  // スポーン位置
+    [SerializeField] float knockBackPower;    // かかるノックバックの強さ
+    [SerializeField] float defNonDamageTime;  // デフォルト無敵時間
 
     // スクリプト
     [Header("スクリプト")]
-    public GameCTRL gameCTRL;    // メトロノーム受け取り用
-    public EnemyWepon ownWepon;  // 所持武器
+    [SerializeField] GC_BpmCTRL bpmCTRL;   // メトロノーム受け取り用
+    [SerializeField] EnemyWepon ownWepon;  // 所持武器
+    [SerializeField] AreaCTRL areaCTRL;    // エリアコンポーネント
 
     // ゲームオブジェクト
     [Header("ゲームオブジェクト")]
-    public GameObject Cursor;    // カーソル取得(多分これが一番早い)
-    public GameObject Player;    // プレイヤー
+    [SerializeField] GameObject Cursor;    // カーソル取得(多分これが一番早い)
+    [SerializeField] GameObject Player;    // プレイヤー
+    [SerializeField] GameObject areaObj;   // エリアオブジェクト
 
     // プライベート変数
     private int weponCharge = 1;         // 現在クールダウン
@@ -40,9 +39,13 @@ public class EnemyCTRL : MonoBehaviour
 
     void Start()
     {
+        // 親エリアコンポーネントの取得
+        areaObj = transform.parent.parent.gameObject;
+        areaCTRL = areaObj.GetComponent<AreaCTRL>();
+
         // キレそう
-        var gcCtrn = GameObject.FindGameObjectWithTag("GameController");
-        gameCTRL = gcCtrn.GetComponent<GameCTRL>();
+        var bpmCtrl = GameObject.FindGameObjectWithTag("GameController");
+        bpmCTRL = bpmCtrl.GetComponent<GC_BpmCTRL>();
 
         // ２回も使いとうなかったわい…
         Player = GameObject.FindGameObjectWithTag("Player");
@@ -53,6 +56,12 @@ public class EnemyCTRL : MonoBehaviour
 
     void Update()
     {
+        if (!areaCTRL.enabled)
+        {
+            body.velocity = new Vector2(0, 0);
+            return;
+        }
+
         Move();
 
         if (!IfIsAlive()) { return; }
@@ -71,7 +80,7 @@ public class EnemyCTRL : MonoBehaviour
         // 攻撃・クールダウン
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
 
-        if ((weponCharge == needWeponCharge) && gameCTRL.SendSignal() && coolDownReset == false)
+        if ((weponCharge == needWeponCharge) && bpmCTRL.SendSignal() && coolDownReset == false)
         {
             // Debug.Log("ENEMY_ATTACK");
             ownWepon.Attacking();
@@ -79,7 +88,7 @@ public class EnemyCTRL : MonoBehaviour
             coolDownReset = true;
         }
 
-        if (gameCTRL.Metronome())
+        if (bpmCTRL.Metronome())
         {
             if (coolDownReset == true)
             {
