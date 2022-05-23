@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemysSpawn : MonoBehaviour
 {
+    [Header("エリアオブジェクトをここに")]
+    [SerializeField] GameObject areaObject;
 
     [Header("生成する敵のリスト")]
     [SerializeField] GameObject[] spawnEnemyList;
@@ -11,16 +13,13 @@ public class EnemysSpawn : MonoBehaviour
     [Header("生成する敵の位置")]
     [SerializeField] Vector2[] spwanEnemyPos;
 
-    
+    [Header("エリアオブジェクトの座標")]
+    [SerializeField] Vector2 ereaPos;
+
     void Start()
     {
-
-    }
-
-    
-    void Update()
-    {
-        
+        ereaPos = new Vector2(areaObject.transform.position.x,
+            areaObject.transform.position.y);
     }
 
     public void DoAwake()
@@ -31,8 +30,8 @@ public class EnemysSpawn : MonoBehaviour
 
         for (int i = 0; spawnEnemyList.Length > i; i++)
         {
-            float pointx = spwanEnemyPos[i].x;
-            float pointy = spwanEnemyPos[i].y;
+            float pointx = ereaPos.x + spwanEnemyPos[i].x;
+            float pointy = ereaPos.y + spwanEnemyPos[i].y;
 
             Instantiate(
                 spawnEnemyList[i],

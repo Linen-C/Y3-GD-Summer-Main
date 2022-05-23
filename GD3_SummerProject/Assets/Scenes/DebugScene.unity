@@ -487,12 +487,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a01469d95484f7b4daaf76a90994679a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  areaObject: {fileID: 1582100011}
   spawnEnemyList:
   - {fileID: 562583548966233380, guid: 5d97662cbc146c1498523ab11eb78860, type: 3}
   - {fileID: 562583548966233380, guid: 5d97662cbc146c1498523ab11eb78860, type: 3}
   spwanEnemyPos:
-  - {x: 5, y: 32}
-  - {x: -5, y: 32}
+  - {x: 5, y: 0}
+  - {x: -5, y: 0}
+  ereaPos: {x: 0, y: 0}
 --- !u!1 &216576646
 GameObject:
   m_ObjectHideFlags: 0
@@ -946,7 +948,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pinMax: {fileID: 1894028251}
   pinMin: {fileID: 1399285769}
-  camera: {fileID: 519420030}
+  camera: {fileID: 0}
 --- !u!61 &340844320
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2427,7 +2429,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pinMax: {fileID: 287341604}
   pinMin: {fileID: 1829921089}
-  camera: {fileID: 519420030}
+  camera: {fileID: 0}
 --- !u!61 &691986041
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2500,7 +2502,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pinMax: {fileID: 1894028251}
   pinMin: {fileID: 1399285769}
-  camera: {fileID: 519420030}
+  camera: {fileID: 0}
 --- !u!61 &872015615
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4013,7 +4015,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pinMax: {fileID: 287341604}
   pinMin: {fileID: 1829921089}
-  camera: {fileID: 519420030}
+  camera: {fileID: 0}
 --- !u!61 &1499726466
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4083,6 +4085,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a01469d95484f7b4daaf76a90994679a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  areaObject: {fileID: 2143951309}
   spawnEnemyList:
   - {fileID: 562583548966233380, guid: 5d97662cbc146c1498523ab11eb78860, type: 3}
   - {fileID: 562583548966233380, guid: 5d97662cbc146c1498523ab11eb78860, type: 3}
@@ -4091,6 +4094,7 @@ MonoBehaviour:
   - {x: 6, y: 6}
   - {x: -18, y: -9}
   - {x: 17, y: -2}
+  ereaPos: {x: 0, y: 0}
 --- !u!1 &1530973623
 GameObject:
   m_ObjectHideFlags: 0
@@ -4672,7 +4676,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pinMax: {fileID: 287341604}
   pinMin: {fileID: 1829921089}
-  camera: {fileID: 519420030}
+  camera: {fileID: 0}
 --- !u!61 &1678505365
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4961,7 +4965,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pinMax: {fileID: 1894028251}
   pinMin: {fileID: 1399285769}
-  camera: {fileID: 519420030}
+  camera: {fileID: 0}
 --- !u!61 &1744224978
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5250,7 +5254,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pinMax: {fileID: 287341604}
   pinMin: {fileID: 1829921089}
-  camera: {fileID: 519420030}
+  camera: {fileID: 0}
 --- !u!61 &1762425963
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6090,7 +6094,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pinMax: {fileID: 1894028251}
   pinMin: {fileID: 1399285769}
-  camera: {fileID: 519420030}
+  camera: {fileID: 0}
 --- !u!61 &1918600227
 BoxCollider2D:
   m_ObjectHideFlags: 0

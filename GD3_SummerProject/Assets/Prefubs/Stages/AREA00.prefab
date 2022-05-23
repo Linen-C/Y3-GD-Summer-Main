@@ -2040,8 +2040,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a01469d95484f7b4daaf76a90994679a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  areaObject: {fileID: 6938091223072499360}
   spawnEnemyList: []
   spwanEnemyPos: []
+  ereaPos: {x: 0, y: 0}
 --- !u!1 &6938091223864074027
 GameObject:
   m_ObjectHideFlags: 0
