@@ -313,15 +313,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ea46601484c5b1488a328108b69a692, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  helthPoint: 3
+  helthPoint: 2
   moveSpeed: 1
   needWeponCharge: 4
   knockBackPower: 2
   defNonDamageTime: 0.5
-  gameCTRL: {fileID: 0}
+  bpmCTRL: {fileID: 0}
   ownWepon: {fileID: 562583549191834702}
+  areaCTRL: {fileID: 0}
   Cursor: {fileID: 562583549000882077}
   Player: {fileID: 0}
+  areaObj: {fileID: 0}
 --- !u!1 &562583549000882077
 GameObject:
   m_ObjectHideFlags: 0

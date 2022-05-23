@@ -5,36 +5,37 @@ using UnityEngine.UI;
 
 public class PlayerCTRL : MonoBehaviour
 {
-    // パブリック変数
+    // 変数
     [Header("ステータス")]
-    public int helthPoint;  // 体力
+    [SerializeField] int helthPoint;  // 体力
+    [SerializeField] bool isDeat;     // 生存of死亡
     [Header("移動")]
-    public float moveSpeed;  // 移動速度
-    public float dashPower;  // ダッシュパワー
+    [SerializeField] float moveSpeed;  // 移動速度
+    [SerializeField] float dashPower;  // ダッシュパワー
     [Header("遠距離攻撃")]
-    public int needCharge;  // 遠距離攻撃に必要なチャージ
-    public int nowCharge;   // 現在のチャージ
+    [SerializeField] int needCharge;  // 遠距離攻撃に必要なチャージ
+    [SerializeField] int nowCharge;   // 現在のチャージ
     [Header("ノックバックと無敵時間")]
-    public float knockBackPower;    // かかるノックバックの強さ
-    public float defNonDamageTime;  // デフォルト無敵時間
+    [SerializeField] float knockBackPower;    // かかるノックバックの強さ
+    [SerializeField] float defNonDamageTime;  // デフォルト無敵時間
 
     // ゲームオブジェクト
     [Header("ゲームオブジェクト")]
-    public GameObject cursor;  // カーソル取得(多分これが一番早い)
-    public GameObject cursorImage;  // カーソルイメージ(TKIH)
-    public GameObject bullet;  // 遠距離攻撃用の弾
+    [SerializeField] GameObject cursor;  // カーソル取得(多分これが一番早い)
+    [SerializeField] GameObject cursorImage;  // カーソルイメージ(TKIH)
+    [SerializeField] GameObject bullet;  // 遠距離攻撃用の弾
 
     // スクリプト
     [Header("スクリプト")]
-    public GameCTRL gameCTRL;       // ゲームコントローラー
-    public jsonInput inputList;     // jsonファイルからの取得
-    public PlayerWeapon ownWeapon;  // 攻撃のテスト用
+    [SerializeField] GC_BpmCTRL bpmCTRL;      // BPMコントローラー
+    [SerializeField] GC_jsonInput inputList;  // jsonファイルからの取得
+    [SerializeField] PlayerWeapon ownWeapon;  // 攻撃のテスト用
 
     // キャンパス
     [Header("キャンバスUI")]
-    public Text hpText;         // 体力表示用
-    public Text cooldownText;   // クールダウン表示用
-    public Text bulletText;     // 射撃チャージ
+    [SerializeField] Text hpText;         // 体力表示用
+    [SerializeField] Text cooldownText;   // クールダウン表示用
+    [SerializeField] Text bulletText;     // 射撃チャージ
 
     // プライベート変数
     private int needWeponCharge = 0;     // 必要クールダウン
@@ -63,6 +64,13 @@ public class PlayerCTRL : MonoBehaviour
 
     void Update()
     {
+        if (isDeat)
+        {
+            body.velocity = new Vector2(0,0);
+            return;
+        }
+
+        hpText.text = "HP：" + helthPoint.ToString();
 
         var padName = Input.GetJoystickNames();
 
@@ -78,10 +86,6 @@ public class PlayerCTRL : MonoBehaviour
         Move();
         SwapWepon();
         Shooting();
-
-        //if (Input.GetKeyDown(KeyCode.R)) nowCharge++;
-
-        hpText.text = "HP：" + helthPoint.ToString();
     }
 
 
@@ -93,7 +97,7 @@ public class PlayerCTRL : MonoBehaviour
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
 
         if ((Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.JoystickButton5))
-            && (weponCharge == needWeponCharge) && gameCTRL.SendSignal())
+            && (weponCharge == needWeponCharge) && bpmCTRL.SendSignal())
         {
             //Debug.Log("ATTACK");
             ownWeapon.Attacking();
@@ -101,7 +105,7 @@ public class PlayerCTRL : MonoBehaviour
             coolDownReset = true;
         }
 
-        if (gameCTRL.Metronome())
+        if (bpmCTRL.Metronome())
         {
             if (coolDownReset == true)
             {
@@ -141,7 +145,7 @@ public class PlayerCTRL : MonoBehaviour
         // 回避
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
 
-        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton4)) && gameCTRL.SendSignal())
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton4)) && bpmCTRL.SendSignal())
         {
             // Debug.Log("doge");
             dogeTimer = 0.1f;
@@ -205,6 +209,18 @@ public class PlayerCTRL : MonoBehaviour
 
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     }
+    
+    // 体力取得
+    public bool IfIsDead()
+    {
+        if (helthPoint <= 0)
+        {
+            hpText.text = "HP：" + helthPoint.ToString();
+            isDeat = true;
+        }
+
+        return isDeat;
+    }
 
     // 武器変更
     void SwapWepon()
@@ -262,7 +278,7 @@ public class PlayerCTRL : MonoBehaviour
     // 遠距離攻撃
     void Shooting()
     {
-        if (gameCTRL.SendSignal())
+        if (bpmCTRL.SendSignal())
         {
             if (nowCharge == needCharge && Input.GetMouseButton(1))
             {
