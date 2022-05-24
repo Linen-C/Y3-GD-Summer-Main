@@ -5,22 +5,24 @@ using UnityEngine.UI;
 
 public class PlayerWeapon : MonoBehaviour
 {
-    // パブリック変数
-    [Header("パブリック変数")]
-    public float defTime;   // 攻撃判定の発生時間
-    public float attakingTime = 0.0f;  // 判定の発生時間
+    // 変数
+    [Header("変数")]
+    [SerializeField] float defTime;   // 攻撃判定の発生時間
+    [SerializeField] public float attakingTime = 0.0f;  // 判定の発生時間
+    [SerializeField] float defChargeCool;
 
     // スクリプト
     [Header("スクリプト")]
-    public PlayerCTRL playerctrl;
-    public SpriteChanger spriteChanger;
+    [SerializeField] PlayerCTRL playerctrl;
+    [SerializeField] SpriteChanger spriteChanger;
 
     // キャンパス
     [Header("キャンバス")]
-    public Text weponNameText;  // 武器名表示用
+    [SerializeField] Text weponNameText;  // 武器名表示用
 
     // プライベート変数
     float spriteAlpha = 0.0f;
+    float chargeCool = 0.0f;
 
     // コンポーネント
     BoxCollider2D coll;
@@ -46,6 +48,11 @@ public class PlayerWeapon : MonoBehaviour
         {
             spriteChanger.ChangeTransparency(spriteAlpha);
             spriteAlpha -= Time.deltaTime * 2.0f;
+        }
+
+        if (chargeCool >= 0.0f)
+        {
+            chargeCool -= Time.deltaTime;
         }
 
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
@@ -115,7 +122,7 @@ public class PlayerWeapon : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Enemy")
+        if(collision.tag == "Enemy" && chargeCool <= 0)
         {
             playerctrl.GetCharge();
         }

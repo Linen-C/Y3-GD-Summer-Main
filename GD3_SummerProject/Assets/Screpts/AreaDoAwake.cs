@@ -6,9 +6,9 @@ public class AreaDoAwake : MonoBehaviour
 {
     [Header("エリア")]
     [SerializeField] AreaCTRL area;
-    [Header("ゲームコントロール")]
+    [Header("ゲームコントロール(自動取得)")]
     [SerializeField] GC_GameCTRL gameCtrl;
-    [Header("ゲート")]
+    [Header("ゲート(自動取得)")]
     [SerializeField] GateCTRL gateCTRL_U;
     [SerializeField] GateCTRL gateCTRL_D;
     [SerializeField] GateCTRL gateCTRL_L;

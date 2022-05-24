@@ -59,6 +59,10 @@ public class PlayerCTRL : MonoBehaviour
         nowCharge = 0;  // 0で初期化
 
         needWeponCharge = ownWeapon.SwapWeapon(getList, 0);
+
+        hpText.text = "HP：" + helthPoint.ToString();
+        cooldownText.text = "W:" + weponCharge + "/" + needWeponCharge;
+        bulletText.text = "S：" + nowCharge + "/" + needCharge;
     }
 
 
@@ -97,11 +101,11 @@ public class PlayerCTRL : MonoBehaviour
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
 
         if ((Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.JoystickButton5))
-            && (weponCharge == needWeponCharge) && bpmCTRL.SendSignal())
+            && (weponCharge == needWeponCharge)
+            && bpmCTRL.SendSignal()
+            && coolDownReset == false)
         {
-            //Debug.Log("ATTACK");
             ownWeapon.Attacking();
-
             coolDownReset = true;
         }
 
@@ -117,6 +121,7 @@ public class PlayerCTRL : MonoBehaviour
                 weponCharge++;
             }
         }
+
         cooldownText.text = "W:" + weponCharge + "/" + needWeponCharge;
 
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
@@ -308,6 +313,12 @@ public class PlayerCTRL : MonoBehaviour
                 -diff.x * knockBackPower,
                 -diff.y * knockBackPower),
                 ForceMode2D.Impulse);
+    }
+
+    // 動きを止めるためだけにこんなことしなきゃいけないなんて…
+    public void StopUpdate()
+    {
+        body.velocity = new Vector2(0, 0);
     }
 
     // 最も近い敵オブジェクトの取得
