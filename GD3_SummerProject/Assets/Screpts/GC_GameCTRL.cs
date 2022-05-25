@@ -12,6 +12,7 @@ public class GC_GameCTRL : MonoBehaviour
     [SerializeField] PlayerCTRL playerCtrl;
     [Header("エリア情報")]
     [SerializeField] GameObject areas;
+    [Header("エリア情報(自動取得)")]
     [SerializeField] public AreaCTRL areaCtrl;
     [Header("UI")]
     [SerializeField] GameObject uiPanel;

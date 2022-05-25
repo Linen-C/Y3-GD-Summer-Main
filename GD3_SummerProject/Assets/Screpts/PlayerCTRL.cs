@@ -8,7 +8,6 @@ public class PlayerCTRL : MonoBehaviour
     // 変数
     [Header("ステータス")]
     [SerializeField] int helthPoint;  // 体力
-    //[SerializeField] bool isDeat;     // 生存of死亡
     [Header("移動")]
     [SerializeField] float moveSpeed;  // 移動速度
     [SerializeField] float dashPower;  // ダッシュパワー
@@ -50,7 +49,6 @@ public class PlayerCTRL : MonoBehaviour
 
     // コンポーネント
     Rigidbody2D body;
-
 
     public enum State
     {
@@ -134,7 +132,7 @@ public class PlayerCTRL : MonoBehaviour
         }
     }
 
-    // 旋回（キーボード）
+    // 旋回（キーボード・マウス）
     void CursorRotMouse()
     {
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
