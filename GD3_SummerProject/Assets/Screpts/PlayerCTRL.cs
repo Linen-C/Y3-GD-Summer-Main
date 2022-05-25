@@ -8,7 +8,7 @@ public class PlayerCTRL : MonoBehaviour
     // 変数
     [Header("ステータス")]
     [SerializeField] int helthPoint;  // 体力
-    [SerializeField] bool isDeat;     // 生存of死亡
+    //[SerializeField] bool isDeat;     // 生存of死亡
     [Header("移動")]
     [SerializeField] float moveSpeed;  // 移動速度
     [SerializeField] float dashPower;  // ダッシュパワー
@@ -52,117 +52,86 @@ public class PlayerCTRL : MonoBehaviour
     Rigidbody2D body;
 
 
+    public enum State
+    {
+        Stop,
+        Alive,
+        Dead
+    }
+    public State state;
+
+
     void Start()
     {
+        // コンポーネント取得
         body = GetComponent<Rigidbody2D>();
+
+        // 武器初期化
         getList = inputList.SendList();
         nowCharge = 0;  // 0で初期化
-
         needWeponCharge = ownWeapon.SwapWeapon(getList, 0);
 
-        hpText.text = "HP：" + helthPoint.ToString();
-        cooldownText.text = "W:" + weponCharge + "/" + needWeponCharge;
-        bulletText.text = "S：" + nowCharge + "/" + needCharge;
+        // UI系初期化
+        UIUpdate();
+
+        // ステート初期化
+        state = State.Stop;
     }
 
 
     void Update()
     {
-        if (isDeat)
+        // UI更新
+        UIUpdate();
+
+        // 死亡判定
+        IsDead();
+
+        // ステート判定
+        if (state == State.Dead || state == State.Stop)
         {
             body.velocity = new Vector2(0,0);
             return;
         }
 
+        // 無敵時間
+        if (NonDamageTime > 0) { NonDamageTime -= Time.deltaTime; }
+
+        // 処理
+        Rotation();   // 旋回系
+        Attack();     // 攻撃
+        Move();       // 移動
+        SwapWepon();  // 武器交換
+        Shooting();   // 遠距離攻撃
+
+        
+    }
+
+    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+    // UI更新
+    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+    void UIUpdate()
+    {
         hpText.text = "HP：" + helthPoint.ToString();
+        cooldownText.text = "W:" + weponCharge + "/" + needWeponCharge;
+        bulletText.text = "S：" + nowCharge + "/" + needCharge;
+    }
+    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
 
+
+    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+    // 旋回
+    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+
+    // 旋回系
+    void Rotation()
+    {
         var padName = Input.GetJoystickNames();
-
         if (ownWeapon.attakingTime <= 0.0f)
         {
             if (padName.Length > 0) { CursorRotStick(); }
             else { CursorRotMouse(); }
         }
-
-        if (NonDamageTime > 0) { NonDamageTime -= Time.deltaTime; }
-
-        Attack();
-        Move();
-        SwapWepon();
-        Shooting();
-    }
-
-
-    // 攻撃
-    void Attack()
-    {
-        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-        // 攻撃・クールダウン
-        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-
-        if ((Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.JoystickButton5))
-            && (weponCharge == needWeponCharge)
-            && bpmCTRL.SendSignal()
-            && coolDownReset == false)
-        {
-            ownWeapon.Attacking();
-            coolDownReset = true;
-        }
-
-        if (bpmCTRL.Metronome())
-        {
-            if (coolDownReset == true)
-            {
-                weponCharge = 1;
-                coolDownReset = false;
-            }
-            else if (weponCharge < needWeponCharge)
-            {
-                weponCharge++;
-            }
-        }
-
-        cooldownText.text = "W:" + weponCharge + "/" + needWeponCharge;
-
-        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-    }
-
-    // 移動
-    void Move()
-    {
-        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-        // 移動
-        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-
-        if (knockBackCounter > 0.0f)
-        {
-            KnockBack();
-
-            knockBackCounter -= Time.deltaTime;
-        }
-        else
-        {
-            body.velocity = new Vector2(
-            Input.GetAxis("Horizontal") * moveSpeed, Input.GetAxis("Vertical") * moveSpeed);
-        }
-
-        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-        // 回避
-        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-
-        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton4)) && bpmCTRL.SendSignal())
-        {
-            // Debug.Log("doge");
-            dogeTimer = 0.1f;
-        }
-
-        if (dogeTimer > 0.0f)
-        {
-            body.AddForce(new Vector2(Input.GetAxis("Horizontal") * dashPower, Input.GetAxis("Vertical") * dashPower), ForceMode2D.Impulse);
-            dogeTimer -= Time.deltaTime;
-        }
-
-        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     }
 
     // 旋回（キーボード）
@@ -208,26 +177,98 @@ public class PlayerCTRL : MonoBehaviour
 
         float radian = Mathf.Atan2(h, v) * Mathf.Rad2Deg;
 
-        if (radian < 0){ radian += 360; }
+        if (radian < 0) { radian += 360; }
 
         cursor.GetComponent<Transform>().rotation = Quaternion.Euler(0, 0, radian);
 
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     }
-    
-    // 体力取得
-    public bool IfIsDead()
+    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+
+
+    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+    // 攻撃
+    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+    void Attack()
     {
-        if (helthPoint <= 0)
+        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+        // 攻撃・クールダウン
+        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+
+        if ((Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.JoystickButton5))
+            && (weponCharge == needWeponCharge)
+            && bpmCTRL.SendSignal()
+            && coolDownReset == false)
         {
-            hpText.text = "HP：" + helthPoint.ToString();
-            isDeat = true;
+            ownWeapon.Attacking();
+            coolDownReset = true;
         }
 
-        return isDeat;
-    }
+        if (bpmCTRL.Metronome())
+        {
+            if (coolDownReset == true)
+            {
+                weponCharge = 1;
+                coolDownReset = false;
+            }
+            else if (weponCharge < needWeponCharge)
+            {
+                weponCharge++;
+            }
+        }
 
+        //cooldownText.text = "W:" + weponCharge + "/" + needWeponCharge;
+
+        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+    }
+    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+
+
+    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+    // 移動
+    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+    void Move()
+    {
+        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+        // 移動
+        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+
+        if (knockBackCounter > 0.0f)
+        {
+            KnockBack();
+
+            knockBackCounter -= Time.deltaTime;
+        }
+        else
+        {
+            body.velocity = new Vector2(
+            Input.GetAxis("Horizontal") * moveSpeed, Input.GetAxis("Vertical") * moveSpeed);
+        }
+
+        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+        // 回避
+        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton4)) && bpmCTRL.SendSignal())
+        {
+            // Debug.Log("doge");
+            dogeTimer = 0.1f;
+        }
+
+        if (dogeTimer > 0.0f)
+        {
+            body.AddForce(new Vector2(Input.GetAxis("Horizontal") * dashPower, Input.GetAxis("Vertical") * dashPower), ForceMode2D.Impulse);
+            dogeTimer -= Time.deltaTime;
+        }
+
+        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+    }
+    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+
+
+    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     // 武器変更
+    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     void SwapWepon()
     {
         if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Q))
@@ -273,6 +314,12 @@ public class PlayerCTRL : MonoBehaviour
             weponCharge = 0;    // 現クールダウンを上書き
         }
     }
+    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+
+
+    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+    // 遠距離攻撃
+    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
 
     // 遠距離攻撃チャージ
     public void GetCharge()
@@ -301,8 +348,28 @@ public class PlayerCTRL : MonoBehaviour
                 nowCharge = 0;
             }
         }
-        bulletText.text = "S：" + nowCharge + "/" + needCharge;
+        //bulletText.text = "S：" + nowCharge + "/" + needCharge;
     }
+    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+
+
+    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+    // 死亡判定
+    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+    void IsDead()
+    {
+        if (helthPoint <= 0)
+        {
+            hpText.text = "HP：" + helthPoint.ToString();
+            state = State.Dead;
+        }
+    }
+    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+
+
+    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+    // その他
+    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
 
     // ノックバック
     void KnockBack()
@@ -313,12 +380,6 @@ public class PlayerCTRL : MonoBehaviour
                 -diff.x * knockBackPower,
                 -diff.y * knockBackPower),
                 ForceMode2D.Impulse);
-    }
-
-    // 動きを止めるためだけにこんなことしなきゃいけないなんて…
-    public void StopUpdate()
-    {
-        body.velocity = new Vector2(0, 0);
     }
 
     // 最も近い敵オブジェクトの取得
@@ -364,6 +425,6 @@ public class PlayerCTRL : MonoBehaviour
             helthPoint -= 1;
         }
     }
-
+    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
 
 }

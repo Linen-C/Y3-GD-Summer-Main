@@ -35,12 +35,16 @@ public class GC_GameCTRL : MonoBehaviour
 
     void Start()
     {
+        // エリアコントロール取得
         areaCtrl = areas.GetComponentInChildren<AreaCTRL>();
 
+        // ポーズUIを隠す
         pauseCanvas.enabled = false;
 
+        // ステート初期化
         S_Ready();
-        Debug.Log("Ready");
+        // のちにこうするか、各キャラのステートを弄るようにするか。
+        // state = State.Ready;
     }
 
     void Update()
@@ -52,8 +56,8 @@ public class GC_GameCTRL : MonoBehaviour
                 break;
 
             case State.Play:
-                if (Input.GetKeyDown(KeyCode.T)) { S_Play_OnPause(); }
-                if (playerCtrl.IfIsDead()) { S_GameOver(); }
+                if (Input.GetKeyDown(KeyCode.T)) { S_Pause(); }
+                if (playerCtrl.state == PlayerCTRL.State.Dead) { S_GameOver(); }
                 break ;
 
             case State.GameOver:
@@ -70,6 +74,7 @@ public class GC_GameCTRL : MonoBehaviour
         }
     }
 
+
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     // ステート用
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
@@ -78,10 +83,10 @@ public class GC_GameCTRL : MonoBehaviour
     void S_Ready()
     {
         state = State.Ready;
-
-        playerCtrl.enabled = false;
         DoEnableFalse();
     }
+
+    // カウントダウン
     void S_Ready_CountDown()
     {
         if (countDown >= 0)
@@ -106,17 +111,11 @@ public class GC_GameCTRL : MonoBehaviour
     // プレイ
     void S_Play()
     {
+        playerCtrl.state = PlayerCTRL.State.Alive;
+
         state = State.Play;
 
-        playerCtrl.enabled = true;
         DoEnableTrue();
-    }
-    void S_Play_OnPause()
-    {
-        playerCtrl.StopUpdate();
-        pauseCanvas.enabled = true;
-
-        S_Pause();
     }
 
     // ゲームオーバー
@@ -140,41 +139,52 @@ public class GC_GameCTRL : MonoBehaviour
 
         state = State.GameClear;
 
-        playerCtrl.StopUpdate();
-        playerCtrl.enabled = false;
+        playerCtrl.state = PlayerCTRL.State.Stop;
         DoEnableFalse();
     }
 
     // ポーズ
     void S_Pause()
     {
-        state = State.Pause;
+        pauseCanvas.enabled = true;
 
-        playerCtrl.enabled = false;
+        state = State.Pause;
+        playerCtrl.state = PlayerCTRL.State.Stop;
+
         DoEnableFalse();
     }
+
+    // ポーズ解除
     void S_Pause_End()
     {
         pauseCanvas.enabled = false;
+
+        playerCtrl.state = PlayerCTRL.State.Alive;
+
         S_Play();
     }
 
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
 
+
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     // その他処理 //
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+
+    // リロード
     void ReLoad()
     {
         string currentSceneName = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(currentSceneName);
     }
 
+    // タイトルへ戻る
     void ReturnTitle()
     {
         SceneManager.LoadScene("TitleScene");
     }
 
+    // のちに消す
     void DoEnableTrue()
     {
         bpmCtrl.enabled = true;
@@ -185,21 +195,28 @@ public class GC_GameCTRL : MonoBehaviour
         bpmCtrl.enabled = false;
         areaCtrl.enabled = false;
     }
+
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+
 
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     // ポーズUI用
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+
+    // UI：ゲームに戻る
     public void Pause_Close()
     {
         S_Pause_End();
     }
 
+    // UI：リスタート
     public void Pause_RestartGame()
     {
         ReLoad();
 
     }
+
+    // UI：タイトルへ戻る
     public void Pause_ReturnToTile()
     {
         ReturnTitle();

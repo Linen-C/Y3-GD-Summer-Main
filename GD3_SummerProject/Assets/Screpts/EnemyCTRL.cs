@@ -16,14 +16,16 @@ public class EnemyCTRL : MonoBehaviour
     [SerializeField] float defNonDamageTime;  // デフォルト無敵時間
 
     // スクリプト
-    [Header("スクリプト")]
-    [SerializeField] GC_BpmCTRL bpmCTRL;   // メトロノーム受け取り用
+    [Header("スクリプト(マニュアル)")]
     [SerializeField] EnemyWepon ownWepon;  // 所持武器
+    [Header("スクリプト(自動取得)")]
+    [SerializeField] GC_BpmCTRL bpmCTRL;   // メトロノーム受け取り用
     [SerializeField] AreaCTRL areaCTRL;    // エリアコンポーネント
 
     // ゲームオブジェクト
-    [Header("ゲームオブジェクト")]
+    [Header("ゲームオブジェクト(マニュアル)")]
     [SerializeField] GameObject Cursor;    // カーソル取得(多分これが一番早い)
+    [Header("ゲームオブジェクト(自動取得)")]
     [SerializeField] GameObject Player;    // プレイヤー
     [SerializeField] GameObject areaObj;   // エリアオブジェクト
 
