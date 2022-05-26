@@ -56,7 +56,7 @@ public class GC_GameCTRL : MonoBehaviour
                 break;
 
             case State.Play:
-                if (Input.GetKeyDown(KeyCode.T)) { S_Pause(); }
+                if (Input.GetKeyDown(KeyCode.Escape)) { S_Pause(); }
                 if (playerCtrl.state == PlayerCTRL.State.Dead) { S_GameOver(); }
                 break ;
 
@@ -69,7 +69,7 @@ public class GC_GameCTRL : MonoBehaviour
                 break;
 
             case State.Pause:
-                if (Input.GetKeyDown(KeyCode.T)) { S_Pause_End(); }
+                if (Input.GetKeyDown(KeyCode.Escape)) { S_Pause_End(); }
                 break ;
         }
     }

@@ -2988,7 +2988,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   helthPoint: 4
-  isDeat: 0
   moveSpeed: 15
   dashPower: 30
   needCharge: 2
@@ -3004,6 +3003,7 @@ MonoBehaviour:
   hpText: {fileID: 2106817273}
   cooldownText: {fileID: 1410366323}
   bulletText: {fileID: 1564279377}
+  state: 0
 --- !u!70 &444358876
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -8565,7 +8565,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1480481515}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5, y: 0, z: 0}
+  m_LocalPosition: {x: -5, y: -2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1733094328}
@@ -8861,12 +8861,10 @@ MonoBehaviour:
   areaObject: {fileID: 2143951309}
   spawnEnemyList:
   - {fileID: 562583548966233380, guid: 5d97662cbc146c1498523ab11eb78860, type: 3}
-  - {fileID: 562583548966233380, guid: 5d97662cbc146c1498523ab11eb78860, type: 3}
-  - {fileID: 562583548966233380, guid: 5d97662cbc146c1498523ab11eb78860, type: 3}
+  - {fileID: 2495565443160729114, guid: 717aff5fdc8eeab44abe1b95cee0b249, type: 3}
   spwanEnemyPos:
   - {x: 6, y: 6}
-  - {x: -18, y: -9}
-  - {x: 17, y: -2}
+  - {x: -6, y: -6}
   ereaPos: {x: 0, y: 0}
 --- !u!1 &1530973623
 GameObject:
@@ -10623,7 +10621,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1771383919}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5, y: 0, z: 0}
+  m_LocalPosition: {x: -5, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1733094328}
@@ -12648,9 +12646,11 @@ MonoBehaviour:
   spawnEnemyList:
   - {fileID: 562583548966233380, guid: 5d97662cbc146c1498523ab11eb78860, type: 3}
   - {fileID: 562583548966233380, guid: 5d97662cbc146c1498523ab11eb78860, type: 3}
+  - {fileID: 562583548966233380, guid: 5d97662cbc146c1498523ab11eb78860, type: 3}
   spwanEnemyPos:
   - {x: 5, y: 0}
   - {x: -5, y: 0}
+  - {x: -5, y: 5}
   ereaPos: {x: 0, y: 0}
 --- !u!1 &2048767022
 GameObject:

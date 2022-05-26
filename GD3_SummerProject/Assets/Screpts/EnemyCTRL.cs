@@ -38,6 +38,16 @@ public class EnemyCTRL : MonoBehaviour
 
     // コンポーネント
     Rigidbody2D body;
+    Animator anim;
+
+    enum State
+    {
+        Stop,
+        Alive,
+        Dead
+    }
+    State state;
+
 
     void Start()
     {
@@ -52,30 +62,88 @@ public class EnemyCTRL : MonoBehaviour
         // ２回も使いとうなかったわい…
         Player = GameObject.FindGameObjectWithTag("Player");
 
+        // コンポーネント取得
         body = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+
+        // ステート初期化
+        state = State.Stop;
     }
 
 
     void Update()
     {
+        // 停止判定
         if (!areaCTRL.enabled)
+        {
+            state = State.Stop;
+            //anim.SetBool("Moving", false);
+        }
+        else
+        {
+            state = State.Alive;
+            //anim.SetBool("Moving", true);
+        }
+
+        // 死亡判定
+        IfIsAlive();
+
+        // ステート判定
+        if (state != State.Alive)
         {
             body.velocity = new Vector2(0, 0);
             return;
         }
 
-        Move();
-
-        if (!IfIsAlive()) { return; }
-
-        Attack();
-        TracePlayer();
-        CursorRot();
-
+        // 無敵時間
         if (NonDamageTime > 0) { NonDamageTime -= Time.deltaTime; }
+
+        // 処理
+        TracePlayer();  // プレイヤー補足・追跡
+        CursorRot();    // 旋回
+        Attack();       // 攻撃
+        Move();         // 移動
     }
 
+    // プレイヤー補足・追跡
+    void TracePlayer()
+    {
+        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+        // プレイヤー方向の補足
+        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
 
+        // 自分の位置
+        Vector2 transPos = transform.position;
+
+        // プレイヤー座標
+        Vector2 playerPos = Player.transform.position;
+
+        // ベクトルを計算
+        diff = (playerPos - transPos).normalized;
+        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+    }
+
+    // 旋回
+    void CursorRot()
+    {
+        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+        // カーソル回転
+        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+
+        if (weponCharge == needWeponCharge)
+        {
+            return;
+        }
+
+        // 回転に代入
+        var curRot = Quaternion.FromToRotation(Vector3.up, diff);
+
+        // カーソルくんにパス
+        Cursor.GetComponent<Transform>().rotation = curRot;
+        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+    }
+
+    // 攻撃
     void Attack()
     {
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
@@ -106,41 +174,7 @@ public class EnemyCTRL : MonoBehaviour
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     }
 
-    void TracePlayer()
-    {
-        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-        // プレイヤー方向の補足
-        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-
-        // 自分の位置
-        Vector2 transPos = transform.position;
-
-        // プレイヤー座標
-        Vector2 playerPos = Player.transform.position;
-
-        // ベクトルを計算
-        diff = (playerPos - transPos).normalized;
-        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-    }
-
-    void CursorRot()
-    {
-        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-        // カーソル回転
-        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-
-        if (weponCharge == needWeponCharge)
-        {
-            return;
-        }
-
-        // 回転に代入
-        var curRot = Quaternion.FromToRotation(Vector3.up, diff);
-
-        // カーソルくんにパス
-        Cursor.GetComponent<Transform>().rotation = curRot;
-        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-    }
+    // 移動
     void Move()
     {
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
@@ -164,16 +198,16 @@ public class EnemyCTRL : MonoBehaviour
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     }
 
-    bool IfIsAlive()
+    // 死亡判定
+    void IfIsAlive()
     {
-        if(helthPoint > 0) { return true; }
-        else
+        if(helthPoint <= 0)
         {
             Destroy(gameObject, defNonDamageTime + 0.1f);
-            return false;
         }
     }
 
+    // 衝突判定
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if ((collision.gameObject.tag == "PlayerAttack") && (NonDamageTime <= 0.0f))

@@ -88,7 +88,7 @@ public class PlayerCTRL : MonoBehaviour
         IsDead();
 
         // ステート判定
-        if (state == State.Dead || state == State.Stop)
+        if (state != State.Alive)
         {
             body.velocity = new Vector2(0,0);
             return;
@@ -249,7 +249,9 @@ public class PlayerCTRL : MonoBehaviour
         // 回避
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
 
-        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton4)) && bpmCTRL.SendSignal())
+        if ((Input.GetKeyDown(KeyCode.Space) ||
+            Input.GetKeyDown(KeyCode.JoystickButton1))
+            && bpmCTRL.SendSignal())
         {
             // Debug.Log("doge");
             dogeTimer = 0.1f;
@@ -271,9 +273,10 @@ public class PlayerCTRL : MonoBehaviour
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     void SwapWepon()
     {
-        if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Q) ||
+            Input.GetKeyDown(KeyCode.JoystickButton3) || Input.GetKeyDown(KeyCode.JoystickButton2))
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.JoystickButton3))
             {
                 switch (weponNo)
                 {
@@ -332,7 +335,7 @@ public class PlayerCTRL : MonoBehaviour
     {
         if (bpmCTRL.SendSignal())
         {
-            if (nowCharge == needCharge && Input.GetMouseButton(1))
+            if (nowCharge == needCharge && (Input.GetMouseButton(1) || Input.GetKeyDown(KeyCode.JoystickButton4)))
             {
                 // 遠距離攻撃発生
                 Debug.Log("遠距離攻撃");

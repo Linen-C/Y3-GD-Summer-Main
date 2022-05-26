@@ -191,6 +191,7 @@ GameObject:
   - component: {fileID: 562583548966230747}
   - component: {fileID: 562583548966230746}
   - component: {fileID: 562583548966233381}
+  - component: {fileID: 2349727082053838120}
   m_Layer: 0
   m_Name: EnemyTest (1)
   m_TagString: Enemy
@@ -253,7 +254,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 5da5e4d5398d1ea4e8c666ab9e2c655b, type: 3}
+  m_Sprite: {fileID: -4795363162621231457, guid: 437850e1a99eddc4381b322811e86984, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -318,12 +319,31 @@ MonoBehaviour:
   needWeponCharge: 4
   knockBackPower: 2
   defNonDamageTime: 0.5
-  bpmCTRL: {fileID: 0}
   ownWepon: {fileID: 562583549191834702}
+  bpmCTRL: {fileID: 0}
   areaCTRL: {fileID: 0}
   Cursor: {fileID: 562583549000882077}
   Player: {fileID: 0}
   areaObj: {fileID: 0}
+--- !u!95 &2349727082053838120
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 562583548966233380}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9ca4647ab3654cf4a8edf2e97a1ff8c6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &562583549000882077
 GameObject:
   m_ObjectHideFlags: 0
