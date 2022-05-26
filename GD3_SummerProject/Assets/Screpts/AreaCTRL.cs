@@ -19,6 +19,7 @@ public class AreaCTRL : MonoBehaviour
     [Header("ゲームコントロール(自動取得)")]
     [SerializeField] GameObject gameCtrl;
 
+
     void Start()
     {
         if (endPoint) { gameCtrl = GameObject.FindGameObjectWithTag("GameController"); }
