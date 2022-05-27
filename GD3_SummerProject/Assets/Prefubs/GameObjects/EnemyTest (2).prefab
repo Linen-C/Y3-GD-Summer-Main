@@ -460,6 +460,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ea46601484c5b1488a328108b69a692, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shootingType: 0
+  bullet: {fileID: 0}
   helthPoint: 4
   moveSpeed: 1
   needWeponCharge: 5
@@ -468,8 +470,9 @@ MonoBehaviour:
   ownWepon: {fileID: 2495565443134607216}
   bpmCTRL: {fileID: 0}
   areaCTRL: {fileID: 0}
-  Cursor: {fileID: 2495565443195245731}
-  Player: {fileID: 0}
+  cursor: {fileID: 2495565443195245731}
+  cursorImage: {fileID: 2495565441524305495}
+  player: {fileID: 0}
   areaObj: {fileID: 0}
 --- !u!1 &2495565443195245731
 GameObject:

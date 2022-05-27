@@ -158,6 +158,8 @@ public class PlayerCTRL : MonoBehaviour
         cursor.GetComponent<Transform>().rotation = curRot;
 
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+
+        //Debug.Log("旋回角度：" + curRot);
     }
 
     // 旋回（スティック）

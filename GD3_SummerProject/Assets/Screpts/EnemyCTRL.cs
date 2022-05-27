@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class EnemyCTRL : MonoBehaviour
 {
+    [Header("遠距離攻撃用の仮組み")]
+    [SerializeField] bool shootingType = false; // 遠距離攻撃タイプか
+    [SerializeField] GameObject bullet; // 弾丸
+
     // 変数
     [Header("ステータス")]
     [SerializeField] int helthPoint;  // 体力
@@ -24,9 +28,10 @@ public class EnemyCTRL : MonoBehaviour
 
     // ゲームオブジェクト
     [Header("ゲームオブジェクト(マニュアル)")]
-    [SerializeField] GameObject Cursor;    // カーソル取得(多分これが一番早い)
+    [SerializeField] GameObject cursor;    // カーソル取得(多分これが一番早い)
+    [SerializeField] GameObject cursorImage;  // カーソルイメージ(TKIH)
     [Header("ゲームオブジェクト(自動取得)")]
-    [SerializeField] GameObject Player;    // プレイヤー
+    [SerializeField] GameObject player;    // プレイヤー
     [SerializeField] GameObject areaObj;   // エリアオブジェクト
 
     // プライベート変数
@@ -37,8 +42,10 @@ public class EnemyCTRL : MonoBehaviour
     private float NonDamageTime = 0;     // 無敵時間
 
     // コンポーネント
+    SpriteRenderer sprite;
     Rigidbody2D body;
     Animator anim;
+    Transform curTrans;
 
     enum State
     {
@@ -51,6 +58,8 @@ public class EnemyCTRL : MonoBehaviour
 
     void Start()
     {
+        if (!shootingType) { bullet = null; }
+
         // 親エリアコンポーネントの取得
         areaObj = transform.parent.parent.gameObject;
         areaCTRL = areaObj.GetComponent<AreaCTRL>();
@@ -60,11 +69,13 @@ public class EnemyCTRL : MonoBehaviour
         bpmCTRL = bpmCtrl.GetComponent<GC_BpmCTRL>();
 
         // ２回も使いとうなかったわい…
-        Player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player");
 
         // コンポーネント取得
+        sprite = GetComponent<SpriteRenderer>();
         body = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        curTrans = cursor.GetComponent<Transform>();
 
         // ステート初期化
         state = State.Stop;
@@ -116,7 +127,7 @@ public class EnemyCTRL : MonoBehaviour
         Vector2 transPos = transform.position;
 
         // プレイヤー座標
-        Vector2 playerPos = Player.transform.position;
+        Vector2 playerPos = player.transform.position;
 
         // ベクトルを計算
         diff = (playerPos - transPos).normalized;
@@ -139,8 +150,12 @@ public class EnemyCTRL : MonoBehaviour
         var curRot = Quaternion.FromToRotation(Vector3.up, diff);
 
         // カーソルくんにパス
-        Cursor.GetComponent<Transform>().rotation = curRot;
+        curTrans.rotation = curRot;
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+
+        // スプライト反転
+        if (curTrans.eulerAngles.z < 180.0f) { sprite.flipX = true; }
+        else { sprite.flipX = false; }
     }
 
     // 攻撃
@@ -153,7 +168,19 @@ public class EnemyCTRL : MonoBehaviour
         if ((weponCharge == needWeponCharge) && bpmCTRL.SendSignal() && coolDownReset == false)
         {
             // Debug.Log("ENEMY_ATTACK");
-            ownWepon.Attacking();
+
+            if (shootingType)
+            {
+                Instantiate(
+                    bullet,
+                    new Vector3
+                    (cursorImage.transform.position.x,
+                    cursorImage.transform.position.y,
+                    cursorImage.transform.position.z),
+                    cursor.transform.rotation);
+            }
+            else { ownWepon.Attacking(); }
+            
 
             coolDownReset = true;
         }

@@ -314,6 +314,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ea46601484c5b1488a328108b69a692, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shootingType: 0
+  bullet: {fileID: 0}
   helthPoint: 2
   moveSpeed: 1
   needWeponCharge: 4
@@ -322,8 +324,9 @@ MonoBehaviour:
   ownWepon: {fileID: 562583549191834702}
   bpmCTRL: {fileID: 0}
   areaCTRL: {fileID: 0}
-  Cursor: {fileID: 562583549000882077}
-  Player: {fileID: 0}
+  cursor: {fileID: 562583549000882077}
+  cursorImage: {fileID: 562583548654357865}
+  player: {fileID: 0}
   areaObj: {fileID: 0}
 --- !u!95 &2349727082053838120
 Animator:
