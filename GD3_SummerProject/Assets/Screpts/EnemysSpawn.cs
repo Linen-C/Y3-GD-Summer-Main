@@ -39,7 +39,7 @@ public class EnemysSpawn : MonoBehaviour
                 Quaternion.identity,
                 transform);
 
-            Debug.Log("ê∂ê¨");
+            //Debug.Log("ê∂ê¨");
         }
 
     }

@@ -821,4 +821,4 @@ ScriptsOnlyBuild:
   scenePathNames:
   - Assets/Scenes/TitleScene.unity
   - Assets/Scenes/DebugScene.unity
-  playerPath: C:/Users/2016002/Desktop/UnityWork/GameDEV/Builds/test001/GD3_SummerProject.exe
+  playerPath: C:/Users/2016002/Desktop/UnityWork/GameDEV/Builds/test002/GD3_SummerProject.exe

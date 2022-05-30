@@ -5,10 +5,10 @@ using UnityEngine;
 public class AudioCTRL : MonoBehaviour
 {
     [Header("ƒNƒŠƒbƒv")]
-    [SerializeField] AudioClip testClip;
+    //[SerializeField] AudioClip testClip;
     [SerializeField] AudioClip[] clips;
     [Header("‰¹—Ê")]
-    [Range(0,1)] public float defVolume;
+    [Range(0,1)] public float defVolume = 0.5f;
 
     AudioSource audioSource;
 
@@ -16,6 +16,7 @@ public class AudioCTRL : MonoBehaviour
     {
         //audioSource = GetComponent<AudioSource>();
         //audioSource.volume = defVolume;
+
     }
 
     

@@ -28,7 +28,7 @@ public class PlayerCTRL : MonoBehaviour
     [Header("スクリプト")]
     [SerializeField] GC_BpmCTRL bpmCTRL;      // BPMコントローラー
     [SerializeField] GC_jsonInput inputList;  // jsonファイルからの取得
-    [SerializeField] PlayerWeapon ownWeapon;  // 攻撃のテスト用
+    [SerializeField] PlayerWeapon trail;  // 攻撃用
 
     // キャンパス
     [Header("キャンバスUI")]
@@ -67,7 +67,7 @@ public class PlayerCTRL : MonoBehaviour
         // 武器初期化
         getList = inputList.SendList();
         nowCharge = 0;  // 0で初期化
-        needWeponCharge = ownWeapon.SwapWeapon(getList, 0);
+        needWeponCharge = trail.SwapWeapon(getList, 0);
 
         // UI系初期化
         UIUpdate();
@@ -98,12 +98,24 @@ public class PlayerCTRL : MonoBehaviour
         // 処理
         Rotation();   // 旋回系
         Attack();     // 攻撃
-        Move();       // 移動
+        //Move();     // 移動
+        Dash();       // 回避入力
         SwapWepon();  // 武器交換
         Shooting();   // 遠距離攻撃
 
-        
     }
+
+    void FixedUpdate()
+    {
+        // ステート判定
+        if (state != State.Alive)
+        {
+            return;
+        }
+
+        Move(); // 一旦ここにしとこう
+    }
+
 
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     // UI更新
@@ -125,7 +137,7 @@ public class PlayerCTRL : MonoBehaviour
     void Rotation()
     {
         var padName = Input.GetJoystickNames();
-        if (ownWeapon.attakingTime <= 0.0f)
+        if (trail.attakingTime <= 0.0f)
         {
             if (padName.Length > 0) { CursorRotStick(); }
             else { CursorRotMouse(); }
@@ -200,7 +212,7 @@ public class PlayerCTRL : MonoBehaviour
             && bpmCTRL.SendSignal()
             && coolDownReset == false)
         {
-            ownWeapon.Attacking();
+            trail.Attacking();
             coolDownReset = true;
         }
 
@@ -227,6 +239,8 @@ public class PlayerCTRL : MonoBehaviour
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     // 移動
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+    
+    // 移動系
     void Move()
     {
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
@@ -242,13 +256,29 @@ public class PlayerCTRL : MonoBehaviour
         else
         {
             body.velocity = new Vector2(
-            Input.GetAxis("Horizontal") * moveSpeed, Input.GetAxis("Vertical") * moveSpeed);
+            Input.GetAxis("Horizontal") * moveSpeed,
+            Input.GetAxis("Vertical") * moveSpeed);
         }
 
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
         // 回避
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
 
+        if (dogeTimer > 0.0f)
+        {
+            body.AddForce(new Vector2(
+                Input.GetAxis("Horizontal") * dashPower,
+                Input.GetAxis("Vertical") * dashPower),
+                ForceMode2D.Impulse);
+            dogeTimer -= Time.deltaTime;
+        }
+
+        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+    }
+
+    // 移動入力(ていうかダッシュ入力)
+    void Dash()
+    {
         if ((Input.GetKeyDown(KeyCode.Space) ||
             Input.GetKeyDown(KeyCode.JoystickButton1))
             && bpmCTRL.SendSignal())
@@ -256,14 +286,6 @@ public class PlayerCTRL : MonoBehaviour
             // Debug.Log("doge");
             dogeTimer = 0.1f;
         }
-
-        if (dogeTimer > 0.0f)
-        {
-            body.AddForce(new Vector2(Input.GetAxis("Horizontal") * dashPower, Input.GetAxis("Vertical") * dashPower), ForceMode2D.Impulse);
-            dogeTimer -= Time.deltaTime;
-        }
-
-        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     }
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
 
@@ -313,7 +335,7 @@ public class PlayerCTRL : MonoBehaviour
                 }
             }
 
-            needWeponCharge = ownWeapon.SwapWeapon(getList, weponNo); // 必要クールダウン上書き   
+            needWeponCharge = trail.SwapWeapon(getList, weponNo); // 必要クールダウン上書き   
             weponCharge = 0;    // 現クールダウンを上書き
         }
     }

@@ -15,7 +15,7 @@ public class Bullet : MonoBehaviour
     }
 
 
-    void Update()
+    void FixedUpdate()
     {
         body.velocity = new Vector2(
             transform.up.x * speed,

@@ -319,7 +319,7 @@ MonoBehaviour:
   helthPoint: 2
   moveSpeed: 1
   needWeponCharge: 4
-  knockBackPower: 2
+  knockBackPower: 30
   defNonDamageTime: 0.5
   ownWepon: {fileID: 562583549191834702}
   bpmCTRL: {fileID: 0}

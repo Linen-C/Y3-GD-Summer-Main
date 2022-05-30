@@ -113,8 +113,21 @@ public class EnemyCTRL : MonoBehaviour
         TracePlayer();  // プレイヤー補足・追跡
         CursorRot();    // 旋回
         Attack();       // 攻撃
-        Move();         // 移動
+        //Move();         // 移動
     }
+
+    void FixedUpdate()
+    {
+        // ステート判定
+        if (state != State.Alive)
+        {
+            body.velocity = new Vector2(0, 0);
+            return;
+        }
+
+        Move();
+    }
+
 
     // プレイヤー補足・追跡
     void TracePlayer()

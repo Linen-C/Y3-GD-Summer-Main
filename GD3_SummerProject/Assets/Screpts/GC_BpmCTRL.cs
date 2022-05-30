@@ -14,13 +14,17 @@ public class GC_BpmCTRL : MonoBehaviour
     public Text bpmText;    // BPM表記
     public Image beatImage;
 
+    // オーディオ関係
+    [Header("オーディオ")]
+    [SerializeField] AudioSource audioSource;   // オーディオソース
+    [SerializeField] AudioClip[] audioClip;     // クリップ
+
     // プライベート変数
     private float timing = 0.0f;    // メトロノーム用
     private bool metronome = false; // メトロノームシグナル
     private bool metronomeFlap = false;
     private bool doSignal = false;  // シグナル送信用
 
-    // コンポーネント
 
     void Start()
     {
@@ -47,6 +51,7 @@ public class GC_BpmCTRL : MonoBehaviour
 
         if (timing <= 0.0f && metronomeFlap == false)
         {
+            //audioSource.PlayOneShot(audioClip[0]);
             metronome = true;
             metronomeFlap = true;
         }
@@ -65,7 +70,6 @@ public class GC_BpmCTRL : MonoBehaviour
             doSignal = false;
             metronomeFlap = false;
             BpmReset();
-
         }
 
         timing -= Time.deltaTime;
