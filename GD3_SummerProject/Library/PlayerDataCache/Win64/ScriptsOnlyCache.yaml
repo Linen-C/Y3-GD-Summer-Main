@@ -19,12 +19,8 @@ ScriptsOnlyBuild:
     - TitleCTRL
     Unity.2D.Animation.Editor.dll:
     - UnityEditor.U2D.Animation.BoneGizmo
-    Unity.2D.IK.Editor.dll:
-    - UnityEditor.U2D.IK.IKGizmos
     Unity.2D.Tilemap.Editor.dll:
     - UnityEditor.Tilemaps.GridPaintingState
-    - UnityEditor.Tilemaps.GridPaletteBrushes
-    - UnityEditor.Tilemaps.GridPalettes
     - UnityEditor.Tilemaps.SceneViewGridManager
     - UnityEditor.Tilemaps.SceneViewOpenTilePaletteHelper
     - UnityEditor.Tilemaps.TileDragAndDropManager
@@ -78,6 +74,8 @@ ScriptsOnlyBuild:
     - Class: 74
       Script: {instanceID: 0}
     - Class: 81
+      Script: {instanceID: 0}
+    - Class: 82
       Script: {instanceID: 0}
     - Class: 91
       Script: {instanceID: 0}
@@ -273,7 +271,7 @@ ScriptsOnlyBuild:
     className: Selectable
   - hash:
       serializedVersion: 2
-      Hash: 160927d213b84d0c79ffa00617746739
+      Hash: 5375a33ac351f74d8fe5606b29446b77
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerCTRL
@@ -651,7 +649,7 @@ ScriptsOnlyBuild:
     className: SpriteShapeGeometryCache
   - hash:
       serializedVersion: 2
-      Hash: a05024299cea01973e28bc8ecd8c5a30
+      Hash: 4a975133025c627fea316ebfc4252d16
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: AudioCTRL
@@ -705,7 +703,7 @@ ScriptsOnlyBuild:
     className: ControlPlayableAsset
   - hash:
       serializedVersion: 2
-      Hash: f41258019e7a1b644ef3338a089a152c
+      Hash: 332426425940e871867d1d28309a6d0c
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GC_BpmCTRL
@@ -821,4 +819,4 @@ ScriptsOnlyBuild:
   scenePathNames:
   - Assets/Scenes/TitleScene.unity
   - Assets/Scenes/DebugScene.unity
-  playerPath: C:/Users/2016002/Desktop/UnityWork/GameDEV/Builds/test002/GD3_SummerProject.exe
+  playerPath: C:/Users/2016002/Desktop/UnityWork/GameDEV/Builds/test003/GD3_SummerProject.exe
