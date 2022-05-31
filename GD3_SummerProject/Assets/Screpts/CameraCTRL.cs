@@ -5,10 +5,13 @@ using UnityEngine;
 public class CameraCTRL : MonoBehaviour
 {
     // ゲームオブジェクト
-    // public GameObject player;
+    [Header("プレイヤートランスフォーム")]
     [SerializeField] Transform playerTr;
+    [Header("カメラ初期位置")]
     [SerializeField] Vector3 cameraDefPos;         // カメラ初期位置
+    [Header("カメラ限界位置：右上")]
     [SerializeField] public Vector2 cameraMaxPos;  // カメラ右上限界位置
+    [Header("カメラ限界位置：左下")]
     [SerializeField] public Vector2 cameraMinPos;  // カメラ左下限界位置
 
     void LateUpdate()

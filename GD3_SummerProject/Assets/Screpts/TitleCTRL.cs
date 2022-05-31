@@ -5,8 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class TitleCTRL : MonoBehaviour
 {
-    public void ClockToGame()
+    public void UIM_ClockToGame()
     {
         SceneManager.LoadScene("DebugScene");
+    }
+
+    public void UIM_Shutdown()
+    {
+        Application.Quit();
     }
 }

@@ -7,10 +7,7 @@ public class AreaCTRL : MonoBehaviour
     [Header("クリアフラグ")]
     [SerializeField] bool clearFlag = false;
     [Header("各ゲート位置")]
-    [SerializeField] public GateCTRL gateCTRL_U;
-    [SerializeField] public GateCTRL gateCTRL_D;
-    [SerializeField] public GateCTRL gateCTRL_L;
-    [SerializeField] public GateCTRL gateCTRL_R;
+    [SerializeField] public GateCTRL[] gateCTRLs;
     [Header("エネミー(自動取得)")]
     [SerializeField] Transform enemys;
     [SerializeField] Transform[] enemyList;
@@ -38,10 +35,11 @@ public class AreaCTRL : MonoBehaviour
                 return;
             }
 
-            if (gateCTRL_U != null) { gateCTRL_U.GateOpen(); }
-            if (gateCTRL_D != null) { gateCTRL_D.GateOpen(); }
-            if (gateCTRL_L != null) { gateCTRL_L.GateOpen(); }
-            if (gateCTRL_R != null) { gateCTRL_R.GateOpen(); }
+            for (int i = 0; i < gateCTRLs.Length; i++)
+            {
+                gateCTRLs[i].GateOpen();
+            }
+
             Debug.Log("殲滅");
             enabled = false;
         }

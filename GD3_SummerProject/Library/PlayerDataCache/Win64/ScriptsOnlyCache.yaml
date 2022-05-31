@@ -13,14 +13,19 @@ ScriptsOnlyBuild:
     - GC_GameCTRL
     - GC_jsonInput
     - GateCTRL
+    - MiniMapCTRL
     - PlayerCTRL
     - PlayerWeapon
     - SpriteChanger
     - TitleCTRL
     Unity.2D.Animation.Editor.dll:
     - UnityEditor.U2D.Animation.BoneGizmo
+    Unity.2D.IK.Editor.dll:
+    - UnityEditor.U2D.IK.IKGizmos
     Unity.2D.Tilemap.Editor.dll:
     - UnityEditor.Tilemaps.GridPaintingState
+    - UnityEditor.Tilemaps.GridPaletteBrushes
+    - UnityEditor.Tilemaps.GridPalettes
     - UnityEditor.Tilemaps.SceneViewGridManager
     - UnityEditor.Tilemaps.SceneViewOpenTilePaletteHelper
     - UnityEditor.Tilemaps.TileDragAndDropManager
@@ -30,8 +35,10 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -44,6 +51,8 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.CanvasScaler
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.Image
+    - UnityEngine.UI.Mask
+    - UnityEngine.UI.RawImage
     - UnityEngine.UI.Text
   sceneClasses:
     Assets/Scenes/DebugScene.unity:
@@ -77,6 +86,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 82
       Script: {instanceID: 0}
+    - Class: 84
+      Script: {instanceID: 0}
     - Class: 91
       Script: {instanceID: 0}
     - Class: 95
@@ -98,6 +109,8 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 2378}
     - Class: 114
+      Script: {instanceID: 2570}
+    - Class: 114
       Script: {instanceID: 2868}
     - Class: 114
       Script: {instanceID: 3072}
@@ -116,6 +129,8 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 4936}
     - Class: 114
+      Script: {instanceID: 5010}
+    - Class: 114
       Script: {instanceID: 5290}
     - Class: 114
       Script: {instanceID: 5382}
@@ -127,6 +142,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 6140}
     - Class: 114
       Script: {instanceID: 6176}
+    - Class: 114
+      Script: {instanceID: 92572}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -523,7 +540,7 @@ ScriptsOnlyBuild:
     className: PlayerQuitHandler
   - hash:
       serializedVersion: 2
-      Hash: a414bf309435754b12885e90eb135744
+      Hash: d303aa8572c037f4db81e453e96c7bc6
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: AreaCTRL
@@ -577,7 +594,7 @@ ScriptsOnlyBuild:
     className: EnemyWepon
   - hash:
       serializedVersion: 2
-      Hash: 7e19ae45fd9d975404bd469130149440
+      Hash: 20169052943802b6659843cc51cc47fd
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: AreaDoAwake
@@ -815,8 +832,14 @@ ScriptsOnlyBuild:
     assemblyName: Unity.2D.IK.Runtime.dll
     namespaceName: UnityEngine.U2D.IK
     className: FabrikSolver2D
+  - hash:
+      serializedVersion: 2
+      Hash: 492740e865cb48cdc489dee2802d15fc
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: MiniMapCTRL
   platform: 19
   scenePathNames:
   - Assets/Scenes/TitleScene.unity
   - Assets/Scenes/DebugScene.unity
-  playerPath: C:/Users/2016002/Desktop/UnityWork/GameDEV/Builds/test003/GD3_SummerProject.exe
+  playerPath: C:/Users/2016002/Desktop/UnityWork/GameDEV/Builds/test004/GD3_SummerProject.exe
