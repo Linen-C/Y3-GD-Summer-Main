@@ -135,15 +135,15 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 5382}
     - Class: 114
-      Script: {instanceID: 5810}
+      Script: {instanceID: 5496}
     - Class: 114
-      Script: {instanceID: 5984}
+      Script: {instanceID: 5812}
     - Class: 114
-      Script: {instanceID: 6140}
+      Script: {instanceID: 5986}
     - Class: 114
-      Script: {instanceID: 6176}
+      Script: {instanceID: 6142}
     - Class: 114
-      Script: {instanceID: 92572}
+      Script: {instanceID: 6178}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -246,7 +246,7 @@ ScriptsOnlyBuild:
     className: SpriteSkin
   - hash:
       serializedVersion: 2
-      Hash: c542ba9b90b593ce57eee22f7b5aeedc
+      Hash: e506536aece20ec863b45406b2a57ec7
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: EnemyCTRL
@@ -288,7 +288,7 @@ ScriptsOnlyBuild:
     className: Selectable
   - hash:
       serializedVersion: 2
-      Hash: 5375a33ac351f74d8fe5606b29446b77
+      Hash: 2f28df91737b2e95d2254bb9fd00d92e
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerCTRL
@@ -744,6 +744,12 @@ ScriptsOnlyBuild:
     className: SpriteSkinEntity
   - hash:
       serializedVersion: 2
+      Hash: 492740e865cb48cdc489dee2802d15fc
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: MiniMapCTRL
+  - hash:
+      serializedVersion: 2
       Hash: 28cfb4bd305dd11c6326cc3ee7c14138
     assemblyName: Unity.2D.Animation.Runtime.dll
     namespaceName: UnityEngine.Experimental.U2D.Animation
@@ -832,14 +838,8 @@ ScriptsOnlyBuild:
     assemblyName: Unity.2D.IK.Runtime.dll
     namespaceName: UnityEngine.U2D.IK
     className: FabrikSolver2D
-  - hash:
-      serializedVersion: 2
-      Hash: 492740e865cb48cdc489dee2802d15fc
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: MiniMapCTRL
   platform: 19
   scenePathNames:
   - Assets/Scenes/TitleScene.unity
   - Assets/Scenes/DebugScene.unity
-  playerPath: C:/Users/2016002/Desktop/UnityWork/GameDEV/Builds/test004/GD3_SummerProject.exe
+  playerPath: C:/Users/2016002/Desktop/UnityWork/GameDEV/Builds/test006/GD3_SummerProject.exe

@@ -23,6 +23,7 @@ public class PlayerCTRL : MonoBehaviour
     [SerializeField] GameObject cursor;  // カーソル取得(多分これが一番早い)
     [SerializeField] GameObject cursorImage;  // カーソルイメージ(TKIH)
     [SerializeField] GameObject bullet;  // 遠距離攻撃用の弾
+    [SerializeField] GameObject flashObj;   // フラッシュ用
 
     // スクリプト
     [Header("スクリプト")]
@@ -48,7 +49,10 @@ public class PlayerCTRL : MonoBehaviour
     private int weponNo = 0;  // 所持している武器番号(0～1)
 
     // コンポーネント
+    SpriteRenderer sprite;
     Rigidbody2D body;
+    Animator anim;
+    Animator flashAnim;
 
     public enum State
     {
@@ -62,7 +66,10 @@ public class PlayerCTRL : MonoBehaviour
     void Start()
     {
         // コンポーネント取得
+        sprite = GetComponent<SpriteRenderer>();
         body = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+        flashAnim = flashObj.GetComponent<Animator>();
 
         // 武器初期化
         getList = inputList.SendList();
@@ -74,6 +81,7 @@ public class PlayerCTRL : MonoBehaviour
 
         // ステート初期化
         state = State.Stop;
+        anim.SetBool("Alive", true);
     }
 
 
@@ -88,9 +96,11 @@ public class PlayerCTRL : MonoBehaviour
         // ステート判定
         if (state != State.Alive)
         {
+            anim.SetBool("Moving", false);
             body.velocity = new Vector2(0,0);
             return;
         }
+        else { anim.SetBool("Moving", true); }
 
         // 無敵時間
         if (NonDamageTime > 0) { NonDamageTime -= Time.deltaTime; }
@@ -108,10 +118,7 @@ public class PlayerCTRL : MonoBehaviour
     void FixedUpdate()
     {
         // ステート判定
-        if (state != State.Alive)
-        {
-            return;
-        }
+        if (state != State.Alive) { return; }
 
         Move(); // 一旦ここにしとこう
     }
@@ -153,12 +160,10 @@ public class PlayerCTRL : MonoBehaviour
 
         // 自分の位置
         Vector2 transPos = transform.position;
-        //Debug.Log("tX" + transPos.x + "_" + "tY" + transPos.y);
 
         // スクリーン座標系のマウス座標をワールド座標系に修正
         Vector2 mouseRawPos = Input.mousePosition;
         Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(mouseRawPos);
-        //Debug.Log("mX" + mouseWorldPos.x + "_"+ "mY" + mouseWorldPos.y);
 
         // ベクトルを計算
         Vector2 diff = (mouseWorldPos - transPos).normalized;
@@ -169,9 +174,10 @@ public class PlayerCTRL : MonoBehaviour
         // カーソルくんにパス
         cursor.GetComponent<Transform>().rotation = curRot;
 
-        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+        if (cursor.transform.eulerAngles.z < 180.0f) { sprite.flipX = true; }
+        else { sprite.flipX = false; }
 
-        //Debug.Log("旋回角度：" + curRot);
+        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     }
 
     // 旋回（スティック）
@@ -193,6 +199,9 @@ public class PlayerCTRL : MonoBehaviour
 
         cursor.GetComponent<Transform>().rotation = Quaternion.Euler(0, 0, radian);
 
+        if (cursor.transform.eulerAngles.z < 180.0f) { sprite.flipX = true; }
+        else { sprite.flipX = false; }
+
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     }
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
@@ -203,10 +212,6 @@ public class PlayerCTRL : MonoBehaviour
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     void Attack()
     {
-        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-        // 攻撃・クールダウン
-        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-
         if ((Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.JoystickButton5))
             && (weponCharge == needWeponCharge)
             && bpmCTRL.SendSignal()
@@ -223,15 +228,11 @@ public class PlayerCTRL : MonoBehaviour
                 weponCharge = 1;
                 coolDownReset = false;
             }
-            else if (weponCharge < needWeponCharge)
-            {
-                weponCharge++;
-            }
+            else if (weponCharge < needWeponCharge) { weponCharge++; }
+
+            if (weponCharge == (needWeponCharge - 1)) { flashAnim.SetTrigger("FlashTrigger"); }
         }
 
-        //cooldownText.text = "W:" + weponCharge + "/" + needWeponCharge;
-
-        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     }
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
 

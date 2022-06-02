@@ -30,6 +30,7 @@ public class EnemyCTRL : MonoBehaviour
     [Header("ゲームオブジェクト(マニュアル)")]
     [SerializeField] GameObject cursor;    // カーソル取得(多分これが一番早い)
     [SerializeField] GameObject cursorImage;  // カーソルイメージ(TKIH)
+    [SerializeField] GameObject flashObj;   // フラッシュ用
     [Header("ゲームオブジェクト(自動取得)")]
     [SerializeField] GameObject player;    // プレイヤー
     [SerializeField] GameObject areaObj;   // エリアオブジェクト
@@ -45,6 +46,7 @@ public class EnemyCTRL : MonoBehaviour
     SpriteRenderer sprite;
     Rigidbody2D body;
     Animator anim;
+    Animator flashAnim;
     Transform curTrans;
 
     enum State
@@ -75,6 +77,7 @@ public class EnemyCTRL : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
         body = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        flashAnim = flashObj.GetComponent<Animator>();
         curTrans = cursor.GetComponent<Transform>();
 
         // ステート初期化
@@ -88,12 +91,12 @@ public class EnemyCTRL : MonoBehaviour
         if (!areaCTRL.enabled)
         {
             state = State.Stop;
-            //anim.SetBool("Moving", false);
+            anim.SetBool("Moving", false);
         }
         else
         {
             state = State.Alive;
-            //anim.SetBool("Moving", true);
+            anim.SetBool("Moving", true);
         }
 
         // 死亡判定
@@ -105,6 +108,7 @@ public class EnemyCTRL : MonoBehaviour
             body.velocity = new Vector2(0, 0);
             return;
         }
+        else { anim.SetBool("Alive", true); }
 
         // 無敵時間
         if (NonDamageTime > 0) { NonDamageTime -= Time.deltaTime; }
@@ -205,10 +209,9 @@ public class EnemyCTRL : MonoBehaviour
                 weponCharge = 1;
                 coolDownReset = false;
             }
-            else if (weponCharge < needWeponCharge)
-            {
-                weponCharge++;
-            }
+            else if (weponCharge < needWeponCharge) { weponCharge++; }
+
+            if (weponCharge == (needWeponCharge - 1)) { flashAnim.SetTrigger("FlashTrigger"); }
         }
 
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
