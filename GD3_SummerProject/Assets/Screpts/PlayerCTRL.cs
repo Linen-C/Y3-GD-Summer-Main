@@ -130,8 +130,8 @@ public class PlayerCTRL : MonoBehaviour
     void UIUpdate()
     {
         hpText.text = "HPF" + helthPoint.ToString();
-        cooldownText.text = "W:" + weponCharge + "/" + needWeponCharge;
-        bulletText.text = "SF" + nowCharge + "/" + needCharge;
+        cooldownText.text = "Wepon : " + weponCharge + "/" + needWeponCharge;
+        bulletText.text = "Shot : " + nowCharge + "/" + needCharge;
     }
     //      //
 
@@ -217,6 +217,7 @@ public class PlayerCTRL : MonoBehaviour
             && bpmCTRL.SendSignal()
             && coolDownReset == false)
         {
+            anim.SetTrigger("Attack");
             trail.Attacking();
             coolDownReset = true;
         }
@@ -230,7 +231,11 @@ public class PlayerCTRL : MonoBehaviour
             }
             else if (weponCharge < needWeponCharge) { weponCharge++; }
 
-            if (weponCharge == (needWeponCharge - 1)) { flashAnim.SetTrigger("FlashTrigger"); }
+            if (weponCharge == (needWeponCharge - 1))
+            {
+                anim.SetTrigger("Charge");
+                flashAnim.SetTrigger("FlashTrigger");
+            }
         }
 
     }
@@ -449,6 +454,7 @@ public class PlayerCTRL : MonoBehaviour
             NonDamageTime = defNonDamageTime;
             knockBackCounter = 0.2f;
             helthPoint -= 1;
+            anim.SetTrigger("Damage");
         }
     }
     //      //

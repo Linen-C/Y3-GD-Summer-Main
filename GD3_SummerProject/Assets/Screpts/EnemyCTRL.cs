@@ -197,7 +197,8 @@ public class EnemyCTRL : MonoBehaviour
                     cursor.transform.rotation);
             }
             else { ownWepon.Attacking(); }
-            
+
+            anim.SetTrigger("Attack");
 
             coolDownReset = true;
         }
@@ -211,7 +212,11 @@ public class EnemyCTRL : MonoBehaviour
             }
             else if (weponCharge < needWeponCharge) { weponCharge++; }
 
-            if (weponCharge == (needWeponCharge - 1)) { flashAnim.SetTrigger("FlashTrigger"); }
+            if (weponCharge == (needWeponCharge - 1))
+            {
+                anim.SetTrigger("Charge");
+                flashAnim.SetTrigger("FlashTrigger");
+            }
         }
 
         //     //
@@ -258,6 +263,7 @@ public class EnemyCTRL : MonoBehaviour
             helthPoint -= 1;
             NonDamageTime = defNonDamageTime;
             knockBackCounter = 0.1f;
+            anim.SetTrigger("Damage");
         }
         //Debug.Log("u‚¢‚Ä‚ÁIv");
     }

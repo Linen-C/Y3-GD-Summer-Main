@@ -5,6 +5,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] float speed;
+    [SerializeField] string owner;
 
     // コンポーネント
     Rigidbody2D body;
@@ -24,7 +25,7 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //if (collision.tag == "NonHit") return;
+        if (collision.tag == owner) return;
         Destroy(gameObject);
     }
 }
