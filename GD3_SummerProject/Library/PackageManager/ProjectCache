@@ -5,7 +5,7 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637897279820652508
+      ticks: 637901765340787265
     m_Hash: 3675893035
   m_LockFileStatus:
     m_FilePath: C:/Users/2016002/Desktop/UnityWork/GameDEV/GD-4GA3-Summer-Main/GD3_SummerProject/Packages/packages-lock.json
@@ -13,7 +13,7 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637897279820652508
+      ticks: 637901765340787265
     m_Hash: 2097654787
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
@@ -342,6 +342,7 @@ m_PackageAssets:
         - 6.0.1
         - 6.0.2
         - 6.0.3
+        - 6.0.4
         - 7.0.0-pre.3
         - 7.0.0-pre.4
         - 7.0.0
