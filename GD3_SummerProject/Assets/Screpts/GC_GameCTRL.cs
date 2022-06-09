@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class GC_GameCTRL : MonoBehaviour
 {
@@ -50,6 +51,9 @@ public class GC_GameCTRL : MonoBehaviour
 
     void Update()
     {
+        var escape = Keyboard.current.escapeKey;
+        var keyR = Keyboard.current.rKey;
+
         switch (state)
         {
             case State.Ready:
@@ -57,20 +61,20 @@ public class GC_GameCTRL : MonoBehaviour
                 break;
 
             case State.Play:
-                if (Input.GetKeyDown(KeyCode.Escape)) { S_Pause(); }
+                if (escape.wasPressedThisFrame) { S_Pause(); }
                 if (playerCtrl.state == PlayerCTRL.State.Dead) { S_GameOver(); }
                 break ;
 
             case State.GameOver:
-                if (Input.GetKeyDown(KeyCode.R)) { ReLoad(); }
+                if (keyR.wasPressedThisFrame) { ReLoad(); }
                 break ;
 
             case State.GameClear:
-                if (Input.GetKeyDown(KeyCode.R)) { ReturnTitle(); }
+                if (keyR.wasPressedThisFrame) { ReturnTitle(); }
                 break;
 
             case State.Pause:
-                if (Input.GetKeyDown(KeyCode.Escape)) { S_Pause_End(); }
+                if (escape.wasPressedThisFrame) { S_Pause_End(); }
                 break ;
         }
     }

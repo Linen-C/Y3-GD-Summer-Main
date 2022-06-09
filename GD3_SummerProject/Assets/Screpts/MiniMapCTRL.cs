@@ -19,7 +19,7 @@ public class MiniMapCTRL : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.M)) { SwitchEnable(); }
+        //if (Input.GetKeyDown(KeyCode.M)) { SwitchEnable(); }
 
         /*
         if (filedMap.enabled == true)

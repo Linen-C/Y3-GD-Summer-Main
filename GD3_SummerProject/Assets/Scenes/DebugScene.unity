@@ -3843,7 +3843,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7854783003313331793, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
   m_PrefabInstance: {fileID: 7854783003480309386}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1946777320}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f5138dd43f17b0d49837004d934a854e, type: 3}
@@ -9592,16 +9592,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 1122911168}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
+  m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
-  m_RepeatDelay: 0.5
-  m_ForceModuleActive: 0
+  m_MoveRepeatDelay: 0.5
+  m_MoveRepeatRate: 0.1
+  m_XRTrackingOrigin: {fileID: 0}
+  m_ActionsAsset: {fileID: 0}
+  m_PointAction: {fileID: 0}
+  m_MoveAction: {fileID: 0}
+  m_SubmitAction: {fileID: 0}
+  m_CancelAction: {fileID: 0}
+  m_LeftClickAction: {fileID: 0}
+  m_MiddleClickAction: {fileID: 0}
+  m_RightClickAction: {fileID: 0}
+  m_ScrollWheelAction: {fileID: 0}
+  m_TrackedDevicePositionAction: {fileID: 0}
+  m_TrackedDeviceOrientationAction: {fileID: 0}
+  m_DeselectOnBackgroundClick: 1
+  m_PointerBehavior: 0
 --- !u!114 &1122911170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18240,30 +18249,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!1 &1946777320 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7854783003313331794, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
-  m_PrefabInstance: {fileID: 7854783003480309386}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &1946777321
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1946777320}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d1e1c3e4e29d25b46bdc01d032744850, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1953227667
 GameObject:
   m_ObjectHideFlags: 0
@@ -23018,9 +23003,5 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 7854783003313331795, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: -8298335142436343970, guid: 84d97094a70bfa5478ffdfbbaaf38c12, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92e7dee90c560604382896b5adcc203a, type: 3}

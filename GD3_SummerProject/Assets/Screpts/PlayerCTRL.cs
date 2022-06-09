@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class PlayerCTRL : MonoBehaviour
 {
@@ -47,12 +48,15 @@ public class PlayerCTRL : MonoBehaviour
     WeponList getList;
 
     private int weponNo = 0;  // 所持している武器番号(0～1)
+    private Vector2 moveDir;
+
 
     // コンポーネント
     SpriteRenderer sprite;
     Rigidbody2D body;
     Animator anim;
     Animator flashAnim;
+    PlayerControls plCtrls;
 
     public enum State
     {
@@ -63,14 +67,20 @@ public class PlayerCTRL : MonoBehaviour
     public State state;
 
 
-    void Start()
+    void Awake()
     {
         // コンポーネント取得
-        sprite = GetComponent<SpriteRenderer>();
-        body = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
-        flashAnim = flashObj.GetComponent<Animator>();
+        TryGetComponent(out body);
+        TryGetComponent(out sprite);
+        TryGetComponent(out anim);
+        TryGetComponent(out flashAnim);
 
+        plCtrls = new PlayerControls();
+        plCtrls.Enable();
+    }
+
+    void Start()
+    {
         // 武器初期化
         getList = inputList.SendList();
         nowCharge = 0;  // 0で初期化
@@ -84,9 +94,15 @@ public class PlayerCTRL : MonoBehaviour
         anim.SetBool("Alive", true);
     }
 
-
     void Update()
     {
+
+
+        // なんだかなぁ
+        moveDir = plCtrls.Player.Move.ReadValue<Vector2>();
+
+
+
         // UI更新
         UIUpdate();
 
@@ -106,11 +122,11 @@ public class PlayerCTRL : MonoBehaviour
         if (NonDamageTime > 0) { NonDamageTime -= Time.deltaTime; }
 
         // 処理
-        Rotation();   // 旋回系
+        //Rotation();   // 旋回系
         Attack();     // 攻撃
         //Move();     // 移動
         Dash();       // 回避入力
-        SwapWepon();  // 武器交換
+        //SwapWepon();  // 武器交換
         Shooting();   // 遠距離攻撃
 
     }
@@ -143,12 +159,16 @@ public class PlayerCTRL : MonoBehaviour
     // 旋回系
     void Rotation()
     {
+        /*
         var padName = Input.GetJoystickNames();
         if (trail.attakingTime <= 0.0f)
         {
             if (padName.Length > 0) { CursorRotStick(); }
             else { CursorRotMouse(); }
         }
+        */
+
+        CursorRotMouse();
     }
 
     // 旋回（キーボード・マウス）
@@ -162,7 +182,7 @@ public class PlayerCTRL : MonoBehaviour
         Vector2 transPos = transform.position;
 
         // スクリーン座標系のマウス座標をワールド座標系に修正
-        Vector2 mouseRawPos = Input.mousePosition;
+        Vector2 mouseRawPos = new Vector2(0, 0);
         Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(mouseRawPos);
 
         // ベクトルを計算
@@ -187,6 +207,8 @@ public class PlayerCTRL : MonoBehaviour
         // カーソル回転（スティック）
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
 
+        /*
+
         var h = Input.GetAxisRaw("Horizontal2");
         var v = Input.GetAxisRaw("Vertical2");
 
@@ -202,6 +224,8 @@ public class PlayerCTRL : MonoBehaviour
         if (cursor.transform.eulerAngles.z < 180.0f) { sprite.flipX = true; }
         else { sprite.flipX = false; }
 
+        */
+
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     }
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
@@ -212,7 +236,7 @@ public class PlayerCTRL : MonoBehaviour
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     void Attack()
     {
-        if ((Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.JoystickButton5))
+        if ((Mouse.current.leftButton).wasPressedThisFrame
             && (weponCharge == needWeponCharge)
             && bpmCTRL.SendSignal()
             && coolDownReset == false)
@@ -261,9 +285,13 @@ public class PlayerCTRL : MonoBehaviour
         }
         else
         {
+            body.velocity = new Vector2(moveDir.x * moveSpeed, moveDir.y * moveSpeed);
+
+            /*
             body.velocity = new Vector2(
             Input.GetAxis("Horizontal") * moveSpeed,
             Input.GetAxis("Vertical") * moveSpeed);
+            */
         }
 
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
@@ -272,10 +300,12 @@ public class PlayerCTRL : MonoBehaviour
 
         if (dogeTimer > 0.0f)
         {
+            /*
             body.AddForce(new Vector2(
                 Input.GetAxis("Horizontal") * dashPower,
                 Input.GetAxis("Vertical") * dashPower),
                 ForceMode2D.Impulse);
+            */
             dogeTimer -= Time.deltaTime;
         }
 
@@ -285,6 +315,7 @@ public class PlayerCTRL : MonoBehaviour
     // 移動入力(ていうかダッシュ入力)
     void Dash()
     {
+        /*
         if ((Input.GetKeyDown(KeyCode.Space) ||
             Input.GetKeyDown(KeyCode.JoystickButton1))
             && bpmCTRL.SendSignal())
@@ -292,6 +323,7 @@ public class PlayerCTRL : MonoBehaviour
             // Debug.Log("doge");
             dogeTimer = 0.1f;
         }
+        */
     }
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
 
@@ -301,6 +333,9 @@ public class PlayerCTRL : MonoBehaviour
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     void SwapWepon()
     {
+        weponNo = 0;
+
+        /*
         if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Q) ||
             Input.GetKeyDown(KeyCode.JoystickButton3) || Input.GetKeyDown(KeyCode.JoystickButton2))
         {
@@ -344,6 +379,7 @@ public class PlayerCTRL : MonoBehaviour
             needWeponCharge = trail.SwapWeapon(getList, weponNo); // 必要クールダウン上書き   
             weponCharge = 0;    // 現クールダウンを上書き
         }
+        */
     }
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
 
@@ -361,6 +397,7 @@ public class PlayerCTRL : MonoBehaviour
     // 遠距離攻撃
     void Shooting()
     {
+        /*
         if (bpmCTRL.SendSignal())
         {
             if (nowCharge == needCharge && (Input.GetMouseButton(1) || Input.GetKeyDown(KeyCode.JoystickButton4)))
@@ -379,6 +416,8 @@ public class PlayerCTRL : MonoBehaviour
                 nowCharge = 0;
             }
         }
+        */
+
         //bulletText.text = "S：" + nowCharge + "/" + needCharge;
     }
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
