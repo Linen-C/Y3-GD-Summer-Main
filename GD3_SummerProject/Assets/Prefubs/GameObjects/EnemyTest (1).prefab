@@ -317,7 +317,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootingType: 0
   bullet: {fileID: 0}
-  helthPoint: 2
+  helthPoint: 10
   moveSpeed: 1
   needWeponCharge: 4
   knockBackPower: 30

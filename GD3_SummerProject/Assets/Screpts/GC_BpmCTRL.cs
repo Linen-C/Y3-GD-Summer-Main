@@ -88,7 +88,7 @@ public class GC_BpmCTRL : MonoBehaviour
     {
         return metronome;
     }
-    public bool SendSignal()
+    public bool Signal()
     {
         return doSignal;
     }

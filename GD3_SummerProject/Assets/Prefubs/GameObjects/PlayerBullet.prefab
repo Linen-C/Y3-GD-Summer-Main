@@ -136,3 +136,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 100
   owner: Player
+  damage: 20
+  knockback: 30

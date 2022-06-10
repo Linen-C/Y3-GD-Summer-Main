@@ -388,7 +388,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootingType: 1
   bullet: {fileID: 8518680874773387965, guid: 149c526469a50c04caa1fb7c2924b20b, type: 3}
-  helthPoint: 1
+  helthPoint: 4
   moveSpeed: 0
   needWeponCharge: 6
   knockBackPower: 30

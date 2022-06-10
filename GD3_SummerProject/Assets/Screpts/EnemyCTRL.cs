@@ -84,7 +84,6 @@ public class EnemyCTRL : MonoBehaviour
         state = State.Stop;
     }
 
-
     void Update()
     {
         // 停止判定
@@ -182,7 +181,7 @@ public class EnemyCTRL : MonoBehaviour
         // 攻撃・クールダウン
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
 
-        if ((weponCharge == needWeponCharge) && bpmCTRL.SendSignal() && coolDownReset == false)
+        if ((weponCharge == needWeponCharge) && bpmCTRL.Signal() && coolDownReset == false)
         {
             // Debug.Log("ENEMY_ATTACK");
 
@@ -255,17 +254,17 @@ public class EnemyCTRL : MonoBehaviour
         }
     }
 
-    // 衝突判定
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if ((collision.gameObject.tag == "PlayerAttack") && (NonDamageTime <= 0.0f))
-        {
-            helthPoint -= 1;
-            NonDamageTime = defNonDamageTime;
-            knockBackCounter = 0.1f;
-            anim.SetTrigger("Damage");
-        }
-        //Debug.Log("「いてっ！」");
-    }
 
+
+    // ダメージを受ける
+    public void TakeDamage(int damage,int knockback)
+    {
+        helthPoint -= damage;
+        knockBackPower = knockback;
+
+        NonDamageTime = defNonDamageTime;
+        knockBackCounter = 0.1f;
+        
+        anim.SetTrigger("Damage");
+    }
 }

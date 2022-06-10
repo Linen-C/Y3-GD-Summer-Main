@@ -1,0 +1,2 @@
+C:\Users\2016002\Desktop\UnityWork\GameDEV\GD-4GA3-Summer-Main\GD3_SummerProject\obj\Debug\Assembly-CSharp.csproj.AssemblyReference.cache
+C:\Users\2016002\Desktop\UnityWork\GameDEV\GD-4GA3-Summer-Main\GD3_SummerProject\obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache

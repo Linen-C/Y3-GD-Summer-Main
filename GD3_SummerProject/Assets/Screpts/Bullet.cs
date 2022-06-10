@@ -6,6 +6,8 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] float speed;
     [SerializeField] string owner;
+    [SerializeField] int damage;
+    [SerializeField] int knockback;
 
     // コンポーネント
     Rigidbody2D body;
@@ -26,6 +28,17 @@ public class Bullet : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == owner) return;
+
+        if (collision.tag == "Enemy")
+        {
+            collision.GetComponent<EnemyCTRL>().TakeDamage(damage, knockback);
+        }
+
+        if (collision.tag == "Player")
+        {
+            // none
+        }
+
         Destroy(gameObject);
     }
 }

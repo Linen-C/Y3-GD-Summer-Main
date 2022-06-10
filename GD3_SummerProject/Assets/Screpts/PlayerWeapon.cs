@@ -9,7 +9,6 @@ public class PlayerWeapon : MonoBehaviour
     [Header("変数")]
     [SerializeField] float defTime;   // 攻撃判定の発生時間
     [SerializeField] public float attakingTime = 0.0f;  // 判定の発生時間
-    [SerializeField] float defChargeCool;
 
     // スクリプト
     [Header("スクリプト")]
@@ -24,6 +23,15 @@ public class PlayerWeapon : MonoBehaviour
     float spriteAlpha = 0.0f;
     float chargeCool = 0.0f;
 
+    [SerializeField] int defDamage = 1;      // 通常ダメージ
+    [SerializeField] int maxDamage = 0;      // 最大ダメージ
+    [SerializeField] int defKnockBack = 0;   // ノックバックパワー
+    [SerializeField] int maxKnockBack = 0;   // ノックバックパワー
+    [SerializeField] int maxCharge = 0;      // 必要最大チャージ
+
+    int nowDamage = 0;
+    int nowKockBack = 0;
+
     // コンポーネント
     BoxCollider2D coll;
 
@@ -32,19 +40,21 @@ public class PlayerWeapon : MonoBehaviour
     {
         coll = GetComponent<BoxCollider2D>();
         coll.enabled = false;
+
+        spriteChanger.ChangeTransparency(spriteAlpha);
     }
 
-    // Update is called once per frame
     void Update()
     {
-        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
         // 判定発生
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-        
-        if (attakingTime >= 0){ attakingTime -= Time.deltaTime; }
+        if (attakingTime >= 0)
+        {
+            attakingTime -= Time.deltaTime;
+        }
         else{ coll.enabled = false; }
 
-        if (spriteAlpha >= 0.0f)
+        if (spriteAlpha > 0.0f)
         {
             spriteChanger.ChangeTransparency(spriteAlpha);
             spriteAlpha -= Time.deltaTime * 2.0f;
@@ -54,38 +64,30 @@ public class PlayerWeapon : MonoBehaviour
         {
             chargeCool -= Time.deltaTime;
         }
-
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     }
 
-    public int SwapWeapon(WeponList wepon,int no)
+
+
+    // 武器切り替え
+    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+    public int SwapWeapon(JsonData wepon,int no)
     {
-        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-        // 武器切り替え
-        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-        //Debug.Log("武器変更");
+        // バグってたら強制的に0を突っ込む
+        if (no + 1 > wepon.weponList.Length) { no = 0; }
 
-        // バグってた時用の処理
-        if (no + 1 > wepon.weponList.Length)
-        {
-            // 座標セット
-            transform.localPosition = new Vector3(
-                0.0f, wepon.weponList[0].offset, 0.0f);
 
-            // スケールセット
-            transform.localScale = new Vector3(
-                wepon.weponList[0].wideth, wepon.weponList[0].height, 1.0f);
+        // 最大ダメージセット
+        maxDamage = wepon.weponList[no].maxcharge;
 
-            // スプライト切り替えのためパス
-            Sprite defImage = Resources.Load<Sprite>(wepon.weponList[0].image.ToString());
-            spriteChanger.ChangeSprite(defImage, wepon.weponList[0].offset);
+        // 基礎ノックバック量セット
+        defKnockBack = wepon.weponList[no].defknockback;
 
-            // テキスト変更
-            weponNameText.text = wepon.weponList[0].name;
+        // 最大ノックバック量セット
+        maxKnockBack = wepon.weponList[no].maxknockback;
 
-            // プレイヤーに必要クールダウンを渡してリターン
-            return wepon.weponList[0].cool;
-        }
+        // 最大チャージ量セット
+        maxCharge = wepon.weponList[no].maxcharge;
 
 
         // 座標セット
@@ -100,32 +102,53 @@ public class PlayerWeapon : MonoBehaviour
         Sprite inImage = Resources.Load<Sprite>(wepon.weponList[no].image.ToString());
         spriteChanger.ChangeSprite(inImage, wepon.weponList[no].offset);
 
+
         // テキスト変更
         weponNameText.text = wepon.weponList[no].name;
 
         // プレイヤーに必要クールダウンを渡してリターン
-        return wepon.weponList[no].cool;
-
-        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+        return wepon.weponList[no].maxcharge;
     }
 
-    public void Attacking()
+    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+
+
+
+    // 攻撃発生
+    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+    public void Attacking(int nowCharge)
     {
+        if (maxCharge == nowCharge)
+        {
+            nowDamage = maxDamage;
+            nowKockBack = maxKnockBack;
+        }
+        else
+        {
+            nowDamage = defDamage;
+            nowKockBack = defKnockBack;
+        }
+
         coll.enabled = true;
         attakingTime = defTime;
 
         spriteAlpha = 1.0f;
-
-        //spriteChanger.ChangeTransparency(1.0f);
-        //Debug.Log("プレイヤー：判定発生");
     }
 
+    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+
+
+
+    // 攻撃の命中判定
+    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "Enemy" && chargeCool <= 0)
         {
+            collision.gameObject.GetComponent<EnemyCTRL>().TakeDamage(nowDamage, nowKockBack);
             playerctrl.GetCharge();
         }
-        //Debug.Log("プレイヤー：命中");
     }
+
+    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
 }

@@ -39,8 +39,8 @@ public class PlayerCTRL : MonoBehaviour
     [SerializeField] Text bulletText;     // 射撃チャージ
 
     // プライベート変数
-    private int needWeponCharge = 0;     // 必要クールダウン
-    private int weponCharge = 1;         // 現在クールダウン
+    private int maxWeponCharge = 0;     // 必要クールダウン
+    private int nowWeponCharge = 1;         // 現在クールダウン
     private int weponNo = 0;             // 所持している武器番号(0～1)
     private bool coolDownReset = false;  // クールダウンのリセットフラグ
     private float dogeTimer = 0;         // 回避用のタイマー
@@ -54,7 +54,7 @@ public class PlayerCTRL : MonoBehaviour
     Animator anim;
     Animator flashAnim;
     PlayerControls plCtrls;
-    WeponList getList;
+    JsonData getList;
 
     public enum State
     {
@@ -81,8 +81,8 @@ public class PlayerCTRL : MonoBehaviour
     {
         // 武器初期化
         getList = inputList.SendList();
-        nowCharge = 0;  // 0で初期化
-        needWeponCharge = trail.SwapWeapon(getList, 0);
+        nowCharge = 0;  // あえて0で初期化
+        maxWeponCharge = trail.SwapWeapon(getList, 0);
 
         // UI系初期化
         UIUpdate();
@@ -144,7 +144,7 @@ public class PlayerCTRL : MonoBehaviour
     void UIUpdate()
     {
         hpText.text = "HP：" + helthPoint.ToString();
-        cooldownText.text = "Wepon : " + weponCharge + "/" + needWeponCharge;
+        cooldownText.text = "Wepon : " + nowWeponCharge + "/" + maxWeponCharge;
         bulletText.text = "Shot : " + nowCharge + "/" + needCharge;
     }
 
@@ -212,12 +212,11 @@ public class PlayerCTRL : MonoBehaviour
     void Attack()
     {
         if (plCtrls.Player.Attack.triggered
-            && weponCharge == needWeponCharge
-            && bpmCTRL.SendSignal()
+            && bpmCTRL.Signal()
             && coolDownReset == false)
         {
             anim.SetTrigger("Attack");
-            trail.Attacking();
+            trail.Attacking(nowWeponCharge);
             coolDownReset = true;
         }
 
@@ -225,12 +224,12 @@ public class PlayerCTRL : MonoBehaviour
         {
             if (coolDownReset == true)
             {
-                weponCharge = 1;
+                nowWeponCharge = 1;
                 coolDownReset = false;
             }
-            else if (weponCharge < needWeponCharge) { weponCharge++; }
+            else if (nowWeponCharge < maxWeponCharge) { nowWeponCharge++; }
 
-            if (weponCharge == (needWeponCharge - 1))
+            if (nowWeponCharge == (maxWeponCharge - 1))
             {
                 anim.SetTrigger("Charge");
                 flashAnim.SetTrigger("FlashTrigger");
@@ -247,7 +246,7 @@ public class PlayerCTRL : MonoBehaviour
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     void Dash()
     {
-        if (plCtrls.Player.Dash.triggered && bpmCTRL.SendSignal()) { dogeTimer = 0.1f; }
+        if (plCtrls.Player.Dash.triggered && bpmCTRL.Signal()) { dogeTimer = 0.1f; }
     }
 
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
@@ -329,8 +328,8 @@ public class PlayerCTRL : MonoBehaviour
                 }
             }
 
-            needWeponCharge = trail.SwapWeapon(getList, weponNo); // 必要クールダウン上書き   
-            weponCharge = 0;    // 現クールダウンを上書き
+            maxWeponCharge = trail.SwapWeapon(getList, weponNo); // 必要クールダウン上書き   
+            nowWeponCharge = 0;    // 現クールダウンを上書き
         }
     }
 
@@ -348,7 +347,7 @@ public class PlayerCTRL : MonoBehaviour
     // 遠距離攻撃
     void Shooting()
     {
-        if (bpmCTRL.SendSignal())
+        if (bpmCTRL.Signal())
         {
             if (nowCharge == needCharge && plCtrls.Player.Shot.triggered)
             {
@@ -407,6 +406,8 @@ public class PlayerCTRL : MonoBehaviour
         var targets = GameObject.FindGameObjectsWithTag(tagName);
         var minTargetDist = float.MaxValue;
 
+        if (targets != null) { return new Vector2(0, 0); }
+
         foreach (var target in targets)
         {
             var targetDist = Vector2.Distance(
@@ -432,7 +433,7 @@ public class PlayerCTRL : MonoBehaviour
         return diff;
     }
 
-    // 衝突判定
+    // 被ダメージ判定
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "EnemyAttack" && (NonDamageTime <= 0.0f))
