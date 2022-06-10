@@ -34,6 +34,12 @@ public class GC_GameCTRL : MonoBehaviour
     }
     State state;
 
+    UIControls uiCtrl;
+
+    private void Awake()
+    {
+        uiCtrl = new UIControls();
+    }
 
     void Start()
     {
@@ -47,13 +53,12 @@ public class GC_GameCTRL : MonoBehaviour
         S_Ready();
         // のちにこうするか、各キャラのステートを弄るようにするか。
         // state = State.Ready;
+
+        uiCtrl.Enable();
     }
 
     void Update()
     {
-        var escape = Keyboard.current.escapeKey;
-        var keyR = Keyboard.current.rKey;
-
         switch (state)
         {
             case State.Ready:
@@ -61,26 +66,26 @@ public class GC_GameCTRL : MonoBehaviour
                 break;
 
             case State.Play:
-                if (escape.wasPressedThisFrame) { S_Pause(); }
+                if (uiCtrl.InGameUI.Pause.triggered) { S_Pause(); }
                 if (playerCtrl.state == PlayerCTRL.State.Dead) { S_GameOver(); }
                 break ;
 
             case State.GameOver:
-                if (keyR.wasPressedThisFrame) { ReLoad(); }
+                if (uiCtrl.InGameUI.Retry.triggered) { ReLoad(); }
                 break ;
 
             case State.GameClear:
-                if (keyR.wasPressedThisFrame) { ReturnTitle(); }
+                if (uiCtrl.InGameUI.Retry.triggered) { ReturnTitle(); }
                 break;
 
             case State.Pause:
-                if (escape.wasPressedThisFrame) { S_Pause_End(); }
+                if (uiCtrl.InGameUI.Pause.triggered) { S_Pause_End(); }
                 break ;
         }
     }
 
 
-    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+
     // ステート用
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
 
@@ -172,7 +177,7 @@ public class GC_GameCTRL : MonoBehaviour
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
 
 
-    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+
     // その他処理 //
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
 
@@ -204,7 +209,7 @@ public class GC_GameCTRL : MonoBehaviour
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
 
 
-    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+
     // ポーズUI用
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
 

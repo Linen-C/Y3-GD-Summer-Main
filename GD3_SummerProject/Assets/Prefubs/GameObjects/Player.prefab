@@ -803,6 +803,26 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 6d699aaf-b8c4-4596-8614-b96e01adf175
     m_ActionName: Player/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b0d4a86e-2b1f-42be-a8fa-65294f794ca2
+    m_ActionName: Player/Dir[/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6a462553-6769-4fb8-bb8d-c18c6f8205de
+    m_ActionName: Player/Dash[/Keyboard/shift]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5d4a40a3-8276-4312-9634-0166a5ec4d0a
+    m_ActionName: Player/Attack[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0131fb34-5b15-4287-ab2a-c07ecab27728
+    m_ActionName: Player/Shot[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: acf28af5-77b9-4a33-b22c-2f23141a18ed
+    m_ActionName: Player/WeponSwap[/Mouse/scroll/y]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

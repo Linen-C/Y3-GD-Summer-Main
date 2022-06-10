@@ -41,15 +41,12 @@ public class PlayerCTRL : MonoBehaviour
     // プライベート変数
     private int needWeponCharge = 0;     // 必要クールダウン
     private int weponCharge = 1;         // 現在クールダウン
+    private int weponNo = 0;             // 所持している武器番号(0～1)
     private bool coolDownReset = false;  // クールダウンのリセットフラグ
     private float dogeTimer = 0;         // 回避用のタイマー
     private float knockBackCounter = 0;  // ノックバック時間カウンター
     private float NonDamageTime = 0;     // 無敵時間
-    WeponList getList;
-
-    private int weponNo = 0;  // 所持している武器番号(0～1)
-    private Vector2 moveDir;
-
+    private Vector2 moveDir;    // 移動用ベクトル
 
     // コンポーネント
     SpriteRenderer sprite;
@@ -57,6 +54,7 @@ public class PlayerCTRL : MonoBehaviour
     Animator anim;
     Animator flashAnim;
     PlayerControls plCtrls;
+    WeponList getList;
 
     public enum State
     {
@@ -76,7 +74,7 @@ public class PlayerCTRL : MonoBehaviour
         TryGetComponent(out flashAnim);
 
         plCtrls = new PlayerControls();
-        plCtrls.Enable();
+        
     }
 
     void Start()
@@ -92,15 +90,15 @@ public class PlayerCTRL : MonoBehaviour
         // ステート初期化
         state = State.Stop;
         anim.SetBool("Alive", true);
+
+        // インプットシステム有効化
+        plCtrls.Enable();
     }
 
     void Update()
     {
-
-
-        // なんだかなぁ
+        // 移動入力の取得
         moveDir = plCtrls.Player.Move.ReadValue<Vector2>();
-
 
 
         // UI更新
@@ -122,11 +120,10 @@ public class PlayerCTRL : MonoBehaviour
         if (NonDamageTime > 0) { NonDamageTime -= Time.deltaTime; }
 
         // 処理
-        //Rotation();   // 旋回系
+        Rotation();   // 旋回系
         Attack();     // 攻撃
-        //Move();     // 移動
-        Dash();       // 回避入力
-        //SwapWepon();  // 武器交換
+        Dash();       // ダッシュ入力
+        SwapWepon();  // 武器交換
         Shooting();   // 遠距離攻撃
 
     }
@@ -136,11 +133,12 @@ public class PlayerCTRL : MonoBehaviour
         // ステート判定
         if (state != State.Alive) { return; }
 
-        Move(); // 一旦ここにしとこう
+        Move();
     }
 
 
-    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+
+
     // UI更新
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     void UIUpdate()
@@ -149,95 +147,72 @@ public class PlayerCTRL : MonoBehaviour
         cooldownText.text = "Wepon : " + weponCharge + "/" + needWeponCharge;
         bulletText.text = "Shot : " + nowCharge + "/" + needCharge;
     }
+
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
 
 
-    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+
     // 旋回
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
 
     // 旋回系
     void Rotation()
     {
-        /*
-        var padName = Input.GetJoystickNames();
-        if (trail.attakingTime <= 0.0f)
-        {
-            if (padName.Length > 0) { CursorRotStick(); }
-            else { CursorRotMouse(); }
-        }
-        */
+        var padName = Gamepad.current;
+        if (padName != null) { CursorRotStick(); }
+        else { CursorRotMouse(); }
 
-        CursorRotMouse();
+        if (cursor.transform.eulerAngles.z < 180.0f) { sprite.flipX = true; }
+        else { sprite.flipX = false; }
+
     }
 
     // 旋回（キーボード・マウス）
     void CursorRotMouse()
     {
-        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-        // カーソル回転（マウス）
-        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-
         // 自分の位置
         Vector2 transPos = transform.position;
 
         // スクリーン座標系のマウス座標をワールド座標系に修正
-        Vector2 mouseRawPos = new Vector2(0, 0);
-        Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(mouseRawPos);
+        var rawDir = plCtrls.Player.Dir.ReadValue<Vector2>();
+        Vector2 mouseDir = Camera.main.ScreenToWorldPoint(rawDir);
 
         // ベクトルを計算
-        Vector2 diff = (mouseWorldPos - transPos).normalized;
+        Vector2 diff = (mouseDir - transPos).normalized;
 
         // 回転に代入
         var curRot = Quaternion.FromToRotation(Vector3.up, diff);
 
-        // カーソルくんにパス
+        // カーソルにパス
         cursor.GetComponent<Transform>().rotation = curRot;
-
-        if (cursor.transform.eulerAngles.z < 180.0f) { sprite.flipX = true; }
-        else { sprite.flipX = false; }
-
-        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     }
 
     // 旋回（スティック）
     void CursorRotStick()
     {
-        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-        // カーソル回転（スティック）
-        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+        // スティック方向取得
+        var stickDir = plCtrls.Player.Dir.ReadValue<Vector2>();
 
-        /*
+        // ベクトルを計算
+        float radian = Mathf.Atan2(stickDir.x, stickDir.y) * Mathf.Rad2Deg;
 
-        var h = Input.GetAxisRaw("Horizontal2");
-        var v = Input.GetAxisRaw("Vertical2");
-
-        if (h == 0 && v == 0)
-            return;
-
-        float radian = Mathf.Atan2(h, v) * Mathf.Rad2Deg;
-
+        // 回転に代入
         if (radian < 0) { radian += 360; }
 
+        // カーソルにパス
         cursor.GetComponent<Transform>().rotation = Quaternion.Euler(0, 0, radian);
-
-        if (cursor.transform.eulerAngles.z < 180.0f) { sprite.flipX = true; }
-        else { sprite.flipX = false; }
-
-        */
-
-        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     }
+
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
 
 
-    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+
     // 攻撃
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     void Attack()
     {
-        if ((Mouse.current.leftButton).wasPressedThisFrame
-            && (weponCharge == needWeponCharge)
+        if (plCtrls.Player.Attack.triggered
+            && weponCharge == needWeponCharge
             && bpmCTRL.SendSignal()
             && coolDownReset == false)
         {
@@ -263,20 +238,29 @@ public class PlayerCTRL : MonoBehaviour
         }
 
     }
+
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
 
 
+
+    // ダッシュ入力
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+    void Dash()
+    {
+        if (plCtrls.Player.Dash.triggered && bpmCTRL.SendSignal()) { dogeTimer = 0.1f; }
+    }
+
+    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+
+
+
     // 移動
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-    
+
     // 移動系
     void Move()
     {
-        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
         // 移動
-        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-
         if (knockBackCounter > 0.0f)
         {
             KnockBack();
@@ -286,60 +270,28 @@ public class PlayerCTRL : MonoBehaviour
         else
         {
             body.velocity = new Vector2(moveDir.x * moveSpeed, moveDir.y * moveSpeed);
-
-            /*
-            body.velocity = new Vector2(
-            Input.GetAxis("Horizontal") * moveSpeed,
-            Input.GetAxis("Vertical") * moveSpeed);
-            */
         }
 
-        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
         // 回避
-        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-
         if (dogeTimer > 0.0f)
         {
-            /*
-            body.AddForce(new Vector2(
-                Input.GetAxis("Horizontal") * dashPower,
-                Input.GetAxis("Vertical") * dashPower),
-                ForceMode2D.Impulse);
-            */
+            body.AddForce(new Vector2(moveDir.x * dashPower, moveDir.y * dashPower), ForceMode2D.Impulse);
+
             dogeTimer -= Time.deltaTime;
         }
-
-        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     }
 
-    // 移動入力(ていうかダッシュ入力)
-    void Dash()
-    {
-        /*
-        if ((Input.GetKeyDown(KeyCode.Space) ||
-            Input.GetKeyDown(KeyCode.JoystickButton1))
-            && bpmCTRL.SendSignal())
-        {
-            // Debug.Log("doge");
-            dogeTimer = 0.1f;
-        }
-        */
-    }
-    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
 
 
-    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     // 武器変更
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     void SwapWepon()
     {
-        weponNo = 0;
+        var value2 = plCtrls.Player.WeponSwap.ReadValue<float>();
 
-        /*
-        if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Q) ||
-            Input.GetKeyDown(KeyCode.JoystickButton3) || Input.GetKeyDown(KeyCode.JoystickButton2))
+        if (value2 != 0)
         {
-            if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.JoystickButton3))
+            if (value2 > 0)
             {
                 switch (weponNo)
                 {
@@ -357,7 +309,8 @@ public class PlayerCTRL : MonoBehaviour
                         break;
                 }
             }
-            else
+
+            if (value2 < 0)
             {
                 switch (weponNo)
                 {
@@ -379,12 +332,10 @@ public class PlayerCTRL : MonoBehaviour
             needWeponCharge = trail.SwapWeapon(getList, weponNo); // 必要クールダウン上書き   
             weponCharge = 0;    // 現クールダウンを上書き
         }
-        */
     }
-    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
 
 
-    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+
     // 遠距離攻撃
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
 
@@ -397,10 +348,9 @@ public class PlayerCTRL : MonoBehaviour
     // 遠距離攻撃
     void Shooting()
     {
-        /*
         if (bpmCTRL.SendSignal())
         {
-            if (nowCharge == needCharge && (Input.GetMouseButton(1) || Input.GetKeyDown(KeyCode.JoystickButton4)))
+            if (nowCharge == needCharge && plCtrls.Player.Shot.triggered)
             {
                 // 遠距離攻撃発生
                 Debug.Log("遠距離攻撃");
@@ -416,14 +366,11 @@ public class PlayerCTRL : MonoBehaviour
                 nowCharge = 0;
             }
         }
-        */
-
-        //bulletText.text = "S：" + nowCharge + "/" + needCharge;
     }
-    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
 
 
-    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+
+
     // 死亡判定
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     void IsDead()
@@ -434,10 +381,10 @@ public class PlayerCTRL : MonoBehaviour
             state = State.Dead;
         }
     }
-    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
 
 
-    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+
+
     // その他
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
 
@@ -496,6 +443,6 @@ public class PlayerCTRL : MonoBehaviour
             anim.SetTrigger("Damage");
         }
     }
-    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+
 
 }

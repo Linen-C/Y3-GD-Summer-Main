@@ -15760,6 +15760,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1784820708}
+  - component: {fileID: 1784820712}
   - component: {fileID: 1784820710}
   - component: {fileID: 1784820709}
   - component: {fileID: 1784820707}
@@ -15809,7 +15810,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0666a689f20f1e54e87726f13117c2c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bpm: 120
+  bpm: 180
   bpmText: {fileID: 1619903086}
   beatImage: {fileID: 1796694549}
   audioSource: {fileID: 1784820711}
@@ -15932,6 +15933,44 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1784820712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1784820706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: bff15d5c2bf5fb44f8f6c3391fd08e47, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6df8d238-2f3d-4a7a-9e3a-f8e50b04e80f
+    m_ActionName: InGameUI/Pause[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 53f16344-dff7-4d49-b7ef-c12f6b2e3c34
+    m_ActionName: InGameUI/Retry[/Keyboard/r]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: InGameUI
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &1793777624
 GameObject:
   m_ObjectHideFlags: 0
