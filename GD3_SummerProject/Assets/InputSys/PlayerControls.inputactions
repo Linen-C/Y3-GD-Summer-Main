@@ -15,9 +15,18 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Dir",
+                    "name": "MouseDir",
                     "type": "Value",
                     "id": "b0d4a86e-2b1f-42be-a8fa-65294f794ca2",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "StickDir",
+                    "type": "Value",
+                    "id": "2df4f3d9-8495-4b2b-b4fd-84c4c0f751c8",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
@@ -51,13 +60,31 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "WeponSwap",
+                    "name": "WeponSwapWhile",
                     "type": "Value",
                     "id": "acf28af5-77b9-4a33-b22c-2f23141a18ed",
                     "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "WeponSwapButtonUp",
+                    "type": "Button",
+                    "id": "6980dd55-5909-4efa-83db-ef96b9c7dfd1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "WeponSwapButtonDown",
+                    "type": "Button",
+                    "id": "83372f80-de18-48a7-a157-df29bc2084f0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -173,23 +200,23 @@
                 },
                 {
                     "name": "",
-                    "id": "bc2c1b0f-5f13-417a-b6eb-9375425b7ce0",
-                    "path": "<Mouse>/position",
+                    "id": "71218da1-92c3-44a0-ab6e-956a832b0c64",
+                    "path": "<Gamepad>/leftStick",
                     "interactions": "",
                     "processors": "",
-                    "groups": "KeyBoard",
-                    "action": "Dir",
+                    "groups": "JoyPad",
+                    "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "347e6eb5-12e8-44e5-a197-8c8b13c965c0",
-                    "path": "<Gamepad>/rightStick",
+                    "id": "bc2c1b0f-5f13-417a-b6eb-9375425b7ce0",
+                    "path": "<Mouse>/position",
                     "interactions": "",
                     "processors": "",
-                    "groups": "JoyPad",
-                    "action": "Dir",
+                    "groups": "KeyBoard",
+                    "action": "MouseDir",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -207,7 +234,7 @@
                 {
                     "name": "",
                     "id": "4218725d-9f28-40c6-b732-da439f5272ac",
-                    "path": "<Gamepad>/buttonEast",
+                    "path": "<Gamepad>/leftShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "JoyPad",
@@ -244,42 +271,9 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyBoard",
-                    "action": "WeponSwap",
+                    "action": "WeponSwapWhile",
                     "isComposite": false,
                     "isPartOfComposite": false
-                },
-                {
-                    "name": "1D Axis",
-                    "id": "7357b627-c5d3-4420-a717-52e1d62617e1",
-                    "path": "1DAxis",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "WeponSwap",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "positive",
-                    "id": "2a6c2b55-4530-4b3d-baed-98f441959724",
-                    "path": "<Gamepad>/buttonNorth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "JoyPad",
-                    "action": "WeponSwap",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "negative",
-                    "id": "fa4d3f03-3649-485f-a9c6-8974483ffda3",
-                    "path": "<Gamepad>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "JoyPad",
-                    "action": "WeponSwap",
-                    "isComposite": false,
-                    "isPartOfComposite": true
                 },
                 {
                     "name": "",
@@ -300,6 +294,39 @@
                     "processors": "",
                     "groups": "JoyPad",
                     "action": "Shot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "16a56136-c90a-4c42-8d7a-47e733170001",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "InvertVector2(invertY=false)",
+                    "groups": "KeyBoard",
+                    "action": "StickDir",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6d66e0ab-b6a5-4f5b-a8ef-b66bed1f89a8",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "JoyPad",
+                    "action": "WeponSwapButtonUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ad7e5987-5fbd-4775-92a5-c38b579a59dc",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "JoyPad",
+                    "action": "WeponSwapButtonDown",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

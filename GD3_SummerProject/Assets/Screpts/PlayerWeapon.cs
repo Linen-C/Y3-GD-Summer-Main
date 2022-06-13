@@ -31,6 +31,7 @@ public class PlayerWeapon : MonoBehaviour
 
     int nowDamage = 0;
     int nowKockBack = 0;
+    bool comboFlag = false;
 
     // コンポーネント
     BoxCollider2D coll;
@@ -138,6 +139,14 @@ public class PlayerWeapon : MonoBehaviour
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
 
 
+    public bool Combo()
+    {
+        if (!comboFlag) { return false; }
+
+        comboFlag = false;
+        return true;
+    }
+
 
     // 攻撃の命中判定
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
@@ -147,6 +156,7 @@ public class PlayerWeapon : MonoBehaviour
         {
             collision.gameObject.GetComponent<EnemyCTRL>().TakeDamage(nowDamage, nowKockBack);
             playerctrl.GetCharge();
+            if (nowDamage == maxDamage) { comboFlag = true; }
         }
     }
 

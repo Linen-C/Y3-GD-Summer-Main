@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyCTRL : MonoBehaviour
 {
@@ -10,7 +11,8 @@ public class EnemyCTRL : MonoBehaviour
 
     // 変数
     [Header("ステータス")]
-    [SerializeField] int helthPoint;  // 体力
+    [SerializeField] int maxHelthPoint;      // 最大体力
+    [SerializeField] int nowHelthPoint = 0;  // 現在体力
     [Header("移動")]
     [SerializeField] float moveSpeed;  // 移動速度
     [Header("武器")]
@@ -35,6 +37,11 @@ public class EnemyCTRL : MonoBehaviour
     [SerializeField] GameObject player;    // プレイヤー
     [SerializeField] GameObject areaObj;   // エリアオブジェクト
 
+    // 体力表示
+    [Header("体力表示(マニュアル)")]
+    //[SerializeField] GameObject hpUI;
+    [SerializeField] Slider hpSlider;
+
     // プライベート変数
     private int weponCharge = 1;         // 現在クールダウン
     private bool coolDownReset = false;  // クールダウンのリセットフラグ
@@ -57,9 +64,22 @@ public class EnemyCTRL : MonoBehaviour
     }
     State state;
 
+    void Awake()
+    {
+        // コンポーネント取得
+        sprite = GetComponent<SpriteRenderer>();
+        body = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+        flashAnim = flashObj.GetComponent<Animator>();
+        curTrans = cursor.GetComponent<Transform>();
+
+    }
 
     void Start()
     {
+        nowHelthPoint = maxHelthPoint;
+        hpSlider.value = 1;
+
         if (!shootingType) { bullet = null; }
 
         // 親エリアコンポーネントの取得
@@ -72,13 +92,6 @@ public class EnemyCTRL : MonoBehaviour
 
         // ２回も使いとうなかったわい…
         player = GameObject.FindGameObjectWithTag("Player");
-
-        // コンポーネント取得
-        sprite = GetComponent<SpriteRenderer>();
-        body = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
-        flashAnim = flashObj.GetComponent<Animator>();
-        curTrans = cursor.GetComponent<Transform>();
 
         // ステート初期化
         state = State.Stop;
@@ -117,6 +130,7 @@ public class EnemyCTRL : MonoBehaviour
         CursorRot();    // 旋回
         Attack();       // 攻撃
         //Move();         // 移動
+        SetHP();
     }
 
     void FixedUpdate()
@@ -245,10 +259,16 @@ public class EnemyCTRL : MonoBehaviour
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     }
 
+    // 体力表示
+    void SetHP()
+    {
+        hpSlider.value = (float)nowHelthPoint / (float)maxHelthPoint;
+    }
+
     // 死亡判定
     void IfIsAlive()
     {
-        if(helthPoint <= 0)
+        if(nowHelthPoint <= 0)
         {
             Destroy(gameObject, defNonDamageTime + 0.1f);
         }
@@ -259,7 +279,9 @@ public class EnemyCTRL : MonoBehaviour
     // ダメージを受ける
     public void TakeDamage(int damage,int knockback)
     {
-        helthPoint -= damage;
+        if (NonDamageTime > 0) { return; }
+
+        nowHelthPoint -= damage;
         knockBackPower = knockback;
 
         NonDamageTime = defNonDamageTime;

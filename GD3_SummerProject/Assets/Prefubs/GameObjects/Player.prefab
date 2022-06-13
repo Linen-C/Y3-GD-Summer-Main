@@ -466,6 +466,7 @@ MonoBehaviour:
   maxDamage: 0
   defKnockBack: 0
   maxKnockBack: 0
+  maxCharge: 0
 --- !u!1 &7854783002991398356
 GameObject:
   m_ObjectHideFlags: 0
@@ -642,9 +643,9 @@ GameObject:
   - component: {fileID: 7854783003313331795}
   - component: {fileID: 7854783003313331799}
   - component: {fileID: 7854783003313331798}
-  - component: {fileID: 1946777321}
   - component: {fileID: 1946777325}
   - component: {fileID: 7854783003313331793}
+  - component: {fileID: 1946777321}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -758,25 +759,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2}
   m_Direction: 0
---- !u!95 &1946777321
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7854783003313331794}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d1e1c3e4e29d25b46bdc01d032744850, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &1946777325
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -861,3 +843,22 @@ MonoBehaviour:
   cooldownText: {fileID: 0}
   bulletText: {fileID: 0}
   state: 0
+--- !u!95 &1946777321
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7854783003313331794}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d1e1c3e4e29d25b46bdc01d032744850, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

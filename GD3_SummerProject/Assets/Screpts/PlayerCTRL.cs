@@ -43,6 +43,10 @@ public class PlayerCTRL : MonoBehaviour
     private int nowWeponCharge = 1;         // 現在クールダウン
     private int weponNo = 0;             // 所持している武器番号(0～1)
     private bool coolDownReset = false;  // クールダウンのリセットフラグ
+
+    private int comboCountLeft = 0;
+    private bool doComboMode = false;
+
     private float dogeTimer = 0;         // 回避用のタイマー
     private float knockBackCounter = 0;  // ノックバック時間カウンター
     private float NonDamageTime = 0;     // 無敵時間
@@ -71,8 +75,9 @@ public class PlayerCTRL : MonoBehaviour
         TryGetComponent(out body);
         TryGetComponent(out sprite);
         TryGetComponent(out anim);
-        TryGetComponent(out flashAnim);
+        //TryGetComponent(out flashAnim);
 
+        flashAnim = flashObj.GetComponent<Animator>();
         plCtrls = new PlayerControls();
         
     }
@@ -174,7 +179,7 @@ public class PlayerCTRL : MonoBehaviour
         Vector2 transPos = transform.position;
 
         // スクリーン座標系のマウス座標をワールド座標系に修正
-        var rawDir = plCtrls.Player.Dir.ReadValue<Vector2>();
+        var rawDir = plCtrls.Player.MouseDir.ReadValue<Vector2>();
         Vector2 mouseDir = Camera.main.ScreenToWorldPoint(rawDir);
 
         // ベクトルを計算
@@ -191,7 +196,10 @@ public class PlayerCTRL : MonoBehaviour
     void CursorRotStick()
     {
         // スティック方向取得
-        var stickDir = plCtrls.Player.Dir.ReadValue<Vector2>();
+        var stickDir = plCtrls.Player.StickDir.ReadValue<Vector2>();
+
+        // 入力が無ければ更新しない
+        if (stickDir == new Vector2(0,0)) { return; }
 
         // ベクトルを計算
         float radian = Mathf.Atan2(stickDir.x, stickDir.y) * Mathf.Rad2Deg;
@@ -211,6 +219,8 @@ public class PlayerCTRL : MonoBehaviour
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     void Attack()
     {
+        
+
         if (plCtrls.Player.Attack.triggered
             && bpmCTRL.Signal()
             && coolDownReset == false)
@@ -220,14 +230,35 @@ public class PlayerCTRL : MonoBehaviour
             coolDownReset = true;
         }
 
+        if (trail.Combo())
+        {
+            nowWeponCharge = maxWeponCharge;
+            doComboMode = true;
+            coolDownReset = false;
+            comboCountLeft = 2;
+        }
+
+        
         if (bpmCTRL.Metronome())
         {
-            if (coolDownReset == true)
+            if (coolDownReset == true && doComboMode == false)
             {
                 nowWeponCharge = 1;
                 coolDownReset = false;
             }
             else if (nowWeponCharge < maxWeponCharge) { nowWeponCharge++; }
+
+            if (comboCountLeft > 0)
+            {
+                comboCountLeft--;
+            }
+            if (comboCountLeft == 0 && doComboMode == true)
+            {
+                nowWeponCharge = 1;
+                doComboMode = false;
+                coolDownReset = true;
+            }
+
 
             if (nowWeponCharge == (maxWeponCharge - 1))
             {
@@ -286,11 +317,13 @@ public class PlayerCTRL : MonoBehaviour
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     void SwapWepon()
     {
-        var value2 = plCtrls.Player.WeponSwap.ReadValue<float>();
+        var valueW = plCtrls.Player.WeponSwapWhile.ReadValue<float>();
+        var valueUp = plCtrls.Player.WeponSwapButtonUp.triggered;
+        var valueDwon = plCtrls.Player.WeponSwapButtonDown.triggered;
 
-        if (value2 != 0)
+        if (valueW != 0 || (valueUp || valueDwon))
         {
-            if (value2 > 0)
+            if (valueW > 0 || valueUp)
             {
                 switch (weponNo)
                 {
@@ -309,7 +342,7 @@ public class PlayerCTRL : MonoBehaviour
                 }
             }
 
-            if (value2 < 0)
+            if (valueW < 0 || valueDwon)
             {
                 switch (weponNo)
                 {
