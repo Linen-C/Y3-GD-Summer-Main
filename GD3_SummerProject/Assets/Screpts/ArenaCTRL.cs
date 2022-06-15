@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ArenaCTRL : MonoBehaviour
 {
@@ -12,6 +13,11 @@ public class ArenaCTRL : MonoBehaviour
     [SerializeField] GC_BpmCTRL bpmCTRL;   // メトロノーム受け取り用
     [Header("敵管理")]
     [SerializeField] ArenaEnemyCTRL enemyCtrl;
+    [Header("インターバル用")]
+    [SerializeField] int maxCount;
+    [SerializeField] int nowCount;
+    [SerializeField] bool interval;
+    [SerializeField] Text interval_text;
 
 
     void Start()
@@ -24,7 +30,12 @@ public class ArenaCTRL : MonoBehaviour
 
     void Update()
     {
-        if (enemyCtrl.DoEnemyAllDestroy())
+        if (interval)
+        {
+            Interval();
+        }
+
+        if (!interval && enemyCtrl.DoEnemyAllDestroy())
         {
             Debug.Log("ウェーブ進行");
             WaveProgress();
@@ -39,12 +50,24 @@ public class ArenaCTRL : MonoBehaviour
 
     void Interval()
     {
+        if (bpmCTRL.Metronome())
+        {
+            nowCount++;
+            interval_text.text = nowCount.ToString();
+        }
 
+        if (nowCount > maxCount)
+        {
+            interval_text.text = " ";
+            interval = false;
+        }
     }
 
     void WaveProgress()
     {
         now_Wave++;
+        nowCount = 0;
+        interval = true;
 
         if (max_Wave >= now_Wave){ enemyCtrl.WavaStart(); }
         else { ArenaClear(); }

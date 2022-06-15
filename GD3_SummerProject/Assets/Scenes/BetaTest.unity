@@ -2405,6 +2405,10 @@ MonoBehaviour:
   now_Wave: 0
   bpmCTRL: {fileID: 0}
   enemyCtrl: {fileID: 1431286680}
+  maxCount: 4
+  nowCount: 0
+  interval: 0
+  interval_text: {fileID: 1725416311}
 --- !u!1 &1055110506
 GameObject:
   m_ObjectHideFlags: 0
