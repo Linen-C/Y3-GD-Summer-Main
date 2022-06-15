@@ -30,15 +30,10 @@ public class ArenaCTRL : MonoBehaviour
 
     void Update()
     {
-        if (interval)
-        {
-            Interval();
-        }
-
-        if (!interval && enemyCtrl.DoEnemyAllDestroy())
+        if (enemyCtrl.DoEnemyAllDestroy())
         {
             Debug.Log("ウェーブ進行");
-            WaveProgress();
+            Interval();
         }
     }
 
@@ -50,6 +45,13 @@ public class ArenaCTRL : MonoBehaviour
 
     void Interval()
     {
+        if (nowCount == -1)
+        {
+            nowCount = 0;
+            interval = true;
+        }
+
+        Debug.Log("インターバル");
         if (bpmCTRL.Metronome())
         {
             nowCount++;
@@ -60,14 +62,14 @@ public class ArenaCTRL : MonoBehaviour
         {
             interval_text.text = " ";
             interval = false;
+            WaveProgress();
         }
     }
 
     void WaveProgress()
     {
         now_Wave++;
-        nowCount = 0;
-        interval = true;
+        nowCount = -1;
 
         if (max_Wave >= now_Wave){ enemyCtrl.WavaStart(); }
         else { ArenaClear(); }

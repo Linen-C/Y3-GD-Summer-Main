@@ -122,7 +122,7 @@ MonoBehaviour:
   m_MinSize: {x: 677, y: 342}
   m_MaxSize: {x: 12002, y: 8042}
   vertical: 0
-  controlID: 83
+  controlID: 112
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -147,7 +147,7 @@ MonoBehaviour:
   m_MinSize: {x: 402, y: 342}
   m_MaxSize: {x: 8002, y: 8042}
   vertical: 1
-  controlID: 93
+  controlID: 57
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -172,7 +172,7 @@ MonoBehaviour:
   m_MinSize: {x: 402, y: 221}
   m_MaxSize: {x: 8002, y: 4021}
   vertical: 0
-  controlID: 94
+  controlID: 58
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1173,23 +1173,23 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: c0460000
-      m_LastClickedID: 18112
-      m_ExpandedIDs: 56fbffff4a460000624600006e460000e046000020470000
+      m_SelectedIDs: 5ef1ffff
+      m_LastClickedID: -3746
+      m_ExpandedIDs: 5afbffff344600004a460000624600006e460000e0460000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: EntryPoint
-        m_OriginalName: EntryPoint
+        m_Name: 
+        m_OriginalName: 
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 18040
+        m_UserData: 0
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 0
+        m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 8}
       m_SearchString: 
@@ -1235,9 +1235,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 2.8203683, y: 0.6259242, z: -3.5677018}
+    m_Target: {x: 298.6638, y: 175.00813, z: -34.920414}
     speed: 2
-    m_Value: {x: 2.8203683, y: 0.6259242, z: -3.5677018}
+    m_Value: {x: 298.6638, y: 175.00813, z: -34.920414}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1288,9 +1288,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 30.149584
+    m_Target: 121.012024
     speed: 2
-    m_Value: 30.149584
+    m_Value: 121.012024
   m_Ortho:
     m_Target: 1
     speed: 2
