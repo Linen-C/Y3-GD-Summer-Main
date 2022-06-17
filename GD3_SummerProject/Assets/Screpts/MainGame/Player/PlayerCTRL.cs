@@ -46,7 +46,7 @@ public class PlayerCTRL : MonoBehaviour
 
     private int comboTimeLeft = 0;     // コンボ継続カウンター
     private bool doComboMode = false;  // コンボモード
-    private int comboCount = 0;        // コンボ回数カウンター
+    //private int comboCount = 0;        // コンボ回数カウンター
 
     private float dogeTimer = 0;         // 回避用のタイマー
     private float knockBackCounter = 0;  // ノックバック時間カウンター
@@ -86,7 +86,7 @@ public class PlayerCTRL : MonoBehaviour
     void Start()
     {
         // 武器初期化
-        getList = inputList.SendList();
+        getList = inputList.GetList();
         nowCharge = 0;  // あえて0で初期化
         maxWeponCharge = playerWepon.SwapWeapon(getList, 0);
 
