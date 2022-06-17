@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 2727068}
   - component: {fileID: 2727069}
   m_Layer: 5
-  m_Name: Wepon2
+  m_Name: Weapon2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -201,7 +201,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Wepon2
+  m_Text: Weapon2
 --- !u!1 &707434898
 GameObject:
   m_ObjectHideFlags: 0
@@ -291,8 +291,8 @@ GameObject:
   m_Component:
   - component: {fileID: 707573332}
   - component: {fileID: 707573331}
-  - component: {fileID: 707573334}
   - component: {fileID: 707573333}
+  - component: {fileID: 707573334}
   m_Layer: 0
   m_Name: TitleControler
   m_TagString: Untagged
@@ -312,42 +312,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b2861f97045d12489710b56ff2bc5fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wepon1_tex: {fileID: 1682017860}
-  wepon2_tex: {fileID: 2727069}
-  wepon3_tex: {fileID: 2056448962}
-  jsonInput: {fileID: 0}
-  jsonData:
-    weponList: []
-  equipData1:
-    name: 
-    image: 
-    damage: 0
-    defknockback: 0
-    maxknockback: 0
-    maxcharge: 0
-    wideth: 0
-    height: 0
-    offset: 0
-  equipData2:
-    name: 
-    image: 
-    damage: 0
-    defknockback: 0
-    maxknockback: 0
-    maxcharge: 0
-    wideth: 0
-    height: 0
-    offset: 0
-  equipData3:
-    name: 
-    image: 
-    damage: 0
-    defknockback: 0
-    maxknockback: 0
-    maxcharge: 0
-    wideth: 0
-    height: 0
-    offset: 0
+  weapon1_tex: {fileID: 0}
+  weapon2_tex: {fileID: 0}
+  weapon3_tex: {fileID: 0}
+  weaponList: {fileID: 707573334}
+  equipList: []
+  saveManager: {fileID: 707573333}
 --- !u!4 &707573332
 Transform:
   m_ObjectHideFlags: 0
@@ -691,7 +661,7 @@ GameObject:
   - component: {fileID: 1338346741}
   - component: {fileID: 1338346740}
   m_Layer: 5
-  m_Name: Wepons
+  m_Name: Weapons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1058,7 +1028,7 @@ GameObject:
   - component: {fileID: 1682017859}
   - component: {fileID: 1682017860}
   m_Layer: 5
-  m_Name: Wepon1
+  m_Name: Weapon1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1124,7 +1094,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Wepon1
+  m_Text: Weapon1
 --- !u!1 &1810153740
 GameObject:
   m_ObjectHideFlags: 0
@@ -1526,7 +1496,7 @@ GameObject:
   - component: {fileID: 2056448963}
   - component: {fileID: 2056448962}
   m_Layer: 5
-  m_Name: Wepon3
+  m_Name: Weapon3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1565,7 +1535,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Wepon3
+  m_Text: 'Weapon3
 
 '
 --- !u!222 &2056448963

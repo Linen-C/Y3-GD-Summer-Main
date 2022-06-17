@@ -75,40 +75,40 @@ public class PlayerWeapon : MonoBehaviour
     public int SwapWeapon(JsonData wepon,int no)
     {
         // バグってたら強制的に0を突っ込む
-        if (no + 1 > wepon.weponList.Length) { no = 0; }
+        if (no + 1 > wepon.weaponList.Length) { no = 0; }
 
 
         // 最大ダメージセット
-        maxDamage = wepon.weponList[no].maxcharge;
+        maxDamage = wepon.weaponList[no].maxcharge;
 
         // 基礎ノックバック量セット
-        defKnockBack = wepon.weponList[no].defknockback;
+        defKnockBack = wepon.weaponList[no].defknockback;
 
         // 最大ノックバック量セット
-        maxKnockBack = wepon.weponList[no].maxknockback;
+        maxKnockBack = wepon.weaponList[no].maxknockback;
 
         // 最大チャージ量セット
-        maxCharge = wepon.weponList[no].maxcharge;
+        maxCharge = wepon.weaponList[no].maxcharge;
 
 
         // 座標セット
         transform.localPosition = new Vector3(
-            0.0f, wepon.weponList[no].offset, 0.0f);
+            0.0f, wepon.weaponList[no].offset, 0.0f);
 
         // スケールセット
         transform.localScale = new Vector3(
-            wepon.weponList[no].wideth, wepon.weponList[no].height, 1.0f);
+            wepon.weaponList[no].wideth, wepon.weaponList[no].height, 1.0f);
 
         // スプライト切り替えのためパス
-        Sprite inImage = Resources.Load<Sprite>(wepon.weponList[no].image.ToString());
-        spriteChanger.ChangeSprite(inImage, wepon.weponList[no].offset);
+        Sprite inImage = Resources.Load<Sprite>(wepon.weaponList[no].image.ToString());
+        spriteChanger.ChangeSprite(inImage, wepon.weaponList[no].offset);
 
 
         // テキスト変更
-        weponNameText.text = wepon.weponList[no].name;
+        weponNameText.text = wepon.weaponList[no].name;
 
         // プレイヤーに必要クールダウンを渡してリターン
-        return wepon.weponList[no].maxcharge;
+        return wepon.weaponList[no].maxcharge;
     }
 
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //

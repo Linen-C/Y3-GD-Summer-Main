@@ -29,7 +29,7 @@ public class PlayerCTRL : MonoBehaviour
     // スクリプト
     [Header("スクリプト(マニュアル)")]
     [SerializeField] GC_BpmCTRL bpmCTRL;      // BPMコントローラー
-    [SerializeField] GC_jsonInput inputList;  // jsonファイルからの取得
+    [SerializeField] WeaponListLoad inputList;  // jsonファイルからの取得
     [SerializeField] PlayerWeapon playerWepon;  // 攻撃用
 
     // キャンパス

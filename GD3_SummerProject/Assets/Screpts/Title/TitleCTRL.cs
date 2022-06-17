@@ -6,39 +6,41 @@ using UnityEngine.SceneManagement;
 
 public class TitleCTRL : MonoBehaviour
 {
-    [SerializeField] Text wepon1_tex;
-    [SerializeField] Text wepon2_tex;
-    [SerializeField] Text wepon3_tex;
+    [SerializeField] Text weapon1_tex;
+    [SerializeField] Text weapon2_tex;
+    [SerializeField] Text weapon3_tex;
 
-    [SerializeField] GC_jsonInput jsonInput;
-    public JsonData jsonData;
+    [SerializeField] WeaponListLoad weaponList;
+    JsonData jsonData;
+    public WeaponList[] equipList;
 
-    public WeponList equipData1;
-    public WeponList equipData2;
-    public WeponList equipData3;
+    [SerializeField] SaveManager saveManager;
 
     private void Start()
     {
-        jsonInput = GetComponent<GC_jsonInput>();
+        weaponList = GetComponent<WeaponListLoad>();
 
-        jsonData = jsonInput.GetList();
+        equipList = new WeaponList[3];
 
+        jsonData = weaponList.GetList();
+
+        //saveManager.EquipLoad();
         TestEquip();
 
-        Debug.Log(equipData1.name);
+        Debug.Log(equipList[0].name);
+        Debug.Log(equipList[1].name);
+        Debug.Log(equipList[2].name);
     }
-
-
 
 
     void TestEquip()
     {
-        equipData1 = jsonData.weponList[0];
-        //equipData2 = jsonData.weponList[1];
-        //equipData3 = jsonData.weponList[2];
+        equipList[0] = jsonData.weaponList[0];
+        equipList[1] = jsonData.weaponList[1];
+        equipList[2] = jsonData.weaponList[2];
     }
 
-    public void WeponSelectSwap()
+    public void WeaponSelectSwap()
     {
         
     }

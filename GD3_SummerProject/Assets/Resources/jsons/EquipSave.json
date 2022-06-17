@@ -1,0 +1,37 @@
+{
+    "weponList": [
+        {
+            "name": "Bat",
+            "image": "Images/testgraphv2/bat4-2",
+            "damage": 3,
+            "defknockback": 20,
+            "maxknockback": 30,
+            "maxcharge": 4,
+            "wideth": 4,
+            "height": 2,
+            "offset": 2.5
+        },
+        {
+            "name": "Spike",
+            "image": "Images/testgraphv2/spike1-3",
+            "damage": 2,
+            "defknockback": 20,
+            "maxknockback": 20,
+            "maxcharge": 2,
+            "wideth": 1,
+            "height": 3,
+            "offset": 3.0
+        },
+        {
+            "name": "Lance",
+            "image": "Images/testgraphv2/lance2-5",
+            "damage": 6,
+            "defknockback": 20,
+            "maxknockback": 40,
+            "maxcharge": 6,
+            "wideth": 2,
+            "height": 5,
+            "offset": 4.0
+        }
+    ]
+}

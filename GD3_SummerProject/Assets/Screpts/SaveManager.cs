@@ -6,24 +6,48 @@ using System.IO;
 public class SaveManager : MonoBehaviour
 {
     [SerializeField] TitleCTRL titleCTRL;
+    //[SerializeField] EquipLoad equipLoad;
 
-    WeponList saveData1;
     string filePath;
+    JsonData saveDatas;
+    JsonData getDatas;
 
     private void Awake()
     {
-        //filePath = Path.Combine(Application.persistentDataPath, "testoutput.json");
-        filePath = Application.persistentDataPath + "/test.json";
+        //equipLoad.GetComponent<EquipLoad>();
+
+        saveDatas = new JsonData();
+        saveDatas.weaponList = new WeaponList[3];
+
+        filePath = Application.dataPath + "/Resources/jsons/EquipSave.json";
+        //Debug.Log(filePath);
     }
 
-    public void DataSaveTest()
+
+    public void EquipSave()
     {
-        saveData1 = titleCTRL.equipData1;
+        for (int i = 0; i < saveDatas.weaponList.Length; i++)
+        {
+            saveDatas.weaponList[i] = new WeaponList();
+            saveDatas.weaponList[i] = titleCTRL.equipList[i];
+        }
 
-        var data1 = JsonUtility.ToJson(saveData1);
+        string datas = JsonUtility.ToJson(saveDatas, true);
+        
+        Debug.Log(datas);
 
-        Debug.Log(data1);
+        File.WriteAllText(filePath, datas);
+    }
 
-        File.WriteAllText(filePath, data1);
+    public void EquipLoad()
+    {
+        //getDatas = equipLoad.GetList();
+        /*
+        for (int i = 0; i < saveDatas.weaponList.Length; i++)
+        {
+            getDatas.weaponList[i] = new WeaponList();
+            titleCTRL.equipList[i] = getDatas.weaponList[i];
+        }
+        */
     }
 }
