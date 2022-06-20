@@ -266,7 +266,7 @@ public class PlayerCTRL : MonoBehaviour
 
             if (nowWeponCharge == (maxWeponCharge - 1))
             {
-                anim.SetTrigger("Charge");
+                //anim.SetTrigger("Charge");
                 flashAnim.SetTrigger("FlashTrigger");
             }
         }

@@ -628,7 +628,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -8298335142436343970, guid: 84d97094a70bfa5478ffdfbbaaf38c12, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f0b42206df3bd82468002fb853ff7416, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -737,6 +737,14 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 83372f80-de18-48a7-a157-df29bc2084f0
     m_ActionName: Player/WeponSwapButtonDown
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c305896d-2c49-4bb9-ac89-89a11a3f5f58
+    m_ActionName: Player/Fire[/Keyboard/g]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 80f09ecb-56d1-415f-be2d-309258bf13ab
+    m_ActionName: Select/New action
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -765,9 +773,10 @@ MonoBehaviour:
   cursorImage: {fileID: 7854783003204025895}
   bullet: {fileID: 8019057332981992899, guid: 9b682da5b8be13141b6f68167fa8fc24, type: 3}
   flashObj: {fileID: 2029939891}
+  gamectrl: {fileID: 0}
   bpmCTRL: {fileID: 0}
-  inputList: {fileID: 0}
   playerWepon: {fileID: 7854783002829949673}
+  equipLoad: {fileID: 0}
   hpText: {fileID: 0}
   cooldownText: {fileID: 0}
   bulletText: {fileID: 0}
