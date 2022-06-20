@@ -8,15 +8,18 @@ public class JsonData
 [System.Serializable]
 public class WeaponList
 {
-    //public Tags tags;
+    // Nuber
+    public int number;
+    // Tags
     public string name;
-    public string image;
-    //public Status status;
+    public string trail;
+    public string icon;
+    // Status
     public int damage;
     public int defknockback;
     public int maxknockback;
     public int maxcharge;
-    //public Sprites sprites;
+    // Sprites
     public int wideth;
     public int height;
     public float offset;

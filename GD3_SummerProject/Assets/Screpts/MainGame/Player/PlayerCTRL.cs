@@ -9,12 +9,15 @@ public class PlayerCTRL : MonoBehaviour
     // 変数
     [Header("ステータス")]
     [SerializeField] int helthPoint;  // 体力
+
     [Header("移動")]
     [SerializeField] float moveSpeed;  // 移動速度
     [SerializeField] float dashPower;  // ダッシュパワー
+
     [Header("遠距離攻撃")]
     [SerializeField] int needCharge;  // 遠距離攻撃に必要なチャージ
     [SerializeField] int nowCharge;   // 現在のチャージ
+
     [Header("ノックバックと無敵時間")]
     [SerializeField] float knockBackPower;    // かかるノックバックの強さ
     [SerializeField] float defNonDamageTime;  // デフォルト無敵時間
@@ -27,10 +30,15 @@ public class PlayerCTRL : MonoBehaviour
     [SerializeField] GameObject flashObj;   // フラッシュ用
 
     // スクリプト
-    [Header("スクリプト(マニュアル)")]
-    [SerializeField] GC_BpmCTRL bpmCTRL;      // BPMコントローラー
-    [SerializeField] WeaponListLoad inputList;  // jsonファイルからの取得
+    [Header("コンポーネント(マニュアル)")]
+    [SerializeField] GC_GameCTRL gamectrl;  // いろいろ取ってくる用
+    
+
+    [Header("コンポーネント(オート)")]
+    [SerializeField] GC_BpmCTRL bpmCTRL;        // BPMコントローラー
     [SerializeField] PlayerWeapon playerWepon;  // 攻撃用
+    [SerializeField] EquipLoad equipLoad;       // 装備武器取得
+    JsonData equipList; // 自動取得
 
     // キャンパス
     [Header("キャンバスUI(マニュアル)")]
@@ -41,7 +49,7 @@ public class PlayerCTRL : MonoBehaviour
     // プライベート変数
     private int maxWeponCharge = 0;      // 必要クールダウン
     private int nowWeponCharge = 1;      // 現在クールダウン
-    private int weponNo = 0;             // 所持している武器番号(0～1)
+    private int equipNo = 0;            // 所持している武器番号(0～2)
     private bool coolDownReset = false;  // クールダウンのリセットフラグ
 
     private int comboTimeLeft = 0;     // コンボ継続カウンター
@@ -53,13 +61,12 @@ public class PlayerCTRL : MonoBehaviour
     private float NonDamageTime = 0;     // 無敵時間
     private Vector2 moveDir;             // 移動用ベクトル
 
-    // コンポーネント
+    // エンジン依存コンポーネント
     SpriteRenderer sprite;
     Rigidbody2D body;
     Animator anim;
     Animator flashAnim;
     PlayerControls plCtrls;
-    JsonData getList;
 
     public enum State
     {
@@ -73,11 +80,13 @@ public class PlayerCTRL : MonoBehaviour
     void Awake()
     {
         // コンポーネント取得
+        playerWepon = GetComponentInChildren<PlayerWeapon>();
+        bpmCTRL = gamectrl.transform.GetComponent<GC_BpmCTRL>();
+        equipLoad = gamectrl.transform.GetComponent<EquipLoad>();
+
         TryGetComponent(out body);
         TryGetComponent(out sprite);
         TryGetComponent(out anim);
-        //TryGetComponent(out flashAnim);
-
         flashAnim = flashObj.GetComponent<Animator>();
         plCtrls = new PlayerControls();
         
@@ -86,9 +95,9 @@ public class PlayerCTRL : MonoBehaviour
     void Start()
     {
         // 武器初期化
-        getList = inputList.GetList();
+        equipList = equipLoad.GetList();
+        maxWeponCharge = playerWepon.SwapWeapon(equipList.weaponList, 0);
         nowCharge = 0;  // あえて0で初期化
-        maxWeponCharge = playerWepon.SwapWeapon(getList, 0);
 
         // UI系初期化
         UIUpdate();
@@ -144,7 +153,6 @@ public class PlayerCTRL : MonoBehaviour
 
 
 
-
     // UI更新
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     void UIUpdate()
@@ -153,8 +161,6 @@ public class PlayerCTRL : MonoBehaviour
         cooldownText.text = "Wepon : " + nowWeponCharge + "/" + maxWeponCharge;
         bulletText.text = "Shot : " + nowCharge + "/" + needCharge;
     }
-
-    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
 
 
 
@@ -212,8 +218,6 @@ public class PlayerCTRL : MonoBehaviour
         cursor.GetComponent<Transform>().rotation = Quaternion.Euler(0, 0, radian);
     }
 
-    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-
 
 
     // 攻撃
@@ -269,8 +273,6 @@ public class PlayerCTRL : MonoBehaviour
 
     }
 
-    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-
 
 
     // ダッシュ入力
@@ -279,8 +281,6 @@ public class PlayerCTRL : MonoBehaviour
     {
         if (plCtrls.Player.Dash.triggered && bpmCTRL.Signal()) { dogeTimer = 0.1f; }
     }
-
-    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
 
 
 
@@ -325,44 +325,22 @@ public class PlayerCTRL : MonoBehaviour
         {
             if (valueW > 0 || valueUp)
             {
-                switch (weponNo)
-                {
-                    case 0:
-                        weponNo = 1;
-                        break;
-                    case 1:
-                        weponNo = 2;
-                        break;
-                    case 2:
-                        weponNo = 0;
-                        break;
-                    default:
-                        weponNo = 0;
-                        break;
-                }
+                equipNo++;
+
+                if (equipNo >= equipList.weaponList.Length){ equipNo = 0; }
             }
 
             if (valueW < 0 || valueDwon)
             {
-                switch (weponNo)
-                {
-                    case 0:
-                        weponNo = 2;
-                        break;
-                    case 1:
-                        weponNo = 0;
-                        break;
-                    case 2:
-                        weponNo = 1;
-                        break;
-                    default:
-                        weponNo = 0;
-                        break;
-                }
+                equipNo--;
+                if (equipNo <= equipList.weaponList.Length) { equipNo = 2; }
             }
 
-            maxWeponCharge = playerWepon.SwapWeapon(getList, weponNo); // 必要クールダウン上書き   
-            nowWeponCharge = 0;    // 現クールダウンを上書き
+            // 必要クールダウン上書き
+            maxWeponCharge = 
+                playerWepon.SwapWeapon(equipList.weaponList, equipNo);
+            // 現クールダウンを上書き
+            nowWeponCharge = 0;
         }
     }
 
@@ -402,7 +380,6 @@ public class PlayerCTRL : MonoBehaviour
 
 
 
-
     // 死亡判定
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     void IsDead()
@@ -413,7 +390,6 @@ public class PlayerCTRL : MonoBehaviour
             state = State.Dead;
         }
     }
-
 
 
 
@@ -477,6 +453,5 @@ public class PlayerCTRL : MonoBehaviour
             anim.SetTrigger("Damage");
         }
     }
-
 
 }

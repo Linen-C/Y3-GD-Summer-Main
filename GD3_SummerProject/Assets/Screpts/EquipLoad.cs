@@ -9,11 +9,10 @@ public class EquipLoad : MonoBehaviour
 
     void Awake()
     {
-        inputData = new JsonData();
-        inputData.weaponList = new WeaponList[5];
-
         string inputString = Resources.Load<TextAsset>("jsons/EquipSave").ToString();
         inputData = JsonUtility.FromJson<JsonData>(inputString);
+
+        //Debug.Log(inputString);
     }
 
     public JsonData GetList()

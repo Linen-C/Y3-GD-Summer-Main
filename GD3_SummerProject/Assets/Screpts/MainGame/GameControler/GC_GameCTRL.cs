@@ -9,18 +9,21 @@ public class GC_GameCTRL : MonoBehaviour
 {
     [Header("BPMコントロール")]
     [SerializeField] GC_BpmCTRL bpmCtrl;
+
     [Header("プレイヤー情報")]
     [SerializeField] PlayerCTRL playerCtrl;
+
     [Header("エリア情報")]
     [SerializeField] GameObject areas;
-    //[Header("エリア情報(自動取得)")]
-    //[SerializeField] public AreaCTRL areaCtrl;
+
     [Header("UI")]
     [SerializeField] GameObject uiPanel;
     [SerializeField] Text centerText;
     [SerializeField] Text underText;
+
     [Header("ポーズメニュー")]
     [SerializeField] Canvas pauseCanvas;
+
     [Header("スタート時用タイマー")]
     [SerializeField] float countDown;
 
@@ -43,9 +46,6 @@ public class GC_GameCTRL : MonoBehaviour
 
     void Start()
     {
-        // エリアコントロール取得
-        //areaCtrl = areas.GetComponentInChildren<AreaCTRL>();
-
         // ポーズUIを隠す
         pauseCanvas.enabled = false;
 
@@ -75,7 +75,7 @@ public class GC_GameCTRL : MonoBehaviour
                 break ;
 
             case State.GameClear:
-                if (uiCtrl.InGameUI.Retry.triggered) { ReturnTitle(); }
+                if (uiCtrl.InGameUI.Retry.triggered) { ReturnMainMenu(); }
                 break;
 
             case State.Pause:
@@ -174,8 +174,6 @@ public class GC_GameCTRL : MonoBehaviour
         S_Play();
     }
 
-    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-
 
 
     // その他処理 //
@@ -188,10 +186,10 @@ public class GC_GameCTRL : MonoBehaviour
         SceneManager.LoadScene(currentSceneName);
     }
 
-    // タイトルへ戻る
-    void ReturnTitle()
+    // メインメニューへ戻る
+    void ReturnMainMenu()
     {
-        SceneManager.LoadScene("TitleScene");
+        SceneManager.LoadScene("MainMenu");
     }
 
     // のちに消す
@@ -205,8 +203,6 @@ public class GC_GameCTRL : MonoBehaviour
         bpmCtrl.enabled = false;
         //areaCtrl.enabled = false;
     }
-
-    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
 
 
 
@@ -226,9 +222,9 @@ public class GC_GameCTRL : MonoBehaviour
     }
 
     // UI：タイトルへ戻る
-    public void Pause_ReturnToTile()
+    public void Pause_ReturnToMainMenu()
     {
-        ReturnTitle();
+        ReturnMainMenu();
     }
-    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+
 }

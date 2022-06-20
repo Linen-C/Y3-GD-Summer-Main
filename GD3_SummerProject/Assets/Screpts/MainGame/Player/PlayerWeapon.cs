@@ -72,43 +72,54 @@ public class PlayerWeapon : MonoBehaviour
 
     // 武器切り替え
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-    public int SwapWeapon(JsonData wepon,int no)
+    public int SwapWeapon(WeaponList[] wepon,int no)
     {
         // バグってたら強制的に0を突っ込む
-        if (no + 1 > wepon.weaponList.Length) { no = 0; }
+        if (no + 1 > wepon.Length) { no = 0; }
 
 
-        // 最大ダメージセット
-        maxDamage = wepon.weaponList[no].maxcharge;
-
-        // 基礎ノックバック量セット
-        defKnockBack = wepon.weaponList[no].defknockback;
-
-        // 最大ノックバック量セット
-        maxKnockBack = wepon.weaponList[no].maxknockback;
-
-        // 最大チャージ量セット
-        maxCharge = wepon.weaponList[no].maxcharge;
-
-
-        // 座標セット
-        transform.localPosition = new Vector3(
-            0.0f, wepon.weaponList[no].offset, 0.0f);
-
-        // スケールセット
-        transform.localScale = new Vector3(
-            wepon.weaponList[no].wideth, wepon.weaponList[no].height, 1.0f);
+        // Tags
+        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+        // テキスト変更
+        weponNameText.text = wepon[no].name;
 
         // スプライト切り替えのためパス
-        Sprite inImage = Resources.Load<Sprite>(wepon.weaponList[no].image.ToString());
-        spriteChanger.ChangeSprite(inImage, wepon.weaponList[no].offset);
+        Sprite inImage = Resources.Load<Sprite>(wepon[no].trail.ToString());
+        spriteChanger.ChangeSprite(inImage, wepon[no].offset);
+
+        // ここにアイコンも追加するかも
+        // (Empty)
 
 
-        // テキスト変更
-        weponNameText.text = wepon.weaponList[no].name;
+        // Status
+        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+        // 最大ダメージ
+        maxDamage = wepon[no].maxcharge;
+
+        // 基礎ノックバック量
+        defKnockBack = wepon[no].defknockback;
+
+        // 最大ノックバック量
+        maxKnockBack = wepon[no].maxknockback;
+
+        // 最大チャージ量
+        maxCharge = wepon[no].maxcharge;
+
+
+        // Sprites
+        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+        // スケール
+        transform.localScale = new Vector3(
+            wepon[no].wideth, wepon[no].height, 1.0f);
+
+        // 座標
+        transform.localPosition = new Vector3(
+            0.0f, wepon[no].offset, 0.0f);
+
+
 
         // プレイヤーに必要クールダウンを渡してリターン
-        return wepon.weaponList[no].maxcharge;
+        return wepon[no].maxcharge;
     }
 
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //

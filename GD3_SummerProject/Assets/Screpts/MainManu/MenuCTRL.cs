@@ -18,7 +18,7 @@ public class MenuCTRL : MonoBehaviour
     }
 
 
-    // メインメニュー
+    // カスタマイズ画面へ
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     public void Main_to_Customize()
     {
@@ -26,30 +26,19 @@ public class MenuCTRL : MonoBehaviour
         _Customize.enabled = true;
     }
 
+
+    // セレクト画面へ
+    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     public void Main_to_Select()
     {
         _Main.enabled = false;
         _Select.enabled = true;
     }
 
-    // カスタマイズ
-    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-    public void Customize_to_Main()
-    {
-        _Customize.enabled = false;
-        _Main.enabled = true;
-    }
-
-    // セレクト
-    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-    public void Select_to_Main()
-    {
-        _Select.enabled = false;
-        _Main.enabled = true;
-    }
+    
 
 
-    // スタンバイ
+    // スタンバイ画面へ
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
 
 
