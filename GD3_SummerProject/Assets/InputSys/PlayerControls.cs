@@ -107,6 +107,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Fire"",
+                    ""type"": ""Button"",
+                    ""id"": ""c305896d-2c49-4bb9-ac89-89a11a3f5f58"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -351,6 +360,56 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""WeponSwapButtonDown"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""483d5bff-53e2-4d5f-8efe-4a36b9d18efe"",
+                    ""path"": ""<Keyboard>/g"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyBoard"",
+                    ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7a456d46-0b3c-4b8b-a6bc-4abac1f60f8f"",
+                    ""path"": ""<Gamepad>/leftStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""JoyPad"",
+                    ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Select"",
+            ""id"": ""5acdf0a4-751d-48ed-83be-f2d94faac49a"",
+            ""actions"": [
+                {
+                    ""name"": ""New action"",
+                    ""type"": ""Button"",
+                    ""id"": ""80f09ecb-56d1-415f-be2d-309258bf13ab"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""9a5ff8d2-2efd-43df-ab77-32fe3a190741"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""New action"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -379,6 +438,10 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Player_WeponSwapWhile = m_Player.FindAction("WeponSwapWhile", throwIfNotFound: true);
         m_Player_WeponSwapButtonUp = m_Player.FindAction("WeponSwapButtonUp", throwIfNotFound: true);
         m_Player_WeponSwapButtonDown = m_Player.FindAction("WeponSwapButtonDown", throwIfNotFound: true);
+        m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
+        // Select
+        m_Select = asset.FindActionMap("Select", throwIfNotFound: true);
+        m_Select_Newaction = m_Select.FindAction("New action", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -447,6 +510,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_WeponSwapWhile;
     private readonly InputAction m_Player_WeponSwapButtonUp;
     private readonly InputAction m_Player_WeponSwapButtonDown;
+    private readonly InputAction m_Player_Fire;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -460,6 +524,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @WeponSwapWhile => m_Wrapper.m_Player_WeponSwapWhile;
         public InputAction @WeponSwapButtonUp => m_Wrapper.m_Player_WeponSwapButtonUp;
         public InputAction @WeponSwapButtonDown => m_Wrapper.m_Player_WeponSwapButtonDown;
+        public InputAction @Fire => m_Wrapper.m_Player_Fire;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -496,6 +561,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @WeponSwapButtonDown.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWeponSwapButtonDown;
                 @WeponSwapButtonDown.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWeponSwapButtonDown;
                 @WeponSwapButtonDown.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWeponSwapButtonDown;
+                @Fire.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
+                @Fire.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
+                @Fire.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -527,10 +595,46 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @WeponSwapButtonDown.started += instance.OnWeponSwapButtonDown;
                 @WeponSwapButtonDown.performed += instance.OnWeponSwapButtonDown;
                 @WeponSwapButtonDown.canceled += instance.OnWeponSwapButtonDown;
+                @Fire.started += instance.OnFire;
+                @Fire.performed += instance.OnFire;
+                @Fire.canceled += instance.OnFire;
             }
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // Select
+    private readonly InputActionMap m_Select;
+    private ISelectActions m_SelectActionsCallbackInterface;
+    private readonly InputAction m_Select_Newaction;
+    public struct SelectActions
+    {
+        private @PlayerControls m_Wrapper;
+        public SelectActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Newaction => m_Wrapper.m_Select_Newaction;
+        public InputActionMap Get() { return m_Wrapper.m_Select; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(SelectActions set) { return set.Get(); }
+        public void SetCallbacks(ISelectActions instance)
+        {
+            if (m_Wrapper.m_SelectActionsCallbackInterface != null)
+            {
+                @Newaction.started -= m_Wrapper.m_SelectActionsCallbackInterface.OnNewaction;
+                @Newaction.performed -= m_Wrapper.m_SelectActionsCallbackInterface.OnNewaction;
+                @Newaction.canceled -= m_Wrapper.m_SelectActionsCallbackInterface.OnNewaction;
+            }
+            m_Wrapper.m_SelectActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Newaction.started += instance.OnNewaction;
+                @Newaction.performed += instance.OnNewaction;
+                @Newaction.canceled += instance.OnNewaction;
+            }
+        }
+    }
+    public SelectActions @Select => new SelectActions(this);
     private int m_KeyBoardSchemeIndex = -1;
     public InputControlScheme KeyBoardScheme
     {
@@ -560,5 +664,10 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnWeponSwapWhile(InputAction.CallbackContext context);
         void OnWeponSwapButtonUp(InputAction.CallbackContext context);
         void OnWeponSwapButtonDown(InputAction.CallbackContext context);
+        void OnFire(InputAction.CallbackContext context);
+    }
+    public interface ISelectActions
+    {
+        void OnNewaction(InputAction.CallbackContext context);
     }
 }

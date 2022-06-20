@@ -37,7 +37,7 @@ public class TitleCTRL : MonoBehaviour
     {
         equipList[0] = jsonData.weaponList[0];
         equipList[1] = jsonData.weaponList[1];
-        equipList[2] = jsonData.weaponList[2];
+        equipList[2] = jsonData.weaponList[4];
     }
 
     public void WeaponSelectSwap()
