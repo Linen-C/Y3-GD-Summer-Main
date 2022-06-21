@@ -9,38 +9,72 @@ public class Rebinding : MonoBehaviour
 {
     [SerializeField] Text _Text;
     [SerializeField] Text _ListText;
+    [SerializeField] Text _ListText_Move;
     [SerializeField] PlayerInput _input;
     [SerializeField] InputActionReference _action;
+    [SerializeField] InputActionReference[] _actions;
     [SerializeField] InputActionAsset _actionAsset;
 
     private InputActionRebindingExtensions.RebindingOperation _rebindingOperation;
+    string filePath;
 
-    string bindTarget;
+    InputBinding bindTarget;
 
     private void Start()
     {
-        // タスク：バインディング内容をjsonとしてresourceフォルダに生成、読み込みする
         // キーボード版を作ったらコントローラー版も作らなきゃ
 
-        //string tes = _actionAsset.FindAction(_action.action.name).ToString();
-        //Debug.Log(tes);
+        filePath = Application.dataPath + "/Resources/jsons/KeyBind.json";
 
-        foreach (var actions in _actionAsset.actionMaps[0])
+        string inputJson = Resources.Load<TextAsset>("jsons/KeyBind").ToString();
+        _actionAsset.actionMaps[0].LoadBindingOverridesFromJson(inputJson);
+
+        /*
+        // リストが必要になったとき用
+        var listTarget = _actionAsset.actionMaps[0];
+        var inspath = Application.dataPath + "/Resources/jsons/DefKeyList.json";
+        File.WriteAllText(inspath, listTarget.ToJson());
+        */
+
+        // 不本意だけどこれでいける
+        foreach (var actions in _actions)
         {
-            _ListText.text += actions.name + "：";
-            _ListText.text += actions.GetBindingDisplayString() + "\n";
-            //Debug.Log(actions.name);
+            if (actions.action.name == "Move") { Debug.Log("Find!"); }
+        }
+
+        //var listTarget = _actionAsset.actionMaps[0].actions[1].type;
+        var test1 = _actionAsset.actionMaps[0].bindings[0].ToDisplayString();
+        var test2 = _actionAsset.actionMaps[0].bindings[1].ToDisplayString();
+        var test3 = _actionAsset.actionMaps[0].bindings[10].groups;
+        Debug.Log(test1);
+        Debug.Log(test2);
+        Debug.Log(test3);
+
+        //foreach (var actions in _actionAsset.actionMaps[0])
+        //{
+        //    _ListText.text += actions.name + "：";
+        //    _ListText.text += actions.GetBindingDisplayString() + "\n";
+        //}
+
+        // 移動方向ページ
+        foreach (var actions in _actionAsset.actionMaps[0].bindings)
+        {
+            if (actions.groups == "JoyPad") { return; }
+            _ListText_Move.text += actions.name + "：";
+            _ListText_Move.text += actions.ToDisplayString() + "\n";
         }
 
         _Text.text = _action.action.name + "：" + _action.action.GetBindingDisplayString();
+
     }
 
     public void Clicked()
     {
-        var target = _action.action;
-
         _input.SwitchCurrentActionMap("Select");
         _Text.text = "バインディング中";
+
+        //ターゲット設定
+        bindTarget = _action.action.bindings[0];
 
         _rebindingOperation = _action.action.PerformInteractiveRebinding()
             .OnComplete(opth => Key_RebindingComplete())
@@ -50,38 +84,36 @@ public class Rebinding : MonoBehaviour
     void Key_RebindingMode()
     {
         // タスク：「_action」をClickedのトコで指定できれば自由にできそう
-
-        _rebindingOperation = _action.action.PerformInteractiveRebinding()
-            .OnComplete(opth => Key_RebindingComplete())
-            .Start();
     }
 
     void Key_RebindingComplete()
     {
-        bindTarget = InputControlPath.ToHumanReadableString(
+        bindTarget.overridePath = InputControlPath.ToHumanReadableString(
             _action.action.bindings[0].effectivePath,
             InputControlPath.HumanReadableStringOptions.OmitDevice);
 
-        Debug.Log(bindTarget);
+        //Debug.Log("Target：" + bindTarget.path);
+        //Debug.Log("OverWr：" + bindTarget.overridePath);
 
-        // タスク：元のpathンところも上手いことやればいけるかも？
+        _action.action.ApplyBindingOverride(new InputBinding { path = bindTarget.path, overridePath = bindTarget.overridePath });
 
-        _action.action.ApplyBindingOverride(new InputBinding { path = "<Keyboard>/g", overridePath = "<Keyboard>/" + bindTarget });
+        string output = _action.action.SaveBindingOverridesAsJson();
+        //Debug.Log(output);
+        File.WriteAllText(filePath, output);
+
         _input.SwitchCurrentActionMap("Player");
-
         _rebindingOperation.Dispose();
 
 
         _ListText.text = "";
-
         foreach (var actions in _actionAsset.actionMaps[0])
         {
             _ListText.text += actions.name + "：";
             _ListText.text += actions.GetBindingDisplayString() + "\n";
-            Debug.Log(actions.name + "：" + actions.GetBindingDisplayString());
+            //Debug.Log(actions.name + "：" + actions.GetBindingDisplayString());
         }
-
         _Text.text = _Text.text = _action.action.name + "：" + _action.action.GetBindingDisplayString();
+
     }
 
 }

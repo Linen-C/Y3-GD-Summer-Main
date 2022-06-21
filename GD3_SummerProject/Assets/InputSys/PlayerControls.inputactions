@@ -15,6 +15,33 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "WeponSwapButtonUp",
+                    "type": "Button",
+                    "id": "6980dd55-5909-4efa-83db-ef96b9c7dfd1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "WeponSwapButtonDown",
+                    "type": "Button",
+                    "id": "83372f80-de18-48a7-a157-df29bc2084f0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "WeponSwapWhile",
+                    "type": "Value",
+                    "id": "acf28af5-77b9-4a33-b22c-2f23141a18ed",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "MouseDir",
                     "type": "Value",
                     "id": "b0d4a86e-2b1f-42be-a8fa-65294f794ca2",
@@ -54,33 +81,6 @@
                     "name": "Shot",
                     "type": "Button",
                     "id": "0131fb34-5b15-4287-ab2a-c07ecab27728",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "WeponSwapWhile",
-                    "type": "Value",
-                    "id": "acf28af5-77b9-4a33-b22c-2f23141a18ed",
-                    "expectedControlType": "Axis",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "WeponSwapButtonUp",
-                    "type": "Button",
-                    "id": "6980dd55-5909-4efa-83db-ef96b9c7dfd1",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "WeponSwapButtonDown",
-                    "type": "Button",
-                    "id": "83372f80-de18-48a7-a157-df29bc2084f0",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -275,17 +275,6 @@
                 },
                 {
                     "name": "",
-                    "id": "08f62c0e-8dab-47b4-a17b-391594d5ea74",
-                    "path": "<Mouse>/scroll/y",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "KeyBoard",
-                    "action": "WeponSwapWhile",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "90dcc5bc-6eee-488f-8a2b-dc46a941f7ed",
                     "path": "<Mouse>/rightButton",
                     "interactions": "",
@@ -319,6 +308,28 @@
                 },
                 {
                     "name": "",
+                    "id": "483d5bff-53e2-4d5f-8efe-4a36b9d18efe",
+                    "path": "<Keyboard>/g",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyBoard",
+                    "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7a456d46-0b3c-4b8b-a6bc-4abac1f60f8f",
+                    "path": "<Gamepad>/leftStickPress",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "JoyPad",
+                    "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "6d66e0ab-b6a5-4f5b-a8ef-b66bed1f89a8",
                     "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
@@ -341,23 +352,12 @@
                 },
                 {
                     "name": "",
-                    "id": "483d5bff-53e2-4d5f-8efe-4a36b9d18efe",
-                    "path": "<Keyboard>/g",
+                    "id": "08f62c0e-8dab-47b4-a17b-391594d5ea74",
+                    "path": "<Mouse>/scroll/y",
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyBoard",
-                    "action": "Fire",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "7a456d46-0b3c-4b8b-a6bc-4abac1f60f8f",
-                    "path": "<Gamepad>/leftStickPress",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "JoyPad",
-                    "action": "Fire",
+                    "action": "WeponSwapWhile",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
