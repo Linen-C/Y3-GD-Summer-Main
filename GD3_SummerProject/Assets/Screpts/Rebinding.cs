@@ -97,17 +97,59 @@ public class Rebinding : MonoBehaviour
 
     public void MoveDir_Up()
     {
+        /*
         foreach (var actions in _actions)
         {
             foreach (var binds in actions.action.bindings)
             {
                 if (binds.name == "up")
                 {
-                    Key_RebindingMode(actions);
+                    Key_RebindingMode(actions, binds);
                     return;
                 }
             }
         }
+        */
+
+        var target = _actions[4];
+        var binding = _actions[4].action.bindings[1];
+
+        Key_RebindingMode(target, binding);
+    }
+
+    void Key_RebindingMode(InputActionReference target,InputBinding binding)
+    {
+        _input.SwitchCurrentActionMap("Select");
+        _ListText_MoveButton[0].text = "バインディング中";
+
+        //ターゲット設定
+        bindTarget = binding;
+        bindAction = target;
+
+        _rebindingOperation = bindAction.action.PerformInteractiveRebinding()
+            .OnComplete(opth => MoveDirReBinding())
+            .Start();
+    }
+
+
+    void MoveDirReBinding()
+    {
+        bindTarget.overridePath = InputControlPath.ToHumanReadableString(
+            bindTarget.effectivePath,
+            InputControlPath.HumanReadableStringOptions.OmitDevice);
+
+        Debug.Log("TargetName：" + bindTarget.name);
+        Debug.Log("TargetPath：" + bindTarget.path);
+        Debug.Log("OverWeite ：" + bindTarget.overridePath);
+
+        string output = bindAction.action.SaveBindingOverridesAsJson();
+        Debug.Log(output);
+
+        _input.SwitchCurrentActionMap("Player");
+        _rebindingOperation.Dispose();
+
+        List_MoveDir_Key();
+        List_WeponSwap();
     }
 
     public void Clicked()
@@ -123,34 +165,20 @@ public class Rebinding : MonoBehaviour
             .Start();
     }
 
-    void Key_RebindingMode(InputActionReference target)
-    {
-        _input.SwitchCurrentActionMap("Select");
-        _ListText_MoveButton[0].text = "バインディング中";
-
-        //ターゲット設定
-        bindTarget = target.action.bindings[1];
-        bindAction = target;
-
-        _rebindingOperation = _action.action.PerformInteractiveRebinding()
-            .OnComplete(opth => Key_RebindingComplete())
-            .Start();
-    }
-
     void Key_RebindingComplete()
     {
         bindTarget.overridePath = InputControlPath.ToHumanReadableString(
-            _action.action.bindings[0].effectivePath,
+            bindTarget.effectivePath,
             InputControlPath.HumanReadableStringOptions.OmitDevice);
 
         Debug.Log("Target：" + bindTarget.path);
         Debug.Log("OverWr：" + bindTarget.overridePath);
 
-        _action.action.ApplyBindingOverride(new InputBinding { path = bindTarget.path, overridePath = bindTarget.overridePath });
+        bindAction.action.ApplyBindingOverride(new InputBinding { path = bindTarget.path, overridePath = bindTarget.overridePath });
 
-        string output = _action.action.SaveBindingOverridesAsJson();
+        string output = bindAction.action.SaveBindingOverridesAsJson();
         Debug.Log(output);
-        File.WriteAllText(filePath, output);
+        //File.WriteAllText(filePath, output);
 
         _input.SwitchCurrentActionMap("Player");
         _rebindingOperation.Dispose();
