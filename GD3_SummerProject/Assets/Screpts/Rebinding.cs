@@ -143,28 +143,17 @@ public class Rebinding : MonoBehaviour
             _action.action.bindings[0].effectivePath,
             InputControlPath.HumanReadableStringOptions.OmitDevice);
 
-        //Debug.Log("Target：" + bindTarget.path);
-        //Debug.Log("OverWr：" + bindTarget.overridePath);
+        Debug.Log("Target：" + bindTarget.path);
+        Debug.Log("OverWr：" + bindTarget.overridePath);
 
         _action.action.ApplyBindingOverride(new InputBinding { path = bindTarget.path, overridePath = bindTarget.overridePath });
 
         string output = _action.action.SaveBindingOverridesAsJson();
-        //Debug.Log(output);
+        Debug.Log(output);
         File.WriteAllText(filePath, output);
 
         _input.SwitchCurrentActionMap("Player");
         _rebindingOperation.Dispose();
-
-        /*
-        _ListText.text = "";
-        foreach (var actions in _actionAsset.actionMaps[0])
-        {
-            _ListText.text += actions.name + "：";
-            _ListText.text += actions.GetBindingDisplayString() + "\n";
-            //Debug.Log(actions.name + "：" + actions.GetBindingDisplayString());
-        }
-        _Text.text = _Text.text = _action.action.name + "：" + _action.action.GetBindingDisplayString();
-        */
 
         List_MoveDir_Key();
         List_WeponSwap();
