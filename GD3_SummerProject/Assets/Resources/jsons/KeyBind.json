@@ -1,1 +1,1 @@
-{"bindings":[{"action":"Player/Fire","id":"483d5bff-53e2-4d5f-8efe-4a36b9d18efe","path":"H","interactions":"","processors":""},{"action":"Player/Fire","id":"7a456d46-0b3c-4b8b-a6bc-4abac1f60f8f","path":"<Keyboard>/h","interactions":"","processors":""}]}
+{"bindings":[{"action":"Player/Fire","id":"483d5bff-53e2-4d5f-8efe-4a36b9d18efe","path":"<Keyboard>/s","interactions":"","processors":""},{"action":"Player/Fire","id":"7a456d46-0b3c-4b8b-a6bc-4abac1f60f8f","path":"<Keyboard>/s","interactions":"","processors":""}]}
