@@ -8,6 +8,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] string owner;
     [SerializeField] int damage;
     [SerializeField] int knockback;
+    [SerializeField] int stanPower;
 
     // コンポーネント
     Rigidbody2D body;
@@ -31,7 +32,7 @@ public class Bullet : MonoBehaviour
 
         if (collision.tag == "Enemy")
         {
-            collision.GetComponent<EnemyCTRL>().TakeDamage(damage, knockback);
+            collision.GetComponent<EnemyCTRL>().TakeDamage(damage, knockback, stanPower);
         }
 
         if (collision.tag == "Player")

@@ -8,25 +8,14 @@ public class PlayerCTRL : MonoBehaviour
 {
     // 変数
     [Header("ステータス")]
-    [SerializeField] int helthPoint;  // 体力
+    [SerializeField] int maxHelthPoint;      // 最大体力
+    [SerializeField] int nowHelthPoint = 0;  // 現在体力
 
-    [Header("移動")]
-    [SerializeField] float moveSpeed;  // 移動速度
-    [SerializeField] float dashPower;  // ダッシュパワー
-
-    [Header("遠距離攻撃")]
-    [SerializeField] int needCharge;  // 遠距離攻撃に必要なチャージ
-    [SerializeField] int nowCharge;   // 現在のチャージ
-
-    [Header("ノックバックと無敵時間")]
-    [SerializeField] float knockBackPower;    // かかるノックバックの強さ
-    [SerializeField] float defNonDamageTime;  // デフォルト無敵時間
+    [Header("無敵時間")]
+    [SerializeField] public float defNonDamageTime;  // デフォルト無敵時間
 
     // ゲームオブジェクト
     [Header("ゲームオブジェクト(マニュアル)")]
-    [SerializeField] GameObject cursor;  // カーソル取得(多分これが一番早い)
-    [SerializeField] GameObject cursorImage;  // カーソルイメージ(TKIH)
-    [SerializeField] GameObject bullet;  // 遠距離攻撃用の弾
     [SerializeField] GameObject flashObj;   // フラッシュ用
 
     // スクリプト
@@ -35,10 +24,24 @@ public class PlayerCTRL : MonoBehaviour
     
 
     [Header("コンポーネント(オート)")]
-    [SerializeField] GC_BpmCTRL bpmCTRL;        // BPMコントローラー
-    [SerializeField] PlayerWeapon playerWepon;  // 攻撃用
+    [SerializeField] GC_BpmCTRL _bpmCTRL;        // BPMコントローラー
+    [SerializeField] PlayerWeapon playerWeapon;  // 攻撃用
     [SerializeField] EquipLoad equipLoad;       // 装備武器取得
-    JsonData equipList; // 自動取得
+
+    [Header("コンポーネント(マニュアル)")]
+    [SerializeField] PlayerMove _playerMove;
+    [SerializeField] PlayerRotation _playerRotation;
+    [SerializeField] PlayerAttack _playerAttack;
+
+    // エンジン依存コンポーネント
+    [Header("コンポーネント(オート)")]
+    [SerializeField] SpriteRenderer _sprite;
+    [SerializeField] Rigidbody2D _body;
+    [SerializeField] public Animator _anim;
+    [SerializeField] public Animator _flashAnim;
+    [SerializeField] PlayerControls _playerControls;
+
+    public JsonData equipList; // 自動取得
 
     // キャンパス
     [Header("キャンバスUI(マニュアル)")]
@@ -46,27 +49,24 @@ public class PlayerCTRL : MonoBehaviour
     [SerializeField] Text cooldownText;   // クールダウン表示用
     [SerializeField] Text bulletText;     // 射撃チャージ
 
-    // プライベート変数
-    private int maxWeponCharge = 0;      // 必要クールダウン
-    private int nowWeponCharge = 1;      // 現在クールダウン
-    private int equipNo = 0;            // 所持している武器番号(0～2)
-    private bool coolDownReset = false;  // クールダウンのリセットフラグ
+    // 体力表示
+    [Header("体力表示(マニュアル)")]
+    [SerializeField] Slider hpSlider;
 
-    private int comboTimeLeft = 0;     // コンボ継続カウンター
-    private bool doComboMode = false;  // コンボモード
+    // プライベート変数
+    [Header("プライベート変数だったもの")]
+    public int maxWeponCharge = 0;      // 必要クールダウン
+    public int nowWeponCharge = 1;      // 現在クールダウン
+    public int equipNo = 0;            // 所持している武器番号(0～2)
+    public bool coolDownReset = false;  // クールダウンのリセットフラグ
+
+    public int comboTimeLeft = 0;     // コンボ継続カウンター
+    public bool doComboMode = false;  // コンボモード
     //private int comboCount = 0;        // コンボ回数カウンター
 
-    private float dogeTimer = 0;         // 回避用のタイマー
-    private float knockBackCounter = 0;  // ノックバック時間カウンター
+    public float knockBackCounter = 0;  // ノックバック時間カウンター
     private float NonDamageTime = 0;     // 無敵時間
-    private Vector2 moveDir;             // 移動用ベクトル
-
-    // エンジン依存コンポーネント
-    SpriteRenderer sprite;
-    Rigidbody2D body;
-    Animator anim;
-    Animator flashAnim;
-    PlayerControls plCtrls;
+    private Vector2 _moveDir;             // 移動用ベクトル
 
     public enum State
     {
@@ -80,44 +80,52 @@ public class PlayerCTRL : MonoBehaviour
     void Awake()
     {
         // コンポーネント取得
-        playerWepon = GetComponentInChildren<PlayerWeapon>();
-        bpmCTRL = gamectrl.transform.GetComponent<GC_BpmCTRL>();
+        playerWeapon = GetComponentInChildren<PlayerWeapon>();
+        _bpmCTRL = gamectrl.transform.GetComponent<GC_BpmCTRL>();
         equipLoad = gamectrl.transform.GetComponent<EquipLoad>();
 
-        TryGetComponent(out body);
-        TryGetComponent(out sprite);
-        TryGetComponent(out anim);
-        flashAnim = flashObj.GetComponent<Animator>();
-        plCtrls = new PlayerControls();
+        _playerMove = GetComponent<PlayerMove>();
+
+        TryGetComponent(out _body);
+        TryGetComponent(out _sprite);
+        TryGetComponent(out _anim);
+        _flashAnim = flashObj.GetComponent<Animator>();
+        _playerControls = new PlayerControls();
         
     }
 
     void Start()
     {
+        // 体力(と表示)初期化
+        nowHelthPoint = maxHelthPoint;
+        hpSlider.value = 1;
+
         // 武器初期化
         equipList = equipLoad.GetList();
-        maxWeponCharge = playerWepon.SwapWeapon(equipList.weaponList, 0);
-        nowCharge = 0;  // あえて0で初期化
+        maxWeponCharge = playerWeapon.SwapWeapon(equipList.weaponList, 0);
+        _playerAttack.nowCharge = 0;  // あえて0で初期化
 
         // UI系初期化
         UIUpdate();
 
         // ステート初期化
         state = State.Stop;
-        anim.SetBool("Alive", true);
+        _anim.SetBool("Alive", true);
 
         // インプットシステム有効化
-        plCtrls.Enable();
+        _playerControls.Enable();
     }
 
     void Update()
     {
         // 移動入力の取得
-        moveDir = plCtrls.Player.Move.ReadValue<Vector2>();
+        _moveDir = _playerControls.Player.Move.ReadValue<Vector2>();
 
 
         // UI更新
         UIUpdate();
+
+        SetHP();
 
         // 死亡判定
         IsDead();
@@ -125,21 +133,21 @@ public class PlayerCTRL : MonoBehaviour
         // ステート判定
         if (state != State.Alive)
         {
-            anim.SetBool("Moving", false);
-            body.velocity = new Vector2(0,0);
+            _anim.SetBool("Moving", false);
+            _body.velocity = new Vector2(0,0);
             return;
         }
-        else { anim.SetBool("Moving", true); }
+        else { _anim.SetBool("Moving", true); }
 
         // 無敵時間
         if (NonDamageTime > 0) { NonDamageTime -= Time.deltaTime; }
 
         // 処理
-        Rotation();   // 旋回系
-        Attack();     // 攻撃
-        Dash();       // ダッシュ入力
-        SwapWepon();  // 武器交換
-        Shooting();   // 遠距離攻撃
+        _playerRotation.Rotation(_playerControls, _sprite);             // 旋回系
+        _playerAttack.Attack(_playerControls, _bpmCTRL, playerWeapon);  // 攻撃
+        _playerAttack.SwapWepon(_playerControls, playerWeapon);         // 武器交換
+        _playerAttack.Shooting(_playerControls, _bpmCTRL);              // 遠距離攻撃
+        _playerMove.Dash(_playerControls, _bpmCTRL);                    // ダッシュ入力
 
     }
 
@@ -148,7 +156,8 @@ public class PlayerCTRL : MonoBehaviour
         // ステート判定
         if (state != State.Alive) { return; }
 
-        Move();
+        _playerMove.Move(_moveDir, _body);
+        //Move();
     }
 
 
@@ -157,224 +166,29 @@ public class PlayerCTRL : MonoBehaviour
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     void UIUpdate()
     {
-        hpText.text = "HP：" + helthPoint.ToString();
+        hpText.text = "HP：" + nowHelthPoint.ToString();
         cooldownText.text = "Wepon : " + nowWeponCharge + "/" + maxWeponCharge;
-        bulletText.text = "Shot : " + nowCharge + "/" + needCharge;
+        bulletText.text = "Shot : " + _playerAttack.nowCharge + "/" + _playerAttack.needCharge;
     }
 
 
 
-    // 旋回
+    // 体力表示
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-
-    // 旋回系
-    void Rotation()
+    void SetHP()
     {
-        var padName = Gamepad.current;
-        if (padName != null) { CursorRotStick(); }
-        else { CursorRotMouse(); }
-
-        if (cursor.transform.eulerAngles.z < 180.0f) { sprite.flipX = true; }
-        else { sprite.flipX = false; }
-
-    }
-
-    // 旋回（キーボード・マウス）
-    void CursorRotMouse()
-    {
-        // 自分の位置
-        Vector2 transPos = transform.position;
-
-        // スクリーン座標系のマウス座標をワールド座標系に修正
-        var rawDir = plCtrls.Player.MouseDir.ReadValue<Vector2>();
-        Vector2 mouseDir = Camera.main.ScreenToWorldPoint(rawDir);
-
-        // ベクトルを計算
-        Vector2 diff = (mouseDir - transPos).normalized;
-
-        // 回転に代入
-        var curRot = Quaternion.FromToRotation(Vector3.up, diff);
-
-        // カーソルにパス
-        cursor.GetComponent<Transform>().rotation = curRot;
-    }
-
-    // 旋回（スティック）
-    void CursorRotStick()
-    {
-        // スティック方向取得
-        var stickDir = plCtrls.Player.StickDir.ReadValue<Vector2>();
-
-        // 入力が無ければ更新しない
-        if (stickDir == new Vector2(0,0)) { return; }
-
-        // ベクトルを計算
-        float radian = Mathf.Atan2(stickDir.x, stickDir.y) * Mathf.Rad2Deg;
-
-        // 回転に代入
-        if (radian < 0) { radian += 360; }
-
-        // カーソルにパス
-        cursor.GetComponent<Transform>().rotation = Quaternion.Euler(0, 0, radian);
+        hpSlider.value = (float)nowHelthPoint / (float)maxHelthPoint;
     }
 
 
-
-    // 攻撃
-    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-    void Attack()
-    {
-        
-
-        if (plCtrls.Player.Attack.triggered
-            && bpmCTRL.Signal()
-            && coolDownReset == false)
-        {
-            anim.SetTrigger("Attack");
-            playerWepon.Attacking(nowWeponCharge);
-            coolDownReset = true;
-        }
-
-        if (playerWepon.Combo())
-        {
-            nowWeponCharge = maxWeponCharge;
-            doComboMode = true;
-            coolDownReset = false;
-            comboTimeLeft = 2;
-        }
-
-        
-        if (bpmCTRL.Metronome())
-        {
-            if (coolDownReset == true && doComboMode == false)
-            {
-                nowWeponCharge = 1;
-                coolDownReset = false;
-            }
-            else if (nowWeponCharge < maxWeponCharge) { nowWeponCharge++; }
-
-            if (comboTimeLeft > 0)
-            {
-                comboTimeLeft--;
-            }
-            if (comboTimeLeft == 0 && doComboMode == true)
-            {
-                doComboMode = false;
-                coolDownReset = true;
-            }
-
-
-            if (nowWeponCharge == (maxWeponCharge - 1))
-            {
-                //anim.SetTrigger("Charge");
-                flashAnim.SetTrigger("FlashTrigger");
-            }
-        }
-
-    }
-
-
-
-    // ダッシュ入力
-    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-    void Dash()
-    {
-        if (plCtrls.Player.Dash.triggered && bpmCTRL.Signal()) { dogeTimer = 0.1f; }
-    }
-
-
-
-    // 移動
-    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-
-    // 移動系
-    void Move()
-    {
-        // 移動
-        if (knockBackCounter > 0.0f)
-        {
-            KnockBack();
-
-            knockBackCounter -= Time.deltaTime;
-        }
-        else
-        {
-            body.velocity = new Vector2(moveDir.x * moveSpeed, moveDir.y * moveSpeed);
-        }
-
-        // 回避
-        if (dogeTimer > 0.0f)
-        {
-            body.AddForce(new Vector2(moveDir.x * dashPower, moveDir.y * dashPower), ForceMode2D.Impulse);
-
-            dogeTimer -= Time.deltaTime;
-        }
-    }
-
-
-
-    // 武器変更
-    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-    void SwapWepon()
-    {
-        var valueW = plCtrls.Player.WeponSwapWhile.ReadValue<float>();
-        var valueUp = plCtrls.Player.WeponSwapButtonUp.triggered;
-        var valueDwon = plCtrls.Player.WeponSwapButtonDown.triggered;
-
-        if (valueW != 0 || (valueUp || valueDwon))
-        {
-            if (valueW > 0 || valueUp)
-            {
-                equipNo++;
-
-                if (equipNo >= equipList.weaponList.Length){ equipNo = 0; }
-            }
-
-            if (valueW < 0 || valueDwon)
-            {
-                equipNo--;
-                if (equipNo <= equipList.weaponList.Length) { equipNo = 2; }
-            }
-
-            // 必要クールダウン上書き
-            maxWeponCharge = 
-                playerWepon.SwapWeapon(equipList.weaponList, equipNo);
-            // 現クールダウンを上書き
-            nowWeponCharge = 0;
-        }
-    }
-
-
-
-    // 遠距離攻撃
-    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
 
     // 遠距離攻撃チャージ
+    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     public void GetCharge()
     {
-        if (nowCharge < needCharge) { nowCharge += 1; }
-    }
-
-    // 遠距離攻撃
-    void Shooting()
-    {
-        if (bpmCTRL.Signal())
+        if (_playerAttack.nowCharge < _playerAttack.needCharge)
         {
-            if (nowCharge == needCharge && plCtrls.Player.Shot.triggered)
-            {
-                // 遠距離攻撃発生
-                //Debug.Log("遠距離攻撃");
-
-                Instantiate(
-                    bullet,
-                    new Vector3
-                    (cursorImage.transform.position.x,
-                    cursorImage.transform.position.y,
-                    cursorImage.transform.position.z),
-                    cursor.transform.rotation);
-
-                nowCharge = 0;
-            }
+            _playerAttack.nowCharge += 1;
         }
     }
 
@@ -384,9 +198,9 @@ public class PlayerCTRL : MonoBehaviour
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     void IsDead()
     {
-        if (helthPoint <= 0)
+        if (nowHelthPoint <= 0)
         {
-            hpText.text = "HP：" + helthPoint.ToString();
+            hpText.text = "HP：" + nowHelthPoint.ToString();
             state = State.Dead;
         }
     }
@@ -396,52 +210,6 @@ public class PlayerCTRL : MonoBehaviour
     // その他
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
 
-    // ノックバック
-    void KnockBack()
-    {
-        var diff = FetchNearObjectWithTag("Enemy");
-
-        body.AddForce(new Vector2(
-                -diff.x * knockBackPower,
-                -diff.y * knockBackPower),
-                ForceMode2D.Impulse);
-    }
-
-    // 最も近い敵オブジェクトの取得
-    private Vector2 FetchNearObjectWithTag(string tagName)
-    {
-        GameObject nearEnemy = null;
-
-        var targets = GameObject.FindGameObjectsWithTag(tagName);
-        var minTargetDist = float.MaxValue;
-
-        if (targets != null) { return new Vector2(0, 0); }
-
-        foreach (var target in targets)
-        {
-            var targetDist = Vector2.Distance(
-                transform.position,
-                target.transform.position);
-
-            if (!(targetDist < minTargetDist)) { continue; }
-
-            minTargetDist = targetDist;
-            nearEnemy = target.transform.gameObject;
-        }
-
-
-        // 自分の位置
-        Vector2 transPos = transform.position;
-
-        // 最も近い座標
-        Vector2 enemyPos = nearEnemy.transform.position;
-
-        // ベクトルを計算
-        Vector2 diff = (enemyPos - transPos).normalized;
-
-        return diff;
-    }
-
     // 被ダメージ判定
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -449,8 +217,8 @@ public class PlayerCTRL : MonoBehaviour
         {
             NonDamageTime = defNonDamageTime;
             knockBackCounter = 0.2f;
-            helthPoint -= 1;
-            anim.SetTrigger("Damage");
+            nowHelthPoint -= 1;
+            _anim.SetTrigger("Damage");
         }
     }
 

@@ -4328,6 +4328,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2447405941736732258, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
+      propertyPath: moveSpeed
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 2447405941736732258, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
+      propertyPath: knockBackPower
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5641307234752981239, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5641307234752981239, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7854783002829949673, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
       propertyPath: weponNameText
       value: 
@@ -4381,29 +4397,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1055110508}
     - target: {fileID: 7854783003313331793, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
-      propertyPath: bpmCTRL
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7854783003313331793, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
       propertyPath: gamectrl
       value: 
       objectReference: {fileID: 2017294181}
-    - target: {fileID: 7854783003313331793, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
-      propertyPath: inputList
-      value: 
-      objectReference: {fileID: 2017294179}
     - target: {fileID: 7854783003313331793, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
       propertyPath: bulletText
       value: 
       objectReference: {fileID: 687751517}
     - target: {fileID: 7854783003313331793, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
-      propertyPath: playerWepon
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7854783003313331793, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
       propertyPath: cooldownText
       value: 
       objectReference: {fileID: 463005066}
+    - target: {fileID: 7854783003313331793, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
+      propertyPath: maxHelthPoint
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7854783003313331794, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
       propertyPath: m_Name
       value: Player

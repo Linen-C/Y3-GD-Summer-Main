@@ -19,6 +19,7 @@ public class WeaponList
     public int defknockback;
     public int maxknockback;
     public int maxcharge;
+    public int stanpower;
     // Sprites
     public int wideth;
     public int height;

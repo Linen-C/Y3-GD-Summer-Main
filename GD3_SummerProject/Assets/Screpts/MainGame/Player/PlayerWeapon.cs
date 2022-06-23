@@ -28,9 +28,11 @@ public class PlayerWeapon : MonoBehaviour
     [SerializeField] int defKnockBack = 0;   // ノックバックパワー
     [SerializeField] int maxKnockBack = 0;   // ノックバックパワー
     [SerializeField] int maxCharge = 0;      // 必要最大チャージ
+    [SerializeField] int maxStanPower = 0;      // スタン値
 
     int nowDamage = 0;
     int nowKockBack = 0;
+    int nowStanPower = 0;
     bool comboFlag = false;
 
     // コンポーネント
@@ -105,6 +107,9 @@ public class PlayerWeapon : MonoBehaviour
         // 最大チャージ量
         maxCharge = wepon[no].maxcharge;
 
+        // スタン値
+        maxStanPower = wepon[no].stanpower;
+
 
         // Sprites
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
@@ -134,11 +139,13 @@ public class PlayerWeapon : MonoBehaviour
         {
             nowDamage = maxDamage;
             nowKockBack = maxKnockBack;
+            nowStanPower = maxStanPower;
         }
         else
         {
             nowDamage = defDamage;
             nowKockBack = defKnockBack;
+            nowStanPower = 0;
         }
 
         coll.enabled = true;
@@ -165,9 +172,13 @@ public class PlayerWeapon : MonoBehaviour
     {
         if(collision.tag == "Enemy" && chargeCool <= 0)
         {
-            collision.gameObject.GetComponent<EnemyCTRL>().TakeDamage(nowDamage, nowKockBack);
-            playerctrl.GetCharge();
-            if (nowDamage == maxDamage) { comboFlag = true; }
+            collision.gameObject.GetComponent<EnemyCTRL>().TakeDamage(nowDamage, nowKockBack, nowStanPower);
+            
+            if (nowDamage == maxDamage)
+            {
+                playerctrl.GetCharge(); 
+                comboFlag = true;
+            }
         }
     }
 

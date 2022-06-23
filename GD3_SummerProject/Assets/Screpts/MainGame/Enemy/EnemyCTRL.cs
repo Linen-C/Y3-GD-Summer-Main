@@ -13,6 +13,10 @@ public class EnemyCTRL : MonoBehaviour
     [Header("ステータス")]
     [SerializeField] int maxHelthPoint;      // 最大体力
     [SerializeField] int nowHelthPoint = 0;  // 現在体力
+    [SerializeField] int maxStan = 100;      // 最大スタン値
+    [SerializeField] int nowStan;            // 現在スタン値
+    [SerializeField] int doStanCount;        // スタン回復までのテンポ数
+    [SerializeField] int stanRecoverCount;   // スタン回復までのデフォルトテンポ数
     [Header("移動")]
     [SerializeField] float moveSpeed;  // 移動速度
     [Header("武器")]
@@ -40,7 +44,6 @@ public class EnemyCTRL : MonoBehaviour
 
     // 体力表示
     [Header("体力表示(マニュアル)")]
-    //[SerializeField] GameObject hpUI;
     [SerializeField] Slider hpSlider;
 
     // プライベート変数
@@ -61,6 +64,7 @@ public class EnemyCTRL : MonoBehaviour
     {
         Stop,
         Alive,
+        Stan,
         Dead
     }
     State state;
@@ -73,7 +77,6 @@ public class EnemyCTRL : MonoBehaviour
         anim = GetComponent<Animator>();
         flashAnim = flashObj.GetComponent<Animator>();
         curTrans = cursor.GetComponent<Transform>();
-
     }
 
     void Start()
@@ -112,40 +115,65 @@ public class EnemyCTRL : MonoBehaviour
             anim.SetBool("Moving", true);
         }
 
+        // 体力表示セット
+        SetHP();
+
         // 死亡判定
         IfIsAlive();
 
         // ステート判定
-        if (state != State.Alive)
-        {
-            body.velocity = new Vector2(0, 0);
-            return;
-        }
+        if (AliveCheck()) { return; }
         else { anim.SetBool("Alive", true); }
 
         // 無敵時間
         if (NonDamageTime > 0) { NonDamageTime -= Time.deltaTime; }
 
+
+
+        if (nowStan >= maxStan)
+        {
+            doStanCount = stanRecoverCount;
+            weponCharge = 0;
+            nowStan = 0;
+        }
+
+        if (doStanCount > 0)
+        {
+            if (bpmCTRL.Metronome()) { doStanCount--; }
+            return;
+        }
+        else if (nowStan > 0)
+        {
+            if (bpmCTRL.Metronome()) { nowStan -= 5; }
+        }
+
         // 処理
         TracePlayer();  // プレイヤー補足・追跡
         CursorRot();    // 旋回
         Attack();       // 攻撃
-        //Move();         // 移動
-        SetHP();
+
     }
 
     void FixedUpdate()
     {
         // ステート判定
-        if (state != State.Alive)
-        {
-            body.velocity = new Vector2(0, 0);
-            return;
-        }
+        if (AliveCheck()) { return; }
 
+        KnockBack();
         Move();
     }
 
+
+
+    bool AliveCheck()
+    {
+        if (state != State.Alive)
+        {
+            body.velocity = new Vector2(0, 0);
+            return true;
+        }
+        return false;
+    }
 
     // プレイヤー補足・追跡
     void TracePlayer()
@@ -239,11 +267,20 @@ public class EnemyCTRL : MonoBehaviour
     // 移動
     void Move()
     {
-        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-        // 移動
-        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+        if (knockBackCounter <= 0.0f)
+        {
+            body.velocity = new Vector2(diff.x * moveSpeed, diff.y * moveSpeed);
+        }
 
-        if(knockBackCounter > 0.0f)
+        if (doStanCount > 0)
+        {
+            body.AddForce(new Vector2(0, 0));
+        }
+    }
+
+    void KnockBack()
+    {
+        if (knockBackCounter > 0.0f)
         {
             body.AddForce(new Vector2(
                 -diff.x * knockBackPower,
@@ -252,12 +289,6 @@ public class EnemyCTRL : MonoBehaviour
 
             knockBackCounter -= Time.deltaTime;
         }
-        else
-        {
-            body.velocity = new Vector2(diff.x * moveSpeed, diff.y * moveSpeed);
-        }
-
-        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     }
 
     // 体力表示
@@ -278,12 +309,13 @@ public class EnemyCTRL : MonoBehaviour
 
 
     // ダメージを受ける
-    public void TakeDamage(int damage,int knockback)
+    public void TakeDamage(int damage,int knockback, int stanPower)
     {
         if (NonDamageTime > 0) { return; }
 
         nowHelthPoint -= damage;
         knockBackPower = knockback;
+        nowStan += stanPower;
 
         NonDamageTime = defNonDamageTime;
         knockBackCounter = 0.1f;

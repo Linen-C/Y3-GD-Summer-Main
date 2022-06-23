@@ -9,6 +9,7 @@
             "defknockback": 20,
             "maxknockback": 30,
             "maxcharge": 4,
+            "stanpower": 50,
             "wideth": 4,
             "height": 2,
             "offset": 2.5
@@ -22,6 +23,7 @@
             "defknockback": 20,
             "maxknockback": 20,
             "maxcharge": 2,
+            "stanpower": 50,
             "wideth": 1,
             "height": 3,
             "offset": 3.0
@@ -35,6 +37,7 @@
             "defknockback": 20,
             "maxknockback": 30,
             "maxcharge": 4,
+            "stanpower": 50,
             "wideth": 4,
             "height": 2,
             "offset": 2.5

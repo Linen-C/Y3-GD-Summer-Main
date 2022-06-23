@@ -696,8 +696,12 @@ MonoBehaviour:
   bullet: {fileID: 0}
   maxHelthPoint: 10
   nowHelthPoint: 0
+  maxStan: 100
+  nowStan: 0
+  doStanCount: 0
+  stanRecoverCount: 4
   moveSpeed: 1
-  needWeponCharge: 0
+  needWeponCharge: 4
   knockBackPower: 30
   defNonDamageTime: 0.1
   ownWepon: {fileID: 562583549191834702}
@@ -790,7 +794,7 @@ Transform:
   m_GameObject: {fileID: 562583549191834709}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 2.5, z: 0}
-  m_LocalScale: {x: 3, y: 2, z: 1}
+  m_LocalScale: {x: 5, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 562583549000882066}
   m_RootOrder: 1
