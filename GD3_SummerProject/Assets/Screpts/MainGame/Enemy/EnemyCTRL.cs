@@ -147,6 +147,11 @@ public class EnemyCTRL : MonoBehaviour
             if (bpmCTRL.Metronome()) { nowStan -= 5; }
         }
 
+        if (nowStan < 0)
+        {
+            nowStan = 0;
+        }
+
         // 処理
         TracePlayer();  // プレイヤー補足・追跡
         CursorRot();    // 旋回
@@ -269,12 +274,14 @@ public class EnemyCTRL : MonoBehaviour
     {
         if (knockBackCounter <= 0.0f)
         {
-            body.velocity = new Vector2(diff.x * moveSpeed, diff.y * moveSpeed);
-        }
-
-        if (doStanCount > 0)
-        {
-            body.AddForce(new Vector2(0, 0));
+            if (doStanCount <= 0)
+            {
+                body.velocity = new Vector2(diff.x * moveSpeed, diff.y * moveSpeed);
+            }
+            else
+            {
+                body.velocity = (new Vector2(0, 0));
+            }
         }
     }
 

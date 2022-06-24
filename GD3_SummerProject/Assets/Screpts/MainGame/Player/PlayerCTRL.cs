@@ -45,9 +45,11 @@ public class PlayerCTRL : MonoBehaviour
 
     // キャンパス
     [Header("キャンバスUI(マニュアル)")]
-    [SerializeField] Text hpText;         // 体力表示用
-    [SerializeField] Text cooldownText;   // クールダウン表示用
-    [SerializeField] Text bulletText;     // 射撃チャージ
+    //[SerializeField] Text hpText;         // 体力表示用
+    [SerializeField] Text text_Wepon;   // クールダウン表示用
+    [SerializeField] Slider slider_Wepon;
+    [SerializeField] Text text_Gun;     // 射撃チャージ
+    [SerializeField] Slider slider_Gun;
 
     // 体力表示
     [Header("体力表示(マニュアル)")]
@@ -103,7 +105,7 @@ public class PlayerCTRL : MonoBehaviour
         // 武器初期化
         equipList = equipLoad.GetList();
         maxWeponCharge = playerWeapon.SwapWeapon(equipList.weaponList, 0);
-        _playerAttack.nowCharge = 0;  // あえて0で初期化
+        _playerAttack.nowGunCharge = 0;
 
         // UI系初期化
         UIUpdate();
@@ -166,9 +168,11 @@ public class PlayerCTRL : MonoBehaviour
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     void UIUpdate()
     {
-        hpText.text = "HP：" + nowHelthPoint.ToString();
-        cooldownText.text = "Wepon : " + nowWeponCharge + "/" + maxWeponCharge;
-        bulletText.text = "Shot : " + _playerAttack.nowCharge + "/" + _playerAttack.needCharge;
+        //hpText.text = "HP：" + nowHelthPoint.ToString();
+        text_Wepon.text = nowWeponCharge + " / " + maxWeponCharge;
+        slider_Wepon.value = (float)nowWeponCharge / (float)maxWeponCharge;
+        text_Gun.text = _playerAttack.nowGunCharge + " / " + _playerAttack.needGunCharge;
+        slider_Gun.value = (float)_playerAttack.nowGunCharge / (float)_playerAttack.needGunCharge;
     }
 
 
@@ -186,9 +190,9 @@ public class PlayerCTRL : MonoBehaviour
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     public void GetCharge()
     {
-        if (_playerAttack.nowCharge < _playerAttack.needCharge)
+        if (_playerAttack.nowGunCharge < _playerAttack.needGunCharge)
         {
-            _playerAttack.nowCharge += 1;
+            _playerAttack.nowGunCharge += 1;
         }
     }
 
@@ -200,7 +204,7 @@ public class PlayerCTRL : MonoBehaviour
     {
         if (nowHelthPoint <= 0)
         {
-            hpText.text = "HP：" + nowHelthPoint.ToString();
+            //hpText.text = "HP：" + nowHelthPoint.ToString();
             state = State.Dead;
         }
     }

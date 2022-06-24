@@ -7,8 +7,8 @@ public class PlayerWeapon : MonoBehaviour
 {
     // 変数
     [Header("変数")]
-    [SerializeField] float defTime;   // 攻撃判定の発生時間
-    [SerializeField] public float attakingTime = 0.0f;  // 判定の発生時間
+    [SerializeField] float defAttackingTime = 0.3f;   // 攻撃判定の基礎発生時間
+    [SerializeField] public float nowAttakingTime = 0.0f;  // 判定の発生時間
 
     // スクリプト
     [Header("スクリプト")]
@@ -16,13 +16,14 @@ public class PlayerWeapon : MonoBehaviour
     [SerializeField] SpriteChanger spriteChanger;
 
     // キャンパス
-    [Header("キャンバス")]
-    [SerializeField] Text weponNameText;  // 武器名表示用
+    //[Header("キャンバス")]
+    //[SerializeField] Text weponNameText;  // 武器名表示用
 
     // プライベート変数
     float spriteAlpha = 0.0f;
     float chargeCool = 0.0f;
 
+    [Header("パラメータ")]
     [SerializeField] int defDamage = 1;      // 通常ダメージ
     [SerializeField] int maxDamage = 0;      // 最大ダメージ
     [SerializeField] int defKnockBack = 0;   // ノックバックパワー
@@ -51,9 +52,9 @@ public class PlayerWeapon : MonoBehaviour
     {
         // 判定発生
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-        if (attakingTime >= 0)
+        if (nowAttakingTime >= 0)
         {
-            attakingTime -= Time.deltaTime;
+            nowAttakingTime -= Time.deltaTime;
         }
         else{ coll.enabled = false; }
 
@@ -83,7 +84,7 @@ public class PlayerWeapon : MonoBehaviour
         // Tags
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
         // テキスト変更
-        weponNameText.text = wepon[no].name;
+        //weponNameText.text = wepon[no].name;
 
         // スプライト切り替えのためパス
         Sprite inImage = Resources.Load<Sprite>(wepon[no].trail.ToString());
@@ -149,7 +150,7 @@ public class PlayerWeapon : MonoBehaviour
         }
 
         coll.enabled = true;
-        attakingTime = defTime;
+        nowAttakingTime = defAttackingTime;
 
         spriteAlpha = 1.0f;
     }
@@ -170,13 +171,17 @@ public class PlayerWeapon : MonoBehaviour
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Enemy" && chargeCool <= 0)
+        if(collision.tag == "Enemy")
         {
             collision.gameObject.GetComponent<EnemyCTRL>().TakeDamage(nowDamage, nowKockBack, nowStanPower);
             
             if (nowDamage == maxDamage)
             {
-                playerctrl.GetCharge(); 
+                if (chargeCool <= 0)
+                {
+                    playerctrl.GetCharge();
+                    chargeCool = defAttackingTime;
+                }
                 comboFlag = true;
             }
         }

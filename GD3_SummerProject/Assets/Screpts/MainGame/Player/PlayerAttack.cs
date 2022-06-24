@@ -13,8 +13,11 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] GameObject bullet;
 
     [Header("遠距離攻撃")]
-    [SerializeField] public int needCharge;  // 遠距離攻撃に必要なチャージ
-    [SerializeField] public int nowCharge;   // 現在のチャージ
+    [SerializeField] public int needGunCharge;  // 遠距離攻撃に必要なチャージ
+    [SerializeField] public int nowGunCharge;   // 現在のチャージ
+    [SerializeField] bool standby = false;
+    [SerializeField] int needCountDown;
+    [SerializeField] int nowCountDown = 0;
 
     public void Attack(PlayerControls playerControls, GC_BpmCTRL bpmCTRL, PlayerWeapon playerWeapon)
     {
@@ -58,7 +61,7 @@ public class PlayerAttack : MonoBehaviour
 
             if (_plCTRL.nowWeponCharge == (_plCTRL.maxWeponCharge - 1))
             {
-                //anim.SetTrigger("Charge");
+                //_plCTRL._anim.SetTrigger("Charge");
                 _plCTRL._flashAnim.SetTrigger("FlashTrigger");
             }
         }
@@ -76,14 +79,13 @@ public class PlayerAttack : MonoBehaviour
             if (valueW > 0 || valueUp)
             {
                 _plCTRL.equipNo++;
-
                 if (_plCTRL.equipNo >= _plCTRL.equipList.weaponList.Length) { _plCTRL.equipNo = 0; }
             }
 
             if (valueW < 0 || valueDwon)
             {
                 _plCTRL.equipNo--;
-                if (_plCTRL.equipNo <= _plCTRL.equipList.weaponList.Length) { _plCTRL.equipNo = 2; }
+                if (_plCTRL.equipNo < 0) { _plCTRL.equipNo = 2; }
             }
 
             // 必要クールダウン上書き
@@ -98,18 +100,38 @@ public class PlayerAttack : MonoBehaviour
     {
         if (bpmCTRL.Signal())
         {
-            if (nowCharge == needCharge && playerControls.Player.Shot.triggered)
+            if (nowGunCharge == needGunCharge && playerControls.Player.Shot.triggered)
             {
-                Instantiate(
-                    bullet,
-                    new Vector3
-                    (cursorImage.transform.position.x,
-                    cursorImage.transform.position.y,
-                    cursorImage.transform.position.z),
-                    cursor.transform.rotation);
-
-                nowCharge = 0;
+                standby = true;
+                nowCountDown = needCountDown;
             }
         }
+
+        if (standby)
+        {
+            BulletFire(bpmCTRL);
+        }
     }
+
+    void BulletFire(GC_BpmCTRL bpmCTRL)
+    {
+        if (bpmCTRL.Metronome())
+        {
+            if (nowCountDown == 0)
+            {
+                Instantiate(
+                        bullet,
+                        new Vector3
+                        (cursorImage.transform.position.x,
+                        cursorImage.transform.position.y,
+                        cursorImage.transform.position.z),
+                        cursor.transform.rotation);
+
+                standby = false;
+                nowGunCharge = 0;
+            }
+            nowCountDown--;
+        }
+    }
+
 }

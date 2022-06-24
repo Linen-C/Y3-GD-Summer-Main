@@ -11,7 +11,7 @@ public class GC_BpmCTRL : MonoBehaviour
 
     // キャンバス
     [Header("キャンバス")]
-    public Text bpmText;    // BPM表記
+    //public Text bpmText;    // BPM表記
     public Image beatImage;
 
     // オーディオ関係
@@ -24,10 +24,15 @@ public class GC_BpmCTRL : MonoBehaviour
     private bool metronome = false; // メトロノームシグナル
     private bool metronomeFlap = false;
     private bool doSignal = false;  // シグナル送信用
+    private float nowImageSize = 0.6f;
+    private float minImageSize = 0.6f;
+    private float maxImageSize = 1.2f;
+
 
 
     void Start()
     {
+        beatImage.color = new Color(1.0f, 0.0f, 0.0f, 0.5f);
         BpmReset();
     }
     
@@ -45,8 +50,8 @@ public class GC_BpmCTRL : MonoBehaviour
         if (timing <= 0.2f)
         {
             doSignal = true;
-            beatImage.color = new Color(1.0f, 0.0f, 0.0f, 0.5f);
-            beatImage.transform.localScale = new Vector3(1.2f, 1.2f, 1.0f);
+            nowImageSize = maxImageSize;
+            //beatImage.transform.localScale = new Vector3(1.2f, 1.2f, 1.0f);
         }
 
         if (timing <= 0.0f && metronomeFlap == false)
@@ -60,8 +65,7 @@ public class GC_BpmCTRL : MonoBehaviour
             metronome = false;
             if (metronomeFlap == false)
             {
-                beatImage.color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
-                beatImage.transform.localScale = new Vector3(0.8f, 0.8f, 1.0f);
+               //beatImage.transform.localScale = new Vector3(0.8f, 0.8f, 1.0f);
             }
         }
 
@@ -72,6 +76,8 @@ public class GC_BpmCTRL : MonoBehaviour
             BpmReset();
         }
 
+        ImageShrinking();
+
         timing -= Time.deltaTime;
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     }
@@ -79,7 +85,7 @@ public class GC_BpmCTRL : MonoBehaviour
     // BPM更新用
     float BpmReset()
     {
-        bpmText.text = "BPM:" + bpm;
+        //bpmText.text = "BPM:" + bpm;
         return timing = 60 / bpm;
     }
 
@@ -93,4 +99,12 @@ public class GC_BpmCTRL : MonoBehaviour
         return doSignal;
     }
 
+
+    void ImageShrinking()
+    {
+        if (nowImageSize > minImageSize){ nowImageSize -= Time.deltaTime * 4.0f; }
+        else { nowImageSize = minImageSize; }
+
+        beatImage.transform.localScale = new Vector3(nowImageSize, nowImageSize, 1.0f);
+    }
 }

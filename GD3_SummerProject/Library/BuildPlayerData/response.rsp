@@ -4,6 +4,7 @@
 -a="C:\Users\2016002\Desktop\UnityWork\GameDEV\GD-4GA3-Summer-Main\GD3_SummerProject\Library\PlayerScriptAssemblies\UnityEngine.TestRunner.dll"
 -a="C:\Users\2016002\Desktop\UnityWork\GameDEV\GD-4GA3-Summer-Main\GD3_SummerProject\Library\PlayerScriptAssemblies\Unity.Timeline.dll"
 -a="C:\Users\2016002\Desktop\UnityWork\GameDEV\GD-4GA3-Summer-Main\GD3_SummerProject\Library\PlayerScriptAssemblies\Unity.TextMeshPro.dll"
+-a="C:\Users\2016002\Desktop\UnityWork\GameDEV\GD-4GA3-Summer-Main\GD3_SummerProject\Library\PlayerScriptAssemblies\Unity.InputSystem.dll"
 -a="C:\Users\2016002\Desktop\UnityWork\GameDEV\GD-4GA3-Summer-Main\GD3_SummerProject\Library\PlayerScriptAssemblies\UnityEngine.UI.dll"
 -a="C:\Users\2016002\Desktop\UnityWork\GameDEV\GD-4GA3-Summer-Main\GD3_SummerProject\Library\PlayerScriptAssemblies\Unity.Mathematics.dll"
 -a="C:\Users\2016002\Desktop\UnityWork\GameDEV\GD-4GA3-Summer-Main\GD3_SummerProject\Library\PlayerScriptAssemblies\Unity.2D.IK.Runtime.dll"

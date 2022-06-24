@@ -271,7 +271,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -361,14 +361,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.7490196, b: 0.7490196, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ce09ef729ba8e6342ac32fed0b676fc1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a6e6ef462829b844c8293bfeee7b2177, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -436,7 +436,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.49803922, g: 0.49803922, b: 0.49803922, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -726,16 +726,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5db76b9ab8bcd1448487bf41c4cf88c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defTime: 0.3
-  attakingTime: 0
+  defAttackingTime: 0.3
+  nowAttakingTime: 0
   playerctrl: {fileID: 7854783003313331793}
   spriteChanger: {fileID: 7854783002277418258}
-  weponNameText: {fileID: 0}
   defDamage: 1
   maxDamage: 0
   defKnockBack: 0
   maxKnockBack: 0
   maxCharge: 0
+  maxStanPower: 0
 --- !u!1 &7854783002991398356
 GameObject:
   m_ObjectHideFlags: 0
@@ -1117,7 +1117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5138dd43f17b0d49837004d934a854e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHelthPoint: 4
+  maxHelthPoint: 10
   nowHelthPoint: 0
   defNonDamageTime: 0.5
   flashObj: {fileID: 2029939891}
@@ -1134,12 +1134,13 @@ MonoBehaviour:
   _flashAnim: {fileID: 0}
   equipList:
     weaponList: []
-  hpText: {fileID: 0}
-  cooldownText: {fileID: 0}
-  bulletText: {fileID: 0}
+  text_Wepon: {fileID: 0}
+  slider_Wepon: {fileID: 0}
+  text_Gun: {fileID: 0}
+  slider_Gun: {fileID: 0}
   hpSlider: {fileID: 5830687477450192321}
   maxWeponCharge: 0
-  nowWeponCharge: 1
+  nowWeponCharge: 0
   equipNo: 0
   coolDownReset: 0
   comboTimeLeft: 0
@@ -1159,9 +1160,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _plCTRL: {fileID: 7854783003313331793}
-  moveSpeed: 15
+  moveSpeed: 18
   dashPower: 30
-  knockBackPower: 5
+  knockBackPower: 10
 --- !u!114 &424716756123729601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1193,8 +1194,11 @@ MonoBehaviour:
   cursor: {fileID: 7854783002312811369}
   cursorImage: {fileID: 7854783003204025895}
   bullet: {fileID: 8019057332981992899, guid: 9b682da5b8be13141b6f68167fa8fc24, type: 3}
-  needCharge: 2
-  nowCharge: 0
+  needGunCharge: 2
+  nowGunCharge: 0
+  standby: 0
+  needCountDown: 1
+  nowCountDown: 0
 --- !u!95 &1946777321
 Animator:
   serializedVersion: 3
