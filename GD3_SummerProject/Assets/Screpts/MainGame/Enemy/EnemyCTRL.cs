@@ -45,6 +45,8 @@ public class EnemyCTRL : MonoBehaviour
     // 体力表示
     [Header("体力表示(マニュアル)")]
     [SerializeField] Slider hpSlider;
+    [SerializeField] Slider stanBar;
+    [SerializeField] Image stanBarFill;
 
     // プライベート変数
     private int weponCharge = 1;         // 現在クールダウン
@@ -83,6 +85,7 @@ public class EnemyCTRL : MonoBehaviour
     {
         nowHelthPoint = maxHelthPoint;
         hpSlider.value = 1;
+        stanBar.value = 1;
 
         if (!shootingType) { bullet = null; }
 
@@ -302,6 +305,16 @@ public class EnemyCTRL : MonoBehaviour
     void SetHP()
     {
         hpSlider.value = (float)nowHelthPoint / (float)maxHelthPoint;
+        if (doStanCount > 0)
+        {
+            stanBar.value = stanBar.maxValue;
+            stanBarFill.color = new Color(1.0f, 0.0f, 0.0f);
+        }
+        else
+        {
+            stanBar.value = (float)nowStan / (float)maxStan;
+            stanBarFill.color = new Color(1.0f, 1.0f, 0.0f);
+        }
     }
 
     // 死亡判定
@@ -322,7 +335,7 @@ public class EnemyCTRL : MonoBehaviour
 
         nowHelthPoint -= damage;
         knockBackPower = knockback;
-        nowStan += stanPower;
+        if (doStanCount <= 0) { nowStan += stanPower; }
 
         NonDamageTime = defNonDamageTime;
         knockBackCounter = 0.1f;

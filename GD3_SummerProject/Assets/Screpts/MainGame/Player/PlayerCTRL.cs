@@ -50,6 +50,9 @@ public class PlayerCTRL : MonoBehaviour
     [SerializeField] Slider slider_Wepon;
     [SerializeField] Text text_Gun;     // 射撃チャージ
     [SerializeField] Slider slider_Gun;
+    [SerializeField] Image image_panel;
+    [SerializeField] float image_panel_defalpha = 1.0f;
+    [SerializeField] float image_panel_nowalpha = 0.0f;
 
     // 体力表示
     [Header("体力表示(マニュアル)")]
@@ -93,7 +96,9 @@ public class PlayerCTRL : MonoBehaviour
         TryGetComponent(out _anim);
         _flashAnim = flashObj.GetComponent<Animator>();
         _playerControls = new PlayerControls();
-        
+
+
+        image_panel.color = new Color(1.0f, 1.0f, 1.0f, 0.0f);
     }
 
     void Start()
@@ -173,6 +178,15 @@ public class PlayerCTRL : MonoBehaviour
         slider_Wepon.value = (float)nowWeponCharge / (float)maxWeponCharge;
         text_Gun.text = _playerAttack.nowGunCharge + " / " + _playerAttack.needGunCharge;
         slider_Gun.value = (float)_playerAttack.nowGunCharge / (float)_playerAttack.needGunCharge;
+
+
+        if (image_panel_nowalpha > 0.0f)
+        {
+            image_panel_nowalpha -= Time.deltaTime;
+        }
+
+        image_panel.color = new Color(1.0f, 1.0f, 1.0f, image_panel_nowalpha);
+
     }
 
 
@@ -219,6 +233,7 @@ public class PlayerCTRL : MonoBehaviour
     {
         if (collision.gameObject.tag == "EnemyAttack" && (NonDamageTime <= 0.0f))
         {
+            image_panel_nowalpha = image_panel_defalpha;
             NonDamageTime = defNonDamageTime;
             knockBackCounter = 0.2f;
             nowHelthPoint -= 1;

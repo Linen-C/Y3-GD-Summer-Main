@@ -13,6 +13,7 @@ public class GC_BpmCTRL : MonoBehaviour
     [Header("キャンバス")]
     //public Text bpmText;    // BPM表記
     public Image beatImage;
+    [SerializeField] Slider _beatSlider;
 
     // オーディオ関係
     [Header("オーディオ")]
@@ -47,16 +48,16 @@ public class GC_BpmCTRL : MonoBehaviour
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
         // カウンター
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-        if (timing <= 0.2f)
+        if (timing <= 0.1f)
         {
             doSignal = true;
-            nowImageSize = maxImageSize;
             //beatImage.transform.localScale = new Vector3(1.2f, 1.2f, 1.0f);
         }
 
         if (timing <= 0.0f && metronomeFlap == false)
         {
             //audioSource.PlayOneShot(audioClip[0]);
+            nowImageSize = maxImageSize;
             metronome = true;
             metronomeFlap = true;
         }
@@ -77,7 +78,6 @@ public class GC_BpmCTRL : MonoBehaviour
         }
 
         ImageShrinking();
-
         timing -= Time.deltaTime;
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     }
@@ -86,6 +86,10 @@ public class GC_BpmCTRL : MonoBehaviour
     float BpmReset()
     {
         //bpmText.text = "BPM:" + bpm;
+
+        _beatSlider.maxValue = 60 / bpm;
+        _beatSlider.minValue = -0.2f;
+
         return timing = 60 / bpm;
     }
 
@@ -104,6 +108,8 @@ public class GC_BpmCTRL : MonoBehaviour
     {
         if (nowImageSize > minImageSize){ nowImageSize -= Time.deltaTime * 4.0f; }
         else { nowImageSize = minImageSize; }
+
+        _beatSlider.value = timing;
 
         beatImage.transform.localScale = new Vector3(nowImageSize, nowImageSize, 1.0f);
     }

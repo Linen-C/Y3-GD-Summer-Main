@@ -3,35 +3,35 @@
    [
     {
       "number":0,
-      "name": "Bat", "trail":"Images/testgraphv2/bat4-2", "icon":"Images/testgraphv2/icon_bat",
+      "name": "Bat", "trail":"Images/images/Trail/bat_b", "icon":"Images/images/Icon/bat_b",
       "damage":3, "defknockback":20, "maxknockback":30, "maxcharge":4, "stanpower":50,
       "wideth": 4, "height": 2, "offset": 2.5
     },
 
     {
       "number":1,
-      "name": "Spike", "trail":"Images/testgraphv2/spike1-3", "icon":"Images/testgraphv2/icon_spike",
+      "name": "Spike", "trail":"Images/images/Trail/spike_b", "icon":"Images/images/Icon/spike_b",
       "damage":2, "defknockback":20, "maxknockback":20, "maxcharge": 2, "stanpower":25,
       "wideth": 1, "height": 3, "offset": 3.0
     },
 
     {
       "number":2,
-      "name": "Lance", "trail":"Images/testgraphv2/lance2-5", "icon":"Images/testgraphv2/icon_lance",
+      "name": "Lance", "trail":"Images/images/Trail/lance_b", "icon":"Images/images/Icon/lance_b",
       "damage":6, "defknockback":20, "maxknockback":40, "maxcharge": 6, "stanpower":100,
       "wideth": 2, "height": 5, "offset": 4.0
     },
 
     {
       "number":3,
-      "name": "Test_No4", "trail":"Images/testgraphv2/bat4-2", "icon":"Images/testgraphv2/icon_bat",
+      "name": "Test_No4", "trail":"Images/images/Trail/bat_b", "icon":"Images/images/Icon/bat_b",
       "damage":3, "defknockback":20, "maxknockback":30, "maxcharge":4, "stanpower":50,
       "wideth": 4, "height": 2, "offset": 2.5
     },
 
     {
       "number":4,
-      "name": "Test_No5_end", "trail":"Images/testgraphv2/bat4-2", "icon":"Images/testgraphv2/icon_bat",
+      "name": "Test_No5_end", "trail":"Images/images/Trail/bat_b", "icon":"Images/images/Icon/bat_b",
       "damage":3, "defknockback":20, "maxknockback":30, "maxcharge":4, "stanpower":25,
       "wideth": 4, "height": 2, "offset": 2.5
     }

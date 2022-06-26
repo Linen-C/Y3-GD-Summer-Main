@@ -14,12 +14,12 @@ public class Menu_Customize : MonoBehaviour
     [SerializeField] public WeaponList[] equipList;
 
     [Header("‘•”õ’†‚Ì•Ší")]
-    [SerializeField] int weponNomberA;
-    [SerializeField] int weponNomberB;
-    [SerializeField] int weponNomberC;
-    [SerializeField] Text text_weponA;
-    [SerializeField] Text text_weponB;
-    [SerializeField] Text text_weponC;
+    [SerializeField] int weaponNomberA;
+    [SerializeField] int weaponNomberB;
+    [SerializeField] int weaponNomberC;
+    [SerializeField] Image image_weaponA;
+    [SerializeField] Image image_weaponB;
+    [SerializeField] Image image_weaponC;
 
     [Header("‰æ–Ê‘JˆÚ—p")]
     [SerializeField] Canvas _Main;
@@ -33,13 +33,13 @@ public class Menu_Customize : MonoBehaviour
         equipList = new WeaponList[3];
         equipList = saveManager.EquipLoad();
 
-        weponNomberA = equipList[0].number;
-        weponNomberB = equipList[1].number;
-        weponNomberC = equipList[2].number;
+        weaponNomberA = equipList[0].number;
+        weaponNomberB = equipList[1].number;
+        weaponNomberC = equipList[2].number;
 
-        text_weponA.text = equipList[0].name;
-        text_weponB.text = equipList[1].name;
-        text_weponC.text = equipList[2].name;
+        image_weaponA.sprite = Resources.Load<Sprite>(equipList[0].icon);
+        image_weaponB.sprite = Resources.Load<Sprite>(equipList[1].icon);
+        image_weaponC.sprite = Resources.Load<Sprite>(equipList[2].icon);
     }
 
 
@@ -47,35 +47,35 @@ public class Menu_Customize : MonoBehaviour
     //      //
     public void SetWeaponChangeA()
     {
-        weponNomberA += 1;
-        if (jsonData.weaponList.Length <= weponNomberA)
+        weaponNomberA += 1;
+        if (jsonData.weaponList.Length <= weaponNomberA)
         {
-            weponNomberA = 0;
+            weaponNomberA = 0;
         }
-        equipList[0] = jsonData.weaponList[weponNomberA];
-        text_weponA.text = equipList[0].name;
+        equipList[0] = jsonData.weaponList[weaponNomberA];
+        image_weaponA.sprite = Resources.Load<Sprite>(equipList[0].icon);
     }
 
     public void SetWeaponChangeB()
     {
-        weponNomberB += 1;
-        if (jsonData.weaponList.Length <= weponNomberB)
+        weaponNomberB += 1;
+        if (jsonData.weaponList.Length <= weaponNomberB)
         {
-            weponNomberB = 0;
+            weaponNomberB = 0;
         }
-        equipList[1] = jsonData.weaponList[weponNomberB];
-        text_weponA.text = equipList[1].name;
+        equipList[1] = jsonData.weaponList[weaponNomberB];
+        image_weaponB.sprite = Resources.Load<Sprite>(equipList[1].icon);
     }
 
     public void SetWeaponChangeC()
     {
-        weponNomberC += 1;
-        if (jsonData.weaponList.Length <= weponNomberC)
+        weaponNomberC += 1;
+        if (jsonData.weaponList.Length <= weaponNomberC)
         {
-            weponNomberC = 0;
+            weaponNomberC = 0;
         }
-        equipList[2] = jsonData.weaponList[weponNomberC];
-        text_weponA.text = equipList[2].name;
+        equipList[2] = jsonData.weaponList[weaponNomberC];
+        image_weaponC.sprite = Resources.Load<Sprite>(equipList[2].icon);
     }
 
 

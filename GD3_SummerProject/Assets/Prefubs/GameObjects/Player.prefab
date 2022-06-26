@@ -72,15 +72,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 6789182474595557520, guid: 9b1c02c0bfb8c5a4795df3e560a0124b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 0}
+  m_Color: {r: 0, g: 0.7490196, b: 0.7490196, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!95 &2029939894
@@ -436,14 +436,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.24705882, g: 0.24705882, b: 0.24705882, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f99fe2872e4ce92448e53154709b1724, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a6e6ef462829b844c8293bfeee7b2177, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -525,8 +525,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c95aa4c7ae695374fbcc77a58369f2b3, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 69735804c3debf8499bdce9fefb72515, type: 3}
+  m_Color: {r: 0, g: 0.7490196, b: 0.7490196, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -889,8 +889,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 52ad252f0c01f3544b5cece21a58d863, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 7036e545b7bdd2243b80e1ed8dd082b2, type: 3}
+  m_Color: {r: 0, g: 0.7490196, b: 0.7490196, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1029,7 +1029,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 2}
+  m_Size: {x: 2, y: 3}
   m_Direction: 0
 --- !u!114 &1946777325
 MonoBehaviour:
@@ -1138,6 +1138,9 @@ MonoBehaviour:
   slider_Wepon: {fileID: 0}
   text_Gun: {fileID: 0}
   slider_Gun: {fileID: 0}
+  image_panel: {fileID: 0}
+  image_panel_defalpha: 1
+  image_panel_nowalpha: 0
   hpSlider: {fileID: 5830687477450192321}
   maxWeponCharge: 0
   nowWeponCharge: 0
