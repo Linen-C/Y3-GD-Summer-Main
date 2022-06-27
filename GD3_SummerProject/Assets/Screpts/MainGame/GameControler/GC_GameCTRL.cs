@@ -20,6 +20,7 @@ public class GC_GameCTRL : MonoBehaviour
     [SerializeField] GameObject uiPanel;
     [SerializeField] Text centerText;
     [SerializeField] Text underText;
+    [SerializeField] public Text prog_text;
 
     [Header("ポーズメニュー")]
     [SerializeField] Canvas pauseCanvas;

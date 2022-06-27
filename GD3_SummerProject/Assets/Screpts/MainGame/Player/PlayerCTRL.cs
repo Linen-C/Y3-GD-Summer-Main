@@ -50,9 +50,9 @@ public class PlayerCTRL : MonoBehaviour
     [SerializeField] Slider slider_Wepon;
     [SerializeField] Text text_Gun;     // 射撃チャージ
     [SerializeField] Slider slider_Gun;
-    [SerializeField] Image image_panel;
-    [SerializeField] float image_panel_defalpha = 1.0f;
-    [SerializeField] float image_panel_nowalpha = 0.0f;
+    [SerializeField] Image image_DamagePanel;
+    [SerializeField] float image_DamagePanel_defalpha = 1.0f;
+    [SerializeField] float image_DamagePanel_nowalpha = 0.0f;
 
     // 体力表示
     [Header("体力表示(マニュアル)")]
@@ -98,7 +98,7 @@ public class PlayerCTRL : MonoBehaviour
         _playerControls = new PlayerControls();
 
 
-        image_panel.color = new Color(1.0f, 1.0f, 1.0f, 0.0f);
+        image_DamagePanel.color = new Color(1.0f, 1.0f, 1.0f, 0.0f);
     }
 
     void Start()
@@ -180,12 +180,12 @@ public class PlayerCTRL : MonoBehaviour
         slider_Gun.value = (float)_playerAttack.nowGunCharge / (float)_playerAttack.needGunCharge;
 
 
-        if (image_panel_nowalpha > 0.0f)
+        if (image_DamagePanel_nowalpha > 0.0f)
         {
-            image_panel_nowalpha -= Time.deltaTime;
+            image_DamagePanel_nowalpha -= Time.deltaTime;
         }
 
-        image_panel.color = new Color(1.0f, 1.0f, 1.0f, image_panel_nowalpha);
+        image_DamagePanel.color = new Color(1.0f, 1.0f, 1.0f, image_DamagePanel_nowalpha);
 
     }
 
@@ -233,7 +233,7 @@ public class PlayerCTRL : MonoBehaviour
     {
         if (collision.gameObject.tag == "EnemyAttack" && (NonDamageTime <= 0.0f))
         {
-            image_panel_nowalpha = image_panel_defalpha;
+            image_DamagePanel_nowalpha = image_DamagePanel_defalpha;
             NonDamageTime = defNonDamageTime;
             knockBackCounter = 0.2f;
             nowHelthPoint -= 1;

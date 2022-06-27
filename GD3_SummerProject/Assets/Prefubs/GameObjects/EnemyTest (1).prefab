@@ -695,7 +695,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootingType: 0
   bullet: {fileID: 0}
-  maxHelthPoint: 100
+  maxHelthPoint: 10
   nowHelthPoint: 0
   maxStan: 100
   nowStan: 0

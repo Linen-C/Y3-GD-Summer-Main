@@ -10,6 +10,9 @@ public class Menu_Customize : MonoBehaviour
     [SerializeField] WeaponListLoad weaponListLoad;
     JsonData jsonData;
 
+    [Header("ˆê——")]
+    [SerializeField] public WeaponList[] weaponList;
+
     [Header("‘•”õŠÇ—")]
     [SerializeField] public WeaponList[] equipList;
 
@@ -29,6 +32,8 @@ public class Menu_Customize : MonoBehaviour
     {
         weaponListLoad = saveManager.transform.GetComponent<WeaponListLoad>();
         jsonData = weaponListLoad.GetList();
+
+        //weaponList = jsonData.weaponList;
 
         equipList = new WeaponList[3];
         equipList = saveManager.EquipLoad();
@@ -78,6 +83,10 @@ public class Menu_Customize : MonoBehaviour
         image_weaponC.sprite = Resources.Load<Sprite>(equipList[2].icon);
     }
 
+    public void SetGunChange()
+    {
+
+    }
 
 
     // ƒƒCƒ“ƒƒjƒ…[‚Ö–ß‚é

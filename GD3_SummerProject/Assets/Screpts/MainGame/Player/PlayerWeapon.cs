@@ -18,6 +18,9 @@ public class PlayerWeapon : MonoBehaviour
     // キャンパス
     //[Header("キャンバス")]
     //[SerializeField] Text weponNameText;  // 武器名表示用
+    [Header("UI用(マニュアル)")]
+    [SerializeField] Image image_Wepon;
+    //[SerializeField] Image image_Gun;
 
     // プライベート変数
     float spriteAlpha = 0.0f;
@@ -87,7 +90,7 @@ public class PlayerWeapon : MonoBehaviour
         //weponNameText.text = wepon[no].name;
 
         // スプライト切り替えのためパス
-        Sprite inImage = Resources.Load<Sprite>(wepon[no].trail.ToString());
+        Sprite inImage = Resources.Load<Sprite>(wepon[no].trail);
         spriteChanger.ChangeSprite(inImage, wepon[no].offset);
 
         // ここにアイコンも追加するかも
@@ -122,6 +125,9 @@ public class PlayerWeapon : MonoBehaviour
         transform.localPosition = new Vector3(
             0.0f, wepon[no].offset, 0.0f);
 
+
+        // UI
+        image_Wepon.sprite = Resources.Load<Sprite>(wepon[no].icon);
 
 
         // プレイヤーに必要クールダウンを渡してリターン

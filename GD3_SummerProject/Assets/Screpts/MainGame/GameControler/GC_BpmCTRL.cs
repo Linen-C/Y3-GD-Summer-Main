@@ -48,7 +48,7 @@ public class GC_BpmCTRL : MonoBehaviour
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
         // カウンター
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-        if (timing <= 0.1f)
+        if (timing <= 0.05f)
         {
             doSignal = true;
             //beatImage.transform.localScale = new Vector3(1.2f, 1.2f, 1.0f);

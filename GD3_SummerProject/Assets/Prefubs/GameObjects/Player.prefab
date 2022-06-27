@@ -730,6 +730,7 @@ MonoBehaviour:
   nowAttakingTime: 0
   playerctrl: {fileID: 7854783003313331793}
   spriteChanger: {fileID: 7854783002277418258}
+  image_Wepon: {fileID: 0}
   defDamage: 1
   maxDamage: 0
   defKnockBack: 0
@@ -1138,9 +1139,9 @@ MonoBehaviour:
   slider_Wepon: {fileID: 0}
   text_Gun: {fileID: 0}
   slider_Gun: {fileID: 0}
-  image_panel: {fileID: 0}
-  image_panel_defalpha: 1
-  image_panel_nowalpha: 0
+  image_DamagePanel: {fileID: 0}
+  image_DamagePanel_defalpha: 1
+  image_DamagePanel_nowalpha: 0
   hpSlider: {fileID: 5830687477450192321}
   maxWeponCharge: 0
   nowWeponCharge: 0
