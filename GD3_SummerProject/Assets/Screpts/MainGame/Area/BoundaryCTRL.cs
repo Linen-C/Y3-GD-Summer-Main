@@ -7,10 +7,9 @@ public class BoundaryCTRL : MonoBehaviour
     [Header("ピン位置(マニュアル)")]
     [SerializeField] GameObject pinMax;
     [SerializeField] GameObject pinMin;
+    [SerializeField] bool downToUp;
     [Header("カメラ(オート)")]
     [SerializeField] new CameraCTRL camera;
-    [Header("使い捨てかどうか")] 
-    [SerializeField] bool _orInstant;
 
     Vector2 pinMaxPos;
     Vector2 pinMinPos;
@@ -26,8 +25,7 @@ public class BoundaryCTRL : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag != "Player") return;
-        camera.SetNewCamPoint(pinMaxPos, pinMinPos);
-        if (_orInstant) { Destroy(gameObject); }
+        camera.SetNewCamPoint(pinMaxPos, pinMinPos, downToUp);
     }
 
 }

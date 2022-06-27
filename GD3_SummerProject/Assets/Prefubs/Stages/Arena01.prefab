@@ -750,6 +750,7 @@ MonoBehaviour:
   text_nomal4: Wave
   text_clear1: Arena
   text_clear2: Clear
+  isEndStage: 0
 --- !u!1 &325881022359142690
 GameObject:
   m_ObjectHideFlags: 0
@@ -889,7 +890,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &325881022593445688
 Transform:
   m_ObjectHideFlags: 0
@@ -2001,7 +2002,6 @@ MonoBehaviour:
   pinMax: {fileID: 325881021755740364}
   pinMin: {fileID: 325881023670939924}
   camera: {fileID: 0}
-  _orInstant: 0
 --- !u!1 &325881023361607179
 GameObject:
   m_ObjectHideFlags: 0
@@ -2215,7 +2215,6 @@ MonoBehaviour:
   pinMax: {fileID: 325881021755740364}
   pinMin: {fileID: 325881023670939924}
   camera: {fileID: 0}
-  _orInstant: 0
 --- !u!1 &325881023485837671
 GameObject:
   m_ObjectHideFlags: 0
