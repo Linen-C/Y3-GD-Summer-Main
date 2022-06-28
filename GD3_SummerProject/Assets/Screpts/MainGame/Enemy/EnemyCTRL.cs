@@ -30,8 +30,7 @@ public class EnemyCTRL : MonoBehaviour
     [SerializeField] EnemyWepon ownWepon;  // 所持武器
     [Header("スクリプト(自動取得)")]
     [SerializeField] GC_BpmCTRL bpmCTRL;   // メトロノーム受け取り用
-    //[SerializeField] AreaCTRL areaCTRL;    // エリアコンポーネント
-    [SerializeField] ArenaCTRL areaCTRL;
+    [SerializeField] StageManager _stageManager;
 
     // ゲームオブジェクト
     [Header("ゲームオブジェクト(マニュアル)")]
@@ -62,7 +61,7 @@ public class EnemyCTRL : MonoBehaviour
     Animator flashAnim;
     Transform curTrans;
 
-    enum State
+    public enum State
     {
         Stop,
         Alive,
@@ -90,8 +89,8 @@ public class EnemyCTRL : MonoBehaviour
         if (!shootingType) { bullet = null; }
 
         // 親エリアコンポーネントの取得
-        areaObj = transform.parent.parent.parent.gameObject;
-        areaCTRL = areaObj.GetComponent<ArenaCTRL>();
+        areaObj = transform.parent.parent.parent.parent.gameObject;
+        _stageManager = areaObj.GetComponent<StageManager>();
 
         // キレそう
         var bpmCtrl = GameObject.FindGameObjectWithTag("GameController");
@@ -107,7 +106,7 @@ public class EnemyCTRL : MonoBehaviour
     void Update()
     {
         // 停止判定
-        if (!areaCTRL.enabled)
+        if (!_stageManager.enabled)
         {
             state = State.Stop;
             anim.SetBool("Moving", false);
@@ -125,7 +124,7 @@ public class EnemyCTRL : MonoBehaviour
         IfIsAlive();
 
         // ステート判定
-        if (AliveCheck()) { return; }
+        if (CanMove()) { return; }
         else { anim.SetBool("Alive", true); }
 
         // 無敵時間
@@ -155,6 +154,8 @@ public class EnemyCTRL : MonoBehaviour
             nowStan = 0;
         }
 
+
+
         // 処理
         TracePlayer();  // プレイヤー補足・追跡
         CursorRot();    // 旋回
@@ -165,17 +166,26 @@ public class EnemyCTRL : MonoBehaviour
     void FixedUpdate()
     {
         // ステート判定
-        if (AliveCheck()) { return; }
+        if (CanMove()) { return; }
 
         KnockBack();
         Move();
     }
 
 
-
-    bool AliveCheck()
+    // 死亡判定
+    void IfIsAlive()
     {
-        if (state != State.Alive)
+        if (nowHelthPoint <= 0)
+        {
+            state = State.Dead;
+            Destroy(gameObject, defNonDamageTime + 0.1f);
+        }
+    }
+
+    bool CanMove()
+    {
+        if (state == State.Dead || state == State.Stop)
         {
             body.velocity = new Vector2(0, 0);
             return true;
@@ -316,16 +326,6 @@ public class EnemyCTRL : MonoBehaviour
             stanBarFill.color = new Color(1.0f, 1.0f, 0.0f);
         }
     }
-
-    // 死亡判定
-    void IfIsAlive()
-    {
-        if(nowHelthPoint <= 0)
-        {
-            Destroy(gameObject, defNonDamageTime + 0.1f);
-        }
-    }
-
 
 
     // ダメージを受ける

@@ -57,7 +57,7 @@ public class ArenaCTRL : MonoBehaviour
             if (enemyCtrl.DoEnemyAllDestroy())
             {
                 inWave = false;
-                Debug.Log("ウェーブ進行");
+                //Debug.Log("ウェーブ進行");
                 ProgressCheck();
             }
         }
@@ -154,7 +154,7 @@ public class ArenaCTRL : MonoBehaviour
 
     void ArenaClear()
     {
-        Debug.Log("殲滅");
+        //Debug.Log("殲滅");
         gate_N.GateOpen();
         enabled = false;
     }

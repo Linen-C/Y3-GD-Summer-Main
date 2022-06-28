@@ -9,11 +9,6 @@ public class Menu_Select : MonoBehaviour
     [SerializeField] Canvas _Main;
     [SerializeField] Canvas _Select;
 
-    void Start()
-    {
-        
-    }
-
     // 各ステージへ
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     public void Select_DebugStage()

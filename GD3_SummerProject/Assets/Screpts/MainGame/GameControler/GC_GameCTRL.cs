@@ -14,7 +14,7 @@ public class GC_GameCTRL : MonoBehaviour
     [SerializeField] PlayerCTRL playerCtrl;
 
     [Header("ƒGƒŠƒAî•ñ")]
-    [SerializeField] GameObject areas;
+    [SerializeField] StageManager _stage;
 
     [Header("UI")]
     [SerializeField] GameObject uiPanel;
@@ -197,12 +197,12 @@ public class GC_GameCTRL : MonoBehaviour
     void DoEnableTrue()
     {
         bpmCtrl.enabled = true;
-        //areaCtrl.enabled = true;
+        _stage.enabled = true;
     }
     void DoEnableFalse()
     {
         bpmCtrl.enabled = false;
-        //areaCtrl.enabled = false;
+        _stage.enabled = false;
     }
 
 

@@ -6,12 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class TitleCTRL : MonoBehaviour
 {
-    private void Start()
-    {
-
-    }
-
-
     public void UIM_ClockToGame()
     {
         SceneManager.LoadScene("MainMenu");
