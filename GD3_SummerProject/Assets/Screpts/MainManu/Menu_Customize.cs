@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Menu_Customize : MonoBehaviour
 {
@@ -24,9 +25,18 @@ public class Menu_Customize : MonoBehaviour
     [SerializeField] Image image_weaponB;
     [SerializeField] Image image_weaponC;
 
+    [Header("右画面")]
+    [SerializeField] TextMeshProUGUI text_weaponA_Name;
+    [SerializeField] TextMeshProUGUI text_weaponA_Spec;
+    //[SerializeField] Text text_weaponB;
+    //[SerializeField] Text text_weaponC;
+
     [Header("画面遷移用")]
     [SerializeField] Canvas _Main;
     [SerializeField] Canvas _Customize;
+
+    [Header("変更用")]
+    [SerializeField] int _target_Num;
 
     void Start()
     {
@@ -48,10 +58,12 @@ public class Menu_Customize : MonoBehaviour
     }
 
 
+
     // 装備武器変更
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     public void SetWeaponChangeA()
     {
+        /*
         weaponNomberA += 1;
         if (jsonData.weaponList.Length <= weaponNomberA)
         {
@@ -59,10 +71,16 @@ public class Menu_Customize : MonoBehaviour
         }
         equipList[0] = jsonData.weaponList[weaponNomberA];
         image_weaponA.sprite = Resources.Load<Sprite>(equipList[0].icon);
+        */
+
+        _target_Num = 0;
+
+        ShowWeaponData();
     }
 
     public void SetWeaponChangeB()
     {
+        /*
         weaponNomberB += 1;
         if (jsonData.weaponList.Length <= weaponNomberB)
         {
@@ -70,10 +88,16 @@ public class Menu_Customize : MonoBehaviour
         }
         equipList[1] = jsonData.weaponList[weaponNomberB];
         image_weaponB.sprite = Resources.Load<Sprite>(equipList[1].icon);
+        */
+
+        _target_Num = 1;
+
+        ShowWeaponData();
     }
 
     public void SetWeaponChangeC()
     {
+        /*
         weaponNomberC += 1;
         if (jsonData.weaponList.Length <= weaponNomberC)
         {
@@ -81,12 +105,46 @@ public class Menu_Customize : MonoBehaviour
         }
         equipList[2] = jsonData.weaponList[weaponNomberC];
         image_weaponC.sprite = Resources.Load<Sprite>(equipList[2].icon);
+        */
+
+        _target_Num = 2;
+
+        ShowWeaponData();
     }
 
     public void SetGunChange()
     {
 
     }
+
+
+    void SetWeapon()
+    {
+        //equipList[_target_Num] = ;
+    }
+
+
+    // 表示
+    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+    void ShowWeaponData()
+    {
+        text_weaponA_Name.text = equipList[_target_Num].name;
+
+        string damage = equipList[_target_Num].damage.ToString();
+        string knockBack = equipList[_target_Num].maxknockback.ToString();
+        string maxCharge = equipList[_target_Num].maxcharge.ToString();
+        string stanPower = equipList[_target_Num].stanpower.ToString();
+        string width = equipList[_target_Num].wideth.ToString();
+        string height = equipList[_target_Num].height.ToString();
+
+        text_weaponA_Spec.text =
+            damage + "\n" +
+            knockBack + "\n" +
+            maxCharge + "\n" +
+            stanPower + "\n" +
+            width + "x" + height;
+    }
+
 
 
     // メインメニューへ戻る

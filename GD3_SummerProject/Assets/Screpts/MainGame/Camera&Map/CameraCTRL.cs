@@ -33,8 +33,13 @@ public class CameraCTRL : MonoBehaviour
     private void Awake()
     {
         transform.position = startPos;
+        
         cameraMaxPos = startMax;
         cameraMinPos = startMin;
+
+        cameraNextMaxPos = startMax;
+        cameraNextMinPos = startMin;
+        
         _state = State.Nomal;
     }
 
@@ -95,15 +100,15 @@ public class CameraCTRL : MonoBehaviour
 
     public void SetNewCamPoint(Vector2 maxPin,Vector2 minPin,bool downToUp)
     {
-        if (cameraMaxPos == maxPin && cameraMinPos == minPin) { return; }
+        if (cameraNextMaxPos == maxPin && cameraNextMinPos == minPin) { return; }
 
         _state = State.Trans;
 
         cameraNextMaxPos = maxPin;
         cameraNextMinPos = minPin;
 
-        //Debug.Log("Max" + cameraNextMaxPos);
-        //Debug.Log("Min" + cameraNextMinPos);
+        //Debug.Log("Max" + maxPin);
+        //Debug.Log("Min" + minPin);
 
         float nextCenter = cameraNextMaxPos.x - (-cameraNextMinPos.x);
         //Debug.Log(nextCenter);
