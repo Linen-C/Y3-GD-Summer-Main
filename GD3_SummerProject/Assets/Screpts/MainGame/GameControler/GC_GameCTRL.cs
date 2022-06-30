@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class GC_GameCTRL : MonoBehaviour
 {
@@ -18,9 +19,9 @@ public class GC_GameCTRL : MonoBehaviour
 
     [Header("UI")]
     [SerializeField] GameObject uiPanel;
-    [SerializeField] Text centerText;
-    [SerializeField] Text underText;
-    [SerializeField] public Text prog_text;
+    [SerializeField] TextMeshProUGUI centerText;
+    [SerializeField] TextMeshProUGUI underText;
+    [SerializeField] public TextMeshProUGUI prog_text;
 
     [Header("ポーズメニュー")]
     [SerializeField] Canvas pauseCanvas;

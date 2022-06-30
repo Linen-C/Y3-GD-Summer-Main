@@ -26,13 +26,13 @@ public class PlayerAttack : MonoBehaviour
             && _plCTRL.coolDownReset == false)
         {
             _plCTRL._anim.SetTrigger("Attack");
-            playerWeapon.Attacking(_plCTRL.nowWeponCharge);
+            playerWeapon.Attacking(_plCTRL.nowWeaponCharge);
             _plCTRL.coolDownReset = true;
         }
 
         if (playerWeapon.Combo())
         {
-            _plCTRL.nowWeponCharge = _plCTRL.maxWeponCharge;
+            _plCTRL.nowWeaponCharge = _plCTRL.maxWeaponCharge;
             _plCTRL.doComboMode = true;
             _plCTRL.coolDownReset = false;
             _plCTRL.comboTimeLeft = 2;
@@ -43,10 +43,10 @@ public class PlayerAttack : MonoBehaviour
         {
             if (_plCTRL.coolDownReset == true && _plCTRL.doComboMode == false)
             {
-                _plCTRL.nowWeponCharge = 1;
+                _plCTRL.nowWeaponCharge = 1;
                 _plCTRL.coolDownReset = false;
             }
-            else if (_plCTRL.nowWeponCharge < _plCTRL.maxWeponCharge) { _plCTRL.nowWeponCharge++; }
+            else if (_plCTRL.nowWeaponCharge < _plCTRL.maxWeaponCharge) { _plCTRL.nowWeaponCharge++; }
 
             if (_plCTRL.comboTimeLeft > 0)
             {
@@ -59,7 +59,7 @@ public class PlayerAttack : MonoBehaviour
             }
 
 
-            if (_plCTRL.nowWeponCharge == (_plCTRL.maxWeponCharge - 1))
+            if (_plCTRL.nowWeaponCharge == (_plCTRL.maxWeaponCharge - 1))
             {
                 //_plCTRL._anim.SetTrigger("Charge");
                 _plCTRL._flashAnim.SetTrigger("FlashTrigger");
@@ -68,11 +68,11 @@ public class PlayerAttack : MonoBehaviour
 
     }
 
-    public void SwapWepon(PlayerControls playerControls, PlayerWeapon playerWeapon)
+    public void SwapWeapon(PlayerControls playerControls, PlayerWeapon playerWeapon)
     {
-        var valueW = playerControls.Player.WeponSwapWhile.ReadValue<float>();
-        var valueUp = playerControls.Player.WeponSwapButtonUp.triggered;
-        var valueDwon = playerControls.Player.WeponSwapButtonDown.triggered;
+        var valueW = playerControls.Player.WeaponSwapWhile.ReadValue<float>();
+        var valueUp = playerControls.Player.WeaponSwapButtonUp.triggered;
+        var valueDwon = playerControls.Player.WeaponSwapButtonDown.triggered;
 
         if (valueW != 0 || (valueUp || valueDwon))
         {
@@ -89,10 +89,10 @@ public class PlayerAttack : MonoBehaviour
             }
 
             // 必要クールダウン上書き
-            _plCTRL.maxWeponCharge =
+            _plCTRL.maxWeaponCharge =
                 playerWeapon.SwapWeapon(_plCTRL.equipList.weaponList, _plCTRL.equipNo);
             // 現クールダウンを上書き
-            _plCTRL.nowWeponCharge = 0;
+            _plCTRL.nowWeaponCharge = 0;
         }
     }
 

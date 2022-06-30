@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class PlayerCTRL : MonoBehaviour
 {
@@ -46,9 +47,9 @@ public class PlayerCTRL : MonoBehaviour
     // キャンパス
     [Header("キャンバスUI(マニュアル)")]
     //[SerializeField] Text hpText;         // 体力表示用
-    [SerializeField] Text text_Wepon;   // クールダウン表示用
-    [SerializeField] Slider slider_Wepon;
-    [SerializeField] Text text_Gun;     // 射撃チャージ
+    [SerializeField] TextMeshProUGUI text_Weapon;   // クールダウン表示用
+    [SerializeField] Slider slider_Weapon;
+    [SerializeField] TextMeshProUGUI text_Gun;     // 射撃チャージ
     [SerializeField] Slider slider_Gun;
     [SerializeField] Image image_DamagePanel;
     [SerializeField] float image_DamagePanel_defalpha = 1.0f;
@@ -60,8 +61,8 @@ public class PlayerCTRL : MonoBehaviour
 
     // プライベート変数
     [Header("プライベート変数だったもの")]
-    public int maxWeponCharge = 0;      // 必要クールダウン
-    public int nowWeponCharge = 1;      // 現在クールダウン
+    public int maxWeaponCharge = 0;      // 必要クールダウン
+    public int nowWeaponCharge = 1;      // 現在クールダウン
     public int equipNo = 0;            // 所持している武器番号(0～2)
     public bool coolDownReset = false;  // クールダウンのリセットフラグ
 
@@ -109,7 +110,7 @@ public class PlayerCTRL : MonoBehaviour
 
         // 武器初期化
         equipList = equipLoad.GetList();
-        maxWeponCharge = playerWeapon.SwapWeapon(equipList.weaponList, 0);
+        maxWeaponCharge = playerWeapon.SwapWeapon(equipList.weaponList, 0);
         _playerAttack.nowGunCharge = 0;
 
         // UI系初期化
@@ -152,7 +153,7 @@ public class PlayerCTRL : MonoBehaviour
         // 処理
         _playerRotation.Rotation(_playerControls, _sprite);             // 旋回系
         _playerAttack.Attack(_playerControls, _bpmCTRL, playerWeapon);  // 攻撃
-        _playerAttack.SwapWepon(_playerControls, playerWeapon);         // 武器交換
+        _playerAttack.SwapWeapon(_playerControls, playerWeapon);         // 武器交換
         _playerAttack.Shooting(_playerControls, _bpmCTRL);              // 遠距離攻撃
         _playerMove.Dash(_playerControls, _bpmCTRL);                    // ダッシュ入力
 
@@ -174,8 +175,8 @@ public class PlayerCTRL : MonoBehaviour
     void UIUpdate()
     {
         //hpText.text = "HP：" + nowHelthPoint.ToString();
-        text_Wepon.text = nowWeponCharge + " / " + maxWeponCharge;
-        slider_Wepon.value = (float)nowWeponCharge / (float)maxWeponCharge;
+        text_Weapon.text = nowWeaponCharge + " / " + maxWeaponCharge;
+        slider_Weapon.value = (float)nowWeaponCharge / (float)maxWeaponCharge;
         text_Gun.text = _playerAttack.nowGunCharge + " / " + _playerAttack.needGunCharge;
         slider_Gun.value = (float)_playerAttack.nowGunCharge / (float)_playerAttack.needGunCharge;
 

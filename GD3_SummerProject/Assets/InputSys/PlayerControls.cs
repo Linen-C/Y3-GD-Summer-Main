@@ -37,7 +37,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""WeponSwapButtonUp"",
+                    ""name"": ""WeaponSwapButtonUp"",
                     ""type"": ""Button"",
                     ""id"": ""6980dd55-5909-4efa-83db-ef96b9c7dfd1"",
                     ""expectedControlType"": ""Button"",
@@ -46,7 +46,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""WeponSwapButtonDown"",
+                    ""name"": ""WeaponSwapButtonDown"",
                     ""type"": ""Button"",
                     ""id"": ""83372f80-de18-48a7-a157-df29bc2084f0"",
                     ""expectedControlType"": ""Button"",
@@ -55,7 +55,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""WeponSwapWhile"",
+                    ""name"": ""WeaponSwapWhile"",
                     ""type"": ""Value"",
                     ""id"": ""acf28af5-77b9-4a33-b22c-2f23141a18ed"",
                     ""expectedControlType"": ""Axis"",
@@ -357,7 +357,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""JoyPad"",
-                    ""action"": ""WeponSwapButtonUp"",
+                    ""action"": ""WeaponSwapButtonUp"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -368,7 +368,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""JoyPad"",
-                    ""action"": ""WeponSwapButtonDown"",
+                    ""action"": ""WeaponSwapButtonDown"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -379,7 +379,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyBoard"",
-                    ""action"": ""WeponSwapWhile"",
+                    ""action"": ""WeaponSwapWhile"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -430,9 +430,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
-        m_Player_WeponSwapButtonUp = m_Player.FindAction("WeponSwapButtonUp", throwIfNotFound: true);
-        m_Player_WeponSwapButtonDown = m_Player.FindAction("WeponSwapButtonDown", throwIfNotFound: true);
-        m_Player_WeponSwapWhile = m_Player.FindAction("WeponSwapWhile", throwIfNotFound: true);
+        m_Player_WeaponSwapButtonUp = m_Player.FindAction("WeaponSwapButtonUp", throwIfNotFound: true);
+        m_Player_WeaponSwapButtonDown = m_Player.FindAction("WeaponSwapButtonDown", throwIfNotFound: true);
+        m_Player_WeaponSwapWhile = m_Player.FindAction("WeaponSwapWhile", throwIfNotFound: true);
         m_Player_MouseDir = m_Player.FindAction("MouseDir", throwIfNotFound: true);
         m_Player_StickDir = m_Player.FindAction("StickDir", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
@@ -502,9 +502,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player;
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_Move;
-    private readonly InputAction m_Player_WeponSwapButtonUp;
-    private readonly InputAction m_Player_WeponSwapButtonDown;
-    private readonly InputAction m_Player_WeponSwapWhile;
+    private readonly InputAction m_Player_WeaponSwapButtonUp;
+    private readonly InputAction m_Player_WeaponSwapButtonDown;
+    private readonly InputAction m_Player_WeaponSwapWhile;
     private readonly InputAction m_Player_MouseDir;
     private readonly InputAction m_Player_StickDir;
     private readonly InputAction m_Player_Dash;
@@ -516,9 +516,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         private @PlayerControls m_Wrapper;
         public PlayerActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
-        public InputAction @WeponSwapButtonUp => m_Wrapper.m_Player_WeponSwapButtonUp;
-        public InputAction @WeponSwapButtonDown => m_Wrapper.m_Player_WeponSwapButtonDown;
-        public InputAction @WeponSwapWhile => m_Wrapper.m_Player_WeponSwapWhile;
+        public InputAction @WeaponSwapButtonUp => m_Wrapper.m_Player_WeaponSwapButtonUp;
+        public InputAction @WeaponSwapButtonDown => m_Wrapper.m_Player_WeaponSwapButtonDown;
+        public InputAction @WeaponSwapWhile => m_Wrapper.m_Player_WeaponSwapWhile;
         public InputAction @MouseDir => m_Wrapper.m_Player_MouseDir;
         public InputAction @StickDir => m_Wrapper.m_Player_StickDir;
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
@@ -537,15 +537,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Move.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
-                @WeponSwapButtonUp.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWeponSwapButtonUp;
-                @WeponSwapButtonUp.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWeponSwapButtonUp;
-                @WeponSwapButtonUp.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWeponSwapButtonUp;
-                @WeponSwapButtonDown.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWeponSwapButtonDown;
-                @WeponSwapButtonDown.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWeponSwapButtonDown;
-                @WeponSwapButtonDown.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWeponSwapButtonDown;
-                @WeponSwapWhile.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWeponSwapWhile;
-                @WeponSwapWhile.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWeponSwapWhile;
-                @WeponSwapWhile.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWeponSwapWhile;
+                @WeaponSwapButtonUp.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWeaponSwapButtonUp;
+                @WeaponSwapButtonUp.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWeaponSwapButtonUp;
+                @WeaponSwapButtonUp.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWeaponSwapButtonUp;
+                @WeaponSwapButtonDown.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWeaponSwapButtonDown;
+                @WeaponSwapButtonDown.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWeaponSwapButtonDown;
+                @WeaponSwapButtonDown.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWeaponSwapButtonDown;
+                @WeaponSwapWhile.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWeaponSwapWhile;
+                @WeaponSwapWhile.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWeaponSwapWhile;
+                @WeaponSwapWhile.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWeaponSwapWhile;
                 @MouseDir.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMouseDir;
                 @MouseDir.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMouseDir;
                 @MouseDir.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMouseDir;
@@ -571,15 +571,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
-                @WeponSwapButtonUp.started += instance.OnWeponSwapButtonUp;
-                @WeponSwapButtonUp.performed += instance.OnWeponSwapButtonUp;
-                @WeponSwapButtonUp.canceled += instance.OnWeponSwapButtonUp;
-                @WeponSwapButtonDown.started += instance.OnWeponSwapButtonDown;
-                @WeponSwapButtonDown.performed += instance.OnWeponSwapButtonDown;
-                @WeponSwapButtonDown.canceled += instance.OnWeponSwapButtonDown;
-                @WeponSwapWhile.started += instance.OnWeponSwapWhile;
-                @WeponSwapWhile.performed += instance.OnWeponSwapWhile;
-                @WeponSwapWhile.canceled += instance.OnWeponSwapWhile;
+                @WeaponSwapButtonUp.started += instance.OnWeaponSwapButtonUp;
+                @WeaponSwapButtonUp.performed += instance.OnWeaponSwapButtonUp;
+                @WeaponSwapButtonUp.canceled += instance.OnWeaponSwapButtonUp;
+                @WeaponSwapButtonDown.started += instance.OnWeaponSwapButtonDown;
+                @WeaponSwapButtonDown.performed += instance.OnWeaponSwapButtonDown;
+                @WeaponSwapButtonDown.canceled += instance.OnWeaponSwapButtonDown;
+                @WeaponSwapWhile.started += instance.OnWeaponSwapWhile;
+                @WeaponSwapWhile.performed += instance.OnWeaponSwapWhile;
+                @WeaponSwapWhile.canceled += instance.OnWeaponSwapWhile;
                 @MouseDir.started += instance.OnMouseDir;
                 @MouseDir.performed += instance.OnMouseDir;
                 @MouseDir.canceled += instance.OnMouseDir;
@@ -656,9 +656,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
-        void OnWeponSwapButtonUp(InputAction.CallbackContext context);
-        void OnWeponSwapButtonDown(InputAction.CallbackContext context);
-        void OnWeponSwapWhile(InputAction.CallbackContext context);
+        void OnWeaponSwapButtonUp(InputAction.CallbackContext context);
+        void OnWeaponSwapButtonDown(InputAction.CallbackContext context);
+        void OnWeaponSwapWhile(InputAction.CallbackContext context);
         void OnMouseDir(InputAction.CallbackContext context);
         void OnStickDir(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);

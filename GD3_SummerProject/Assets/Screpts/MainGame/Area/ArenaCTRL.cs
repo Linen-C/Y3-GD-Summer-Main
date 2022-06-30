@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ArenaCTRL : MonoBehaviour
 {
@@ -22,7 +23,7 @@ public class ArenaCTRL : MonoBehaviour
     [SerializeField] bool doInterval_Nomal;
     [SerializeField] bool doInterval_Clear;
     [Header("テキスト表示(オート)")]
-    [SerializeField] Text prog_text;
+    [SerializeField] TextMeshProUGUI prog_text;
     [Header("表示テキスト")]
     [SerializeField] string text_nomal1;
     [SerializeField] string text_nomal2;
