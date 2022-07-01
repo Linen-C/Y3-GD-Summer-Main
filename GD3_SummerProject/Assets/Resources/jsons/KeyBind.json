@@ -1,5 +1,11 @@
-{"bindings":
-    [
-        {"action":"Player/Move","id":"1ab23385-0fac-4fec-85db-1efa5928a685","path":"W","interactions":"","processors":""}
+{
+    "bindings":[
+        {
+            "action":"Player/Fire",
+            "id":"483d5bff-53e2-4d5f-8efe-4a36b9d18efe",
+            "path":"<Keyboard>/h",
+            "interactions":"",
+            "processors":""
+        }
     ]
 }

@@ -177,10 +177,11 @@ public class Menu_Customize : MonoBehaviour
         text_weaponName.text = "";
         text_weaponSpec.text = "";
 
-        saveManager.EquipSave();
-
         _Customize.enabled = false;
         _Main.enabled = true;
+
+        saveManager.EquipSave();
+        Debug.Log("Saved...");
     }
 
 }

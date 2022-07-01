@@ -72,8 +72,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 6789182474595557520, guid: 9b1c02c0bfb8c5a4795df3e560a0124b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 0}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -953,6 +953,7 @@ GameObject:
   - component: {fileID: 8825447691515864927}
   - component: {fileID: 8825447691515864926}
   - component: {fileID: 8825447691515861153}
+  - component: {fileID: -5536215024157495835}
   - component: {fileID: 6714607008582686892}
   m_Layer: 0
   m_Name: EnemyTest (3)
@@ -1090,9 +1091,10 @@ MonoBehaviour:
   needWeponCharge: 10
   knockBackPower: 30
   defNonDamageTime: 0.1
+  _enemyMove: {fileID: -5536215024157495835}
   ownWepon: {fileID: 8825447691338822090}
   bpmCTRL: {fileID: 0}
-  areaCTRL: {fileID: 0}
+  _stageManager: {fileID: 0}
   cursor: {fileID: 8825447691550550553}
   cursorImage: {fileID: 8825447692948861165}
   flashObj: {fileID: 667564154056010388}
@@ -1101,6 +1103,18 @@ MonoBehaviour:
   hpSlider: {fileID: 3036597731051929616}
   stanBar: {fileID: 5959988020899463614}
   stanBarFill: {fileID: 196955111070910921}
+--- !u!114 &-5536215024157495835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8825447691515861152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9885d0413b6bd4044bae94af071d5c16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &6714607008582686892
 Animator:
   serializedVersion: 3

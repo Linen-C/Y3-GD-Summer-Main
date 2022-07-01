@@ -257,15 +257,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 52ad252f0c01f3544b5cece21a58d863, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 7036e545b7bdd2243b80e1ed8dd082b2, type: 3}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2, y: 0.75}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &2495565441621952007
@@ -341,7 +341,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 7a4dcbc3e4e48444aa0258c4210635b8, type: 3}
-  m_Color: {r: 0.7490196, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.7490196, g: 0, b: 0.24705882, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -524,6 +524,7 @@ GameObject:
   - component: {fileID: 2495565443160725989}
   - component: {fileID: 2495565443160725988}
   - component: {fileID: 2495565443160729115}
+  - component: {fileID: 3976107878704391558}
   - component: {fileID: 1245742905496986536}
   m_Layer: 0
   m_Name: EnemyTest (2)
@@ -661,9 +662,10 @@ MonoBehaviour:
   needWeponCharge: 6
   knockBackPower: 20
   defNonDamageTime: 0.1
+  _enemyMove: {fileID: 3976107878704391558}
   ownWepon: {fileID: 2495565443134607216}
   bpmCTRL: {fileID: 0}
-  areaCTRL: {fileID: 0}
+  _stageManager: {fileID: 0}
   cursor: {fileID: 2495565443195245731}
   cursorImage: {fileID: 2495565441524305495}
   flashObj: {fileID: 2695810765732697021}
@@ -672,6 +674,18 @@ MonoBehaviour:
   hpSlider: {fileID: 4025085854104506935}
   stanBar: {fileID: 958522748916753426}
   stanBarFill: {fileID: 2352882390112797519}
+--- !u!114 &3976107878704391558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2495565443160729114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9885d0413b6bd4044bae94af071d5c16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &1245742905496986536
 Animator:
   serializedVersion: 3
@@ -796,8 +810,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 6789182474595557520, guid: 9b1c02c0bfb8c5a4795df3e560a0124b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 0}
+  m_Color: {r: 0.7490196, g: 0, b: 0.24705882, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

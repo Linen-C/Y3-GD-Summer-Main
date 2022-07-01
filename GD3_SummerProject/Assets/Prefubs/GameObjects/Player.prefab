@@ -1135,16 +1135,16 @@ MonoBehaviour:
   _flashAnim: {fileID: 0}
   equipList:
     weaponList: []
-  text_Wepon: {fileID: 0}
-  slider_Wepon: {fileID: 0}
+  text_Weapon: {fileID: 0}
+  slider_Weapon: {fileID: 0}
   text_Gun: {fileID: 0}
   slider_Gun: {fileID: 0}
   image_DamagePanel: {fileID: 0}
   image_DamagePanel_defalpha: 1
   image_DamagePanel_nowalpha: 0
   hpSlider: {fileID: 5830687477450192321}
-  maxWeponCharge: 0
-  nowWeponCharge: 0
+  maxWeaponCharge: 0
+  nowWeaponCharge: 1
   equipNo: 0
   coolDownReset: 0
   comboTimeLeft: 0
@@ -1201,7 +1201,7 @@ MonoBehaviour:
   needGunCharge: 2
   nowGunCharge: 0
   standby: 0
-  needCountDown: 1
+  needCountDown: 0
   nowCountDown: 0
 --- !u!95 &1946777321
 Animator:

@@ -4,25 +4,31 @@ ScriptsOnlyBuild:
     - ArenaCTRL
     - ArenaEnemyCTRL
     - ArenaEntry
+    - BoundaryCTRL
     - Bullet
     - CameraCTRL
     - CameraShake
     - EnemyCTRL
+    - EnemyMove
     - EnemyWepon
     - EquipLoad
     - GC_BpmCTRL
     - GC_GameCTRL
+    - GateCTRL
     - MenuCTRL
     - Menu_Customize
     - Menu_Select
+    - Option
     - PlayerAttack
     - PlayerCTRL
     - PlayerMove
     - PlayerRotation
     - PlayerWeapon
+    - Portal
     - SaveManager
     - SpawnPattarn
     - SpriteChanger
+    - StageManager
     - TitleCTRL
     - WeaponListLoad
     Unity.2D.Animation.Editor.dll:
@@ -48,6 +54,15 @@ ScriptsOnlyBuild:
     - UnityEngine.InputSystem.UI.InputSystemUIInputModule
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
+    Unity.TextMeshPro.Editor.dll:
+    - TMPro.EditorUtilities.TMPro_FontAssetCreatorWindow
+    Unity.TextMeshPro.dll:
+    - TMPro.TMP_FontAsset
+    - TMPro.TMP_InputField
+    - TMPro.TMP_Settings
+    - TMPro.TMP_SpriteAsset
+    - TMPro.TMP_StyleSheet
+    - TMPro.TextMeshProUGUI
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
@@ -64,8 +79,13 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.CanvasScaler
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.Image
+    - UnityEngine.UI.LayoutElement
+    - UnityEngine.UI.RectMask2D
+    - UnityEngine.UI.Scrollbar
     - UnityEngine.UI.Slider
     - UnityEngine.UI.Text
+    - UnityEngine.UI.Toggle
+    - UnityEngine.UI.ToggleGroup
   sceneClasses:
     Assets/Scenes/BetaTest.unity:
     - Class: 1
@@ -107,61 +127,73 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 1482}
     - Class: 114
-      Script: {instanceID: 1558}
+      Script: {instanceID: 1484}
     - Class: 114
-      Script: {instanceID: 1566}
+      Script: {instanceID: 1560}
     - Class: 114
-      Script: {instanceID: 1600}
+      Script: {instanceID: 1568}
     - Class: 114
-      Script: {instanceID: 1662}
+      Script: {instanceID: 1602}
     - Class: 114
-      Script: {instanceID: 1762}
+      Script: {instanceID: 1664}
     - Class: 114
-      Script: {instanceID: 1792}
+      Script: {instanceID: 1764}
     - Class: 114
-      Script: {instanceID: 1804}
+      Script: {instanceID: 1794}
     - Class: 114
-      Script: {instanceID: 2152}
+      Script: {instanceID: 1806}
     - Class: 114
-      Script: {instanceID: 2394}
+      Script: {instanceID: 1946}
     - Class: 114
-      Script: {instanceID: 2412}
+      Script: {instanceID: 2154}
     - Class: 114
-      Script: {instanceID: 2904}
+      Script: {instanceID: 2396}
     - Class: 114
-      Script: {instanceID: 3108}
+      Script: {instanceID: 2906}
     - Class: 114
-      Script: {instanceID: 3524}
+      Script: {instanceID: 3110}
     - Class: 114
-      Script: {instanceID: 3712}
+      Script: {instanceID: 3130}
     - Class: 114
-      Script: {instanceID: 3714}
+      Script: {instanceID: 3168}
     - Class: 114
-      Script: {instanceID: 3802}
+      Script: {instanceID: 3528}
     - Class: 114
-      Script: {instanceID: 3858}
+      Script: {instanceID: 3716}
     - Class: 114
-      Script: {instanceID: 4016}
+      Script: {instanceID: 3718}
     - Class: 114
-      Script: {instanceID: 4642}
+      Script: {instanceID: 3860}
     - Class: 114
-      Script: {instanceID: 4790}
+      Script: {instanceID: 4018}
     - Class: 114
-      Script: {instanceID: 4976}
+      Script: {instanceID: 4280}
     - Class: 114
-      Script: {instanceID: 5256}
+      Script: {instanceID: 4644}
     - Class: 114
-      Script: {instanceID: 5426}
+      Script: {instanceID: 4746}
     - Class: 114
-      Script: {instanceID: 5844}
+      Script: {instanceID: 4794}
     - Class: 114
-      Script: {instanceID: 5858}
+      Script: {instanceID: 4984}
     - Class: 114
-      Script: {instanceID: 5860}
+      Script: {instanceID: 5264}
     - Class: 114
-      Script: {instanceID: 6174}
+      Script: {instanceID: 5340}
     - Class: 114
-      Script: {instanceID: 6194}
+      Script: {instanceID: 5434}
+    - Class: 114
+      Script: {instanceID: 5852}
+    - Class: 114
+      Script: {instanceID: 5866}
+    - Class: 114
+      Script: {instanceID: 5868}
+    - Class: 114
+      Script: {instanceID: 6182}
+    - Class: 114
+      Script: {instanceID: 6202}
+    - Class: 114
+      Script: {instanceID: 6238}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -200,31 +232,49 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 1482}
     - Class: 114
-      Script: {instanceID: 1566}
+      Script: {instanceID: 1484}
     - Class: 114
-      Script: {instanceID: 1804}
+      Script: {instanceID: 1568}
     - Class: 114
-      Script: {instanceID: 2394}
+      Script: {instanceID: 1608}
     - Class: 114
-      Script: {instanceID: 2412}
+      Script: {instanceID: 1708}
     - Class: 114
-      Script: {instanceID: 2904}
+      Script: {instanceID: 1728}
     - Class: 114
-      Script: {instanceID: 3108}
+      Script: {instanceID: 1806}
     - Class: 114
-      Script: {instanceID: 3122}
+      Script: {instanceID: 1946}
     - Class: 114
-      Script: {instanceID: 3312}
+      Script: {instanceID: 2396}
     - Class: 114
-      Script: {instanceID: 3524}
+      Script: {instanceID: 2414}
     - Class: 114
-      Script: {instanceID: 3802}
+      Script: {instanceID: 2906}
     - Class: 114
-      Script: {instanceID: 4468}
+      Script: {instanceID: 3110}
     - Class: 114
-      Script: {instanceID: 5256}
+      Script: {instanceID: 3124}
     - Class: 114
-      Script: {instanceID: 5370}
+      Script: {instanceID: 3168}
+    - Class: 114
+      Script: {instanceID: 3316}
+    - Class: 114
+      Script: {instanceID: 3528}
+    - Class: 114
+      Script: {instanceID: 3674}
+    - Class: 114
+      Script: {instanceID: 3784}
+    - Class: 114
+      Script: {instanceID: 4470}
+    - Class: 114
+      Script: {instanceID: 4844}
+    - Class: 114
+      Script: {instanceID: 5264}
+    - Class: 114
+      Script: {instanceID: 5378}
+    - Class: 114
+      Script: {instanceID: 5452}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -263,19 +313,27 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 1482}
     - Class: 114
-      Script: {instanceID: 1566}
+      Script: {instanceID: 1484}
     - Class: 114
-      Script: {instanceID: 2412}
+      Script: {instanceID: 1568}
     - Class: 114
-      Script: {instanceID: 2904}
+      Script: {instanceID: 1946}
     - Class: 114
-      Script: {instanceID: 3108}
+      Script: {instanceID: 2404}
     - Class: 114
-      Script: {instanceID: 3802}
+      Script: {instanceID: 2414}
     - Class: 114
-      Script: {instanceID: 4872}
+      Script: {instanceID: 2906}
     - Class: 114
-      Script: {instanceID: 5256}
+      Script: {instanceID: 3110}
+    - Class: 114
+      Script: {instanceID: 4880}
+    - Class: 114
+      Script: {instanceID: 5264}
+    - Class: 114
+      Script: {instanceID: 5482}
+    - Class: 114
+      Script: {instanceID: 5936}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -299,6 +357,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: GraphicRaycaster
+  - hash:
+      serializedVersion: 2
+      Hash: 69415240821be7986b27e72bf9609a30
+    assemblyName: UnityEngine.UI.dll
+    namespaceName: UnityEngine.UI
+    className: Button
   - hash:
       serializedVersion: 2
       Hash: 5ab533713adae59372fb3e10a585c186
@@ -343,7 +407,7 @@ ScriptsOnlyBuild:
     className: SpriteSkin
   - hash:
       serializedVersion: 2
-      Hash: b06cd7abec811934d5059ca0ce783bd5
+      Hash: fac405f72135168fec4be6ee1506b2dc
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: EnemyCTRL
@@ -373,7 +437,7 @@ ScriptsOnlyBuild:
     className: LayoutElement
   - hash:
       serializedVersion: 2
-      Hash: 11cd7ed7dee4d0340b2dffe3e863307b
+      Hash: cc506c8bb1f545dac9ea2bceeaf2e5f1
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GC_GameCTRL
@@ -385,7 +449,7 @@ ScriptsOnlyBuild:
     className: Selectable
   - hash:
       serializedVersion: 2
-      Hash: f7b77a70aeb1df499ca701eb0638014f
+      Hash: 90b911e9e37ff883a5d8a9fb933eb58c
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerCTRL
@@ -517,7 +581,7 @@ ScriptsOnlyBuild:
     className: EventSystem
   - hash:
       serializedVersion: 2
-      Hash: c45525b3449a36ffc0b04e21dd3ad0a1
+      Hash: 060f98dff10f7368a912620c380455f3
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Menu_Customize
@@ -527,6 +591,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_Dropdown
+  - hash:
+      serializedVersion: 2
+      Hash: 83357a13e14ff637e175ea53735f7810
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: StageManager
   - hash:
       serializedVersion: 2
       Hash: f336e086360abe49a3323e5f1583c35a
@@ -649,12 +719,6 @@ ScriptsOnlyBuild:
     className: ToggleGroup
   - hash:
       serializedVersion: 2
-      Hash: 69415240821be7986b27e72bf9609a30
-    assemblyName: UnityEngine.UI.dll
-    namespaceName: UnityEngine.UI
-    className: Button
-  - hash:
-      serializedVersion: 2
       Hash: 349d08daa6108b9a28f8c38fd40ce96f
     assemblyName: Unity.2D.SpriteShape.Runtime.dll
     namespaceName: UnityEngine.U2D
@@ -775,7 +839,7 @@ ScriptsOnlyBuild:
     className: BaseInput
   - hash:
       serializedVersion: 2
-      Hash: 0d5b98ecf3457df1c2abbbdde4e66926
+      Hash: d76818507f364bbe2e388efdfd33cc51
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: MenuCTRL
@@ -820,7 +884,7 @@ ScriptsOnlyBuild:
       Hash: 3375689ab751512bf7666b861ebacdb6
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: Rebinding
+    className: Rebinding_v1
   - hash:
       serializedVersion: 2
       Hash: 85297144ecc2c1dd48b22e03b97707c8
@@ -853,6 +917,12 @@ ScriptsOnlyBuild:
     className: InputSettings
   - hash:
       serializedVersion: 2
+      Hash: 097acffa70ab8be283881388c44424a4
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Portal
+  - hash:
+      serializedVersion: 2
       Hash: 87cef3c82381dc586f6772c3e27561b6
     assemblyName: Unity.2D.Animation.Runtime.dll
     namespaceName: UnityEngine.Experimental.U2D.Animation
@@ -877,6 +947,18 @@ ScriptsOnlyBuild:
     className: ActivationTrack
   - hash:
       serializedVersion: 2
+      Hash: 49e4beddcac78db71ac4db91cdae173f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Option
+  - hash:
+      serializedVersion: 2
+      Hash: c54cef47866a792b95c53e949b5d2d45
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Rebinding
+  - hash:
+      serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
@@ -895,7 +977,7 @@ ScriptsOnlyBuild:
     className: SignalTrack
   - hash:
       serializedVersion: 2
-      Hash: 25a4eb0c1d540c780a12cb57c42bc08c
+      Hash: 66d945328db055d3dd611671b67844a0
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerWeapon
@@ -979,7 +1061,7 @@ ScriptsOnlyBuild:
     className: ScrollRect
   - hash:
       serializedVersion: 2
-      Hash: e11742a98ab9eaa7705e71402a427e8a
+      Hash: 61ab4e64a1c5b5daed790a1d7ee62503
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: BoundaryCTRL
@@ -1003,7 +1085,7 @@ ScriptsOnlyBuild:
     className: ControlPlayableAsset
   - hash:
       serializedVersion: 2
-      Hash: 7123e3dfd7df26ca092e6527c82f41bd
+      Hash: e07e414bf796d3327dff282d3a87c69d
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GC_BpmCTRL
@@ -1081,7 +1163,7 @@ ScriptsOnlyBuild:
     className: PlayerAttack
   - hash:
       serializedVersion: 2
-      Hash: 1bfa74091a2019c5f309bf89586a03e3
+      Hash: 366849ef775421919e113c01a1b995cf
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: CameraCTRL
@@ -1117,7 +1199,7 @@ ScriptsOnlyBuild:
     className: InputSystemObject
   - hash:
       serializedVersion: 2
-      Hash: 1b45121ea0f38704b26275b0bbb2336b
+      Hash: c80087d98e8dba771f861df513c9752f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ArenaCTRL
@@ -1186,4 +1268,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/TitleScene.unity
   - Assets/Scenes/MainMenu.unity
   - Assets/Scenes/BetaTest.unity
-  playerPath: C:/Users/2016002/Desktop/UnityWork/GameDEV/Builds/beta/test_B_1/GD3_SummerProject.exe
+  playerPath: C:/Users/2016002/Desktop/UnityWork/GameDEV/Builds/beta/test_B_3/GD3_SummerProject.exe

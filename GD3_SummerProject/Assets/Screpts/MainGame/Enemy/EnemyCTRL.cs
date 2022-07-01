@@ -25,6 +25,9 @@ public class EnemyCTRL : MonoBehaviour
     [SerializeField] float knockBackPower;    // かかるノックバックの強さ
     [SerializeField] float defNonDamageTime;  // デフォルト無敵時間
 
+    [Header("テスト")]
+    [SerializeField] EnemyMove _enemyMove;
+
     // スクリプト
     [Header("スクリプト(マニュアル)")]
     [SerializeField] EnemyWepon ownWepon;  // 所持武器
@@ -130,30 +133,8 @@ public class EnemyCTRL : MonoBehaviour
         // 無敵時間
         if (NonDamageTime > 0) { NonDamageTime -= Time.deltaTime; }
 
-
-
-        if (nowStan >= maxStan)
-        {
-            doStanCount = stanRecoverCount;
-            weponCharge = 0;
-            nowStan = 0;
-        }
-
-        if (doStanCount > 0)
-        {
-            if (bpmCTRL.Metronome()) { doStanCount--; }
-            return;
-        }
-        else if (nowStan > 0)
-        {
-            if (bpmCTRL.Metronome()) { nowStan -= 5; }
-        }
-
-        if (nowStan < 0)
-        {
-            nowStan = 0;
-        }
-
+        // スタン処理
+        if (!Stan()) { return; }
 
 
         // 処理
@@ -168,10 +149,36 @@ public class EnemyCTRL : MonoBehaviour
         // ステート判定
         if (CanMove()) { return; }
 
-        KnockBack();
-        Move();
+        knockBackCounter = _enemyMove.KnockBack(knockBackCounter, body, diff, knockBackPower);
+        _enemyMove.Move(knockBackCounter, doStanCount, body, diff, moveSpeed);
     }
 
+
+
+    // スタン
+    bool Stan()
+    {
+        if (nowStan >= maxStan)
+        {
+            doStanCount = stanRecoverCount;
+            weponCharge = 0;
+            nowStan = 0;
+        }
+
+        if (doStanCount > 0)
+        {
+            if (bpmCTRL.Metronome()) { doStanCount--; }
+            return false;
+        }
+        else if (nowStan > 0)
+        {
+            if (bpmCTRL.Metronome()) { nowStan -= 5; }
+        }
+
+        if (nowStan < 0) { nowStan = 0; }
+
+        return true;
+    }
 
     // 死亡判定
     void IfIsAlive()

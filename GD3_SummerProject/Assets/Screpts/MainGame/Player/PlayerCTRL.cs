@@ -165,7 +165,6 @@ public class PlayerCTRL : MonoBehaviour
         if (state != State.Alive) { return; }
 
         _playerMove.Move(_moveDir, _body);
-        //Move();
     }
 
 
@@ -187,7 +186,6 @@ public class PlayerCTRL : MonoBehaviour
         }
 
         image_DamagePanel.color = new Color(1.0f, 1.0f, 1.0f, image_DamagePanel_nowalpha);
-
     }
 
 
@@ -226,10 +224,8 @@ public class PlayerCTRL : MonoBehaviour
 
 
 
-    // ‚»‚Ì‘¼
-    //      //
-
     // ”íƒ_ƒ[ƒW”»’è
+    //      //
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "EnemyAttack" && (NonDamageTime <= 0.0f))
