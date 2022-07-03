@@ -8,7 +8,7 @@ public class SaveManager : MonoBehaviour
     [SerializeField] Menu_Customize cutomize;
     [SerializeField] EquipLoad equipLoad;
 
-    string filePath;
+    string _equipSavePath;
     JsonData saveDatas;
     JsonData getDatas;
 
@@ -19,8 +19,9 @@ public class SaveManager : MonoBehaviour
         saveDatas = new JsonData();
         saveDatas.weaponList = new WeaponList[3];
 
-        filePath = Application.dataPath + "/Resources/jsons/EquipSave.json";
-        //Debug.Log(filePath);
+        //filePath = Application.dataPath + "/Resources/jsons/EquipSave.json";
+        _equipSavePath = Application.streamingAssetsPath + "/jsons/EquipSave.json";
+        //Debug.Log("Path\n" + filePath);
     }
 
 
@@ -35,9 +36,9 @@ public class SaveManager : MonoBehaviour
 
         string datas = JsonUtility.ToJson(saveDatas, true);
         
-        Debug.Log(datas);
+        Debug.Log("SaveData\n" + datas);
 
-        File.WriteAllText(filePath, datas);
+        File.WriteAllText(_equipSavePath, datas);
     }
 
 
@@ -49,6 +50,7 @@ public class SaveManager : MonoBehaviour
         for (int i = 0; i < saveDatas.weaponList.Length; i++)
         {
             saveDatas.weaponList[i] = getDatas.weaponList[i];
+            Debug.Log("LoadData" + i + "F" + saveDatas.weaponList[i].name);
         }
 
         return saveDatas.weaponList;

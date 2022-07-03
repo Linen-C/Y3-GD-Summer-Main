@@ -4,6 +4,7 @@ ScriptsOnlyBuild:
     - ArenaCTRL
     - ArenaEnemyCTRL
     - ArenaEntry
+    - AudioCTRL
     - BoundaryCTRL
     - Bullet
     - CameraCTRL
@@ -66,8 +67,10 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -117,6 +120,8 @@ ScriptsOnlyBuild:
     - Class: 81
       Script: {instanceID: 0}
     - Class: 82
+      Script: {instanceID: 0}
+    - Class: 83
       Script: {instanceID: 0}
     - Class: 91
       Script: {instanceID: 0}
@@ -176,6 +181,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 4794}
     - Class: 114
       Script: {instanceID: 4984}
+    - Class: 114
+      Script: {instanceID: 5122}
     - Class: 114
       Script: {instanceID: 5264}
     - Class: 114
@@ -307,6 +314,8 @@ ScriptsOnlyBuild:
     - Class: 49
       Script: {instanceID: 0}
     - Class: 81
+      Script: {instanceID: 0}
+    - Class: 83
       Script: {instanceID: 0}
     - Class: 104
       Script: {instanceID: 0}
@@ -839,7 +848,7 @@ ScriptsOnlyBuild:
     className: BaseInput
   - hash:
       serializedVersion: 2
-      Hash: d76818507f364bbe2e388efdfd33cc51
+      Hash: a6a2af955ae8d90cd3ae893e739ad39e
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: MenuCTRL
@@ -1085,7 +1094,7 @@ ScriptsOnlyBuild:
     className: ControlPlayableAsset
   - hash:
       serializedVersion: 2
-      Hash: e07e414bf796d3327dff282d3a87c69d
+      Hash: f07b338e7f74f891b8bfbd6ebf922601
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GC_BpmCTRL
@@ -1268,4 +1277,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/TitleScene.unity
   - Assets/Scenes/MainMenu.unity
   - Assets/Scenes/BetaTest.unity
-  playerPath: C:/Users/2016002/Desktop/UnityWork/GameDEV/Builds/beta/test_B_3/GD3_SummerProject.exe
+  playerPath: D:/Develop/UnityDevEnviro/OutPut/2022/Beta/beta_5/GD3_SummerProject.exe

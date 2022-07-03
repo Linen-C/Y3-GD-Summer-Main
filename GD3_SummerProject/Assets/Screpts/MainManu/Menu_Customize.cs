@@ -43,8 +43,10 @@ public class Menu_Customize : MonoBehaviour
     [Header("•ÏX—p")]
     [SerializeField] int _target_Num;
 
-    void Start()
+
+    public void EnableMenu()
     {
+        Debug.Log("Custom_Run");
         weaponListLoad = saveManager.transform.GetComponent<WeaponListLoad>();
         jsonData = weaponListLoad.GetList();
 
@@ -66,7 +68,6 @@ public class Menu_Customize : MonoBehaviour
         weaponImages[1].sprite = Resources.Load<Sprite>(equipList[1].icon);
         weaponImages[2].sprite = Resources.Load<Sprite>(equipList[2].icon);
     }
-
 
 
     // ‘•”õ•Ší•ÏX
@@ -181,7 +182,6 @@ public class Menu_Customize : MonoBehaviour
         _Main.enabled = true;
 
         saveManager.EquipSave();
-        Debug.Log("Saved...");
     }
 
 }

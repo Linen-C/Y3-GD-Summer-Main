@@ -5827,6 +5827,7 @@ GameObject:
   - component: {fileID: 2017294183}
   - component: {fileID: 2017294182}
   - component: {fileID: 2017294181}
+  - component: {fileID: 2017294185}
   - component: {fileID: 2017294180}
   - component: {fileID: 2017294178}
   - component: {fileID: 2017294179}
@@ -5961,6 +5962,7 @@ MonoBehaviour:
   bpm: 180
   beatImage: {fileID: 374598950}
   _beatSlider: {fileID: 595820892}
+  _audioCTRL: {fileID: 2017294185}
   audioSource: {fileID: 2017294178}
   audioClip:
   - {fileID: 0}
@@ -6049,6 +6051,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef1bce5bb9c4ecc47b36dbd23220de0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2017294185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2017294177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7a6959b6a8957344809d9dd3298211e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clips:
+  - {fileID: 8300000, guid: 7c195ee4c64105b4bbf934c028a2c394, type: 3}
+  defVolume: 0.5
 --- !u!1 &2030088174
 GameObject:
   m_ObjectHideFlags: 0

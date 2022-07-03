@@ -17,6 +17,7 @@ public class GC_BpmCTRL : MonoBehaviour
 
     // オーディオ関係
     [Header("オーディオ")]
+    [SerializeField] AudioCTRL _audioCTRL;
     [SerializeField] AudioSource audioSource;   // オーディオソース
     [SerializeField] AudioClip[] audioClip;     // クリップ
 
@@ -33,6 +34,9 @@ public class GC_BpmCTRL : MonoBehaviour
 
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
+        audioClip = new AudioClip[_audioCTRL.clips.Length];
+        audioClip = _audioCTRL.clips;
         beatImage.color = new Color(1.0f, 0.0f, 0.0f, 0.5f);
         BpmReset();
     }
@@ -51,12 +55,11 @@ public class GC_BpmCTRL : MonoBehaviour
         if (timing <= 0.05f)
         {
             doSignal = true;
-            //beatImage.transform.localScale = new Vector3(1.2f, 1.2f, 1.0f);
         }
 
         if (timing <= 0.0f && metronomeFlap == false)
         {
-            //audioSource.PlayOneShot(audioClip[0]);
+            audioSource.PlayOneShot(audioClip[0]);
             nowImageSize = maxImageSize;
             metronome = true;
             metronomeFlap = true;
@@ -64,10 +67,6 @@ public class GC_BpmCTRL : MonoBehaviour
         else
         {
             metronome = false;
-            if (metronomeFlap == false)
-            {
-               //beatImage.transform.localScale = new Vector3(0.8f, 0.8f, 1.0f);
-            }
         }
 
         if (timing <= -0.2f)
@@ -85,8 +84,6 @@ public class GC_BpmCTRL : MonoBehaviour
     // BPM更新用
     float BpmReset()
     {
-        //bpmText.text = "BPM:" + bpm;
-
         _beatSlider.maxValue = 60 / bpm;
         _beatSlider.minValue = -0.2f;
 

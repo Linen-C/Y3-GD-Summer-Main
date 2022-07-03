@@ -7,7 +7,8 @@ using UnityEngine.SceneManagement;
 public class MenuCTRL : MonoBehaviour
 {
     [SerializeField] Canvas _Main; 
-    [SerializeField] Canvas _Customize; 
+    [SerializeField] Canvas _Customize;
+    [SerializeField] Menu_Customize _menu_Customize;
     [SerializeField] Canvas _Select; 
     [SerializeField] Canvas _Standby;
     [SerializeField] Canvas _Option;
@@ -26,6 +27,7 @@ public class MenuCTRL : MonoBehaviour
     public void Main_to_Customize()
     {
         _Main.enabled = false;
+        _menu_Customize.EnableMenu();
         _Customize.enabled = true;
     }
 
