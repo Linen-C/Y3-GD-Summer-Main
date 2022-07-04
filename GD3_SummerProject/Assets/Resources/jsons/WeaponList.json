@@ -3,37 +3,98 @@
    [
     {
       "number":0,
-      "name": "Bat", "trail":"Images/images/Trail/bat_b", "icon":"Images/images/Icon/bat_b",
+      "name": "バット", "trail":"Images/images/Trail/bat_b", "icon":"Images/images/Icon/bat_b",
       "damage":3, "defknockback":20, "maxknockback":30, "maxcharge":4, "stanpower":50,
-      "wideth": 4, "height": 2, "offset": 2.5
+      "wideth": 4, "height": 2, "offset": 2.5,
+      "text":"どこにでもよくあるバット\n尖ったところはない\n性能的にも物理的にも"
     },
 
     {
       "number":1,
-      "name": "Spike", "trail":"Images/images/Trail/spike_b", "icon":"Images/images/Icon/spike_b",
+      "name": "スパイク", "trail":"Images/images/Trail/spike_b", "icon":"Images/images/Icon/spike_b",
       "damage":2, "defknockback":20, "maxknockback":20, "maxcharge": 2, "stanpower":25,
-      "wideth": 1, "height": 3, "offset": 3.0
+      "wideth": 1, "height": 3, "offset": 3.0,
+      "text":"素手よりマシ程度の性能\n退魔の力があるとかなんとか\n信じない方がいい\n実際ウソ"
     },
 
     {
       "number":2,
-      "name": "Lance", "trail":"Images/images/Trail/lance_b", "icon":"Images/images/Icon/lance_b",
+      "name": "ランス", "trail":"Images/images/Trail/lance_b", "icon":"Images/images/Icon/lance_b",
       "damage":6, "defknockback":20, "maxknockback":40, "maxcharge": 6, "stanpower":100,
-      "wideth": 2, "height": 5, "offset": 4.0
+      "wideth": 2, "height": 5, "offset": 4.0,
+      "text":"「殴るなんてそんな物騒な！」\n「ここは穏便に突き刺しましょう！」\n…オマエの言いたいことはわかるぞ"
     },
 
     {
       "number":3,
-      "name": "Test_No4", "trail":"Images/images/Trail/bat_b", "icon":"Images/images/Icon/bat_b",
-      "damage":3, "defknockback":20, "maxknockback":30, "maxcharge":4, "stanpower":50,
-      "wideth": 4, "height": 2, "offset": 2.5
+      "name": "マチェット(WIP)", "trail":"Images/images/Trail/bat_b", "icon":"Images/images/Icon/machet",
+      "damage":4, "defknockback":20, "maxknockback":20, "maxcharge":5, "stanpower":20,
+      "wideth": 5, "height": 2, "offset": 2.25,
+      "text":"こいつを見てくれ…どうだ？\nちょうど「刈り取る」形をしているだろう"
     },
 
     {
       "number":4,
-      "name": "Test_No5_end", "trail":"Images/images/Trail/bat_b", "icon":"Images/images/Icon/bat_b",
-      "damage":3, "defknockback":20, "maxknockback":30, "maxcharge":4, "stanpower":25,
-      "wideth": 4, "height": 2, "offset": 2.5
+      "name": "スピア(WIP)", "trail":"Images/images/Trail/bat_b", "icon":"Images/images/Icon/lance_c",
+      "damage":6, "defknockback":20, "maxknockback":30, "maxcharge":6, "stanpower":80,
+      "wideth": 2, "height": 3, "offset": 6.0,
+      "text":"先の細い槍\n刃が小さすぎるせいで\n突くのにしか使えない"
+    },
+
+    {
+      "number":5,
+      "name": "Test_No6(WIP)", "trail":"Images/images/Trail/bat_b", "icon":"Images/images/Icon/bat_b",
+      "damage":3, "defknockback":20, "maxknockback":30, "maxcharge":4, "stanpower":50,
+      "wideth": 4, "height": 2, "offset": 2.5,
+      "text":"「テスト中」というメッキの下にあるはバット"
+    },
+
+    {
+      "number":6,
+      "name": "Test_No7(WIP)", "trail":"Images/images/Trail/bat_b", "icon":"Images/images/Icon/bat_b",
+      "damage":3, "defknockback":20, "maxknockback":30, "maxcharge":4, "stanpower":50,
+      "wideth": 4, "height": 2, "offset": 2.5,
+      "text":"このメッセージを見れる段階から\n遊んでくれてありがとうございます"
+    },
+
+    {
+      "number":7,
+      "name": "Test_No8(WIP)", "trail":"Images/images/Trail/bat_b", "icon":"Images/images/Icon/bat_b",
+      "damage":3, "defknockback":20, "maxknockback":30, "maxcharge":4, "stanpower":50,
+      "wideth": 4, "height": 2, "offset": 2.5,
+      "text":"TestText"
+    },
+
+    {
+      "number":8,
+      "name": "Test_No9(WIP)", "trail":"Images/images/Trail/bat_b", "icon":"Images/images/Icon/bat_b",
+      "damage":3, "defknockback":20, "maxknockback":30, "maxcharge":4, "stanpower":50,
+      "wideth": 4, "height": 2, "offset": 2.5,
+      "text":"以下同文"
+    },
+
+    {
+      "number":9,
+      "name": "Test_No10(WIP)", "trail":"Images/images/Trail/bat_b", "icon":"Images/images/Icon/bat_b",
+      "damage":256, "defknockback":20, "maxknockback":30, "maxcharge":4, "stanpower":50,
+      "wideth": 4, "height": 2, "offset": 2.5,
+      "text":"TestText"
+    },
+
+    {
+      "number":10,
+      "name": "Test_No11(Wii)", "trail":"Images/images/Trail/bat_b", "icon":"Images/images/Icon/bat_b",
+      "damage":3, "defknockback":20, "maxknockback":30, "maxcharge":4, "stanpower":50,
+      "wideth": 4, "height": 2, "offset": 2.5,
+      "text":"TestText"
+    },
+
+    {
+      "number":11,
+      "name": "Test_No12(WIP)", "trail":"Images/images/Trail/bat_b", "icon":"Images/images/Icon/bat_b",
+      "damage":3, "defknockback":20, "maxknockback":30, "maxcharge":4, "stanpower":50,
+      "wideth": 4, "height": 2, "offset": 2.5,
+      "text":"待った…\nおい、11番の名前 変じゃなかったか…？"
     }
   ]
 }

@@ -35,6 +35,7 @@ public class Menu_Customize : MonoBehaviour
     [Header("右画面")]
     [SerializeField] TextMeshProUGUI text_weaponName;
     [SerializeField] TextMeshProUGUI text_weaponSpec;
+    [SerializeField] TextMeshProUGUI text_description;
 
     [Header("画面遷移用")]
     [SerializeField] Canvas _Main;
@@ -67,6 +68,8 @@ public class Menu_Customize : MonoBehaviour
         weaponImages[0].sprite = Resources.Load<Sprite>(equipList[0].icon);
         weaponImages[1].sprite = Resources.Load<Sprite>(equipList[1].icon);
         weaponImages[2].sprite = Resources.Load<Sprite>(equipList[2].icon);
+
+        ButtonErase();
     }
 
 
@@ -106,21 +109,21 @@ public class Menu_Customize : MonoBehaviour
         _horiDist = -_defHoriDist;
         _vertDist = _defVertDist;
 
-        for (int num = 0; jsonData.weaponList.Length > num; num++)
+        for (int num = 1; jsonData.weaponList.Length > (num - 1); num++)
         {
+            int indexNumber = num - 1;
             var button = Instantiate(_buttonTemp, new Vector2(_horiDist, _vertDist), Quaternion.identity);
             var image = button.transform.GetChild(0).GetComponent<Image>();
 
             button.transform.SetParent(_parent.transform, false);
             button.name = "weaponButton" + num.ToString();
-            image.sprite = Resources.Load<Sprite>(jsonData.weaponList[num].icon);
 
-            int indexNumber = num;
+            image.sprite = Resources.Load<Sprite>(jsonData.weaponList[indexNumber].icon);
+
             button.GetComponent<Button>().onClick.AddListener(() => SetWepon(button, indexNumber));
-            //Debug.Log("配列ナンバー：" + indexNumber);
 
-            _horiDist += _defHoriDist;
-            if (num % 2 == 0 && num != 0)
+            _horiDist += _defHoriDist - 50;
+            if (num % 4 == 0 && num != 0)
             {
                 _horiDist = -_defHoriDist;
                 _vertDist -= _defVertDist;
@@ -141,6 +144,10 @@ public class Menu_Customize : MonoBehaviour
 
     void ButtonErase()
     {
+        text_weaponName.text = "";
+        text_weaponSpec.text = "";
+        text_description.text = "";
+
         foreach (Transform child in _parent.transform)
         {
             Destroy(child.gameObject);
@@ -159,13 +166,17 @@ public class Menu_Customize : MonoBehaviour
         string stanPower = equipList[_target_Num].stanpower.ToString();
         string width = equipList[_target_Num].wideth.ToString();
         string height = equipList[_target_Num].height.ToString();
+        string offset = equipList[_target_Num].offset.ToString();
 
         text_weaponSpec.text =
             damage + "\n" +
             knockBack + "\n" +
             maxCharge + "\n" +
             stanPower + "\n" +
-            width + "x" + height;
+            offset + "+" + width + "x" + height;
+
+        string description = equipList[_target_Num].text;
+        text_description.text = description;
     }
 
 
@@ -175,8 +186,6 @@ public class Menu_Customize : MonoBehaviour
     public void Customize_to_Main()
     {
         ButtonErase();
-        text_weaponName.text = "";
-        text_weaponSpec.text = "";
 
         _Customize.enabled = false;
         _Main.enabled = true;

@@ -124,10 +124,7 @@ public class EnemyCTRL : MonoBehaviour
         SetHP();
 
         // 死亡判定
-        IfIsAlive();
-
-        // ステート判定
-        if (CanMove()) { return; }
+        if (!IfIsAlive()) { return; }
         else { anim.SetBool("Alive", true); }
 
         // 無敵時間
@@ -147,7 +144,7 @@ public class EnemyCTRL : MonoBehaviour
     void FixedUpdate()
     {
         // ステート判定
-        if (CanMove()) { return; }
+        if (!CanMove()) { return; }
 
         knockBackCounter = _enemyMove.KnockBack(knockBackCounter, body, diff, knockBackPower);
         _enemyMove.Move(knockBackCounter, doStanCount, body, diff, moveSpeed);
@@ -181,23 +178,26 @@ public class EnemyCTRL : MonoBehaviour
     }
 
     // 死亡判定
-    void IfIsAlive()
+    bool IfIsAlive()
     {
         if (nowHelthPoint <= 0)
         {
             state = State.Dead;
             Destroy(gameObject, defNonDamageTime + 0.1f);
+
+            return false;
         }
+        return true;
     }
 
     bool CanMove()
     {
-        if (state == State.Dead || state == State.Stop)
+        if (state == State.Dead || state == State.Stop || weponCharge == (needWeponCharge - 1))
         {
             body.velocity = new Vector2(0, 0);
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 
     // プレイヤー補足・追跡
@@ -225,10 +225,7 @@ public class EnemyCTRL : MonoBehaviour
         // カーソル回転
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
 
-        if (weponCharge == needWeponCharge)
-        {
-            return;
-        }
+        if (weponCharge >= (needWeponCharge - 1)){ return; }
 
         // 回転に代入
         var curRot = Quaternion.FromToRotation(Vector3.up, diff);
@@ -266,7 +263,6 @@ public class EnemyCTRL : MonoBehaviour
             else { ownWepon.Attacking(); }
 
             anim.SetTrigger("Attack");
-
             coolDownReset = true;
         }
 
@@ -274,6 +270,7 @@ public class EnemyCTRL : MonoBehaviour
         {
             if (coolDownReset == true)
             {
+                state = State.Alive;
                 weponCharge = 1;
                 coolDownReset = false;
             }

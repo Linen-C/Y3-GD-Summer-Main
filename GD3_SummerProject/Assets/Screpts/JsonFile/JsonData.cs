@@ -24,4 +24,6 @@ public class WeaponList
     public int wideth;
     public int height;
     public float offset;
+    // Description
+    public string text;
 }

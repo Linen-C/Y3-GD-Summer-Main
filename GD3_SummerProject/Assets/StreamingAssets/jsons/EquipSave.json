@@ -1,22 +1,23 @@
 {
     "weaponList": [
         {
-            "number": 0,
-            "name": "Bat",
+            "number": 9,
+            "name": "Test_No10(WIP)",
             "trail": "Images/images/Trail/bat_b",
             "icon": "Images/images/Icon/bat_b",
-            "damage": 3,
+            "damage": 256,
             "defknockback": 20,
             "maxknockback": 30,
             "maxcharge": 4,
             "stanpower": 50,
             "wideth": 4,
             "height": 2,
-            "offset": 2.5
+            "offset": 2.5,
+            "text": "TestText"
         },
         {
             "number": 1,
-            "name": "Spike",
+            "name": "スパイク",
             "trail": "Images/images/Trail/spike_b",
             "icon": "Images/images/Icon/spike_b",
             "damage": 2,
@@ -26,21 +27,23 @@
             "stanpower": 25,
             "wideth": 1,
             "height": 3,
-            "offset": 3.0
+            "offset": 3.0,
+            "text": "素手よりマシ程度の性能\n退魔の力があるとかなんとか\n信じない方がいい\n実際ウソ"
         },
         {
-            "number": 2,
-            "name": "Lance",
-            "trail": "Images/images/Trail/lance_b",
-            "icon": "Images/images/Icon/lance_b",
+            "number": 4,
+            "name": "スピア",
+            "trail": "Images/images/Trail/bat_b",
+            "icon": "Images/images/Icon/lance_c",
             "damage": 6,
             "defknockback": 20,
-            "maxknockback": 40,
+            "maxknockback": 30,
             "maxcharge": 6,
-            "stanpower": 100,
+            "stanpower": 80,
             "wideth": 2,
-            "height": 5,
-            "offset": 4.0
+            "height": 3,
+            "offset": 6.0,
+            "text": "先の細い槍\n刃が小さすぎるせいで\n突くのにしか使えない"
         }
     ]
 }

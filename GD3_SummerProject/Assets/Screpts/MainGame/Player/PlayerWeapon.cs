@@ -100,7 +100,7 @@ public class PlayerWeapon : MonoBehaviour
         // Status
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
         // 最大ダメージ
-        maxDamage = wepon[no].maxcharge;
+        maxDamage = wepon[no].damage;
 
         // 基礎ノックバック量
         defKnockBack = wepon[no].defknockback;

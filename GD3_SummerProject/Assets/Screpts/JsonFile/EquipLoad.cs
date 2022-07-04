@@ -45,7 +45,7 @@ public class EquipLoad : MonoBehaviour
         string inputJson = File.ReadAllText(_equipSavePath).ToString();
         inputData = JsonUtility.FromJson<JsonData>(inputJson);
 
-        Debug.Log("InputString" + inputJson);
+        //Debug.Log("InputString" + inputJson);
 
         return inputData;
     }
