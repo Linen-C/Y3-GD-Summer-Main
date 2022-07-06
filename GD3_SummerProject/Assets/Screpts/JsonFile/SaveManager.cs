@@ -50,7 +50,7 @@ public class SaveManager : MonoBehaviour
         for (int i = 0; i < saveDatas.weaponList.Length; i++)
         {
             saveDatas.weaponList[i] = getDatas.weaponList[i];
-            Debug.Log("LoadData" + i + "F" + saveDatas.weaponList[i].name);
+            //Debug.Log("LoadData" + i + "F" + saveDatas.weaponList[i].name);
         }
 
         return saveDatas.weaponList;

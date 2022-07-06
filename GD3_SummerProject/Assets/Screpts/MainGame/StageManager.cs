@@ -12,6 +12,7 @@ public class StageManager : MonoBehaviour
     [SerializeField] GC_GameCTRL _gameCTRL;
     [SerializeField] Transform _entryPoint;
     [SerializeField] Transform _player;
+    [SerializeField] PlayerCTRL _playerCTRL;
 
 
     void Start()

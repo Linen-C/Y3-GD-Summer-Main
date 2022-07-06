@@ -47,7 +47,7 @@ public class Menu_Customize : MonoBehaviour
 
     public void EnableMenu()
     {
-        Debug.Log("Custom_Run");
+        //Debug.Log("Custom_Run");
         weaponListLoad = saveManager.transform.GetComponent<WeaponListLoad>();
         jsonData = weaponListLoad.GetList();
 
