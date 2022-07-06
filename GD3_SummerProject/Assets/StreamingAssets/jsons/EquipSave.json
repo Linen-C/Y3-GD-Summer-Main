@@ -1,19 +1,19 @@
 {
     "weaponList": [
         {
-            "number": 9,
-            "name": "Test_No10(WIP)",
+            "number": 3,
+            "name": "マチェット(WIP)",
             "trail": "Images/images/Trail/bat_b",
-            "icon": "Images/images/Icon/bat_b",
-            "damage": 256,
+            "icon": "Images/images/Icon/machet",
+            "damage": 4,
             "defknockback": 20,
-            "maxknockback": 30,
-            "maxcharge": 4,
-            "stanpower": 50,
-            "wideth": 4,
+            "maxknockback": 20,
+            "maxcharge": 5,
+            "stanpower": 20,
+            "wideth": 5,
             "height": 2,
-            "offset": 2.5,
-            "text": "TestText"
+            "offset": 2.25,
+            "text": "こいつを見てくれ…どうだ？\nちょうど「刈り取る」形をしているだろう"
         },
         {
             "number": 1,
