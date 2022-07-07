@@ -8,6 +8,7 @@ public class BoundaryCTRL : MonoBehaviour
     [SerializeField] GameObject pinMax;
     [SerializeField] GameObject pinMin;
     [SerializeField] bool downToUp;
+    [SerializeField] bool setCenter;
     [Header("カメラ(オート)")]
     [SerializeField] new CameraCTRL camera;
 
@@ -25,6 +26,13 @@ public class BoundaryCTRL : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag != "Player") return;
+
+        if (setCenter)
+        {
+            camera.SetNewCenter(transform.position, pinMinPos, pinMaxPos);
+            return;
+        }
+
         camera.SetNewCamPoint(pinMaxPos, pinMinPos, downToUp);
     }
 

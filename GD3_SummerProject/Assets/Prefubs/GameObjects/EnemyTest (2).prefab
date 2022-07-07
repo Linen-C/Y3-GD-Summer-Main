@@ -658,7 +658,7 @@ MonoBehaviour:
   nowStan: 0
   doStanCount: 0
   stanRecoverCount: 3
-  moveSpeed: 1
+  moveSpeed: 4
   needWeponCharge: 6
   knockBackPower: 20
   defNonDamageTime: 0.1

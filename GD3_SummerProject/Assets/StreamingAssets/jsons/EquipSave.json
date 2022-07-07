@@ -8,31 +8,31 @@
             "damage": 4,
             "defknockback": 20,
             "maxknockback": 20,
-            "maxcharge": 5,
-            "stanpower": 20,
+            "maxcharge": 3,
+            "stanpower": 25,
             "wideth": 5,
             "height": 2,
-            "offset": 2.25,
-            "text": "こいつを見てくれ…どうだ？\nちょうど「刈り取る」形をしているだろう"
+            "offset": 2.0,
+            "text": "軽くて鋭くて、切るのにきっと丁度いい\nただし間合いには気を付けるべきだろう\nついでに打撃武器としてはあまり向いていない\n切れ味が良すぎるのも考えもの"
         },
         {
-            "number": 1,
-            "name": "スパイク",
-            "trail": "Images/images/Trail/spike_b",
-            "icon": "Images/images/Icon/spike_b",
-            "damage": 2,
-            "defknockback": 20,
-            "maxknockback": 20,
-            "maxcharge": 2,
-            "stanpower": 25,
-            "wideth": 1,
-            "height": 3,
-            "offset": 3.0,
-            "text": "素手よりマシ程度の性能\n退魔の力があるとかなんとか\n信じない方がいい\n実際ウソ"
+            "number": 5,
+            "name": "BattleAxe(WIP)",
+            "trail": "Images/images/Trail/bat_b",
+            "icon": "Images/images/Icon/bat_b",
+            "damage": 7,
+            "defknockback": 25,
+            "maxknockback": 50,
+            "maxcharge": 8,
+            "stanpower": 120,
+            "wideth": 6,
+            "height": 2,
+            "offset": 4.0,
+            "text": "あまりにも小回りが利かなさすぎる…\n雑魚掃除には全く向いていないだろう\nこの無骨すぎる武器で\n一体何と戦おうと言うのだ？"
         },
         {
             "number": 4,
-            "name": "スピア",
+            "name": "スピア(WIP)",
             "trail": "Images/images/Trail/bat_b",
             "icon": "Images/images/Icon/lance_c",
             "damage": 6,
@@ -40,10 +40,10 @@
             "maxknockback": 30,
             "maxcharge": 6,
             "stanpower": 80,
-            "wideth": 2,
-            "height": 3,
-            "offset": 6.0,
-            "text": "先の細い槍\n刃が小さすぎるせいで\n突くのにしか使えない"
+            "wideth": 1,
+            "height": 2,
+            "offset": 6.5,
+            "text": "長い槍だが、刃が小さすぎるせいで\n突くのにしか使えない\n面白いのはきっと最初のうちだけ\nそのうちこいつのピーキーさに辟易する"
         }
     ]
 }

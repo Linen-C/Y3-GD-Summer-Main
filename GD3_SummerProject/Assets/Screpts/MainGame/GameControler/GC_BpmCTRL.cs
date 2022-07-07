@@ -29,6 +29,7 @@ public class GC_BpmCTRL : MonoBehaviour
     private float nowImageSize = 0.6f;
     private float minImageSize = 0.6f;
     private float maxImageSize = 1.2f;
+    private bool pause = false;
 
 
 
@@ -43,6 +44,11 @@ public class GC_BpmCTRL : MonoBehaviour
     
     void Update()
     {
+        if (pause)
+        {
+            BpmReset();
+            return;
+        }
         Counter();
     }
 
@@ -100,6 +106,11 @@ public class GC_BpmCTRL : MonoBehaviour
         return doSignal;
     }
 
+    public void ChangePause(bool flag)
+    {
+        timing = 0;
+        pause = flag;
+    }
 
     void ImageShrinking()
     {

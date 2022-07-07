@@ -596,7 +596,7 @@ GameObject:
   - component: {fileID: 7854783002829949674}
   - component: {fileID: 7854783002829949673}
   m_Layer: 7
-  m_Name: Wepon
+  m_Name: Weapon
   m_TagString: PlayerAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -728,8 +728,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defAttackingTime: 0.3
   nowAttakingTime: 0
-  playerctrl: {fileID: 7854783003313331793}
-  spriteChanger: {fileID: 7854783002277418258}
+  _playerCTRL: {fileID: 7854783003313331793}
+  _spriteChanger: {fileID: 7854783002277418258}
   image_Wepon: {fileID: 0}
   defDamage: 1
   maxDamage: 0
@@ -1118,7 +1118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5138dd43f17b0d49837004d934a854e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHelthPoint: 10
+  maxHelthPoint: 8
   nowHelthPoint: 0
   defNonDamageTime: 0.5
   flashObj: {fileID: 2029939891}
@@ -1142,6 +1142,7 @@ MonoBehaviour:
   image_DamagePanel: {fileID: 0}
   image_DamagePanel_defalpha: 1
   image_DamagePanel_nowalpha: 0
+  comboText: {fileID: 0}
   hpSlider: {fileID: 5830687477450192321}
   maxWeaponCharge: 0
   nowWeaponCharge: 1
@@ -1149,6 +1150,7 @@ MonoBehaviour:
   coolDownReset: 0
   comboTimeLeft: 0
   doComboMode: 0
+  comboCount: 0
   knockBackCounter: 0
   state: 0
 --- !u!114 &2447405941736732258

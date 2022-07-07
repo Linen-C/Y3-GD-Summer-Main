@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class PlayerAttack : MonoBehaviour
 {
     [Header("PlayerCTRL")]
@@ -41,6 +42,7 @@ public class PlayerAttack : MonoBehaviour
 
         if (bpmCTRL.Metronome())
         {
+            // クールダウンリセット
             if (_plCTRL.coolDownReset == true && _plCTRL.doComboMode == false)
             {
                 _plCTRL.nowWeaponCharge = 1;
@@ -48,17 +50,21 @@ public class PlayerAttack : MonoBehaviour
             }
             else if (_plCTRL.nowWeaponCharge < _plCTRL.maxWeaponCharge) { _plCTRL.nowWeaponCharge++; }
 
+            // コンボ継続時間減少
             if (_plCTRL.comboTimeLeft > 0)
             {
                 _plCTRL.comboTimeLeft--;
             }
+
+            // コンボ終了
             if (_plCTRL.comboTimeLeft == 0 && _plCTRL.doComboMode == true)
             {
+                _plCTRL.comboCount = 0;
                 _plCTRL.doComboMode = false;
                 _plCTRL.coolDownReset = true;
             }
 
-
+            // アニメーション
             if (_plCTRL.nowWeaponCharge == (_plCTRL.maxWeaponCharge - 1))
             {
                 //_plCTRL._anim.SetTrigger("Charge");

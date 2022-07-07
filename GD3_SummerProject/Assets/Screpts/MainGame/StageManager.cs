@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class StageManager : MonoBehaviour
 {
@@ -16,20 +17,31 @@ public class StageManager : MonoBehaviour
     [SerializeField] float _nowWaitTime;
     [SerializeField] bool _wait = false;
     [SerializeField] Animator _animator;
+    [SerializeField] TextMeshProUGUI _text_MaxStage;
+    [SerializeField] TextMeshProUGUI _text_NowStage;
     [Header("トランスフォーム(マニュアル)")]
     [SerializeField] Transform _entryPoint;
     [SerializeField] Transform _player;
+    [SerializeField] Transform _gameController;
     [Header("コンポーネント(マニュアル)")]
     [SerializeField] Portal _portal;
-    [SerializeField] GC_GameCTRL _gameCTRL;
     [Header("コンポーネント(オート)")]
     [SerializeField] PlayerCTRL _playerCTRL;
+    [SerializeField] GC_GameCTRL _gameCTRL;
+    [SerializeField] GC_BpmCTRL _bpmCTRL;
 
 
     void Start()
     {
+        _text_MaxStage.text = "/" + _arenas.Length.ToString();
+        
         _animator.SetBool("Close", false);
+        
         _playerCTRL = _player.GetComponent<PlayerCTRL>();
+
+        _gameCTRL = _gameController.GetComponent<GC_GameCTRL>();
+        _bpmCTRL = _gameController.GetComponent<GC_BpmCTRL>();
+
         SetArena();
     }
 
@@ -38,9 +50,14 @@ public class StageManager : MonoBehaviour
         if (WaitFlip() && _wait)
         {
             SetArena();
+
+            _bpmCTRL.ChangePause(false);
+
             _animator.SetBool("Close", false);
+
             _player.position = _entryPoint.position;
             _playerCTRL.state = PlayerCTRL.State.Alive;
+
             _wait = false;
         }
     }
@@ -56,11 +73,15 @@ public class StageManager : MonoBehaviour
         Destroy(_cloned);
         _nowArenaNo++;
 
+        _text_NowStage.text = "Stage " + (_nowArenaNo + 1).ToString();
+
         if (_nowArenaNo == _arenas.Length)
         {
             _gameCTRL.S_GameClear();
             return;
         }
+
+        _bpmCTRL.ChangePause(true);
 
         _animator.SetBool("Close", true);
         _wait = true;

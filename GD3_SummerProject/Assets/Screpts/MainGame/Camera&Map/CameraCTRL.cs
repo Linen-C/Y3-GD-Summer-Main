@@ -80,7 +80,7 @@ public class CameraCTRL : MonoBehaviour
         Vector3 camPos = Vector3.Lerp(
             transform.position,
             cameraCenter,
-            5.0f * Time.deltaTime);
+            10.0f * Time.deltaTime);
 
         camPos.x = Mathf.Clamp(camPos.x, cameraNextMinPos.x, cameraNextMaxPos.x);
 
@@ -121,5 +121,15 @@ public class CameraCTRL : MonoBehaviour
         {
             cameraCenter = new Vector3(nextCenter, cameraNextMaxPos.y, -10.0f);
         }
+    }
+
+    public void SetNewCenter(Vector2 center,Vector2 minPin, Vector2 maxPin)
+    {
+        if (cameraNextMinPos == minPin) { return; }
+
+        _state = State.Trans;
+        cameraNextMinPos = minPin;
+        cameraNextMaxPos = maxPin;
+        cameraCenter = new Vector3(center.x, center.y, -10);
     }
 }

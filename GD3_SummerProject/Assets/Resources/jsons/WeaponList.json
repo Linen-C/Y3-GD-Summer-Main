@@ -28,41 +28,41 @@
     {
       "number":3,
       "name": "マチェット(WIP)", "trail":"Images/images/Trail/bat_b", "icon":"Images/images/Icon/machet",
-      "damage":4, "defknockback":20, "maxknockback":20, "maxcharge":5, "stanpower":20,
-      "wideth": 5, "height": 2, "offset": 2.25,
-      "text":"こいつを見てくれ…どうだ？\nちょうど「刈り取る」形をしているだろう"
+      "damage":4, "defknockback":20, "maxknockback":20, "maxcharge":3, "stanpower":25,
+      "wideth": 5, "height": 2, "offset": 2.0,
+      "text":"軽くて鋭くて、切るのにきっと丁度いい\nただし間合いには気を付けるべきだろう\nついでに打撃武器としてはあまり向いていない\n切れ味が良すぎるのも考えもの"
     },
 
     {
       "number":4,
       "name": "スピア(WIP)", "trail":"Images/images/Trail/bat_b", "icon":"Images/images/Icon/lance_c",
       "damage":6, "defknockback":20, "maxknockback":30, "maxcharge":6, "stanpower":80,
-      "wideth": 2, "height": 3, "offset": 6.0,
-      "text":"先の細い槍\n刃が小さすぎるせいで\n突くのにしか使えない"
+      "wideth": 1, "height": 2, "offset": 6.5,
+      "text":"長い槍だが、刃が小さすぎるせいで\n突くのにしか使えない\n面白いのはきっと最初のうちだけ\nそのうちこいつのピーキーさに辟易する"
     },
 
     {
       "number":5,
-      "name": "Test_No6(WIP)", "trail":"Images/images/Trail/bat_b", "icon":"Images/images/Icon/bat_b",
-      "damage":3, "defknockback":20, "maxknockback":30, "maxcharge":4, "stanpower":50,
-      "wideth": 4, "height": 2, "offset": 2.5,
-      "text":"「テスト中」というメッキの下にあるはバット"
+      "name": "BattleAxe(WIP)", "trail":"Images/images/Trail/bat_b", "icon":"Images/images/Icon/bat_b",
+      "damage":7, "defknockback":25, "maxknockback":50, "maxcharge":8, "stanpower":120,
+      "wideth": 6, "height": 2, "offset": 4,
+      "text":"あまりにも小回りが利かなさすぎる…\n雑魚掃除には全く向いていないだろう\nこの無骨すぎる武器で\n一体何と戦おうと言うのだ？"
     },
 
     {
       "number":6,
-      "name": "Test_No7(WIP)", "trail":"Images/images/Trail/bat_b", "icon":"Images/images/Icon/bat_b",
+      "name": "Test_No6(WIP)", "trail":"Images/images/Trail/bat_b", "icon":"Images/images/Icon/bat_b",
       "damage":3, "defknockback":20, "maxknockback":30, "maxcharge":4, "stanpower":50,
       "wideth": 4, "height": 2, "offset": 2.5,
-      "text":"このメッセージを見れる段階から\n遊んでくれてありがとうございます"
+      "text":"「作成中」というメッキの下にあるはただのバット"
     },
 
     {
       "number":7,
-      "name": "Test_No8(WIP)", "trail":"Images/images/Trail/bat_b", "icon":"Images/images/Icon/bat_b",
+      "name": "Test_No7(WIP)", "trail":"Images/images/Trail/bat_b", "icon":"Images/images/Icon/bat_b",
       "damage":3, "defknockback":20, "maxknockback":30, "maxcharge":4, "stanpower":50,
       "wideth": 4, "height": 2, "offset": 2.5,
-      "text":"TestText"
+      "text":"このメッセージを見れる段階から\n遊んでくれてありがとうございます"
     },
 
     {
@@ -94,7 +94,7 @@
       "name": "Test_No12(WIP)", "trail":"Images/images/Trail/bat_b", "icon":"Images/images/Icon/bat_b",
       "damage":3, "defknockback":20, "maxknockback":30, "maxcharge":4, "stanpower":50,
       "wideth": 4, "height": 2, "offset": 2.5,
-      "text":"待った…\nおい、11番の名前 変じゃなかったか…？"
+      "text":"ちょっと待った…\nおい、11番の名前 変じゃなかったか…？"
     }
   ]
 }

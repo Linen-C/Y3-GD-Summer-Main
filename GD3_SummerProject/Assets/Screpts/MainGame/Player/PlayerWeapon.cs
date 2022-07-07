@@ -12,8 +12,8 @@ public class PlayerWeapon : MonoBehaviour
 
     // スクリプト
     [Header("スクリプト")]
-    [SerializeField] PlayerCTRL playerctrl;
-    [SerializeField] SpriteChanger spriteChanger;
+    [SerializeField] PlayerCTRL _playerCTRL;
+    [SerializeField] SpriteChanger _spriteChanger;
 
     // キャンパス
     //[Header("キャンバス")]
@@ -48,7 +48,7 @@ public class PlayerWeapon : MonoBehaviour
         coll = GetComponent<BoxCollider2D>();
         coll.enabled = false;
 
-        spriteChanger.ChangeTransparency(spriteAlpha);
+        _spriteChanger.ChangeTransparency(spriteAlpha);
     }
 
     void Update()
@@ -63,7 +63,7 @@ public class PlayerWeapon : MonoBehaviour
 
         if (spriteAlpha > 0.0f)
         {
-            spriteChanger.ChangeTransparency(spriteAlpha);
+            _spriteChanger.ChangeTransparency(spriteAlpha);
             spriteAlpha -= Time.deltaTime * 2.0f;
         }
 
@@ -91,7 +91,7 @@ public class PlayerWeapon : MonoBehaviour
 
         // スプライト切り替えのためパス
         Sprite inImage = Resources.Load<Sprite>(wepon[no].trail);
-        spriteChanger.ChangeSprite(inImage, wepon[no].offset);
+        _spriteChanger.ChangeSprite(inImage, wepon[no].offset);
 
         // ここにアイコンも追加するかも
         // (Empty)
@@ -185,8 +185,9 @@ public class PlayerWeapon : MonoBehaviour
             {
                 if (chargeCool <= 0)
                 {
-                    playerctrl.GetCharge();
+                    _playerCTRL.GetCharge();
                     chargeCool = defAttackingTime;
+                    _playerCTRL.comboCount++;
                 }
                 comboFlag = true;
             }

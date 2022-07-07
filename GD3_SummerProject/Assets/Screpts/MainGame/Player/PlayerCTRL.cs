@@ -54,6 +54,7 @@ public class PlayerCTRL : MonoBehaviour
     [SerializeField] Image image_DamagePanel;
     [SerializeField] float image_DamagePanel_defalpha = 1.0f;
     [SerializeField] float image_DamagePanel_nowalpha = 0.0f;
+    [SerializeField] TextMeshProUGUI comboText;
 
     // 体力表示
     [Header("体力表示(マニュアル)")]
@@ -68,7 +69,7 @@ public class PlayerCTRL : MonoBehaviour
 
     public int comboTimeLeft = 0;     // コンボ継続カウンター
     public bool doComboMode = false;  // コンボモード
-    //private int comboCount = 0;        // コンボ回数カウンター
+    public int comboCount = 0;        // コンボ回数カウンター
 
     public float knockBackCounter = 0;  // ノックバック時間カウンター
     private float NonDamageTime = 0;     // 無敵時間
@@ -129,11 +130,8 @@ public class PlayerCTRL : MonoBehaviour
         // 移動入力の取得
         _moveDir = _playerControls.Player.Move.ReadValue<Vector2>();
 
-
         // UI更新
         UIUpdate();
-
-        SetHP();
 
         // 死亡判定
         IsDead();
@@ -149,6 +147,7 @@ public class PlayerCTRL : MonoBehaviour
 
         // 無敵時間
         if (NonDamageTime > 0) { NonDamageTime -= Time.deltaTime; }
+
 
         // 処理
         _playerRotation.Rotation(_playerControls, _sprite);             // 旋回系
@@ -173,30 +172,33 @@ public class PlayerCTRL : MonoBehaviour
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     void UIUpdate()
     {
-        //hpText.text = "HP：" + nowHelthPoint.ToString();
+        // 体力表示
+        hpSlider.value = (float)nowHelthPoint / (float)maxHelthPoint;
+
+        // 武器表示
         text_Weapon.text = nowWeaponCharge + " / " + maxWeaponCharge;
         slider_Weapon.value = (float)nowWeaponCharge / (float)maxWeaponCharge;
+        // 銃
         text_Gun.text = _playerAttack.nowGunCharge + " / " + _playerAttack.needGunCharge;
         slider_Gun.value = (float)_playerAttack.nowGunCharge / (float)_playerAttack.needGunCharge;
 
 
-        if (image_DamagePanel_nowalpha > 0.0f)
-        {
-            image_DamagePanel_nowalpha -= Time.deltaTime;
-        }
-
+        // ダメージ表示
+        if (image_DamagePanel_nowalpha > 0.0f) { image_DamagePanel_nowalpha -= Time.deltaTime; }
         image_DamagePanel.color = new Color(1.0f, 1.0f, 1.0f, image_DamagePanel_nowalpha);
+
+
+        // コンボ表示
+        if (comboCount == 0)
+        {
+            if (comboText.alpha > 0.0f) { comboText.alpha -= Time.deltaTime; }
+        }
+        else
+        {
+            comboText.alpha = 1.0f;
+            comboText.text = comboCount + "Combo";
+        }
     }
-
-
-
-    // 体力表示
-    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-    void SetHP()
-    {
-        hpSlider.value = (float)nowHelthPoint / (float)maxHelthPoint;
-    }
-
 
 
     // 遠距離攻撃チャージ
