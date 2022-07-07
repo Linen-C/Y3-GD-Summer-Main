@@ -3,7 +3,7 @@
    [
     {
       "number":0,
-      "name": "バット", "trail":"Images/images/Trail/bat_b", "icon":"Images/images/Icon/bat_b",
+      "name": "バット", "trail":"Images/images/Trail/TR_bat", "icon":"Images/images/Icon/WI_bat",
       "damage":3, "defknockback":20, "maxknockback":30, "maxcharge":4, "stanpower":50,
       "wideth": 4, "height": 2, "offset": 2.5,
       "text":"どこにでもよくあるバット\n尖ったところはない\n性能的にも物理的にも"
@@ -11,7 +11,7 @@
 
     {
       "number":1,
-      "name": "スパイク", "trail":"Images/images/Trail/spike_b", "icon":"Images/images/Icon/spike_b",
+      "name": "スパイク", "trail":"Images/images/Trail/TR_spike", "icon":"Images/images/Icon/WI_spike",
       "damage":2, "defknockback":20, "maxknockback":20, "maxcharge": 2, "stanpower":25,
       "wideth": 1, "height": 3, "offset": 3.0,
       "text":"素手よりマシ程度の性能\n退魔の力があるとかなんとか\n信じない方がいい\n実際ウソ"
@@ -19,7 +19,7 @@
 
     {
       "number":2,
-      "name": "ランス", "trail":"Images/images/Trail/lance_b", "icon":"Images/images/Icon/lance_b",
+      "name": "ランス", "trail":"Images/images/Trail/TR_lance", "icon":"Images/images/Icon/WI_lance",
       "damage":6, "defknockback":20, "maxknockback":40, "maxcharge": 6, "stanpower":100,
       "wideth": 2, "height": 5, "offset": 4.0,
       "text":"「殴るなんてそんな物騒な！」\n「ここは穏便に突き刺しましょう！」\n…オマエの言いたいことはわかるぞ"
@@ -27,7 +27,7 @@
 
     {
       "number":3,
-      "name": "マチェット(WIP)", "trail":"Images/images/Trail/bat_b", "icon":"Images/images/Icon/machet",
+      "name": "マチェット(WIP)", "trail":"Images/images/Trail/TR_machet", "icon":"Images/images/Icon/WI_machet",
       "damage":4, "defknockback":20, "maxknockback":20, "maxcharge":3, "stanpower":25,
       "wideth": 5, "height": 2, "offset": 2.0,
       "text":"軽くて鋭くて、切るのにきっと丁度いい\nただし間合いには気を付けるべきだろう\nついでに打撃武器としてはあまり向いていない\n切れ味が良すぎるのも考えもの"
@@ -35,7 +35,7 @@
 
     {
       "number":4,
-      "name": "スピア(WIP)", "trail":"Images/images/Trail/bat_b", "icon":"Images/images/Icon/lance_c",
+      "name": "スピア(WIP)", "trail":"Images/images/Trail/TR_spear", "icon":"Images/images/Icon/WI_spear",
       "damage":6, "defknockback":20, "maxknockback":30, "maxcharge":6, "stanpower":80,
       "wideth": 1, "height": 2, "offset": 6.5,
       "text":"長い槍だが、刃が小さすぎるせいで\n突くのにしか使えない\n面白いのはきっと最初のうちだけ\nそのうちこいつのピーキーさに辟易する"
@@ -43,7 +43,7 @@
 
     {
       "number":5,
-      "name": "BattleAxe(WIP)", "trail":"Images/images/Trail/bat_b", "icon":"Images/images/Icon/bat_b",
+      "name": "BattleAxe(WIP)", "trail":"Images/images/Trail/TR_bat", "icon":"Images/images/Icon/WI_bat",
       "damage":7, "defknockback":25, "maxknockback":50, "maxcharge":8, "stanpower":120,
       "wideth": 6, "height": 2, "offset": 4,
       "text":"あまりにも小回りが利かなさすぎる…\n雑魚掃除には全く向いていないだろう\nこの無骨すぎる武器で\n一体何と戦おうと言うのだ？"
@@ -51,7 +51,7 @@
 
     {
       "number":6,
-      "name": "Test_No6(WIP)", "trail":"Images/images/Trail/bat_b", "icon":"Images/images/Icon/bat_b",
+      "name": "Test_No6(WIP)", "trail":"Images/images/Trail/TR_bat", "icon":"Images/images/Icon/WI_bat",
       "damage":3, "defknockback":20, "maxknockback":30, "maxcharge":4, "stanpower":50,
       "wideth": 4, "height": 2, "offset": 2.5,
       "text":"「作成中」というメッキの下にあるはただのバット"
@@ -59,7 +59,7 @@
 
     {
       "number":7,
-      "name": "Test_No7(WIP)", "trail":"Images/images/Trail/bat_b", "icon":"Images/images/Icon/bat_b",
+      "name": "Test_No7(WIP)", "trail":"Images/images/Trail/TR_bat", "icon":"Images/images/Icon/WI_bat",
       "damage":3, "defknockback":20, "maxknockback":30, "maxcharge":4, "stanpower":50,
       "wideth": 4, "height": 2, "offset": 2.5,
       "text":"このメッセージを見れる段階から\n遊んでくれてありがとうございます"
@@ -67,7 +67,7 @@
 
     {
       "number":8,
-      "name": "Test_No9(WIP)", "trail":"Images/images/Trail/bat_b", "icon":"Images/images/Icon/bat_b",
+      "name": "Test_No9(WIP)", "trail":"Images/images/Trail/TR_bat", "icon":"Images/images/Icon/WI_bat",
       "damage":3, "defknockback":20, "maxknockback":30, "maxcharge":4, "stanpower":50,
       "wideth": 4, "height": 2, "offset": 2.5,
       "text":"以下同文"
@@ -75,7 +75,7 @@
 
     {
       "number":9,
-      "name": "Test_No10(WIP)", "trail":"Images/images/Trail/bat_b", "icon":"Images/images/Icon/bat_b",
+      "name": "Test_No10(WIP)", "trail":"Images/images/Trail/TR_bat", "icon":"Images/images/Icon/WI_bat",
       "damage":256, "defknockback":20, "maxknockback":30, "maxcharge":4, "stanpower":50,
       "wideth": 4, "height": 2, "offset": 2.5,
       "text":"TestText"
@@ -83,7 +83,7 @@
 
     {
       "number":10,
-      "name": "Test_No11(Wii)", "trail":"Images/images/Trail/bat_b", "icon":"Images/images/Icon/bat_b",
+      "name": "Test_No11(Wii)", "trail":"Images/images/Trail/TR_bat", "icon":"Images/images/Icon/WI_bat",
       "damage":3, "defknockback":20, "maxknockback":30, "maxcharge":4, "stanpower":50,
       "wideth": 4, "height": 2, "offset": 2.5,
       "text":"TestText"
@@ -91,7 +91,7 @@
 
     {
       "number":11,
-      "name": "Test_No12(WIP)", "trail":"Images/images/Trail/bat_b", "icon":"Images/images/Icon/bat_b",
+      "name": "Test_No12(WIP)", "trail":"Images/images/Trail/TR_bat", "icon":"Images/images/Icon/WI_bat",
       "damage":3, "defknockback":20, "maxknockback":30, "maxcharge":4, "stanpower":50,
       "wideth": 4, "height": 2, "offset": 2.5,
       "text":"ちょっと待った…\nおい、11番の名前 変じゃなかったか…？"
