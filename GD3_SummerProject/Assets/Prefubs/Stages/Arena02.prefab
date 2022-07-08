@@ -73,6 +73,7 @@ MonoBehaviour:
   pinMax: {fileID: 711387572874766051}
   pinMin: {fileID: 711387570963695419}
   downToUp: 0
+  setCenter: 0
   camera: {fileID: 0}
 --- !u!1 &711387570913883976
 GameObject:
@@ -325,6 +326,7 @@ MonoBehaviour:
   pinMax: {fileID: 711387572874766051}
   pinMin: {fileID: 711387570963695419}
   downToUp: 1
+  setCenter: 0
   camera: {fileID: 0}
 --- !u!1 &711387571193324852
 GameObject:
@@ -2257,11 +2259,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnEnemyList:
-  - {fileID: 562583548966233380, guid: 5d97662cbc146c1498523ab11eb78860, type: 3}
-  - {fileID: 562583548966233380, guid: 5d97662cbc146c1498523ab11eb78860, type: 3}
+  - {fileID: 8825447691515861152, guid: 2f4c92cad421606469414fc183eae264, type: 3}
+  - {fileID: 8825447691515861152, guid: 2f4c92cad421606469414fc183eae264, type: 3}
+  - {fileID: 8825447691515861152, guid: 2f4c92cad421606469414fc183eae264, type: 3}
+  - {fileID: 8825447691515861152, guid: 2f4c92cad421606469414fc183eae264, type: 3}
+  - {fileID: 8825447691515861152, guid: 2f4c92cad421606469414fc183eae264, type: 3}
+  - {fileID: 8825447691515861152, guid: 2f4c92cad421606469414fc183eae264, type: 3}
   spwanEnemyPos:
-  - {x: 0, y: -15}
-  - {x: 0, y: 15}
+  - {x: -20, y: 15}
+  - {x: 20, y: 15}
+  - {x: 30, y: 0}
+  - {x: 20, y: -15}
+  - {x: -20, y: -15}
+  - {x: -30, y: 0}
   arenaCtrl: {fileID: 0}
   arenaPos: {x: 0, y: 0}
 --- !u!1 &711387572874766051

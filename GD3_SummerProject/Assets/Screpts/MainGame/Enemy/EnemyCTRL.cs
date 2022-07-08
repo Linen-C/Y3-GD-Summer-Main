@@ -9,6 +9,10 @@ public class EnemyCTRL : MonoBehaviour
     [SerializeField] bool shootingType = false; // 遠距離攻撃タイプか
     [SerializeField] GameObject bullet; // 弾丸
 
+    [Header("チュートリアル用")]
+    [SerializeField] bool _kockBackResist = false;
+    [SerializeField] int _damageCap = 0;
+
     // 変数
     [Header("ステータス")]
     [SerializeField] int maxHelthPoint;      // 最大体力
@@ -20,7 +24,7 @@ public class EnemyCTRL : MonoBehaviour
     [Header("移動")]
     [SerializeField] float moveSpeed;  // 移動速度
     [Header("武器")]
-    [SerializeField] int needWeponCharge;  // 必要クールダウン
+    [SerializeField] int needWeaponCharge;  // 必要クールダウン
     [Header("ノックバックと無敵時間")]
     [SerializeField] float knockBackPower;    // かかるノックバックの強さ
     [SerializeField] float defNonDamageTime;  // デフォルト無敵時間
@@ -51,7 +55,7 @@ public class EnemyCTRL : MonoBehaviour
     [SerializeField] Image stanBarFill;
 
     // プライベート変数
-    private int weponCharge = 1;         // 現在クールダウン
+    private int weaponCharge = 1;         // 現在クールダウン
     private bool coolDownReset = false;  // クールダウンのリセットフラグ
     private Vector2 diff;                // プレイヤーの方向
     private float knockBackCounter = 0;  // ノックバック時間カウンター
@@ -155,10 +159,12 @@ public class EnemyCTRL : MonoBehaviour
     // スタン
     bool Stan()
     {
+        if (maxStan == -1) { return true; }
+
         if (nowStan >= maxStan)
         {
             doStanCount = stanRecoverCount;
-            weponCharge = 0;
+            weaponCharge = 0;
             nowStan = 0;
         }
 
@@ -192,7 +198,7 @@ public class EnemyCTRL : MonoBehaviour
 
     bool CanMove()
     {
-        if (state == State.Dead || state == State.Stop || weponCharge == (needWeponCharge - 1))
+        if (state == State.Dead || state == State.Stop || weaponCharge == (needWeaponCharge - 1))
         {
             body.velocity = new Vector2(0, 0);
             return false;
@@ -225,7 +231,7 @@ public class EnemyCTRL : MonoBehaviour
         // カーソル回転
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
 
-        if (weponCharge >= (needWeponCharge - 1)){ return; }
+        if (weaponCharge >= (needWeaponCharge - 1) && (needWeaponCharge != -1)) { return; }
 
         // 回転に代入
         var curRot = Quaternion.FromToRotation(Vector3.up, diff);
@@ -246,7 +252,7 @@ public class EnemyCTRL : MonoBehaviour
         // 攻撃・クールダウン
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
 
-        if ((weponCharge == needWeponCharge) && bpmCTRL.Signal() && coolDownReset == false)
+        if ((weaponCharge == needWeaponCharge) && bpmCTRL.Signal() && coolDownReset == false)
         {
             // Debug.Log("ENEMY_ATTACK");
 
@@ -271,12 +277,12 @@ public class EnemyCTRL : MonoBehaviour
             if (coolDownReset == true)
             {
                 state = State.Alive;
-                weponCharge = 1;
+                weaponCharge = 1;
                 coolDownReset = false;
             }
-            else if (weponCharge < needWeponCharge) { weponCharge++; }
+            else if (weaponCharge < needWeaponCharge) { weaponCharge++; }
 
-            if (weponCharge == (needWeponCharge - 1))
+            if (weaponCharge == (needWeaponCharge - 1))
             {
                 anim.SetTrigger("Charge");
                 flashAnim.SetTrigger("FlashTrigger");
@@ -336,9 +342,12 @@ public class EnemyCTRL : MonoBehaviour
     public void TakeDamage(int damage,int knockback, int stanPower)
     {
         if (NonDamageTime > 0) { return; }
+        if (_damageCap >= damage) { damage = 0; }
 
         nowHelthPoint -= damage;
         knockBackPower = knockback;
+        if (_kockBackResist) { knockBackPower = 0; }
+
         if (doStanCount <= 0) { nowStan += stanPower; }
 
         NonDamageTime = defNonDamageTime;

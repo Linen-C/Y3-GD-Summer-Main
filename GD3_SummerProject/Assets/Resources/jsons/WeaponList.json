@@ -5,7 +5,7 @@
       "number":0,
       "name": "バット", "trail":"Images/images/Trail/TR_bat", "icon":"Images/images/Icon/WI_bat",
       "damage":3, "defknockback":20, "maxknockback":30, "maxcharge":4, "stanpower":50,
-      "wideth": 4, "height": 2, "offset": 2.5,
+      "wideth": 4, "height": 2, "offset": 3,
       "text":"どこにでもよくあるバット\n尖ったところはない\n性能的にも物理的にも"
     },
 

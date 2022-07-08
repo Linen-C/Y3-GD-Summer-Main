@@ -16,7 +16,8 @@ public class StageManager : MonoBehaviour
     [SerializeField] float _defWaitTime;
     [SerializeField] float _nowWaitTime;
     [SerializeField] bool _wait = false;
-    [SerializeField] Animator _animator;
+    [Header("UI(マニュアル)")]
+    [SerializeField] Animator _panelAnimator;
     [SerializeField] TextMeshProUGUI _text_MaxStage;
     [SerializeField] TextMeshProUGUI _text_NowStage;
     [Header("トランスフォーム(マニュアル)")]
@@ -35,7 +36,7 @@ public class StageManager : MonoBehaviour
     {
         _text_MaxStage.text = "/" + _arenas.Length.ToString();
         
-        _animator.SetBool("Close", false);
+        _panelAnimator.SetBool("Close", false);
         
         _playerCTRL = _player.GetComponent<PlayerCTRL>();
 
@@ -53,7 +54,7 @@ public class StageManager : MonoBehaviour
 
             _bpmCTRL.ChangePause(false);
 
-            _animator.SetBool("Close", false);
+            _panelAnimator.SetBool("Close", false);
 
             _player.position = _entryPoint.position;
             _playerCTRL.state = PlayerCTRL.State.Alive;
@@ -83,7 +84,7 @@ public class StageManager : MonoBehaviour
 
         _bpmCTRL.ChangePause(true);
 
-        _animator.SetBool("Close", true);
+        _panelAnimator.SetBool("Close", true);
         _wait = true;
         _nowWaitTime = _defWaitTime;
         _playerCTRL.state = PlayerCTRL.State.Stop;

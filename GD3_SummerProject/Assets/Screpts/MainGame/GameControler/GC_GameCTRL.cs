@@ -18,7 +18,7 @@ public class GC_GameCTRL : MonoBehaviour
     [SerializeField] StageManager _stage;
 
     [Header("UI")]
-    [SerializeField] GameObject uiPanel;
+    [SerializeField] GameObject upperPanel;
     [SerializeField] TextMeshProUGUI centerText;
     [SerializeField] TextMeshProUGUI underText;
     [SerializeField] public TextMeshProUGUI prog_text;
@@ -103,7 +103,7 @@ public class GC_GameCTRL : MonoBehaviour
     {
         if (countDown >= 0)
         {
-            uiPanel.SetActive(true);
+            upperPanel.SetActive(true);
             centerText.text = "Ready...";
             underText.text = "";
 
@@ -111,7 +111,7 @@ public class GC_GameCTRL : MonoBehaviour
         }
         else
         {
-            uiPanel.SetActive(false);
+            upperPanel.SetActive(false);
             centerText.text = "";
 
             countDown = 0;
@@ -133,7 +133,7 @@ public class GC_GameCTRL : MonoBehaviour
     // ゲームオーバー
     void S_GameOver()
     {
-        uiPanel.SetActive(true);
+        upperPanel.SetActive(true);
         centerText.text = "GameOver";
         underText.text = "[R] キーでリスタート";
 
@@ -145,7 +145,7 @@ public class GC_GameCTRL : MonoBehaviour
     // ゲームクリア
     public void S_GameClear()
     {
-        uiPanel.SetActive(true);
+        upperPanel.SetActive(true);
         centerText.text = "GameClear";
         underText.text = "[R] キーでタイトルへ";
 

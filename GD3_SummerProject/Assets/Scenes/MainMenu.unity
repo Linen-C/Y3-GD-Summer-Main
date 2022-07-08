@@ -680,7 +680,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Tutorial(WIP)
+  m_text: "\u30C1\u30E5\u30FC\u30C8\u30EA\u30A2\u30EB"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7a9bc6069c010094398f07cf59f1c639, type: 2}
   m_sharedMaterial: {fileID: 5053199535565018950, guid: 7a9bc6069c010094398f07cf59f1c639, type: 2}
@@ -689,8 +689,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278255615
-  m_fontColor: {r: 1, g: 1, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -3305,6 +3305,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef1bce5bb9c4ecc47b36dbd23220de0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tutorial: 0
 --- !u!114 &799179853
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4074,7 +4075,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1032531509}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1926551729}
+        m_TargetAssemblyTypeName: Menu_Select, Assembly-CSharp
+        m_MethodName: Select_Tutorial
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1032531509
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4088,7 +4101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.24705882, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0.7490196, b: 0.49803922, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -6132,7 +6145,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Endless(WIP)
+  m_text: "\u30A8\u30F3\u30C9\u30EC\u30B9(WIP)"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7a9bc6069c010094398f07cf59f1c639, type: 2}
   m_sharedMaterial: {fileID: 5053199535565018950, guid: 7a9bc6069c010094398f07cf59f1c639, type: 2}
@@ -6368,7 +6381,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1926551729}
         m_TargetAssemblyTypeName: Menu_Select, Assembly-CSharp
-        m_MethodName: Select_DebugStage
+        m_MethodName: Select_MainGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7138,7 +7151,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: MainGame
+  m_text: "\u30E1\u30A4\u30F3\u30B2\u30FC\u30E0"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7a9bc6069c010094398f07cf59f1c639, type: 2}
   m_sharedMaterial: {fileID: 5053199535565018950, guid: 7a9bc6069c010094398f07cf59f1c639, type: 2}

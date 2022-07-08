@@ -5,6 +5,8 @@ using System.IO;
 
 public class EquipLoad : MonoBehaviour
 {
+    [SerializeField] bool tutorial = false;
+
     JsonData defData;
     JsonData inputData;
 
@@ -19,6 +21,7 @@ public class EquipLoad : MonoBehaviour
         // ÉtÉ@ÉCÉãÇ™ñ≥Ç¢èÍçáÇÕèâä˙âª
         if (!File.Exists(_equipSavePath))
         {
+            /*
             defData = new JsonData();
 
             inputData = new JsonData();
@@ -32,6 +35,9 @@ public class EquipLoad : MonoBehaviour
                 inputData.weaponList[i] = defData.weaponList[i];
                 //Debug.Log(inputData.weaponList[i].name);
             }
+            */
+
+            DefInput();
 
             string datas = JsonUtility.ToJson(inputData, true);
             File.WriteAllText(_equipSavePath, datas);
@@ -42,11 +48,35 @@ public class EquipLoad : MonoBehaviour
 
     public JsonData GetList()
     {
+        if (tutorial)
+        {
+            DefInput();
+            return inputData;
+        }
+
         string inputJson = File.ReadAllText(_equipSavePath).ToString();
         inputData = JsonUtility.FromJson<JsonData>(inputJson);
 
         //Debug.Log("InputString" + inputJson);
 
         return inputData;
+    }
+
+
+    void DefInput()
+    {
+        defData = new JsonData();
+
+        inputData = new JsonData();
+        inputData.weaponList = new WeaponList[3];
+
+        string inputJson = Resources.Load<TextAsset>(_weaponListPath).ToString();
+        defData = JsonUtility.FromJson<JsonData>(inputJson);
+
+        for (int i = 0; i < inputData.weaponList.Length; i++)
+        {
+            inputData.weaponList[i] = defData.weaponList[i];
+            //Debug.Log(inputData.weaponList[i].name);
+        }
     }
 }

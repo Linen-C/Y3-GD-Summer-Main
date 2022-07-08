@@ -34,7 +34,7 @@ public class ArenaCTRL : MonoBehaviour
     [Header("èIì_Ç©")]
     [SerializeField] public bool isEndStage;
 
-    bool inWave = false;
+    [SerializeField] public bool inWave = false;
 
 
     void Start()

@@ -11,9 +11,14 @@ public class Menu_Select : MonoBehaviour
 
     // 各ステージへ
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-    public void Select_DebugStage()
+    public void Select_MainGame()
     {
-        SceneManager.LoadScene("BetaTest");
+        SceneManager.LoadScene("MainGame");
+    }
+
+    public void Select_Tutorial()
+    {
+        SceneManager.LoadScene("Tutorial");
     }
 
 
