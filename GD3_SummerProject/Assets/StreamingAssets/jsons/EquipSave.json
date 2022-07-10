@@ -1,49 +1,49 @@
 {
     "weaponList": [
         {
-            "number": 0,
-            "name": "バット",
+            "number": 8,
+            "name": "Test_No10(WIP)",
             "trail": "Images/images/Trail/TR_bat",
             "icon": "Images/images/Icon/WI_bat",
-            "damage": 3,
+            "damage": 256,
             "defknockback": 20,
             "maxknockback": 30,
             "maxcharge": 4,
             "stanpower": 50,
             "wideth": 4,
             "height": 2,
-            "offset": 3.0,
-            "text": "どこにでもよくあるバット\n尖ったところはない\n性能的にも物理的にも"
+            "offset": 2.5,
+            "text": "テスト用最強武器"
         },
         {
-            "number": 1,
-            "name": "スパイク",
-            "trail": "Images/images/Trail/TR_spike",
-            "icon": "Images/images/Icon/WI_spike",
-            "damage": 2,
-            "defknockback": 20,
+            "number": 9,
+            "name": "ハンドアックス",
+            "trail": "Images/images/Trail/TR_bat",
+            "icon": "Images/images/Icon/WI_handaxe",
+            "damage": 4,
+            "defknockback": 10,
             "maxknockback": 20,
             "maxcharge": 2,
-            "stanpower": 25,
-            "wideth": 1,
-            "height": 3,
-            "offset": 3.0,
-            "text": "素手よりマシ程度の性能\n退魔の力があるとかなんとか\n信じない方がいい\n実際ウソ"
+            "stanpower": 20,
+            "wideth": 3,
+            "height": 2,
+            "offset": 2.0,
+            "text": "空白"
         },
         {
-            "number": 2,
-            "name": "ランス",
-            "trail": "Images/images/Trail/TR_lance",
-            "icon": "Images/images/Icon/WI_lance",
-            "damage": 6,
-            "defknockback": 20,
-            "maxknockback": 40,
-            "maxcharge": 6,
-            "stanpower": 100,
-            "wideth": 2,
-            "height": 5,
+            "number": 10,
+            "name": "ハンマー",
+            "trail": "Images/images/Trail/TR_bat",
+            "icon": "Images/images/Icon/WI_hammer",
+            "damage": 7,
+            "defknockback": 25,
+            "maxknockback": 50,
+            "maxcharge": 8,
+            "stanpower": 120,
+            "wideth": 6,
+            "height": 2,
             "offset": 4.0,
-            "text": "「殴るなんてそんな物騒な！」\n「ここは穏便に突き刺しましょう！」\n…オマエの言いたいことはわかるぞ"
+            "text": "あまりにも小回りが利かなさすぎる…\n雑魚掃除には全く向いていないだろう\nこの無骨すぎる武器で\n一体何と戦おうと言うのだ？"
         }
     ]
 }
