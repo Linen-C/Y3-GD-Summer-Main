@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8913747572552637919
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8913747572552637917}
+  - component: {fileID: 8913747572552637916}
+  m_Layer: 0
+  m_Name: AudioController
+  m_TagString: AudioController
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8913747572552637917
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8913747572552637919}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8913747572552637916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8913747572552637919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7a6959b6a8957344809d9dd3298211e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clips_BPM:
+  - {fileID: 8300000, guid: 842c84eba5770114192d19fe8a1163e6, type: 3}
+  clips_Progress:
+  - {fileID: 8300000, guid: 7c195ee4c64105b4bbf934c028a2c394, type: 3}
+  - {fileID: 8300000, guid: 2d1c041e9b97ab143bebc68087554413, type: 3}
+  - {fileID: 8300000, guid: 912fee6ae0953c64689f7ecf396b32fb, type: 3}
+  clips_Player_Gun:
+  - {fileID: 8300000, guid: 4b1fed9cdff539c4fb0f70a92a3cd75d, type: 3}
+  - {fileID: 8300000, guid: 00bb01f7c85d9ab4eb5ee222883d095c, type: 3}
+  - {fileID: 8300000, guid: b12f7998b842d714aae16dfe3b1a92ae, type: 3}
+  clips_Player_Weapon:
+  - {fileID: 8300000, guid: cd6e2069777db4b479bc1c633a681ae8, type: 3}
+  - {fileID: 8300000, guid: 25c8491f622c0b94cbf08db8015c3974, type: 3}
+  - {fileID: 8300000, guid: 379afad5f29349b4aa0fae22fb7c61de, type: 3}
+  clips_Damage:
+  - {fileID: 8300000, guid: ebe2b5cb20b9ff649815f9a669a79857, type: 3}
+  defVolume: 0.5

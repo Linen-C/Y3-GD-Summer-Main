@@ -33,8 +33,14 @@ public class ArenaCTRL : MonoBehaviour
     [SerializeField] string text_clear2;
     [Header("終点か")]
     [SerializeField] public bool isEndStage;
-
+    [Header("ウェーブ中か")]
     [SerializeField] public bool inWave = false;
+
+    // オーディオ関係
+    [Header("オーディオ")]
+    [SerializeField] AudioCTRL _audioCTRL;
+    [SerializeField] AudioSource audioSource;   // オーディオソース
+    [SerializeField] AudioClip[] audioClip;     // クリップ
 
 
     void Start()
@@ -42,6 +48,16 @@ public class ArenaCTRL : MonoBehaviour
         var gameCtrlObj = GameObject.FindGameObjectWithTag("GameController");
         bpmCTRL = gameCtrlObj.GetComponent<GC_BpmCTRL>();
         gameCTRL = gameCtrlObj.GetComponent<GC_GameCTRL>();
+
+        
+        // オーディオコントロール取得
+        var audioCtrlObj = GameObject.FindGameObjectWithTag("AudioController");
+        _audioCTRL = audioCtrlObj.GetComponent<AudioCTRL>();
+        // オーディオ初期化
+        audioSource = GetComponent<AudioSource>();
+        audioSource.volume = _audioCTRL.defVolume;
+        audioClip = new AudioClip[_audioCTRL.clips_Progress.Length];
+        audioClip = _audioCTRL.clips_Progress;
 
         prog_text = gameCTRL.prog_text;
         prog_text.text = " ";
@@ -89,15 +105,19 @@ public class ArenaCTRL : MonoBehaviour
             {
                 case 1:
                     prog_text.text = text_nomal1;
+                    audioSource.PlayOneShot(audioClip[0]);
                 break;
                 case 2:
                     prog_text.text = text_nomal2;
+                    audioSource.PlayOneShot(audioClip[0]);
                     break;
                 case 3:
                     prog_text.text = text_nomal3;
+                    audioSource.PlayOneShot(audioClip[0]);
                     break;
                 case 4:
                     prog_text.text = text_nomal4 + now_Wave.ToString();
+                    audioSource.PlayOneShot(audioClip[2]);
                     break;
                 default:
                     break;
@@ -123,9 +143,11 @@ public class ArenaCTRL : MonoBehaviour
             {
                 case 1:
                     prog_text.text = text_clear1;
+                    audioSource.PlayOneShot(audioClip[1]);
                     break;
                 case 2:
                     prog_text.text = text_clear2;
+                    audioSource.PlayOneShot(audioClip[2]);
                     break;
             }
         }

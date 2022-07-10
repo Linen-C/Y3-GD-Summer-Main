@@ -20,12 +20,30 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] int needCountDown;
     [SerializeField] int nowCountDown = 0;
 
+    [Header("オーディオ(マニュアル)")]
+    [SerializeField] AudioCTRL _audioCTRL;
+    [SerializeField] AudioSource audioSource;   // オーディオソース
+    [SerializeField] AudioClip[] audioClip_Gun;
+    [SerializeField] AudioClip[] audioClip_Weapon;
+
+    void Start()
+    {
+        // オーディオ初期化
+        audioSource = GetComponent<AudioSource>();
+        audioSource.volume = _audioCTRL.defVolume;
+        audioClip_Gun = new AudioClip[_audioCTRL.clips_Player_Gun.Length];
+        audioClip_Gun = _audioCTRL.clips_Player_Gun;
+        audioClip_Weapon = new AudioClip[_audioCTRL.clips_Player_Weapon.Length];
+        audioClip_Weapon = _audioCTRL.clips_Player_Weapon;
+    }
+
     public void Attack(PlayerControls playerControls, GC_BpmCTRL bpmCTRL, PlayerWeapon playerWeapon)
     {
         if (playerControls.Player.Attack.triggered
             && bpmCTRL.Signal()
             && _plCTRL.coolDownReset == false)
         {
+            //audioSource.PlayOneShot(audioClip_Weapon[1]); // 音ズレがひどい
             _plCTRL._anim.SetTrigger("Attack");
             playerWeapon.Attacking(_plCTRL.nowWeaponCharge);
             _plCTRL.coolDownReset = true;
@@ -106,17 +124,19 @@ public class PlayerAttack : MonoBehaviour
     {
         if (bpmCTRL.Signal())
         {
-            if (nowGunCharge == needGunCharge && playerControls.Player.Shot.triggered)
+            if (playerControls.Player.Shot.triggered)
             {
-                standby = true;
-                nowCountDown = needCountDown;
+                if (nowGunCharge == needGunCharge && standby == false)
+                {
+                    audioSource.PlayOneShot(audioClip_Gun[0]);
+                    standby = true;
+                    nowCountDown = needCountDown;
+                }
+                else { audioSource.PlayOneShot(audioClip_Gun[2]); }
             }
         }
 
-        if (standby)
-        {
-            BulletFire(bpmCTRL);
-        }
+        if (standby) { BulletFire(bpmCTRL); }
     }
 
     void BulletFire(GC_BpmCTRL bpmCTRL)
@@ -133,6 +153,7 @@ public class PlayerAttack : MonoBehaviour
                         cursorImage.transform.position.z),
                         cursor.transform.rotation);
 
+                audioSource.PlayOneShot(audioClip_Gun[1]);
                 standby = false;
                 nowGunCharge = 0;
             }

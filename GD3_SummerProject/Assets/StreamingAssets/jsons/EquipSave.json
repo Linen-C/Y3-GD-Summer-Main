@@ -31,19 +31,19 @@
             "text": "素手よりマシ程度の性能\n退魔の力があるとかなんとか\n信じない方がいい\n実際ウソ"
         },
         {
-            "number": 5,
-            "name": "BattleAxe(WIP)",
-            "trail": "Images/images/Trail/TR_bat",
-            "icon": "Images/images/Icon/WI_bat",
-            "damage": 7,
-            "defknockback": 25,
-            "maxknockback": 50,
-            "maxcharge": 8,
-            "stanpower": 120,
-            "wideth": 6,
-            "height": 2,
+            "number": 2,
+            "name": "ランス",
+            "trail": "Images/images/Trail/TR_lance",
+            "icon": "Images/images/Icon/WI_lance",
+            "damage": 6,
+            "defknockback": 20,
+            "maxknockback": 40,
+            "maxcharge": 6,
+            "stanpower": 100,
+            "wideth": 2,
+            "height": 5,
             "offset": 4.0,
-            "text": "あまりにも小回りが利かなさすぎる…\n雑魚掃除には全く向いていないだろう\nこの無骨すぎる武器で\n一体何と戦おうと言うのだ？"
+            "text": "「殴るなんてそんな物騒な！」\n「ここは穏便に突き刺しましょう！」\n…オマエの言いたいことはわかるぞ"
         }
     ]
 }

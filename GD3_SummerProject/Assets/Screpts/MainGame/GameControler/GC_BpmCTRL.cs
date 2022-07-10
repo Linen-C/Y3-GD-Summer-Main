@@ -35,9 +35,12 @@ public class GC_BpmCTRL : MonoBehaviour
 
     void Start()
     {
+        // オーディオ初期化
         audioSource = GetComponent<AudioSource>();
-        audioClip = new AudioClip[_audioCTRL.clips.Length];
-        audioClip = _audioCTRL.clips;
+        audioSource.volume = _audioCTRL.defVolume;
+        audioClip = new AudioClip[_audioCTRL.clips_BPM.Length];
+        audioClip = _audioCTRL.clips_BPM;
+
         beatImage.color = new Color(1.0f, 0.0f, 0.0f, 0.5f);
         BpmReset();
     }
