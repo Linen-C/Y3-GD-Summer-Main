@@ -205,17 +205,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &642485816 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7389265046384759735, guid: 6f770c8c496911b43b02d2c08ab089e5, type: 3}
-  m_PrefabInstance: {fileID: 7389265045943934351}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &673201113 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7389265046612928086, guid: 6f770c8c496911b43b02d2c08ab089e5, type: 3}
@@ -498,10 +487,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4222365566821760001, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
-      propertyPath: _audioCTRL
+    - target: {fileID: 895136248591659088, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
+      propertyPath: image_Wepon
       value: 
-      objectReference: {fileID: 1331429722}
+      objectReference: {fileID: 45823888}
+    - target: {fileID: 3399113693741798867, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
+      propertyPath: text_Gun
+      value: 
+      objectReference: {fileID: 943190063}
+    - target: {fileID: 3399113693741798867, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
+      propertyPath: _text_Gun
+      value: 
+      objectReference: {fileID: 943190063}
+    - target: {fileID: 3399113693741798867, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
+      propertyPath: slider_Gun
+      value: 
+      objectReference: {fileID: 90009833}
+    - target: {fileID: 3399113693741798867, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
+      propertyPath: _slider_Gun
+      value: 
+      objectReference: {fileID: 90009833}
+    - target: {fileID: 3399113693741798867, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
+      propertyPath: _image_Wepon
+      value: 
+      objectReference: {fileID: 45823888}
     - target: {fileID: 5641307234752981239, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -563,25 +572,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2017294181}
     - target: {fileID: 7854783003313331793, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
-      propertyPath: text_Gun
-      value: 
-      objectReference: {fileID: 943190063}
-    - target: {fileID: 7854783003313331793, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
       propertyPath: comboText
       value: 
       objectReference: {fileID: 1908371071}
-    - target: {fileID: 7854783003313331793, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
-      propertyPath: slider_Gun
-      value: 
-      objectReference: {fileID: 90009833}
-    - target: {fileID: 7854783003313331793, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
-      propertyPath: text_Weapon
-      value: 
-      objectReference: {fileID: 642485816}
-    - target: {fileID: 7854783003313331793, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
-      propertyPath: slider_Weapon
-      value: 
-      objectReference: {fileID: 1848392356}
     - target: {fileID: 7854783003313331793, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
       propertyPath: image_DamagePanel
       value: 
@@ -592,17 +585,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
---- !u!114 &1848392356 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7389265045439309611, guid: 6f770c8c496911b43b02d2c08ab089e5, type: 3}
-  m_PrefabInstance: {fileID: 7389265045943934351}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1908371071 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7389265045681452016, guid: 6f770c8c496911b43b02d2c08ab089e5, type: 3}
@@ -756,7 +738,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0666a689f20f1e54e87726f13117c2c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bpm: 270
+  bpm: 180
   beatImage: {fileID: 374598950}
   _beatSlider: {fileID: 595820892}
   _audioCTRL: {fileID: 1331429722}
@@ -968,54 +950,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2017294181}
-    - target: {fileID: 7389265045742456658, guid: 6f770c8c496911b43b02d2c08ab089e5, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7389265045742456658, guid: 6f770c8c496911b43b02d2c08ab089e5, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7389265045742456658, guid: 6f770c8c496911b43b02d2c08ab089e5, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7389265045947459087, guid: 6f770c8c496911b43b02d2c08ab089e5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2017294181}
-    - target: {fileID: 7389265046000637568, guid: 6f770c8c496911b43b02d2c08ab089e5, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7389265046000637568, guid: 6f770c8c496911b43b02d2c08ab089e5, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7389265046000637568, guid: 6f770c8c496911b43b02d2c08ab089e5, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7389265046038612640, guid: 6f770c8c496911b43b02d2c08ab089e5, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7389265046038612640, guid: 6f770c8c496911b43b02d2c08ab089e5, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7389265046462283825, guid: 6f770c8c496911b43b02d2c08ab089e5, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7389265046462283825, guid: 6f770c8c496911b43b02d2c08ab089e5, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7389265046462283825, guid: 6f770c8c496911b43b02d2c08ab089e5, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7389265046536855718, guid: 6f770c8c496911b43b02d2c08ab089e5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 

@@ -1,0 +1,163 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerWeapon_B : MonoBehaviour
+{
+    // 変数
+    [Header("変数")]
+    [SerializeField] float defAttackingTime = 0.3f;   // 攻撃判定の基礎発生時間
+    [SerializeField] public float nowAttakingTime = 0.0f;  // 判定の発生時間
+
+    // スクリプト
+    [Header("スクリプト")]
+    [SerializeField] PlayerCTRL _playerCTRL;
+    [SerializeField] PlayerAttack_B _playerAttack;
+    [SerializeField] SpriteChanger _spriteChanger;
+
+    [Header("パラメータ")]
+    [SerializeField] int _damage = 0;
+    [SerializeField] int _knockBack = 0;
+    [SerializeField] int _stanPower = 0;
+
+    // プライベート変数
+    float _spriteAlpha = 0.0f;
+    float _chargeCool = 0.0f;
+    bool _comboFlag = false;
+
+    // コンポーネント
+    BoxCollider2D coll;
+
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        coll = GetComponent<BoxCollider2D>();
+        coll.enabled = false;
+
+        _spriteChanger.ChangeTransparency(_spriteAlpha);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        // 判定発生
+        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+        if (nowAttakingTime >= 0)
+        {
+            nowAttakingTime -= Time.deltaTime;
+        }
+        else { coll.enabled = false; }
+
+        if (_spriteAlpha > 0.0f)
+        {
+            _spriteChanger.ChangeTransparency(_spriteAlpha);
+            _spriteAlpha -= Time.deltaTime * 2.0f;
+        }
+
+        if (_chargeCool >= 0.0f)
+        {
+            _chargeCool -= Time.deltaTime;
+        }
+        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+    }
+
+    // 武器切り替え
+    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+    public void SwapWeapon(WeaponList[] wepon, int no)
+    {
+        // バグってたら強制的に0を突っ込む
+        if (no + 1 > wepon.Length) { no = 0; }
+
+
+        // Tags
+        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+        // テキスト変更
+        //weponNameText.text = wepon[no].name;
+
+        // スプライト切り替えのためパス
+        Sprite inImage = Resources.Load<Sprite>(wepon[no].trail);
+        _spriteChanger.ChangeSprite(inImage, wepon[no].offset);
+
+        // ここにアイコンも追加するかも
+        // (Empty)
+
+
+        // Status
+        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+        // 最大ダメージ
+        _damage = wepon[no].damage;
+
+        // 基礎ノックバック量
+        //defKnockBack = wepon[no].defknockback;
+
+        // 最大ノックバック量
+        _knockBack = wepon[no].maxknockback;
+
+        // 最大チャージ量
+        //maxCharge = wepon[no].maxcharge;
+
+        // スタン値
+        _stanPower = wepon[no].stanpower;
+
+
+        // Sprites
+        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+        // スケール
+        transform.localScale = new Vector3(
+            wepon[no].wideth, wepon[no].height, 1.0f);
+
+        // 座標
+        transform.localPosition = new Vector3(
+            0.0f, wepon[no].offset, 0.0f);
+
+
+        // UI
+        _playerAttack._image_Wepon.sprite = Resources.Load<Sprite>(wepon[no].icon);
+
+
+        // プレイヤーに必要クールダウンを渡してリターン
+        //return wepon[no].maxcharge;
+    }
+
+    public bool Combo()
+    {
+        if (!_comboFlag) { return false; }
+
+        _comboFlag = false;
+        return true;
+    }
+
+    public void Attacking()
+    {
+        coll.enabled = true;
+        nowAttakingTime = defAttackingTime;
+
+        _spriteAlpha = 1.0f;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Enemy")
+        {
+            collision.gameObject.GetComponent<EnemyCTRL>().TakeDamage(_damage, _knockBack, _stanPower);
+
+            _chargeCool = defAttackingTime;
+            _playerCTRL.comboCount++;
+            _comboFlag = true;
+
+            /*
+            if (nowDamage == maxDamage)
+            {
+                if (chargeCool <= 0)
+                {
+                    _playerCTRL.GetCharge();
+                    chargeCool = defAttackingTime;
+                    _playerCTRL.comboCount++;
+                }
+                comboFlag = true;
+            }
+            */
+        }
+    }
+}

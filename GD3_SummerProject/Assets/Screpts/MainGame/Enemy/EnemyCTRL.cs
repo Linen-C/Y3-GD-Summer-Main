@@ -38,6 +38,7 @@ public class EnemyCTRL : MonoBehaviour
     [Header("スクリプト(自動取得)")]
     [SerializeField] GC_BpmCTRL bpmCTRL;   // メトロノーム受け取り用
     [SerializeField] StageManager _stageManager;
+    [SerializeField] PlayerAttack_B _playerAttack;
 
     // ゲームオブジェクト
     [Header("ゲームオブジェクト(マニュアル)")]
@@ -105,6 +106,7 @@ public class EnemyCTRL : MonoBehaviour
 
         // ２回も使いとうなかったわい…
         player = GameObject.FindGameObjectWithTag("Player");
+        _playerAttack = player.GetComponent<PlayerAttack_B>();
 
         // ステート初期化
         state = State.Stop;
@@ -186,9 +188,12 @@ public class EnemyCTRL : MonoBehaviour
     // 死亡判定
     bool IfIsAlive()
     {
+        if (state == State.Dead) { return false; }
+
         if (nowHelthPoint <= 0)
         {
             state = State.Dead;
+            _playerAttack.GetCharge();
             Destroy(gameObject, defNonDamageTime + 0.1f);
 
             return false;

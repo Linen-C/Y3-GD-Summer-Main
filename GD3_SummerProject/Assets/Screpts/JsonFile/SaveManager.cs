@@ -17,7 +17,7 @@ public class SaveManager : MonoBehaviour
         equipLoad.GetComponent<EquipLoad>();
 
         saveDatas = new JsonData();
-        saveDatas.weaponList = new WeaponList[3];
+        saveDatas.weaponList = new WeaponList[2];
 
         //filePath = Application.dataPath + "/Resources/jsons/EquipSave.json";
         _equipSavePath = Application.streamingAssetsPath + "/jsons/EquipSave.json";

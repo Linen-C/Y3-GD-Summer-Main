@@ -26,13 +26,13 @@ public class PlayerCTRL : MonoBehaviour
 
     [Header("コンポーネント(オート)")]
     [SerializeField] GC_BpmCTRL _bpmCTRL;        // BPMコントローラー
-    [SerializeField] PlayerWeapon playerWeapon;  // 攻撃用
+    [SerializeField] PlayerWeapon_B playerWeapon;  // 攻撃用
     [SerializeField] EquipLoad equipLoad;       // 装備武器取得
 
     [Header("コンポーネント(マニュアル)")]
     [SerializeField] PlayerMove _playerMove;
     [SerializeField] PlayerRotation _playerRotation;
-    [SerializeField] PlayerAttack _playerAttack;
+    [SerializeField] PlayerAttack_B _playerAttack;
 
     // エンジン依存コンポーネント
     [Header("コンポーネント(オート)")]
@@ -47,10 +47,9 @@ public class PlayerCTRL : MonoBehaviour
     // キャンパス
     [Header("キャンバスUI(マニュアル)")]
     //[SerializeField] Text hpText;         // 体力表示用
-    [SerializeField] TextMeshProUGUI text_Weapon;   // クールダウン表示用
-    [SerializeField] Slider slider_Weapon;
-    [SerializeField] TextMeshProUGUI text_Gun;     // 射撃チャージ
-    [SerializeField] Slider slider_Gun;
+    //[SerializeField] TextMeshProUGUI text_Weapon;   // クールダウン表示用
+    //[SerializeField] Slider slider_Weapon;
+    
     [SerializeField] Image image_DamagePanel;
     [SerializeField] float image_DamagePanel_defalpha = 1.0f;
     [SerializeField] float image_DamagePanel_nowalpha = 0.0f;
@@ -62,18 +61,18 @@ public class PlayerCTRL : MonoBehaviour
 
     // プライベート変数
     [Header("プライベート変数だったもの")]
-    public int maxWeaponCharge = 0;      // 必要クールダウン
-    public int nowWeaponCharge = 1;      // 現在クールダウン
+    //public int maxWeaponCharge = 0;      // 必要クールダウン
+    //public int nowWeaponCharge = 1;      // 現在クールダウン
     public int equipNo = 0;            // 所持している武器番号(0～2)
-    public bool coolDownReset = false;  // クールダウンのリセットフラグ
+    //public bool coolDownReset = false;  // クールダウンのリセットフラグ
 
     public int comboTimeLeft = 0;     // コンボ継続カウンター
     public bool doComboMode = false;  // コンボモード
     public int comboCount = 0;        // コンボ回数カウンター
 
     public float knockBackCounter = 0;  // ノックバック時間カウンター
-    private float NonDamageTime = 0;     // 無敵時間
-    private Vector2 _moveDir;             // 移動用ベクトル
+    float NonDamageTime = 0;     // 無敵時間
+    Vector2 _moveDir;             // 移動用ベクトル
 
     public enum State
     {
@@ -87,7 +86,7 @@ public class PlayerCTRL : MonoBehaviour
     void Awake()
     {
         // コンポーネント取得
-        playerWeapon = GetComponentInChildren<PlayerWeapon>();
+        playerWeapon = GetComponentInChildren<PlayerWeapon_B>();
         _bpmCTRL = gamectrl.transform.GetComponent<GC_BpmCTRL>();
         equipLoad = gamectrl.transform.GetComponent<EquipLoad>();
 
@@ -111,8 +110,9 @@ public class PlayerCTRL : MonoBehaviour
 
         // 武器初期化
         equipList = equipLoad.GetList();
-        maxWeaponCharge = playerWeapon.SwapWeapon(equipList.weaponList, 0);
-        _playerAttack.nowGunCharge = 0;
+        //maxWeaponCharge = playerWeapon.SwapWeapon(equipList.weaponList, 0);
+        playerWeapon.SwapWeapon(equipList.weaponList, 0);
+        //_playerAttack.nowGunCharge = 0;
 
         // UI系初期化
         UIUpdate();
@@ -152,7 +152,7 @@ public class PlayerCTRL : MonoBehaviour
         // 処理
         _playerRotation.Rotation(_playerControls, _sprite);             // 旋回系
         _playerAttack.Attack(_playerControls, _bpmCTRL, playerWeapon);  // 攻撃
-        _playerAttack.SwapWeapon(_playerControls, playerWeapon);         // 武器交換
+        _playerAttack.SwapingWeapon(_playerControls, playerWeapon);         // 武器交換
         _playerAttack.Shooting(_playerControls, _bpmCTRL);              // 遠距離攻撃
         _playerMove.Dash(_playerControls, _bpmCTRL);                    // ダッシュ入力
 
@@ -176,11 +176,11 @@ public class PlayerCTRL : MonoBehaviour
         hpSlider.value = (float)nowHelthPoint / (float)maxHelthPoint;
 
         // 武器表示
-        text_Weapon.text = nowWeaponCharge + " / " + maxWeaponCharge;
-        slider_Weapon.value = (float)nowWeaponCharge / (float)maxWeaponCharge;
+        //text_Weapon.text = nowWeaponCharge + " / " + maxWeaponCharge;
+        //slider_Weapon.value = (float)nowWeaponCharge / (float)maxWeaponCharge;
         // 銃
-        text_Gun.text = _playerAttack.nowGunCharge + " / " + _playerAttack.needGunCharge;
-        slider_Gun.value = (float)_playerAttack.nowGunCharge / (float)_playerAttack.needGunCharge;
+        //text_Gun.text = _playerAttack.nowGunCharge + " / " + _playerAttack.needGunCharge;
+        //slider_Gun.value = (float)_playerAttack.nowGunCharge / (float)_playerAttack.needGunCharge;
 
 
         // ダメージ表示
@@ -203,6 +203,7 @@ public class PlayerCTRL : MonoBehaviour
 
     // 遠距離攻撃チャージ
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+    /*
     public void GetCharge()
     {
         if (_playerAttack.nowGunCharge < _playerAttack.needGunCharge)
@@ -210,6 +211,7 @@ public class PlayerCTRL : MonoBehaviour
             _playerAttack.nowGunCharge += 1;
         }
     }
+    */
 
 
 

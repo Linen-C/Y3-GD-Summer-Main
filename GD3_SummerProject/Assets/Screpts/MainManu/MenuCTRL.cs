@@ -10,14 +10,14 @@ public class MenuCTRL : MonoBehaviour
     [SerializeField] Canvas _Customize;
     [SerializeField] Menu_Customize _menu_Customize;
     [SerializeField] Canvas _Select; 
-    //[SerializeField] Canvas _Standby;
+    [SerializeField] Canvas _StandbyMaingame;
     [SerializeField] Canvas _Option;
 
     void Awake()
     {
         _Customize.enabled = false;
         _Select.enabled = false;
-        //_Standby.enabled = false;
+        _StandbyMaingame.enabled = false;
         _Option.enabled = false;
     }
 
@@ -27,8 +27,7 @@ public class MenuCTRL : MonoBehaviour
     public void Main_to_Customize()
     {
         _Main.enabled = false;
-        _menu_Customize.EnableMenu();
-        _Customize.enabled = true;
+        _menu_Customize.EnableMenu(_Main);
     }
 
 

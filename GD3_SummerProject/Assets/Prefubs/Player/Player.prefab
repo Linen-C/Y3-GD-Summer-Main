@@ -594,7 +594,7 @@ GameObject:
   - component: {fileID: 7854783002829949675}
   - component: {fileID: 7854783002829949672}
   - component: {fileID: 7854783002829949674}
-  - component: {fileID: 7854783002829949673}
+  - component: {fileID: 895136248591659088}
   m_Layer: 7
   m_Name: Weapon
   m_TagString: PlayerAttack
@@ -714,7 +714,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &7854783002829949673
+--- !u!114 &895136248591659088
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -723,20 +723,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 7854783002829949652}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5db76b9ab8bcd1448487bf41c4cf88c, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b15933d4dc597a49821256347d3e75d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   defAttackingTime: 0.3
   nowAttakingTime: 0
   _playerCTRL: {fileID: 7854783003313331793}
+  _playerAttack: {fileID: 3399113693741798867}
   _spriteChanger: {fileID: 7854783002277418258}
-  image_Wepon: {fileID: 0}
-  defDamage: 1
-  maxDamage: 0
-  defKnockBack: 0
-  maxKnockBack: 0
-  maxCharge: 0
-  maxStanPower: 0
+  _damage: 0
+  _knockBack: 0
+  _stanPower: 0
 --- !u!1 &7854783002991398356
 GameObject:
   m_ObjectHideFlags: 0
@@ -917,7 +914,7 @@ GameObject:
   - component: {fileID: 7854783003313331793}
   - component: {fileID: 2447405941736732258}
   - component: {fileID: 424716756123729601}
-  - component: {fileID: 4222365566821760001}
+  - component: {fileID: 3399113693741798867}
   - component: {fileID: 1744843459}
   - component: {fileID: 1946777321}
   m_Layer: 7
@@ -1129,26 +1126,19 @@ MonoBehaviour:
   equipLoad: {fileID: 0}
   _playerMove: {fileID: 2447405941736732258}
   _playerRotation: {fileID: 424716756123729601}
-  _playerAttack: {fileID: 4222365566821760001}
+  _playerAttack: {fileID: 3399113693741798867}
   _sprite: {fileID: 0}
   _body: {fileID: 0}
   _anim: {fileID: 0}
   _flashAnim: {fileID: 0}
   equipList:
     weaponList: []
-  text_Weapon: {fileID: 0}
-  slider_Weapon: {fileID: 0}
-  text_Gun: {fileID: 0}
-  slider_Gun: {fileID: 0}
   image_DamagePanel: {fileID: 0}
   image_DamagePanel_defalpha: 1
   image_DamagePanel_nowalpha: 0
   comboText: {fileID: 0}
   hpSlider: {fileID: 5830687477450192321}
-  maxWeaponCharge: 0
-  nowWeaponCharge: 1
   equipNo: 0
-  coolDownReset: 0
   comboTimeLeft: 0
   doComboMode: 0
   comboCount: 0
@@ -1185,7 +1175,7 @@ MonoBehaviour:
   _plCTRL: {fileID: 7854783003313331793}
   cursor: {fileID: 7854783002312811369}
   cursorImage: {fileID: 7854783003204025895}
---- !u!114 &4222365566821760001
+--- !u!114 &3399113693741798867
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1194,22 +1184,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 7854783003313331794}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19ee3277f011c6c41b8c8ef83f640a74, type: 3}
+  m_Script: {fileID: 11500000, guid: acff61b90087fe645940ef1f44a14f7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _plCTRL: {fileID: 7854783003313331793}
-  cursor: {fileID: 7854783002312811369}
-  cursorImage: {fileID: 7854783003204025895}
-  bullet: {fileID: 8019057332981992899, guid: 9b682da5b8be13141b6f68167fa8fc24, type: 3}
-  needGunCharge: 2
-  nowGunCharge: 0
-  standby: 0
-  needCountDown: 0
-  nowCountDown: 0
-  _audioCTRL: {fileID: 0}
-  audioSource: {fileID: 1744843459}
-  audioClip_Gun: []
-  audioClip_Weapon: []
+  _cursor: {fileID: 7854783002312811369}
+  _cursorImage: {fileID: 7854783003204025895}
+  _bullet: {fileID: 8019057332981992899, guid: 9b682da5b8be13141b6f68167fa8fc24, type: 3}
+  _image_Wepon: {fileID: 0}
+  _text_Gun: {fileID: 0}
+  _slider_Gun: {fileID: 0}
+  _needGunCharge: 4
+  _nowGunCharge: 0
+  _standby: 0
+  _needCountDown: 1
+  _nowCountDown: 0
 --- !u!82 &1744843459
 AudioSource:
   m_ObjectHideFlags: 0

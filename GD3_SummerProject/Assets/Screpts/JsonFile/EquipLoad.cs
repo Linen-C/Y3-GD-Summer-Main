@@ -68,7 +68,7 @@ public class EquipLoad : MonoBehaviour
         defData = new JsonData();
 
         inputData = new JsonData();
-        inputData.weaponList = new WeaponList[3];
+        inputData.weaponList = new WeaponList[2];
 
         string inputJson = Resources.Load<TextAsset>(_weaponListPath).ToString();
         defData = JsonUtility.FromJson<JsonData>(inputJson);

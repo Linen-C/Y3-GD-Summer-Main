@@ -38,36 +38,39 @@ public class Menu_Customize : MonoBehaviour
     [SerializeField] TextMeshProUGUI text_description;
 
     [Header("âÊñ ëJà⁄óp")]
-    [SerializeField] Canvas _Main;
+    [SerializeField] Canvas _CallManu;
     [SerializeField] Canvas _Customize;
 
     [Header("ïœçXóp")]
     [SerializeField] int _target_Num;
 
 
-    public void EnableMenu()
+    public void EnableMenu(Canvas callMenu)
     {
+        _Customize.enabled = true;
+        _CallManu = callMenu;
+
         //Debug.Log("Custom_Run");
         weaponListLoad = saveManager.transform.GetComponent<WeaponListLoad>();
         jsonData = weaponListLoad.GetList();
 
         //weaponList = jsonData.weaponList;
 
-        equipList = new WeaponList[3];
+        equipList = new WeaponList[2];
         equipList = saveManager.EquipLoad();
 
-        weaponNumbers = new int[3];
+        weaponNumbers = new int[2];
         weaponNumbers[0] = equipList[0].number;
         weaponNumbers[1] = equipList[1].number;
-        weaponNumbers[2] = equipList[2].number;
+        //weaponNumbers[2] = equipList[2].number;
 
-        weaponImages = new Image[3];
+        weaponImages = new Image[2];
         weaponImages[0] = image_weaponA;
         weaponImages[1] = image_weaponB;
-        weaponImages[2] = image_weaponC;
+        //weaponImages[2] = image_weaponC;
         weaponImages[0].sprite = Resources.Load<Sprite>(equipList[0].icon);
         weaponImages[1].sprite = Resources.Load<Sprite>(equipList[1].icon);
-        weaponImages[2].sprite = Resources.Load<Sprite>(equipList[2].icon);
+        //weaponImages[2].sprite = Resources.Load<Sprite>(equipList[2].icon);
 
         ButtonErase();
     }
@@ -91,6 +94,7 @@ public class Menu_Customize : MonoBehaviour
         ButtonGenerate();
     }
 
+    /*
     public void SetWeaponChangeC()
     {
         ButtonErase();
@@ -98,6 +102,7 @@ public class Menu_Customize : MonoBehaviour
         ShowWeaponData();
         ButtonGenerate();
     }
+    */
 
     public void SetGunChange()
     {
@@ -188,7 +193,7 @@ public class Menu_Customize : MonoBehaviour
         ButtonErase();
 
         _Customize.enabled = false;
-        _Main.enabled = true;
+        _CallManu.enabled = true;
 
         saveManager.EquipSave();
     }

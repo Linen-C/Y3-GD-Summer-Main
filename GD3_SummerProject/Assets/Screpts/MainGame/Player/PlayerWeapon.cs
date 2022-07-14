@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerWeapon : MonoBehaviour
 {
+    /*
     // •Ï”
     [Header("•Ï”")]
     [SerializeField] float defAttackingTime = 0.3f;   // UŒ‚”»’è‚ÌŠî‘b”­¶ŠÔ
@@ -50,7 +51,7 @@ public class PlayerWeapon : MonoBehaviour
 
         _spriteChanger.ChangeTransparency(spriteAlpha);
     }
-
+    
     void Update()
     {
         // ”»’è”­¶
@@ -195,4 +196,5 @@ public class PlayerWeapon : MonoBehaviour
     }
 
     //     //
+    */
 }
