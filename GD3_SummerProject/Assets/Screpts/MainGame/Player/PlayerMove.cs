@@ -16,9 +16,18 @@ public class PlayerMove : MonoBehaviour
 
     private float dogeTimer = 0;         // 回避用のタイマー
 
+    float _eventMoveTimer = 0.0f;
 
     public void Move(Vector2 moveDir, Rigidbody2D body)
     {
+        // イベント移動
+        if (_eventMoveTimer > 0)
+        {
+            body.AddForce(new Vector2(0, 4), ForceMode2D.Impulse);
+            _eventMoveTimer -= Time.deltaTime;
+            return;
+        }
+
         // 移動
         if (_plCTRL.knockBackCounter > 0.0f)
         {
@@ -43,6 +52,7 @@ public class PlayerMove : MonoBehaviour
 
             dogeTimer -= Time.deltaTime;
         }
+
     }
 
     void KnockBack(Rigidbody2D body)
@@ -97,5 +107,10 @@ public class PlayerMove : MonoBehaviour
         {
             dogeTimer = 0.1f;
         }
+    }
+
+    public void EventMove(float timer)
+    {
+        _eventMoveTimer = timer;
     }
 }

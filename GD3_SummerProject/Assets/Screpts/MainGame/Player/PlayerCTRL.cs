@@ -152,7 +152,7 @@ public class PlayerCTRL : MonoBehaviour
         // ˆ—
         _playerRotation.Rotation(_playerControls, _sprite);             // ù‰ñŒn
         _playerAttack.Attack(_playerControls, _bpmCTRL, playerWeapon);  // UŒ‚
-        _playerAttack.SwapingWeapon(_playerControls, playerWeapon);         // •ŠíŒğŠ·
+        _playerAttack.SwapingWeapon(_playerControls, playerWeapon);     // •ŠíŒğŠ·
         _playerAttack.Shooting(_playerControls, _bpmCTRL);              // ‰“‹——£UŒ‚
         _playerMove.Dash(_playerControls, _bpmCTRL);                    // ƒ_ƒbƒVƒ…“ü—Í
 
@@ -199,20 +199,6 @@ public class PlayerCTRL : MonoBehaviour
             comboText.text = comboCount + "Combo";
         }
     }
-
-
-    // ‰“‹——£UŒ‚ƒ`ƒƒ[ƒW
-    //      //
-    /*
-    public void GetCharge()
-    {
-        if (_playerAttack.nowGunCharge < _playerAttack.needGunCharge)
-        {
-            _playerAttack.nowGunCharge += 1;
-        }
-    }
-    */
-
 
 
     // €–S”»’è

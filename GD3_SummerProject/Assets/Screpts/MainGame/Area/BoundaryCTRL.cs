@@ -7,8 +7,6 @@ public class BoundaryCTRL : MonoBehaviour
     [Header("ピン位置(マニュアル)")]
     [SerializeField] GameObject pinMax;
     [SerializeField] GameObject pinMin;
-    [SerializeField] bool downToUp;
-    [SerializeField] bool setCenter;
     [Header("カメラ(オート)")]
     [SerializeField] new CameraCTRL camera;
 
@@ -27,13 +25,7 @@ public class BoundaryCTRL : MonoBehaviour
     {
         if (collision.tag != "Player") return;
 
-        if (setCenter)
-        {
-            camera.SetNewCenter(transform.position, pinMinPos, pinMaxPos);
-            return;
-        }
-
-        camera.SetNewCamPoint(pinMaxPos, pinMinPos, downToUp);
+        camera.SetNewCamPoint(pinMaxPos, pinMinPos);
     }
 
 }

@@ -120,7 +120,7 @@ public class EnemyCTRL : MonoBehaviour
             state = State.Stop;
             anim.SetBool("Moving", false);
         }
-        else
+        else if (state != State.Dead)
         {
             state = State.Alive;
             anim.SetBool("Moving", true);
@@ -190,7 +190,7 @@ public class EnemyCTRL : MonoBehaviour
     {
         if (state == State.Dead) { return false; }
 
-        if (nowHelthPoint <= 0)
+        if (nowHelthPoint <= 0 && state != State.Dead)
         {
             state = State.Dead;
             _playerAttack.GetCharge();
@@ -281,7 +281,7 @@ public class EnemyCTRL : MonoBehaviour
         {
             if (coolDownReset == true)
             {
-                state = State.Alive;
+                //state = State.Alive;
                 weaponCharge = 1;
                 coolDownReset = false;
             }
