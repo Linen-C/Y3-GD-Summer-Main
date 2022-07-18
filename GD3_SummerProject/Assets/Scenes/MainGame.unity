@@ -1029,6 +1029,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8913747572552637916, guid: 79bb26c59ef5eae44ab20313a630c600, type: 3}
+      propertyPath: clips_BPM.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 7c195ee4c64105b4bbf934c028a2c394, type: 3}
+    - target: {fileID: 8913747572552637916, guid: 79bb26c59ef5eae44ab20313a630c600, type: 3}
+      propertyPath: clips_Progress.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 842c84eba5770114192d19fe8a1163e6, type: 3}
     - target: {fileID: 8913747572552637917, guid: 79bb26c59ef5eae44ab20313a630c600, type: 3}
       propertyPath: m_RootOrder
       value: 4
