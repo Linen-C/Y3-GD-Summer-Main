@@ -22,7 +22,7 @@ public class PlayerWeapon_B : MonoBehaviour
 
     // プライベート変数
     float _spriteAlpha = 0.0f;
-    float _chargeCool = 0.0f;
+    float _hitCoolDown = 0.0f;
     bool _comboFlag = false;
 
     // コンポーネント
@@ -55,9 +55,9 @@ public class PlayerWeapon_B : MonoBehaviour
             _spriteAlpha -= Time.deltaTime * 2.0f;
         }
 
-        if (_chargeCool >= 0.0f)
+        if (_hitCoolDown > 0.0f)
         {
-            _chargeCool -= Time.deltaTime;
+            _hitCoolDown -= Time.deltaTime;
         }
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     }
@@ -140,24 +140,17 @@ public class PlayerWeapon_B : MonoBehaviour
     {
         if (collision.tag == "Enemy")
         {
-            collision.gameObject.GetComponent<EnemyCTRL>().TakeDamage(_damage, _knockBack, _stanPower);
-
-            _chargeCool = defAttackingTime;
-            _playerCTRL.comboCount++;
-            _comboFlag = true;
-
-            /*
-            if (nowDamage == maxDamage)
+            if (_hitCoolDown <= 0)
             {
-                if (chargeCool <= 0)
-                {
-                    _playerCTRL.GetCharge();
-                    chargeCool = defAttackingTime;
-                    _playerCTRL.comboCount++;
-                }
-                comboFlag = true;
+                _playerCTRL.comboCount++;
+                _comboFlag = true;
+                _hitCoolDown = defAttackingTime;
             }
-            */
+
+            collision.gameObject.GetComponent<EnemyCTRL>().TakeDamage(
+                _damage + _playerCTRL.comboCount,
+                _knockBack,
+                _stanPower);
         }
     }
 }

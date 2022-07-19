@@ -1136,13 +1136,16 @@ MonoBehaviour:
   image_DamagePanel: {fileID: 0}
   image_DamagePanel_defalpha: 1
   image_DamagePanel_nowalpha: 0
-  comboText: {fileID: 0}
+  _comboText: {fileID: 0}
+  _resultText: {fileID: 0}
   hpSlider: {fileID: 5830687477450192321}
   equipNo: 0
   comboTimeLeft: 0
   doComboMode: 0
   comboCount: 0
   knockBackCounter: 0
+  _orFaild: 0
+  _orFaildCount: 0
   state: 0
 --- !u!114 &2447405941736732258
 MonoBehaviour:
@@ -1157,7 +1160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _plCTRL: {fileID: 7854783003313331793}
-  moveSpeed: 18
+  moveSpeed: 20
   dashPower: 30
   knockBackPower: 10
 --- !u!114 &424716756123729601

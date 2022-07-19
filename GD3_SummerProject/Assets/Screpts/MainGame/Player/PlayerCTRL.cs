@@ -46,14 +46,11 @@ public class PlayerCTRL : MonoBehaviour
 
     // キャンパス
     [Header("キャンバスUI(マニュアル)")]
-    //[SerializeField] Text hpText;         // 体力表示用
-    //[SerializeField] TextMeshProUGUI text_Weapon;   // クールダウン表示用
-    //[SerializeField] Slider slider_Weapon;
-    
     [SerializeField] Image image_DamagePanel;
     [SerializeField] float image_DamagePanel_defalpha = 1.0f;
     [SerializeField] float image_DamagePanel_nowalpha = 0.0f;
-    [SerializeField] TextMeshProUGUI comboText;
+    [SerializeField] TextMeshProUGUI _comboText;
+    [SerializeField] public TextMeshProUGUI _resultText;
 
     // 体力表示
     [Header("体力表示(マニュアル)")]
@@ -61,10 +58,7 @@ public class PlayerCTRL : MonoBehaviour
 
     // プライベート変数
     [Header("プライベート変数だったもの")]
-    //public int maxWeaponCharge = 0;      // 必要クールダウン
-    //public int nowWeaponCharge = 1;      // 現在クールダウン
     public int equipNo = 0;            // 所持している武器番号(0～2)
-    //public bool coolDownReset = false;  // クールダウンのリセットフラグ
 
     public int comboTimeLeft = 0;     // コンボ継続カウンター
     public bool doComboMode = false;  // コンボモード
@@ -73,6 +67,10 @@ public class PlayerCTRL : MonoBehaviour
     public float knockBackCounter = 0;  // ノックバック時間カウンター
     float NonDamageTime = 0;     // 無敵時間
     Vector2 _moveDir;             // 移動用ベクトル
+
+    public bool _orFaild = false;
+    public int _orFaildCount = 0;
+
 
     public enum State
     {
@@ -175,14 +173,6 @@ public class PlayerCTRL : MonoBehaviour
         // 体力表示
         hpSlider.value = (float)nowHelthPoint / (float)maxHelthPoint;
 
-        // 武器表示
-        //text_Weapon.text = nowWeaponCharge + " / " + maxWeaponCharge;
-        //slider_Weapon.value = (float)nowWeaponCharge / (float)maxWeaponCharge;
-        // 銃
-        //text_Gun.text = _playerAttack.nowGunCharge + " / " + _playerAttack.needGunCharge;
-        //slider_Gun.value = (float)_playerAttack.nowGunCharge / (float)_playerAttack.needGunCharge;
-
-
         // ダメージ表示
         if (image_DamagePanel_nowalpha > 0.0f) { image_DamagePanel_nowalpha -= Time.deltaTime; }
         image_DamagePanel.color = new Color(1.0f, 1.0f, 1.0f, image_DamagePanel_nowalpha);
@@ -191,12 +181,13 @@ public class PlayerCTRL : MonoBehaviour
         // コンボ表示
         if (comboCount == 0)
         {
-            if (comboText.alpha > 0.0f) { comboText.alpha -= Time.deltaTime; }
+            if (_comboText.alpha > 0.0f) { _comboText.alpha -= Time.deltaTime; }
+            if (_resultText.alpha > 0.0f) { _resultText.alpha -= Time.deltaTime; }
         }
         else
         {
-            comboText.alpha = 1.0f;
-            comboText.text = comboCount + "Combo";
+            _comboText.alpha = 1.0f;
+            _comboText.text = "x" + comboCount;
         }
     }
 

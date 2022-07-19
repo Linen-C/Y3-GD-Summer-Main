@@ -707,11 +707,12 @@ MonoBehaviour:
   moveSpeed: 2
   needWeaponCharge: 8
   knockBackPower: 0
-  defNonDamageTime: 0.2
+  defNonDamageTime: 0.3
   _enemyMove: {fileID: 7781659906550622949}
   ownWepon: {fileID: 562583549191834702}
   bpmCTRL: {fileID: 0}
   _stageManager: {fileID: 0}
+  _playerAttack: {fileID: 0}
   cursor: {fileID: 562583549000882077}
   cursorImage: {fileID: 562583548654357865}
   flashObj: {fileID: 7273811921848249318}

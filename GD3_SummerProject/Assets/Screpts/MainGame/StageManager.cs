@@ -20,6 +20,7 @@ public class StageManager : MonoBehaviour
     [SerializeField] Animator _panelAnimator;
     [SerializeField] TextMeshProUGUI _text_MaxStage;
     [SerializeField] TextMeshProUGUI _text_NowStage;
+    [SerializeField] TextMeshProUGUI _text_Floor;
     [Header("トランスフォーム(マニュアル)")]
     [SerializeField] Transform _entryPoint;
     [SerializeField] Transform _player;
@@ -43,6 +44,8 @@ public class StageManager : MonoBehaviour
         _gameCTRL = _gameController.GetComponent<GC_GameCTRL>();
         _bpmCTRL = _gameController.GetComponent<GC_BpmCTRL>();
 
+        _text_Floor.text = "Floor：1";
+
         SetArena();
     }
 
@@ -51,6 +54,8 @@ public class StageManager : MonoBehaviour
         if (WaitFlip() && _wait)
         {
             SetArena();
+
+            _text_Floor.text = "Floor：" + (_nowArenaNo + 1).ToString();
 
             _bpmCTRL.ChangePause(false);
 

@@ -27,7 +27,7 @@ public class EnemyCTRL : MonoBehaviour
     [SerializeField] int needWeaponCharge;  // 必要クールダウン
     [Header("ノックバックと無敵時間")]
     [SerializeField] float knockBackPower;    // かかるノックバックの強さ
-    [SerializeField] float defNonDamageTime;  // デフォルト無敵時間
+    [SerializeField] float defNonDamageTime = 0.3f;  // デフォルト無敵時間
 
     [Header("テスト")]
     [SerializeField] EnemyMove _enemyMove;
@@ -60,7 +60,7 @@ public class EnemyCTRL : MonoBehaviour
     private bool coolDownReset = false;  // クールダウンのリセットフラグ
     private Vector2 diff;                // プレイヤーの方向
     private float knockBackCounter = 0;  // ノックバック時間カウンター
-    private float NonDamageTime = 0;     // 無敵時間
+    [SerializeField] private float NonDamageTime = 0;     // 無敵時間
 
     // コンポーネント
     SpriteRenderer sprite;

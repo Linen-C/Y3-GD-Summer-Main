@@ -36,15 +36,26 @@ public class PlayerAttack_B : MonoBehaviour
 
     public void Attack(PlayerControls playerControls, GC_BpmCTRL bpmCTRL, PlayerWeapon_B playerWeapon)
     {
-        if (playerControls.Player.Attack.triggered
-            && bpmCTRL.Signal())
+        if (playerControls.Player.Attack.triggered && !_plCTRL._orFaild && playerWeapon.nowAttakingTime < 0)
         {
-            _plCTRL._anim.SetTrigger("Attack");
-            playerWeapon.Attacking();
+            if (bpmCTRL.Signal())
+            {
+                _plCTRL._anim.SetTrigger("Attack");
+                playerWeapon.Attacking();
+            }
+            else
+            {
+                _plCTRL._resultText.text = "miss...";
+                _plCTRL._resultText.alpha = 1.0f;
+                _plCTRL._orFaild = true;
+                _plCTRL._orFaildCount = 1;
+            }
         }
 
         if (playerWeapon.Combo())
         {
+            _plCTRL._resultText.text = "HIT!";
+            _plCTRL._resultText.alpha = 1.0f;
             _plCTRL.doComboMode = true;
             _plCTRL.comboTimeLeft = 2;
         }
@@ -62,6 +73,18 @@ public class PlayerAttack_B : MonoBehaviour
             {
                 _plCTRL.comboCount = 0;
                 _plCTRL.doComboMode = false;
+            }
+
+            if (_plCTRL._orFaild)
+            {
+                if (_plCTRL._orFaildCount >= 1)
+                {
+                    _plCTRL._orFaildCount--;
+                }
+                else
+                {
+                    _plCTRL._orFaild = false;
+                }
             }
         }
 

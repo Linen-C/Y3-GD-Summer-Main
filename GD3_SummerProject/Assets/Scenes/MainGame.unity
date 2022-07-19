@@ -355,6 +355,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0bf80ed232ba824cb2c1d3d55f1c2d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1088473384 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4718598050716635766, guid: 6f770c8c496911b43b02d2c08ab089e5, type: 3}
+  m_PrefabInstance: {fileID: 7389265045943934351}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1157742480 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7854783003313331793, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
@@ -462,6 +473,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7389265045272984191, guid: 6f770c8c496911b43b02d2c08ab089e5, type: 3}
   m_PrefabInstance: {fileID: 7389265045943934351}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1538071258 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3634494435335773840, guid: 6f770c8c496911b43b02d2c08ab089e5, type: 3}
+  m_PrefabInstance: {fileID: 7389265045943934351}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1727096758
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -469,26 +491,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 895136248591659088, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
-      propertyPath: image_Wepon
-      value: 
-      objectReference: {fileID: 45823888}
-    - target: {fileID: 2447405941736732258, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
-      propertyPath: moveSpeed
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3399113693741798867, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
-      propertyPath: text_Gun
-      value: 
-      objectReference: {fileID: 943190063}
     - target: {fileID: 3399113693741798867, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
       propertyPath: _text_Gun
       value: 
       objectReference: {fileID: 943190063}
-    - target: {fileID: 3399113693741798867, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
-      propertyPath: slider_Gun
-      value: 
-      objectReference: {fileID: 90009833}
     - target: {fileID: 3399113693741798867, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
       propertyPath: _slider_Gun
       value: 
@@ -505,10 +511,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7854783002829949673, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
-      propertyPath: image_Wepon
-      value: 
-      objectReference: {fileID: 45823888}
     - target: {fileID: 7854783003313331792, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -558,9 +560,13 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2017294181}
     - target: {fileID: 7854783003313331793, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
-      propertyPath: comboText
+      propertyPath: _comboText
       value: 
       objectReference: {fileID: 1908371071}
+    - target: {fileID: 7854783003313331793, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
+      propertyPath: _resultText
+      value: 
+      objectReference: {fileID: 1538071258}
     - target: {fileID: 7854783003313331793, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
       propertyPath: image_DamagePanel
       value: 
@@ -859,6 +865,10 @@ PrefabInstance:
       propertyPath: _player
       value: 
       objectReference: {fileID: 154433220}
+    - target: {fileID: 5146510215725634679, guid: 79b95c6d623d44a409f3beabd4ce2962, type: 3}
+      propertyPath: _text_Floor
+      value: 
+      objectReference: {fileID: 1088473384}
     - target: {fileID: 5146510215725634679, guid: 79b95c6d623d44a409f3beabd4ce2962, type: 3}
       propertyPath: _panelAnimator
       value: 
