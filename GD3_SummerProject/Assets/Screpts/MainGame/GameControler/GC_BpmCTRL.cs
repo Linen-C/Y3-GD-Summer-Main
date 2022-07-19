@@ -55,12 +55,19 @@ public class GC_BpmCTRL : MonoBehaviour
         Counter();
     }
 
+    private void FixedUpdate()
+    {
+        if (pause) { return; }
+        timing -= Time.deltaTime;
+    }
+
 
     void Counter()
     {
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
         // カウンター
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+
         if (timing <= 0.05f)
         {
             doSignal = true;
@@ -72,6 +79,8 @@ public class GC_BpmCTRL : MonoBehaviour
             nowImageSize = maxImageSize;
             metronome = true;
             metronomeFlap = true;
+
+            //Debug.Log("メトロノーム");
         }
         else
         {
@@ -85,8 +94,9 @@ public class GC_BpmCTRL : MonoBehaviour
             BpmReset();
         }
 
+        
         ImageShrinking();
-        timing -= Time.deltaTime;
+
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     }
 
@@ -120,8 +130,9 @@ public class GC_BpmCTRL : MonoBehaviour
         if (nowImageSize > minImageSize){ nowImageSize -= Time.deltaTime * 4.0f; }
         else { nowImageSize = minImageSize; }
 
-        _beatSlider.value = timing;
-
         beatImage.transform.localScale = new Vector3(nowImageSize, nowImageSize, 1.0f);
+
+
+        _beatSlider.value = timing;
     }
 }
