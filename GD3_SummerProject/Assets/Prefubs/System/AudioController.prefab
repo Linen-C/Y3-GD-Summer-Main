@@ -44,9 +44,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clips_BPM:
-  - {fileID: 8300000, guid: 842c84eba5770114192d19fe8a1163e6, type: 3}
-  clips_Progress:
   - {fileID: 8300000, guid: 7c195ee4c64105b4bbf934c028a2c394, type: 3}
+  clips_Progress:
+  - {fileID: 8300000, guid: 842c84eba5770114192d19fe8a1163e6, type: 3}
   - {fileID: 8300000, guid: 2d1c041e9b97ab143bebc68087554413, type: 3}
   - {fileID: 8300000, guid: 912fee6ae0953c64689f7ecf396b32fb, type: 3}
   clips_Player_Gun:

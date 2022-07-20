@@ -19,11 +19,12 @@ public class Menu_Select : MonoBehaviour
         _StundbyMaingame.enabled = true;
     }
 
+    /*
     public void Select_Tutorial()
     {
         SceneManager.LoadScene("Tutorial");
     }
-
+    */
 
     // ƒƒCƒ“ƒƒjƒ…[‚Ö–ß‚é
     //      //

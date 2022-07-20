@@ -26,6 +26,22 @@ public class PlayerAttack_B : MonoBehaviour
     [SerializeField] int _needCountDown;
     [SerializeField] int _nowCountDown = 0;
 
+    [Header("オーディオ(マニュアル)")]
+    [SerializeField] AudioCTRL _audioCTRL;
+    [SerializeField] AudioSource audioSource;   // オーディオソース
+    [SerializeField] AudioClip[] audioClip_Gun;
+
+
+    void Start()
+    {
+        // オーディオ初期化
+        audioSource = GetComponent<AudioSource>();
+        audioSource.volume = _audioCTRL.defVolume;
+        audioClip_Gun = new AudioClip[_audioCTRL.clips_Player_Gun.Length];
+        audioClip_Gun = _audioCTRL.clips_Player_Gun;
+        //audioClip_Weapon = new AudioClip[_audioCTRL.clips_Player_Weapon.Length];
+        //audioClip_Weapon = _audioCTRL.clips_Player_Weapon;
+    }
 
     private void Update()
     {
@@ -122,11 +138,11 @@ public class PlayerAttack_B : MonoBehaviour
             {
                 if (_nowGunCharge == _needGunCharge && _standby == false)
                 {
-                    //audioSource.PlayOneShot(audioClip_Gun[0]);
+                    audioSource.PlayOneShot(audioClip_Gun[0]);
                     _standby = true;
                     _nowCountDown = _needCountDown;
                 }
-                //else { audioSource.PlayOneShot(audioClip_Gun[2]); }
+                else { audioSource.PlayOneShot(audioClip_Gun[2]); }
             }
         }
 
@@ -148,7 +164,7 @@ public class PlayerAttack_B : MonoBehaviour
                         _cursorImage.transform.position.z),
                         _cursor.transform.rotation);
 
-                //audioSource.PlayOneShot(audioClip_Gun[1]);
+                audioSource.PlayOneShot(audioClip_Gun[1]);
                 _standby = false;
                 _nowGunCharge = 0;
             }
