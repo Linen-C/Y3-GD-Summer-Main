@@ -19,6 +19,7 @@ public class PlayerWeapon_B : MonoBehaviour
     [SerializeField] int _damage = 0;
     [SerializeField] int _knockBack = 0;
     [SerializeField] int _stanPower = 0;
+    [SerializeField] int _typeNum = 0;
 
     // プライベート変数
     float _spriteAlpha = 0.0f;
@@ -82,20 +83,17 @@ public class PlayerWeapon_B : MonoBehaviour
         // ここにアイコンも追加するかも
         // (Empty)
 
+        // タイプ
+        _typeNum = wepon[no].typeNum;
+
 
         // Status
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
         // 最大ダメージ
         _damage = wepon[no].damage;
 
-        // 基礎ノックバック量
-        //defKnockBack = wepon[no].defknockback;
-
         // 最大ノックバック量
         _knockBack = wepon[no].maxknockback;
-
-        // 最大チャージ量
-        //maxCharge = wepon[no].maxcharge;
 
         // スタン値
         _stanPower = wepon[no].stanpower;
@@ -112,12 +110,25 @@ public class PlayerWeapon_B : MonoBehaviour
             0.0f, wepon[no].offset, 0.0f);
 
 
-        // UI
+        // plAttack
+        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+        switch (_typeNum)
+        {
+            case 1:
+                _playerAttack._defPenalty = 0;
+                break;
+            case 2:
+                _playerAttack._defPenalty = 2;
+                break;
+            default:
+                _playerAttack._defPenalty = 1;
+                break;
+        }
+
+        
+
+        // UI更新
         _playerAttack._image_Wepon.sprite = Resources.Load<Sprite>(wepon[no].icon);
-
-
-        // プレイヤーに必要クールダウンを渡してリターン
-        //return wepon[no].maxcharge;
     }
 
     public bool Combo()
@@ -147,10 +158,15 @@ public class PlayerWeapon_B : MonoBehaviour
                 _hitCoolDown = defAttackingTime;
             }
 
+            int damage = _damage;
+
+            if (_typeNum != 2) { damage += _playerCTRL.comboCount; }
+
             collision.gameObject.GetComponent<EnemyCTRL>().TakeDamage(
-                _damage + _playerCTRL.comboCount,
+                damage,
                 _knockBack,
-                _stanPower);
+                _stanPower,
+                _typeNum);
         }
     }
 }

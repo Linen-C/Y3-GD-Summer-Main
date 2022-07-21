@@ -167,7 +167,6 @@ public class Menu_Customize : MonoBehaviour
 
         string damage = equipList[_target_Num].damage.ToString();
         string knockBack = equipList[_target_Num].maxknockback.ToString();
-        string maxCharge = equipList[_target_Num].maxcharge.ToString();
         string stanPower = equipList[_target_Num].stanpower.ToString();
         string width = equipList[_target_Num].wideth.ToString();
         string height = equipList[_target_Num].height.ToString();
@@ -176,7 +175,6 @@ public class Menu_Customize : MonoBehaviour
         text_weaponSpec.text =
             damage + "\n" +
             knockBack + "\n" +
-            maxCharge + "\n" +
             stanPower + "\n" +
             offset + "+" + width + "x" + height;
 

@@ -32,7 +32,7 @@ public class Bullet : MonoBehaviour
 
         if (collision.tag == "Enemy")
         {
-            collision.GetComponent<EnemyCTRL>().TakeDamage(damage, knockback, stanPower);
+            collision.GetComponent<EnemyCTRL>().TakeDamage(damage, knockback, stanPower, 5);
         }
 
         if (collision.tag == "Player")

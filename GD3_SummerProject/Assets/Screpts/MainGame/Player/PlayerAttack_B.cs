@@ -19,6 +19,9 @@ public class PlayerAttack_B : MonoBehaviour
     [SerializeField] TextMeshProUGUI _text_Gun;
     [SerializeField] Slider _slider_Gun;
 
+    [Header("パラメータ")]
+    [SerializeField] public int _defPenalty = 1;
+
     [Header("遠距離攻撃")]
     [SerializeField] int _needGunCharge;  // 遠距離攻撃に必要なチャージ
     [SerializeField] int _nowGunCharge;   // 現在のチャージ
@@ -64,7 +67,7 @@ public class PlayerAttack_B : MonoBehaviour
                 _plCTRL._resultText.text = "miss...";
                 _plCTRL._resultText.alpha = 1.0f;
                 _plCTRL._orFaild = true;
-                _plCTRL._orFaildCount = 1;
+                _plCTRL._orFaildCount = _defPenalty;
             }
         }
 

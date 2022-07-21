@@ -21,15 +21,22 @@ public class GC_BpmCTRL : MonoBehaviour
     [SerializeField] AudioSource audioSource;   // オーディオソース
     [SerializeField] AudioClip[] audioClip;     // クリップ
 
+    [Header("デバッグ")]
+    [SerializeField] float _maxValue;
+    [SerializeField] float _halfValue;
+    [SerializeField] float _ping;
+
     // プライベート変数
-    private float timing = 0.0f;    // メトロノーム用
-    private bool metronome = false; // メトロノームシグナル
-    private bool metronomeFlap = false;
-    private bool doSignal = false;  // シグナル送信用
-    private float nowImageSize = 0.6f;
-    private float minImageSize = 0.6f;
-    private float maxImageSize = 1.2f;
-    private bool pause = false;
+    private float _timing = 0.0f;    // メトロノーム用
+    private bool _metronome = false; // メトロノームシグナル
+    private bool _metronomeFlap = false;
+    private bool _step = false;
+    private bool _stepFlip = false;
+    private bool _doSignal = false;  // シグナル送信用
+    private float _nowImageSize = 0.6f;
+    private float _minImageSize = 0.6f;
+    private float _maxImageSize = 1.2f;
+    private bool _pause = false;
 
 
 
@@ -47,7 +54,7 @@ public class GC_BpmCTRL : MonoBehaviour
     
     void Update()
     {
-        if (pause)
+        if (_pause)
         {
             BpmReset();
             return;
@@ -57,8 +64,8 @@ public class GC_BpmCTRL : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (pause) { return; }
-        timing -= Time.deltaTime;
+        if (_pause) { return; }
+        _timing -= Time.deltaTime;
     }
 
 
@@ -68,29 +75,45 @@ public class GC_BpmCTRL : MonoBehaviour
         // カウンター
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
 
-        if (timing <= 0.05f)
-        {
-            doSignal = true;
-        }
-
-        if (timing <= 0.0f && metronomeFlap == false)
+        if (_timing <= _halfValue && _stepFlip == false)
         {
             audioSource.PlayOneShot(audioClip[0]);
-            nowImageSize = maxImageSize;
-            metronome = true;
-            metronomeFlap = true;
+            _nowImageSize = _maxImageSize;
+            _step = true;
+            _stepFlip = true;
 
-            //Debug.Log("メトロノーム");
+            Debug.Log("half");
         }
         else
         {
-            metronome = false;
+            _step = false;
         }
 
-        if (timing <= -0.2f)
+
+        if (_timing <= _ping)
         {
-            doSignal = false;
-            metronomeFlap = false;
+            _doSignal = true;
+        }
+
+        if (_timing <= 0.0f && _metronomeFlap == false)
+        {
+            audioSource.PlayOneShot(audioClip[0]);
+            _nowImageSize = _maxImageSize;
+            _metronome = true;
+            _metronomeFlap = true;
+
+            Debug.Log("full");
+        }
+        else
+        {
+            _metronome = false;
+        }
+
+        if (_timing <= -_ping)
+        {
+            _doSignal = false;
+            _metronomeFlap = false;
+            _stepFlip = false;
             BpmReset();
         }
 
@@ -103,36 +126,48 @@ public class GC_BpmCTRL : MonoBehaviour
     // BPM更新用
     float BpmReset()
     {
-        _beatSlider.maxValue = 60 / bpm;
-        _beatSlider.minValue = -0.2f;
+        _halfValue = float.Parse((60 / bpm).ToString("N4"));
+        _maxValue = float.Parse((_halfValue * 2.0f).ToString("N4"));
 
-        return timing = 60 / bpm;
+        _beatSlider.maxValue = _maxValue;
+
+        _ping = float.Parse((_maxValue * 0.1f).ToString("N4"));
+
+        _beatSlider.minValue = -_ping;
+
+        return _timing = _maxValue;
     }
 
     // シグナル送信関数
     public bool Metronome()
     {
-        return metronome;
+        return _metronome;
     }
+
+    public bool Step()
+    {
+        return _step;
+    }
+
     public bool Signal()
     {
-        return doSignal;
+        return _doSignal;
     }
 
     public void ChangePause(bool flag)
     {
-        timing = 0;
-        pause = flag;
+        _timing = 0;
+        _pause = flag;
     }
 
     void ImageShrinking()
     {
-        if (nowImageSize > minImageSize){ nowImageSize -= Time.deltaTime * 4.0f; }
-        else { nowImageSize = minImageSize; }
+        if (_nowImageSize > _minImageSize){ _nowImageSize -= Time.deltaTime * 3.0f; }
+        else { _nowImageSize = _minImageSize; }
 
-        beatImage.transform.localScale = new Vector3(nowImageSize, nowImageSize, 1.0f);
+        beatImage.transform.localScale = new Vector3(_nowImageSize, _nowImageSize, 1.0f);
 
 
-        _beatSlider.value = timing;
+        _beatSlider.value = _timing;
     }
 }

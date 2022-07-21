@@ -344,7 +344,7 @@ public class EnemyCTRL : MonoBehaviour
 
 
     // ƒ_ƒ[ƒW‚ðŽó‚¯‚é
-    public void TakeDamage(int damage,int knockback, int stanPower)
+    public void TakeDamage(int damage,int knockback, int stanPower,int typeNum)
     {
         if (NonDamageTime > 0) { return; }
         if (_damageCap >= damage) { damage = 0; }

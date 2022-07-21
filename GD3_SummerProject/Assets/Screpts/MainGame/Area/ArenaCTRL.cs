@@ -98,7 +98,7 @@ public class ArenaCTRL : MonoBehaviour
 
     void Interval_Nomal()
     {
-        if (bpmCTRL.Metronome())
+        if (bpmCTRL.Metronome() || bpmCTRL.Step())
         {
             interval_NowCount++;
             switch (interval_NowCount)
@@ -136,7 +136,7 @@ public class ArenaCTRL : MonoBehaviour
 
     void Interval_Clear()
     {
-        if (bpmCTRL.Metronome())
+        if (bpmCTRL.Metronome() || bpmCTRL.Step())
         {
             interval_NowCount++;
             switch (interval_NowCount)

@@ -21,22 +21,6 @@ public class EquipLoad : MonoBehaviour
         // ƒtƒ@ƒCƒ‹‚ª–³‚¢ê‡‚Í‰Šú‰»
         if (!File.Exists(_equipSavePath))
         {
-            /*
-            defData = new JsonData();
-
-            inputData = new JsonData();
-            inputData.weaponList = new WeaponList[3];
-
-            string inputJson = Resources.Load<TextAsset>(_weaponListPath).ToString();
-            defData = JsonUtility.FromJson<JsonData>(inputJson);
-
-            for (int i = 0; i < inputData.weaponList.Length; i++)
-            {
-                inputData.weaponList[i] = defData.weaponList[i];
-                //Debug.Log(inputData.weaponList[i].name);
-            }
-            */
-
             DefInput();
 
             string datas = JsonUtility.ToJson(inputData, true);
