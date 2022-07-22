@@ -60,7 +60,7 @@ public class PlayerAttack_B : MonoBehaviour
             if (bpmCTRL.Signal())
             {
                 _plCTRL._anim.SetTrigger("Attack");
-                playerWeapon.Attacking();
+                playerWeapon.Attacking(bpmCTRL.Perfect());
             }
             else
             {
@@ -73,13 +73,15 @@ public class PlayerAttack_B : MonoBehaviour
 
         if (playerWeapon.Combo())
         {
-            _plCTRL._resultText.text = "HIT!";
+            if(playerWeapon.IsPerfect()) { _plCTRL._resultText.text = "PERFECT!"; }
+            else { _plCTRL._resultText.text = "HIT!"; }
+            
             _plCTRL._resultText.alpha = 1.0f;
             _plCTRL.doComboMode = true;
             _plCTRL.comboTimeLeft = 2;
         }
 
-        if (bpmCTRL.Metronome())
+        if (bpmCTRL.Count())
         {
             // ƒRƒ“ƒ{Œp‘±ŽžŠÔŒ¸­
             if (_plCTRL.comboTimeLeft > 0)
@@ -100,7 +102,8 @@ public class PlayerAttack_B : MonoBehaviour
                 {
                     _plCTRL._orFaildCount--;
                 }
-                else
+
+                if (_plCTRL._orFaildCount <= 0)
                 {
                     _plCTRL._orFaild = false;
                 }
@@ -155,7 +158,7 @@ public class PlayerAttack_B : MonoBehaviour
 
     void BulletFire(GC_BpmCTRL bpmCTRL)
     {
-        if (bpmCTRL.Metronome())
+        if (bpmCTRL.Count() || bpmCTRL.Step())
         {
             if (_nowCountDown == 0)
             {
@@ -171,7 +174,10 @@ public class PlayerAttack_B : MonoBehaviour
                 _standby = false;
                 _nowGunCharge = 0;
             }
-            _nowCountDown--;
+            else
+            {
+                _nowCountDown--;
+            }
         }
     }
 

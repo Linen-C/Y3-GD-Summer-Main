@@ -10,6 +10,8 @@ public class Bullet : MonoBehaviour
     [SerializeField] int knockback;
     [SerializeField] int stanPower;
 
+    [SerializeField] GameObject _plBullet; // 弾丸
+
     // コンポーネント
     Rigidbody2D body;
 
@@ -28,17 +30,53 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == owner) return;
+        // 何でもない場合
+        if (collision.tag == owner) { return; }
 
-        if (collision.tag == "Enemy")
+
+        // エネミー弾
+        if (owner == "Enemy")
         {
-            collision.GetComponent<EnemyCTRL>().TakeDamage(damage, knockback, stanPower, 5);
+            // 反射
+            if (collision.tag == "PlayerAttack")
+            {
+                Instantiate(
+                    _plBullet,
+                    new Vector3
+                    (transform.position.x,
+                    transform.position.y,
+                    transform.position.z),
+                    collision.transform.rotation);
+
+                Destroy(gameObject);
+                return;
+            }
+
+            // プレイヤーに命中した時
+            if (collision.tag == "Player")
+            {
+                // none
+            }
         }
 
-        if (collision.tag == "Player")
+
+        // プレイヤー弾
+        if (owner == "Player")
         {
-            // none
+            // プレイヤーの攻撃に反応しないように
+            if (collision.tag == "PlayerAttack") { return; }
+
+            // 敵に命中した時
+            if (collision.tag == "Enemy")
+            {
+                collision.GetComponent<EnemyCTRL>().TakeDamage(
+                    damage,
+                    knockback,
+                    stanPower,
+                    5);
+            }
         }
+
 
         Destroy(gameObject);
     }

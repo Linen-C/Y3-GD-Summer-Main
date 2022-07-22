@@ -5,18 +5,22 @@ using UnityEngine.SceneManagement;
 
 public class Menu_Select : MonoBehaviour
 {
+    [Header("キャンバス")]
     [SerializeField] Canvas _Main;
     [SerializeField] Canvas _Select;
     [SerializeField] Canvas _StundbyMaingame;
+
+    [Header("ボタン")]
+    [SerializeField] Menu_Button _menu_Button;
 
     // 各ステージへ
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     public void Select_MainGame()
     {
-        //SceneManager.LoadScene("MainGame");
-
         _Select.enabled = false;
         _StundbyMaingame.enabled = true;
+
+        _menu_Button.B_StundbyMG();
     }
 
     /*
@@ -32,6 +36,8 @@ public class Menu_Select : MonoBehaviour
     {
         _Select.enabled = false;
         _Main.enabled = true;
+
+        _menu_Button.B_MainMenu();
     }
 
 }

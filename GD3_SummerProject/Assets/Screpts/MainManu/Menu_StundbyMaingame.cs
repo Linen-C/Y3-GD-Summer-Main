@@ -19,6 +19,9 @@ public class Menu_StundbyMaingame : MonoBehaviour
     [SerializeField] Image _weaponImage_A;
     [SerializeField] Image _weaponImage_B;
 
+    [Header("ƒ{ƒ^ƒ“")]
+    [SerializeField] Menu_Button _menu_Button;
+
     private bool _selected = false;
 
     private void Update()
@@ -40,6 +43,8 @@ public class Menu_StundbyMaingame : MonoBehaviour
         _StundbyMaingame.enabled = false;
         _selected = false;
         _Select.enabled = true;
+
+        _menu_Button.B_select();
     }
 
     public void StMaingame_to_Customize()
@@ -47,6 +52,8 @@ public class Menu_StundbyMaingame : MonoBehaviour
         _StundbyMaingame.enabled = false;
         _selected = false;
         _menu_Customize.EnableMenu(_StundbyMaingame);
+
+        _menu_Button.B_Custom();
     }
 
     public void GameStart_Nomal()

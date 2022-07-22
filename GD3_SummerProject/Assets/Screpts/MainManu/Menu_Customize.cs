@@ -44,6 +44,9 @@ public class Menu_Customize : MonoBehaviour
     [Header("変更用")]
     [SerializeField] int _target_Num;
 
+    [Header("ボタン")]
+    [SerializeField] Menu_Button _menu_Button;
+
 
     public void EnableMenu(Canvas callMenu)
     {
@@ -54,23 +57,19 @@ public class Menu_Customize : MonoBehaviour
         weaponListLoad = saveManager.transform.GetComponent<WeaponListLoad>();
         jsonData = weaponListLoad.GetList();
 
-        //weaponList = jsonData.weaponList;
-
         equipList = new WeaponList[2];
         equipList = saveManager.EquipLoad();
 
         weaponNumbers = new int[2];
         weaponNumbers[0] = equipList[0].number;
         weaponNumbers[1] = equipList[1].number;
-        //weaponNumbers[2] = equipList[2].number;
 
         weaponImages = new Image[2];
         weaponImages[0] = image_weaponA;
         weaponImages[1] = image_weaponB;
-        //weaponImages[2] = image_weaponC;
+
         weaponImages[0].sprite = Resources.Load<Sprite>(equipList[0].icon);
         weaponImages[1].sprite = Resources.Load<Sprite>(equipList[1].icon);
-        //weaponImages[2].sprite = Resources.Load<Sprite>(equipList[2].icon);
 
         ButtonErase();
     }
@@ -184,9 +183,9 @@ public class Menu_Customize : MonoBehaviour
 
 
 
-    // メインメニューへ戻る
+    //  前のメニューへ戻る
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-    public void Customize_to_Main()
+    public void Customize_to_Back()
     {
         ButtonErase();
 
@@ -194,6 +193,10 @@ public class Menu_Customize : MonoBehaviour
         _CallManu.enabled = true;
 
         saveManager.EquipSave();
+
+        if (_CallManu.name == "Canvas_Main") { _menu_Button.B_MainMenu(); }
+        if (_CallManu.name == "Canvas_SelectMaingame") { _menu_Button.B_StundbyMG(); }
+
     }
 
 }

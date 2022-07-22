@@ -1090,7 +1090,7 @@ MonoBehaviour:
   doStanCount: 0
   stanRecoverCount: 4
   moveSpeed: 0
-  needWeaponCharge: 10
+  needWeaponCharge: 6
   knockBackPower: 0
   defNonDamageTime: 0.3
   _enemyMove: {fileID: -5536215024157495835}
@@ -1106,6 +1106,7 @@ MonoBehaviour:
   hpSlider: {fileID: 3036597731051929616}
   stanBar: {fileID: 5959988020899463614}
   stanBarFill: {fileID: 196955111070910921}
+  NonDamageTime: 0
 --- !u!114 &-5536215024157495835
 MonoBehaviour:
   m_ObjectHideFlags: 0

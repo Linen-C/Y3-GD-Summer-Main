@@ -2108,8 +2108,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pinMax: {fileID: 325881021755740364}
   pinMin: {fileID: 325881023670939924}
-  downToUp: 1
-  setCenter: 0
   camera: {fileID: 0}
 --- !u!1 &325881023361607179
 GameObject:
@@ -2323,8 +2321,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pinMax: {fileID: 325881021755740364}
   pinMin: {fileID: 325881023670939924}
-  downToUp: 0
-  setCenter: 0
   camera: {fileID: 0}
 --- !u!1 &325881023485837671
 GameObject:

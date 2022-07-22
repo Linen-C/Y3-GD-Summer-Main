@@ -92,6 +92,269 @@ public partial class @UIControls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""MenuUI"",
+            ""id"": ""a69737f0-5a9f-46a1-9111-1c28b9d3b68e"",
+            ""actions"": [
+                {
+                    ""name"": ""Point"",
+                    ""type"": ""Value"",
+                    ""id"": ""f60b9a68-d148-4d11-ac07-85578d39eb3f"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Left Click"",
+                    ""type"": ""Button"",
+                    ""id"": ""8c9eabc5-46bf-4992-ac26-67307313d6de"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Middle Click"",
+                    ""type"": ""Button"",
+                    ""id"": ""e7cb9a4c-7818-4ab7-b89d-045079544560"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Right Click"",
+                    ""type"": ""Button"",
+                    ""id"": ""17a57ef9-1bb9-48cf-b831-fd1d7e679a90"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Scroll Wheel"",
+                    ""type"": ""Button"",
+                    ""id"": ""1f35990c-8187-4dae-ad79-4848b2f172f6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Move"",
+                    ""type"": ""Value"",
+                    ""id"": ""d24f5104-7349-4156-aeba-c7bd32bf4f1f"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Submit"",
+                    ""type"": ""Button"",
+                    ""id"": ""4622f0e6-0960-499c-92d6-ddab6bdcce6a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Cancel"",
+                    ""type"": ""Button"",
+                    ""id"": ""5d2e6589-9695-47ea-a908-d60222c09fa9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Tracked Position"",
+                    ""type"": ""Value"",
+                    ""id"": ""668dca86-96fc-4d8f-aea9-19d97a29a5f7"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Tracked Orientation"",
+                    ""type"": ""Value"",
+                    ""id"": ""9ce00526-28fd-4782-8037-f9350abdbd11"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""fb062389-5638-4e02-a978-16a835d59fca"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Submit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b9d6c919-74b1-4a8b-b174-93d8a079a1d6"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Submit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ac63f4fc-cc86-4c4d-933d-dc41fcae5ffb"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7b30f106-9b17-4b28-b5b0-c6050dd2e79e"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b28e8acb-53c4-4259-9f0c-5ac2bd29770a"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Point"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bd8f848c-4d53-4741-867a-a77103be97af"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Point"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5eda9bdd-e022-4799-bf66-81eda0985d66"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Left Click"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bddf6132-eded-4e2d-8924-c29d36c95d02"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Left Click"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cd6ace12-bad7-4fbd-ad73-14c4c6f1d437"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Right Click"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ff6b3b0b-af40-44e9-9b20-9aaeb023a69f"",
+                    ""path"": ""<Gamepad>/dpad"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""WASD"",
+                    ""id"": ""225b7ae7-a228-42f7-9fe0-2967a1cd3cae"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""91ed6611-09f7-4000-a8b8-b4c47842c354"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""1651fcb9-5997-4ebf-9a6e-d4f3c043547e"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""a8f55389-e05e-4cf9-97ea-389719e0c9d1"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""913d7109-f597-4f7c-9967-78bd7245d633"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -100,6 +363,18 @@ public partial class @UIControls : IInputActionCollection2, IDisposable
         m_InGameUI = asset.FindActionMap("InGameUI", throwIfNotFound: true);
         m_InGameUI_Pause = m_InGameUI.FindAction("Pause", throwIfNotFound: true);
         m_InGameUI_Retry = m_InGameUI.FindAction("Retry", throwIfNotFound: true);
+        // MenuUI
+        m_MenuUI = asset.FindActionMap("MenuUI", throwIfNotFound: true);
+        m_MenuUI_Point = m_MenuUI.FindAction("Point", throwIfNotFound: true);
+        m_MenuUI_LeftClick = m_MenuUI.FindAction("Left Click", throwIfNotFound: true);
+        m_MenuUI_MiddleClick = m_MenuUI.FindAction("Middle Click", throwIfNotFound: true);
+        m_MenuUI_RightClick = m_MenuUI.FindAction("Right Click", throwIfNotFound: true);
+        m_MenuUI_ScrollWheel = m_MenuUI.FindAction("Scroll Wheel", throwIfNotFound: true);
+        m_MenuUI_Move = m_MenuUI.FindAction("Move", throwIfNotFound: true);
+        m_MenuUI_Submit = m_MenuUI.FindAction("Submit", throwIfNotFound: true);
+        m_MenuUI_Cancel = m_MenuUI.FindAction("Cancel", throwIfNotFound: true);
+        m_MenuUI_TrackedPosition = m_MenuUI.FindAction("Tracked Position", throwIfNotFound: true);
+        m_MenuUI_TrackedOrientation = m_MenuUI.FindAction("Tracked Orientation", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -196,9 +471,127 @@ public partial class @UIControls : IInputActionCollection2, IDisposable
         }
     }
     public InGameUIActions @InGameUI => new InGameUIActions(this);
+
+    // MenuUI
+    private readonly InputActionMap m_MenuUI;
+    private IMenuUIActions m_MenuUIActionsCallbackInterface;
+    private readonly InputAction m_MenuUI_Point;
+    private readonly InputAction m_MenuUI_LeftClick;
+    private readonly InputAction m_MenuUI_MiddleClick;
+    private readonly InputAction m_MenuUI_RightClick;
+    private readonly InputAction m_MenuUI_ScrollWheel;
+    private readonly InputAction m_MenuUI_Move;
+    private readonly InputAction m_MenuUI_Submit;
+    private readonly InputAction m_MenuUI_Cancel;
+    private readonly InputAction m_MenuUI_TrackedPosition;
+    private readonly InputAction m_MenuUI_TrackedOrientation;
+    public struct MenuUIActions
+    {
+        private @UIControls m_Wrapper;
+        public MenuUIActions(@UIControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Point => m_Wrapper.m_MenuUI_Point;
+        public InputAction @LeftClick => m_Wrapper.m_MenuUI_LeftClick;
+        public InputAction @MiddleClick => m_Wrapper.m_MenuUI_MiddleClick;
+        public InputAction @RightClick => m_Wrapper.m_MenuUI_RightClick;
+        public InputAction @ScrollWheel => m_Wrapper.m_MenuUI_ScrollWheel;
+        public InputAction @Move => m_Wrapper.m_MenuUI_Move;
+        public InputAction @Submit => m_Wrapper.m_MenuUI_Submit;
+        public InputAction @Cancel => m_Wrapper.m_MenuUI_Cancel;
+        public InputAction @TrackedPosition => m_Wrapper.m_MenuUI_TrackedPosition;
+        public InputAction @TrackedOrientation => m_Wrapper.m_MenuUI_TrackedOrientation;
+        public InputActionMap Get() { return m_Wrapper.m_MenuUI; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(MenuUIActions set) { return set.Get(); }
+        public void SetCallbacks(IMenuUIActions instance)
+        {
+            if (m_Wrapper.m_MenuUIActionsCallbackInterface != null)
+            {
+                @Point.started -= m_Wrapper.m_MenuUIActionsCallbackInterface.OnPoint;
+                @Point.performed -= m_Wrapper.m_MenuUIActionsCallbackInterface.OnPoint;
+                @Point.canceled -= m_Wrapper.m_MenuUIActionsCallbackInterface.OnPoint;
+                @LeftClick.started -= m_Wrapper.m_MenuUIActionsCallbackInterface.OnLeftClick;
+                @LeftClick.performed -= m_Wrapper.m_MenuUIActionsCallbackInterface.OnLeftClick;
+                @LeftClick.canceled -= m_Wrapper.m_MenuUIActionsCallbackInterface.OnLeftClick;
+                @MiddleClick.started -= m_Wrapper.m_MenuUIActionsCallbackInterface.OnMiddleClick;
+                @MiddleClick.performed -= m_Wrapper.m_MenuUIActionsCallbackInterface.OnMiddleClick;
+                @MiddleClick.canceled -= m_Wrapper.m_MenuUIActionsCallbackInterface.OnMiddleClick;
+                @RightClick.started -= m_Wrapper.m_MenuUIActionsCallbackInterface.OnRightClick;
+                @RightClick.performed -= m_Wrapper.m_MenuUIActionsCallbackInterface.OnRightClick;
+                @RightClick.canceled -= m_Wrapper.m_MenuUIActionsCallbackInterface.OnRightClick;
+                @ScrollWheel.started -= m_Wrapper.m_MenuUIActionsCallbackInterface.OnScrollWheel;
+                @ScrollWheel.performed -= m_Wrapper.m_MenuUIActionsCallbackInterface.OnScrollWheel;
+                @ScrollWheel.canceled -= m_Wrapper.m_MenuUIActionsCallbackInterface.OnScrollWheel;
+                @Move.started -= m_Wrapper.m_MenuUIActionsCallbackInterface.OnMove;
+                @Move.performed -= m_Wrapper.m_MenuUIActionsCallbackInterface.OnMove;
+                @Move.canceled -= m_Wrapper.m_MenuUIActionsCallbackInterface.OnMove;
+                @Submit.started -= m_Wrapper.m_MenuUIActionsCallbackInterface.OnSubmit;
+                @Submit.performed -= m_Wrapper.m_MenuUIActionsCallbackInterface.OnSubmit;
+                @Submit.canceled -= m_Wrapper.m_MenuUIActionsCallbackInterface.OnSubmit;
+                @Cancel.started -= m_Wrapper.m_MenuUIActionsCallbackInterface.OnCancel;
+                @Cancel.performed -= m_Wrapper.m_MenuUIActionsCallbackInterface.OnCancel;
+                @Cancel.canceled -= m_Wrapper.m_MenuUIActionsCallbackInterface.OnCancel;
+                @TrackedPosition.started -= m_Wrapper.m_MenuUIActionsCallbackInterface.OnTrackedPosition;
+                @TrackedPosition.performed -= m_Wrapper.m_MenuUIActionsCallbackInterface.OnTrackedPosition;
+                @TrackedPosition.canceled -= m_Wrapper.m_MenuUIActionsCallbackInterface.OnTrackedPosition;
+                @TrackedOrientation.started -= m_Wrapper.m_MenuUIActionsCallbackInterface.OnTrackedOrientation;
+                @TrackedOrientation.performed -= m_Wrapper.m_MenuUIActionsCallbackInterface.OnTrackedOrientation;
+                @TrackedOrientation.canceled -= m_Wrapper.m_MenuUIActionsCallbackInterface.OnTrackedOrientation;
+            }
+            m_Wrapper.m_MenuUIActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Point.started += instance.OnPoint;
+                @Point.performed += instance.OnPoint;
+                @Point.canceled += instance.OnPoint;
+                @LeftClick.started += instance.OnLeftClick;
+                @LeftClick.performed += instance.OnLeftClick;
+                @LeftClick.canceled += instance.OnLeftClick;
+                @MiddleClick.started += instance.OnMiddleClick;
+                @MiddleClick.performed += instance.OnMiddleClick;
+                @MiddleClick.canceled += instance.OnMiddleClick;
+                @RightClick.started += instance.OnRightClick;
+                @RightClick.performed += instance.OnRightClick;
+                @RightClick.canceled += instance.OnRightClick;
+                @ScrollWheel.started += instance.OnScrollWheel;
+                @ScrollWheel.performed += instance.OnScrollWheel;
+                @ScrollWheel.canceled += instance.OnScrollWheel;
+                @Move.started += instance.OnMove;
+                @Move.performed += instance.OnMove;
+                @Move.canceled += instance.OnMove;
+                @Submit.started += instance.OnSubmit;
+                @Submit.performed += instance.OnSubmit;
+                @Submit.canceled += instance.OnSubmit;
+                @Cancel.started += instance.OnCancel;
+                @Cancel.performed += instance.OnCancel;
+                @Cancel.canceled += instance.OnCancel;
+                @TrackedPosition.started += instance.OnTrackedPosition;
+                @TrackedPosition.performed += instance.OnTrackedPosition;
+                @TrackedPosition.canceled += instance.OnTrackedPosition;
+                @TrackedOrientation.started += instance.OnTrackedOrientation;
+                @TrackedOrientation.performed += instance.OnTrackedOrientation;
+                @TrackedOrientation.canceled += instance.OnTrackedOrientation;
+            }
+        }
+    }
+    public MenuUIActions @MenuUI => new MenuUIActions(this);
     public interface IInGameUIActions
     {
         void OnPause(InputAction.CallbackContext context);
         void OnRetry(InputAction.CallbackContext context);
+    }
+    public interface IMenuUIActions
+    {
+        void OnPoint(InputAction.CallbackContext context);
+        void OnLeftClick(InputAction.CallbackContext context);
+        void OnMiddleClick(InputAction.CallbackContext context);
+        void OnRightClick(InputAction.CallbackContext context);
+        void OnScrollWheel(InputAction.CallbackContext context);
+        void OnMove(InputAction.CallbackContext context);
+        void OnSubmit(InputAction.CallbackContext context);
+        void OnCancel(InputAction.CallbackContext context);
+        void OnTrackedPosition(InputAction.CallbackContext context);
+        void OnTrackedOrientation(InputAction.CallbackContext context);
     }
 }

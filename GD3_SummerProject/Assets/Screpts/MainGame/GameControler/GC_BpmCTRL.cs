@@ -25,14 +25,17 @@ public class GC_BpmCTRL : MonoBehaviour
     [SerializeField] float _maxValue;
     [SerializeField] float _halfValue;
     [SerializeField] float _ping;
+    [SerializeField] float _halfPing;
 
     // プライベート変数
     private float _timing = 0.0f;    // メトロノーム用
     private bool _metronome = false; // メトロノームシグナル
     private bool _metronomeFlap = false;
-    private bool _step = false;
-    private bool _stepFlip = false;
-    private bool _doSignal = false;  // シグナル送信用
+    private bool _step = false;       // １拍
+    private bool _stepFlip = false;   // シグナル半分
+    private bool _doSignal = false;   // シグナル送信用
+    private bool _perfect = false;    // パーフェクト
+    private bool _count = false;      // カウント用
     private float _nowImageSize = 0.6f;
     private float _minImageSize = 0.6f;
     private float _maxImageSize = 1.2f;
@@ -95,6 +98,11 @@ public class GC_BpmCTRL : MonoBehaviour
             _doSignal = true;
         }
 
+        if (_timing <= _halfPing)
+        {
+            _perfect = true;
+        }
+
         if (_timing <= 0.0f && _metronomeFlap == false)
         {
             audioSource.PlayOneShot(audioClip[0]);
@@ -109,12 +117,24 @@ public class GC_BpmCTRL : MonoBehaviour
             _metronome = false;
         }
 
+        if (_timing <= -_halfPing)
+        {
+            _perfect = false;
+        }
+
         if (_timing <= -_ping)
         {
             _doSignal = false;
             _metronomeFlap = false;
             _stepFlip = false;
+
+            _count = true;
+
             BpmReset();
+        }
+        else
+        {
+            _count = false;
         }
 
         
@@ -131,7 +151,9 @@ public class GC_BpmCTRL : MonoBehaviour
 
         _beatSlider.maxValue = _maxValue;
 
-        _ping = float.Parse((_maxValue * 0.1f).ToString("N4"));
+        _ping = float.Parse((_maxValue * 0.14f).ToString("N4"));
+
+        _halfPing = float.Parse((_ping * 0.2f).ToString("N4"));
 
         _beatSlider.minValue = -_ping;
 
@@ -152,6 +174,16 @@ public class GC_BpmCTRL : MonoBehaviour
     public bool Signal()
     {
         return _doSignal;
+    }
+
+    public bool Perfect()
+    {
+        return _perfect;
+    }
+
+    public bool Count()
+    {
+        return _count;
     }
 
     public void ChangePause(bool flag)

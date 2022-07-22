@@ -23,8 +23,9 @@ public class PlayerWeapon_B : MonoBehaviour
 
     // プライベート変数
     float _spriteAlpha = 0.0f;
-    float _hitCoolDown = 0.0f;
+    [SerializeField] float _hitCoolDown = 0.0f;
     bool _comboFlag = false;
+    bool _isPerfect = false;
 
     // コンポーネント
     BoxCollider2D coll;
@@ -139,12 +140,24 @@ public class PlayerWeapon_B : MonoBehaviour
         return true;
     }
 
-    public void Attacking()
+    public void Attacking(bool timing)
     {
         coll.enabled = true;
         nowAttakingTime = defAttackingTime;
 
+        if (timing) { _isPerfect = true; }
+
         _spriteAlpha = 1.0f;
+    }
+
+    public bool IsPerfect()
+    {
+        bool retBool;
+
+        retBool = _isPerfect;
+        _isPerfect = false;
+
+        return retBool;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -160,13 +173,24 @@ public class PlayerWeapon_B : MonoBehaviour
 
             int damage = _damage;
 
-            if (_typeNum != 2) { damage += _playerCTRL.comboCount; }
+            if (_typeNum != 2)
+            {
+                damage += _playerCTRL.comboCount;
+                if (_isPerfect) { damage += 2; }
+            }
 
             collision.gameObject.GetComponent<EnemyCTRL>().TakeDamage(
                 damage,
                 _knockBack,
                 _stanPower,
                 _typeNum);
+        }
+
+        if (collision.tag == "EnemyAttack")
+        {
+            _playerCTRL.comboCount++;
+            _comboFlag = true;
+            _hitCoolDown = defAttackingTime;
         }
     }
 }
