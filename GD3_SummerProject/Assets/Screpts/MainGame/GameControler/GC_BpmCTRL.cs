@@ -28,7 +28,7 @@ public class GC_BpmCTRL : MonoBehaviour
     [SerializeField] float _halfPing;
 
     // プライベート変数
-    private float _timing = 0.0f;    // メトロノーム用
+    [SerializeField] private float _timing = 0.0f;    // メトロノーム用
     private bool _metronome = false; // メトロノームシグナル
     private bool _metronomeFlap = false;
     private bool _step = false;       // １拍
@@ -122,7 +122,7 @@ public class GC_BpmCTRL : MonoBehaviour
             _perfect = false;
         }
 
-        if (_timing <= -_ping)
+        if (_timing <= -0.0f)
         {
             _doSignal = false;
             _metronomeFlap = false;

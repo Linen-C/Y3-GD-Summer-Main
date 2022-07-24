@@ -21,7 +21,6 @@ public class Menu_Customize : MonoBehaviour
     [SerializeField] int[] weaponNumbers;
     [SerializeField] Image image_weaponA;
     [SerializeField] Image image_weaponB;
-    [SerializeField] Image image_weaponC;
     [SerializeField] Image[] weaponImages;
 
     [Header("ƒ{ƒ^ƒ““®“I¶¬")]

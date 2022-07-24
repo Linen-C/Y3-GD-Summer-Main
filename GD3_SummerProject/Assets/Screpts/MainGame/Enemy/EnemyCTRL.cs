@@ -172,12 +172,12 @@ public class EnemyCTRL : MonoBehaviour
 
         if (doStanCount > 0)
         {
-            if (bpmCTRL.Metronome()) { doStanCount--; }
+            if (bpmCTRL.Count()) { doStanCount--; }
             return false;
         }
         else if (nowStan > 0)
         {
-            if (bpmCTRL.Metronome()) { nowStan -= 5; }
+            if (bpmCTRL.Count()) { nowStan -= 5; }
         }
 
         if (nowStan < 0) { nowStan = 0; }
