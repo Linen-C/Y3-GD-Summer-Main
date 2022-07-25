@@ -6,6 +6,12 @@ using TMPro;
 
 public class Menu_Customize : MonoBehaviour
 {
+    [Header("アニメーター")]
+    [SerializeField] Animator _animator;
+
+    [Header("表記更新用")]
+    [SerializeField] Menu_StundbyMaingame _stMG;
+
     [Header("武器リストと装備武器のロード・セーブ")]
     [SerializeField] SaveManager saveManager;
     [SerializeField] WeaponListLoad weaponListLoad;
@@ -36,22 +42,15 @@ public class Menu_Customize : MonoBehaviour
     [SerializeField] TextMeshProUGUI text_weaponSpec;
     [SerializeField] TextMeshProUGUI text_description;
 
-    [Header("画面遷移用")]
-    [SerializeField] Canvas _CallManu;
-    [SerializeField] Canvas _Customize;
-
     [Header("変更用")]
     [SerializeField] int _target_Num;
 
-    [Header("ボタン")]
+    [Header("ボタンリスト")]
     [SerializeField] Menu_Button _menu_Button;
 
 
-    public void EnableMenu(Canvas callMenu)
+    public void EnableMenu()
     {
-        _Customize.enabled = true;
-        _CallManu = callMenu;
-
         //Debug.Log("Custom_Run");
         weaponListLoad = saveManager.transform.GetComponent<WeaponListLoad>();
         jsonData = weaponListLoad.GetList();
@@ -91,16 +90,6 @@ public class Menu_Customize : MonoBehaviour
         ShowWeaponData();
         ButtonGenerate();
     }
-
-    /*
-    public void SetWeaponChangeC()
-    {
-        ButtonErase();
-        _target_Num = 2;
-        ShowWeaponData();
-        ButtonGenerate();
-    }
-    */
 
     public void SetGunChange()
     {
@@ -187,15 +176,10 @@ public class Menu_Customize : MonoBehaviour
     public void Customize_to_Back()
     {
         ButtonErase();
-
-        _Customize.enabled = false;
-        _CallManu.enabled = true;
-
         saveManager.EquipSave();
 
-        if (_CallManu.name == "Canvas_Main") { _menu_Button.B_MainMenu(); }
-        if (_CallManu.name == "Canvas_SelectMaingame") { _menu_Button.B_StundbyMG(); }
-
+        _stMG.SetWeaponImage();
+        _animator.SetBool("Custom_Bool", false);
     }
 
 }

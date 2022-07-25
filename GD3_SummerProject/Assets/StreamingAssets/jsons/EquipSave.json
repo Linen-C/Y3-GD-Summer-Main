@@ -17,20 +17,20 @@
             "text": "どこにでもよくあるバット\n尖ったところはない\n性能的にも物理的にも\n木製だったら釘でも打ち込んでいたところだ"
         },
         {
-            "number": 1,
-            "name": "スパイク",
-            "typeName": "small",
-            "typeNum": 1,
-            "trail": "Images/images/Trail/TR_spike",
-            "icon": "Images/images/Icon/WI_spike",
-            "damage": 2,
-            "defknockback": 20,
-            "maxknockback": 20,
-            "stanpower": 25,
-            "wideth": 1,
-            "height": 3,
-            "offset": 3.0,
-            "text": "素手よりマシ程度の性能\n使い手曰く退魔の力があるとかなんとか\n信じない方がいい\n実際ウソ"
+            "number": 2,
+            "name": "ランス",
+            "typeName": "long",
+            "typeNum": 2,
+            "trail": "Images/images/Trail/TR_lance",
+            "icon": "Images/images/Icon/WI_lance",
+            "damage": 6,
+            "defknockback": 40,
+            "maxknockback": 50,
+            "stanpower": 50,
+            "wideth": 2,
+            "height": 5,
+            "offset": 4.0,
+            "text": "使い手曰く…\n「殴るなんてそんな野蛮な！」\n「ここは穏便に突き刺しましょう！」\n…大丈夫、その違和感はきっと正しい"
         }
     ]
 }

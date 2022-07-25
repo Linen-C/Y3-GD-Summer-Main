@@ -3,26 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 
 public class Menu_Button : MonoBehaviour
 {
     [Header("メインメニュー")]
-    [SerializeField] Button _Button_mainmenu;
+    [SerializeField] GameObject _Button_mainmenu;
     [Header("カスタマイズ")]
-    [SerializeField] Button _Button_custom;
+    [SerializeField] GameObject _Button_custom;
     [Header("ステージセレクト")]
-    [SerializeField] Button _Button_select;
+    [SerializeField] GameObject _Button_select;
     [Header("スタンバイ")]
-    [SerializeField] Button _Button_standbyMG;
-    [Header("オプション")]
-    [SerializeField] Button _Button_option;
+    [SerializeField] GameObject _Button_standbyMG;
+    //[Header("オプション")]
+    //[SerializeField] GameObject _Button_option;
 
 
     void Awake()
     {
-        var padName = Gamepad.current;
-        if (padName == null)  { return; }
-
         B_MainMenu();
     }
 
@@ -31,7 +29,9 @@ public class Menu_Button : MonoBehaviour
         var padName = Gamepad.current;
         if (padName == null) { return; }
 
-        _Button_mainmenu.Select();
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(_Button_mainmenu);
+        //_Button_mainmenu.Select();
     }
 
     public void B_Custom()
@@ -39,7 +39,8 @@ public class Menu_Button : MonoBehaviour
         var padName = Gamepad.current;
         if (padName == null) { return; }
 
-        _Button_custom.Select();
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(_Button_custom);
     }
 
     public void B_select()
@@ -47,7 +48,8 @@ public class Menu_Button : MonoBehaviour
         var padName = Gamepad.current;
         if (padName == null) { return; }
 
-        _Button_select.Select();
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(_Button_select);
     }
 
     public void B_StundbyMG()
@@ -55,15 +57,18 @@ public class Menu_Button : MonoBehaviour
         var padName = Gamepad.current;
         if (padName == null) { return; }
 
-        _Button_standbyMG.Select();
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(_Button_standbyMG);
     }
     
+    /*
     public void B_Option()
     {
         var padName = Gamepad.current;
         if (padName == null) { return; }
 
-        _Button_option.Select();
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(_Button_option);
     }
-
+    */
 }

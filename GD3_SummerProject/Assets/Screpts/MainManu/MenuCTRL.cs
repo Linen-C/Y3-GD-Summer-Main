@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class MenuCTRL : MonoBehaviour
 {
@@ -12,9 +13,10 @@ public class MenuCTRL : MonoBehaviour
     [SerializeField] Menu_Customize _menu_Customize;
     [SerializeField] GameObject _Select; 
     [SerializeField] GameObject _StandbyMaingame;
+    [SerializeField] Menu_StundbyMaingame _stMG;
     [SerializeField] GameObject _Option;
 
-    [Header("テスト")]
+    [Header("アニメーター")]
     [SerializeField] Animator _animator;
 
     [Header("ボタン")]
@@ -22,32 +24,52 @@ public class MenuCTRL : MonoBehaviour
 
     void Awake()
     {
-        //_Customize.SetActive(false);
-        //_Select.SetActive(false);
-        //_StandbyMaingame.SetActive(false);
-        _Option.SetActive(false);
+        //_Option.SetActive(false);
+        _animator.SetBool("Main_Bool", true);
     }
 
-    // カスタマイズ画面へ
+    // Any→カスタマイズ
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-    public void Main_to_Customize()
+    public void Any_to_Customize()
     {
-        //_Main.SetActive(false);
-        //_menu_Customize.EnableMenu(_Main);
-
-        //_menu_Button.B_Custom();
-        //Debug.Log("Main→Custom");
+        _menu_Customize.EnableMenu();
+        _animator.SetBool("Custom_Bool", true);
     }
 
-
-    // セレクト画面へ
+    // メイン→セレクト
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     public void Main_to_Select()
     {
-        //_Main.enabled = false;
-        //_Select.enabled = true;
+        _animator.SetBool("Main_Bool", false);
+        _animator.SetBool("Select_Bool", true);
+    }
 
-        //_menu_Button.B_select();
+
+    // セレクト→メイン
+    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+    public void Select_to_Main()
+    {
+        _animator.SetBool("Select_Bool", false);
+        _animator.SetBool("Main_Bool", true);
+    }
+
+    // セレクト→メインゲーム
+    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+    public void Select_to_StMG()
+    {
+        _stMG.SetWeaponImage();
+
+        _animator.SetBool("Select_Bool", false);
+        _animator.SetBool("StMG_Bool", true);
+    }
+
+
+    // メインゲーム→セレクト
+    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+    public void StMG_to_Select()
+    {
+        _animator.SetBool("StMG_Bool", false);
+        _animator.SetBool("Select_Bool", true);
     }
 
 
@@ -63,10 +85,7 @@ public class MenuCTRL : MonoBehaviour
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     public void OptionEnable()
     {
-        //_Main.enabled = false;
-        //_Option.enabled = true;
-
-        //_menu_Button.B_Option();
+        EventSystem.current.SetSelectedGameObject(null);
+        Instantiate(_Option);
     }
-
 }

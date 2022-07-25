@@ -117,16 +117,17 @@ public class GC_BpmCTRL : MonoBehaviour
             _metronome = false;
         }
 
-        if (_timing <= -_halfPing)
-        {
-            _perfect = false;
-        }
+        //if (_timing <= -_halfPing)
+        //{
+        //    _perfect = false;
+        //}
 
-        if (_timing <= -0.0f)
+        if (_timing <= 0.0f)
         {
             _doSignal = false;
             _metronomeFlap = false;
             _stepFlip = false;
+            _perfect = false;
 
             _count = true;
 
@@ -151,11 +152,11 @@ public class GC_BpmCTRL : MonoBehaviour
 
         _beatSlider.maxValue = _maxValue;
 
-        _ping = float.Parse((_maxValue * 0.14f).ToString("N4"));
+        _ping = float.Parse((_maxValue * 0.18f).ToString("N4"));
 
-        _halfPing = float.Parse((_ping * 0.2f).ToString("N4"));
+        _halfPing = float.Parse((_ping * 0.4f).ToString("N4"));
 
-        _beatSlider.minValue = -_ping;
+        _beatSlider.minValue = 0;
 
         return _timing = _maxValue;
     }
