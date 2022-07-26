@@ -505,10 +505,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 90009833}
     - target: {fileID: 3399113693741798867, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
-      propertyPath: audioSource
-      value: 
-      objectReference: {fileID: 1926219330}
-    - target: {fileID: 3399113693741798867, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
       propertyPath: _image_Wepon
       value: 
       objectReference: {fileID: 45823888}
@@ -597,11 +593,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!82 &1926219330 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 1744843459, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
-  m_PrefabInstance: {fileID: 1727096758}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2017294177
 GameObject:
   m_ObjectHideFlags: 0
@@ -1050,6 +1041,18 @@ PrefabInstance:
     - target: {fileID: 6903588830716025513, guid: 6f770c8c496911b43b02d2c08ab089e5, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 92
+      objectReference: {fileID: 0}
+    - target: {fileID: 7389265044780042268, guid: 6f770c8c496911b43b02d2c08ab089e5, type: 3}
+      propertyPath: m_Color.b
+      value: 0.24705882
+      objectReference: {fileID: 0}
+    - target: {fileID: 7389265044780042268, guid: 6f770c8c496911b43b02d2c08ab089e5, type: 3}
+      propertyPath: m_Color.g
+      value: 0.24705882
+      objectReference: {fileID: 0}
+    - target: {fileID: 7389265044780042268, guid: 6f770c8c496911b43b02d2c08ab089e5, type: 3}
+      propertyPath: m_Color.r
+      value: 0.24705882
       objectReference: {fileID: 0}
     - target: {fileID: 7389265045122809625, guid: 6f770c8c496911b43b02d2c08ab089e5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target

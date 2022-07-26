@@ -85,7 +85,7 @@ public class GC_BpmCTRL : MonoBehaviour
             _step = true;
             _stepFlip = true;
 
-            Debug.Log("half");
+            //Debug.Log("half");
         }
         else
         {
@@ -110,7 +110,7 @@ public class GC_BpmCTRL : MonoBehaviour
             _metronome = true;
             _metronomeFlap = true;
 
-            Debug.Log("full");
+            //Debug.Log("full");
         }
         else
         {

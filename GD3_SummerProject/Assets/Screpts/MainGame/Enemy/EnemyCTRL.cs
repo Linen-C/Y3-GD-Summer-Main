@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class EnemyCTRL : MonoBehaviour
 {
-    [Header("遠距離攻撃用の仮組み")]
+    [Header("遠距離攻撃用")]
     [SerializeField] bool shootingType = false; // 遠距離攻撃タイプか
     [SerializeField] GameObject bullet; // 弾丸
 
@@ -13,7 +13,6 @@ public class EnemyCTRL : MonoBehaviour
     [SerializeField] bool _kockBackResist = false;
     [SerializeField] int _damageCap = 0;
 
-    // 変数
     [Header("ステータス")]
     [SerializeField] int maxHelthPoint;      // 最大体力
     [SerializeField] int nowHelthPoint = 0;  // 現在体力
@@ -21,10 +20,13 @@ public class EnemyCTRL : MonoBehaviour
     [SerializeField] int nowStan;            // 現在スタン値
     [SerializeField] int doStanCount;        // スタン回復までのテンポ数
     [SerializeField] int stanRecoverCount;   // スタン回復までのデフォルトテンポ数
+
     [Header("移動")]
     [SerializeField] float moveSpeed;  // 移動速度
+
     [Header("武器")]
     [SerializeField] int needWeaponCharge;  // 必要クールダウン
+
     [Header("ノックバックと無敵時間")]
     [SerializeField] float knockBackPower;    // かかるノックバックの強さ
     [SerializeField] float defNonDamageTime = 0.3f;  // デフォルト無敵時間
@@ -48,6 +50,7 @@ public class EnemyCTRL : MonoBehaviour
     [Header("ゲームオブジェクト(自動取得)")]
     [SerializeField] GameObject player;    // プレイヤー
     [SerializeField] GameObject areaObj;   // エリアオブジェクト
+    [SerializeField] Renderer _renderer;
 
     // 体力表示
     [Header("体力表示(マニュアル)")]
@@ -60,7 +63,7 @@ public class EnemyCTRL : MonoBehaviour
     private bool coolDownReset = false;  // クールダウンのリセットフラグ
     private Vector2 diff;                // プレイヤーの方向
     private float knockBackCounter = 0;  // ノックバック時間カウンター
-    [SerializeField] private float NonDamageTime = 0;     // 無敵時間
+    private float NonDamageTime = 0;     // 無敵時間
 
     // コンポーネント
     SpriteRenderer sprite;
@@ -86,6 +89,7 @@ public class EnemyCTRL : MonoBehaviour
         anim = GetComponent<Animator>();
         flashAnim = flashObj.GetComponent<Animator>();
         curTrans = cursor.GetComponent<Transform>();
+        _renderer = GetComponent<Renderer>();
     }
 
     void Start()
@@ -151,8 +155,9 @@ public class EnemyCTRL : MonoBehaviour
     {
         // ステート判定
         if (!CanMove()) { return; }
-
         knockBackCounter = _enemyMove.KnockBack(knockBackCounter, body, diff, knockBackPower);
+
+        if (weaponCharge >= (needWeaponCharge - 1) && (needWeaponCharge != -1)) { return; }
         _enemyMove.Move(knockBackCounter, doStanCount, body, diff, moveSpeed);
     }
 
@@ -263,13 +268,16 @@ public class EnemyCTRL : MonoBehaviour
 
             if (shootingType)
             {
-                Instantiate(
+                if (_renderer.isVisible)
+                {
+                    Instantiate(
                     bullet,
                     new Vector3
                     (cursorImage.transform.position.x,
                     cursorImage.transform.position.y,
                     cursorImage.transform.position.z),
                     cursor.transform.rotation);
+                }
             }
             else { ownWepon.Attacking(); }
 
@@ -295,35 +303,6 @@ public class EnemyCTRL : MonoBehaviour
         }
 
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-    }
-
-    // 移動
-    void Move()
-    {
-        if (knockBackCounter <= 0.0f)
-        {
-            if (doStanCount <= 0)
-            {
-                body.velocity = new Vector2(diff.x * moveSpeed, diff.y * moveSpeed);
-            }
-            else
-            {
-                body.velocity = (new Vector2(0, 0));
-            }
-        }
-    }
-
-    void KnockBack()
-    {
-        if (knockBackCounter > 0.0f)
-        {
-            body.AddForce(new Vector2(
-                -diff.x * knockBackPower,
-                -diff.y * knockBackPower),
-                ForceMode2D.Impulse);
-
-            knockBackCounter -= Time.deltaTime;
-        }
     }
 
     // 体力表示

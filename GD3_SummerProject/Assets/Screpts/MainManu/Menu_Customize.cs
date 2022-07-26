@@ -113,7 +113,8 @@ public class Menu_Customize : MonoBehaviour
             image.sprite = Resources.Load<Sprite>(jsonData.weaponList[indexNumber].icon);
 
             button.GetComponent<Button>().onClick.AddListener(() => SetWepon(button, indexNumber));
-
+            var test = button.GetComponent<Selectable>();
+            
             _horiDist += _defHoriDist - 50;
             if (num % 4 == 0 && num != 0)
             {

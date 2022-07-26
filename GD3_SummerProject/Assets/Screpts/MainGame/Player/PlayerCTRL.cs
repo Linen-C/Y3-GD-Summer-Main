@@ -138,10 +138,11 @@ public class PlayerCTRL : MonoBehaviour
         if (state != State.Alive)
         {
             _anim.SetBool("Moving", false);
+            _anim.SetBool("Alive", false);
             _body.velocity = new Vector2(0,0);
             return;
         }
-        else { _anim.SetBool("Moving", true); }
+        else { _anim.SetBool("Alive", true); }
 
         // –³“GŽžŠÔ
         if (NonDamageTime > 0) { NonDamageTime -= Time.deltaTime; }

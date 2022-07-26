@@ -25,6 +25,7 @@ public class PlayerMove : MonoBehaviour
         {
             body.AddForce(new Vector2(0, 4), ForceMode2D.Impulse);
             _eventMoveTimer -= Time.deltaTime;
+            _plCTRL._anim.SetBool("Moving", true);
             return;
         }
 
@@ -40,6 +41,7 @@ public class PlayerMove : MonoBehaviour
             body.velocity = new Vector2(
                 moveDir.x * moveSpeed,
                 moveDir.y * moveSpeed);
+            _plCTRL._anim.SetBool("Moving", true);
         }
 
         // ‰ñ”ð
@@ -53,6 +55,8 @@ public class PlayerMove : MonoBehaviour
             dogeTimer -= Time.deltaTime;
         }
 
+
+        if (body.velocity.magnitude == Vector2.zero.magnitude) { _plCTRL._anim.SetBool("Moving", false); }
     }
 
     void KnockBack(Rigidbody2D body)
