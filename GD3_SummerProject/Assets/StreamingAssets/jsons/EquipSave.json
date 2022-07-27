@@ -1,36 +1,36 @@
 {
     "weaponList": [
         {
-            "number": 0,
-            "name": "バット",
-            "typeName": "club",
-            "typeNum": 0,
-            "trail": "Images/images/Trail/TR_bat",
-            "icon": "Images/images/Icon/WI_bat",
-            "damage": 3,
-            "defknockback": 20,
-            "maxknockback": 30,
-            "stanpower": 100,
-            "wideth": 4,
-            "height": 2,
-            "offset": 3.0,
-            "text": "どこにでもよくあるバット\n尖ったところはない\n性能的にも物理的にも\n木製だったら釘でも打ち込んでいたところだ"
-        },
-        {
-            "number": 2,
-            "name": "ランス",
+            "number": 6,
+            "name": "スピア",
             "typeName": "long",
             "typeNum": 2,
-            "trail": "Images/images/Trail/TR_lance",
-            "icon": "Images/images/Icon/WI_lance",
+            "trail": "Images/Weapon/Trail/TR_spear",
+            "icon": "Images/Weapon/Icon/WI_spear",
             "damage": 6,
             "defknockback": 40,
             "maxknockback": 50,
             "stanpower": 50,
             "wideth": 2,
-            "height": 5,
-            "offset": 4.0,
-            "text": "使い手曰く…\n「殴るなんてそんな野蛮な！」\n「ここは穏便に突き刺しましょう！」\n…大丈夫、その違和感はきっと正しい"
+            "height": 3,
+            "offset": 8.5,
+            "text": "長い槍だが、刃が小さすぎるせいで\n突くのにしか使えない\n面白いのはきっと最初のうちだけ\nそのうちこいつのピーキーさに辟易する"
+        },
+        {
+            "number": 10,
+            "name": "ハンマー",
+            "typeName": "long",
+            "typeNum": 2,
+            "trail": "Images/Weapon/Trail/TR_bat",
+            "icon": "Images/Weapon/Icon/WI_hammer",
+            "damage": 7,
+            "defknockback": 40,
+            "maxknockback": 50,
+            "stanpower": 50,
+            "wideth": 7,
+            "height": 3,
+            "offset": 8.0,
+            "text": "あまりにも小回りが利かなさすぎる…\n雑魚掃除には全く向いていないだろう\nこの無骨すぎる武器で\n一体何と戦おうと言うのだ？"
         }
     ]
 }

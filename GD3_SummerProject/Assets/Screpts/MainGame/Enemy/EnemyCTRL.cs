@@ -223,6 +223,8 @@ public class EnemyCTRL : MonoBehaviour
         // プレイヤー方向の補足
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
 
+        if (ownWepon.attakingTime > 0) { return; }
+
         // 自分の位置
         Vector2 transPos = transform.position;
 

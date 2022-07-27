@@ -14,7 +14,7 @@ public class EnemyWepon : MonoBehaviour
     public SpriteChanger spriteChanger;
 
     // プライベート変数
-    float attakingTime = 0.0f;  // 判定の発生時間
+    public float attakingTime = 0.0f;  // 判定の発生時間
     float spriteAlpha = 0.0f;
 
     // コンポーネント

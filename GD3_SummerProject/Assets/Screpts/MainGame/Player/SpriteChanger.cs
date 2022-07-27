@@ -7,14 +7,6 @@ public class SpriteChanger : MonoBehaviour
     // コンポーネント
     public SpriteRenderer spriteRenderer;
 
-    void Start()
-    {
-        // どうしてかこの方式だと上手くいかない
-        // spriteRenderer = GetComponent<SpriteRenderer>();
-        //Debug.Log("SpCh：" + spriteRenderer);
-    }
-
-    
     public void ChangeSprite(Sprite changeTarget,float offset)
     {
         transform.localPosition = new Vector3(0, offset, 0);
