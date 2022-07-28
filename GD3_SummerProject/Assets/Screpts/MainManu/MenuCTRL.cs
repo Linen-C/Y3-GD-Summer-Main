@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 
@@ -57,7 +56,7 @@ public class MenuCTRL : MonoBehaviour
     //      //
     public void Select_to_StMG()
     {
-        _stMG.SetWeaponImage();
+        _stMG.Select_StMG();
 
         _animator.SetBool("Select_Bool", false);
         _animator.SetBool("StMG_Bool", true);

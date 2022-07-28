@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 7a4dcbc3e4e48444aa0258c4210635b8, type: 3}
-  m_Color: {r: 0.7490196, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.7490196, g: 0, b: 0, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -321,7 +321,7 @@ MonoBehaviour:
   bullet: {fileID: 0}
   _kockBackResist: 0
   _damageCap: 0
-  maxHelthPoint: 10
+  maxHelthPoint: 16
   nowHelthPoint: 0
   maxStan: 100
   nowStan: 0
@@ -345,7 +345,6 @@ MonoBehaviour:
   hpSlider: {fileID: 898896841}
   stanBar: {fileID: 2926692960818375499}
   stanBarFill: {fileID: 1296231227346687202}
-  NonDamageTime: 0
 --- !u!114 &7781659906550622949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -555,6 +554,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defTime: 0.3
+  attakingTime: 0
   enemyCTRL: {fileID: 562583548966233381}
   spriteChanger: {fileID: 562583548491957567}
 --- !u!1 &7273811921848249318

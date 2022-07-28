@@ -208,7 +208,9 @@ public class EnemyCTRL : MonoBehaviour
 
     bool CanMove()
     {
-        if (state == State.Dead || state == State.Stop || weaponCharge == (needWeaponCharge - 1))
+        if (state == State.Dead ||
+            state == State.Stop ||
+            weaponCharge == (needWeaponCharge - 1))
         {
             body.velocity = new Vector2(0, 0);
             return false;
@@ -222,8 +224,6 @@ public class EnemyCTRL : MonoBehaviour
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
         // プレイヤー方向の補足
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-
-        if (ownWepon.attakingTime > 0) { return; }
 
         // 自分の位置
         Vector2 transPos = transform.position;
@@ -243,7 +243,10 @@ public class EnemyCTRL : MonoBehaviour
         // カーソル回転
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
 
-        if (weaponCharge >= (needWeaponCharge - 1) && (needWeaponCharge != -1)) { return; }
+        if (weaponCharge >= (needWeaponCharge - 1) ||
+            (needWeaponCharge == -1)) { return; }
+
+        if (ownWepon.attakingTime > 0) { return; }
 
         // 回転に代入
         var curRot = Quaternion.FromToRotation(Vector3.up, diff);

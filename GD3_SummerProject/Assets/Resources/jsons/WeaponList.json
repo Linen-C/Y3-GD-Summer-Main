@@ -6,7 +6,7 @@
       "name": "バット", "typeName":"club", "typeNum":0, "trail":"Images/Weapon/Trail/TR_bat", "icon":"Images/Weapon/Icon/WI_bat",
       "damage":3, "defknockback":20, "maxknockback":30, "stanpower":100,
       "wideth": 5, "height": 3, "offset": 3.0,
-      "text":"どこにでもよくあるバット\n尖ったところはない\n性能的にも物理的にも\n木製だったら釘でも打ち込んでいたところだ"
+      "text":"どこにでもよくあるバット。\n尖ったところはない\n性能的にも物理的にも。\n木製だったら釘でも打ち込んでいたところだ。"
     },
 
     {
@@ -14,7 +14,7 @@
       "name": "スパイク", "typeName":"small", "typeNum":1, "trail":"Images/Weapon/Trail/TR_spike", "icon":"Images/Weapon/Icon/WI_spike",
       "damage":2, "defknockback":20, "maxknockback":20, "stanpower":25,
       "wideth": 2, "height": 4, "offset": 3.0,
-      "text":"素手よりマシ程度の性能\n使い手曰く退魔の力があるとかなんとか\n信じない方がいい\n実際ウソ"
+      "text":"素手よりマシ程度の性能。\n使い手曰く「敵によく効く」とかなんとか。\n信じない方がいい。実際ウソ。\nなんでこんなもの使ってるんだろう…"
     },
 
     {
@@ -22,7 +22,7 @@
       "name": "ランス", "typeName":"long", "typeNum":2, "trail":"Images/Weapon/Trail/TR_lance", "icon":"Images/Weapon/Icon/WI_lance",
       "damage":6, "defknockback":40, "maxknockback":50, "stanpower":50,
       "wideth": 3, "height": 6, "offset": 4.0,
-      "text":"使い手曰く…\n「殴るなんてそんな野蛮な！」\n「ここは穏便に突き刺しましょう！」\n…ツッコミはナシで"
+      "text":"アイツ曰く…\n「殴るなんてそんな野蛮な！」\n「ここは穏便に突き刺しましょう！」\n…ツッコミはナシで。"
     },
 
     {
@@ -30,23 +30,23 @@
       "name": "マチェット", "typeName":"blade", "typeNum":3, "trail":"Images/Weapon/Trail/TR_machet", "icon":"Images/Weapon/Icon/WI_machet",
       "damage":4, "defknockback":20, "maxknockback":20, "stanpower":25,
       "wideth": 6, "height": 3, "offset": 2.0,
-      "text":"軽くて鋭くて、切るのにきっと丁度いい\nただし間合いには気を付けるべきだろう\nついでに打撃武器としてはあまり向いていない\n切れ味が良すぎるのも考えもの"
+      "text":"軽くて鋭くて、切るのにきっと丁度いい。\nただ、打撃武器としてはあまり向いていない。\n切れ味が良すぎるのも考えもの。"
     },
     
     {
       "number":4,
       "name": "パイプ", "typeName":"club", "typeNum":0, "trail":"Images/Weapon/Trail/TR_bat", "icon":"Images/Weapon/Icon/WI_ironpipe",
       "damage":3, "defknockback":20, "maxknockback":30, "stanpower":100,
-      "wideth": 6, "height": 2, "offset": 2.0,
-      "text":"もしかするとある種の「正解」かもしれない\n空洞だから叩くといい音するし\n実質コレ楽器だよ、楽器の一種\nこれがホントの打楽器…"
+      "wideth": 4, "height": 4, "offset": 3.6,
+      "text":"もしかするとある種の「正解」かもしれない。\n空洞だから叩くといい音するし。\nこれがホントの打楽器ということか…"
     },
 
     {
       "number":5,
-      "name": "Test_No6", "typeName":"small", "typeNum":1, "trail":"Images/Weapon/Trail/TR_spike", "icon":"Images/Weapon/Icon/WI_spike",
+      "name": "ナイフ", "typeName":"small", "typeNum":1, "trail":"Images/Weapon/Trail/TR_spike", "icon":"Images/Weapon/Icon/WI_spike",
       "damage":3, "defknockback":20, "maxknockback":30, "stanpower":25,
       "wideth": 5, "height": 3, "offset": 2.5,
-      "text":"空白"
+      "text":"面白味という面では0点で、\n実用性という面なら100点の品。\nアイツは物騒な物を持ち込みがち。"
     },
 
     {
@@ -54,15 +54,15 @@
       "name": "スピア", "typeName":"long", "typeNum":2, "trail":"Images/Weapon/Trail/TR_spear", "icon":"Images/Weapon/Icon/WI_spear",
       "damage":6, "defknockback":40, "maxknockback":50, "stanpower":50,
       "wideth": 2, "height": 3, "offset": 8.5,
-      "text":"長い槍だが、刃が小さすぎるせいで\n突くのにしか使えない\n面白いのはきっと最初のうちだけ\nそのうちこいつのピーキーさに辟易する"
+      "text":"柄の長い槍だが、扱いが難しく\n刃の部分が死ぬほど小さい。\n最初は面白く思うだろうが、\nきっとそのうちピーキーさに辟易する。"
     },
 
     {
       "number":7,
-      "name": "Test_No8(WIP)", "typeName":"blade", "typeNum":3, "trail":"Images/Weapon/Trail/TR_machet", "icon":"Images/Weapon/Icon/WI_machet",
+      "name": "キーボード", "typeName":"blade", "typeNum":3, "trail":"Images/Weapon/Trail/TR_machet", "icon":"Images/Weapon/Icon/WI_machet",
       "damage":3, "defknockback":20, "maxknockback":30, "stanpower":25,
       "wideth": 5, "height": 3, "offset": 2.5,
-      "text":"このメッセージを見れる段階から\n遊んでくれてありがとうございます"
+      "text":"音が出る方。あるいは文字が出ない方。\n武器になりそうだなとは思ったが\n本当にやるとは思わな…ちょっと待て。\n「刃物」属性？マジ？これが？えっ。"
     },
 
     {
@@ -70,7 +70,7 @@
       "name": "ギター", "typeName":"club", "typeNum":0, "trail":"Images/Weapon/Trail/TR_bat", "icon":"Images/Weapon/Icon/WI_bat",
       "damage":256, "defknockback":20, "maxknockback":30, "stanpower":100,
       "wideth": 5, "height": 3, "offset": 2.5,
-      "text":"お前ならやらかすと信じていたぞ後輩ィ…\nところでコレをバットみたいに振り回すって？\nこの大きさを…そうか…いや、何でもない…\n好きなだけ振り回し散らかすといい…"
+      "text":"アイツなら絶対にやらかすと信じていた。\nどこかの倉庫から引っ張って来たらしい。\nロッカーに収まっている姿が様になる。\n突き詰めれば打楽器なんだよ何もかも。"
     },
 
     {
@@ -78,7 +78,7 @@
       "name": "ハンドアックス", "typeName":"small", "typeNum":1, "trail":"Images/Weapon/Trail/TR_bat", "icon":"Images/Weapon/Icon/WI_handaxe",
       "damage":4, "defknockback":10, "maxknockback":20, "stanpower":25,
       "wideth": 4, "height": 3, "offset": 2.0,
-      "text":"超高速、短射程\nコンパクトでインファイト"
+      "text":"超高速、短射程。\nコンパクトでインファイト。"
     },
 
     {
@@ -86,15 +86,15 @@
       "name": "ハンマー", "typeName":"long", "typeNum":2, "trail":"Images/Weapon/Trail/TR_bat", "icon":"Images/Weapon/Icon/WI_hammer",
       "damage":7, "defknockback":40, "maxknockback":50, "stanpower":50,
       "wideth": 7, "height": 3, "offset": 8.0,
-      "text":"あまりにも小回りが利かなさすぎる…\n雑魚掃除には全く向いていないだろう\nこの無骨すぎる武器で\n一体何と戦おうと言うのだ？"
+      "text":"あまりにも小回りが利かなさすぎる…\n雑魚掃除には全く向いていないだろう。\nこの無駄にデカくて無骨が過ぎる武器で\nアイツは一体何と戦おうと言うのだ…？"
     },
 
     {
       "number":11,
-      "name": "Test_No12(Wii)", "typeName":"blade", "typeNum":3, "trail":"Images/Weapon/Trail/TR_machet", "icon":"Images/Weapon/Icon/WI_machet",
+      "name": "カタナ", "typeName":"blade", "typeNum":3, "trail":"Images/Weapon/Trail/TR_machet", "icon":"Images/Weapon/Icon/WI_machet",
       "damage":3, "defknockback":20, "maxknockback":30, "stanpower":25,
       "wideth": 5, "height": 3, "offset": 2.5,
-      "text":"一体どこからこんなものを持ってきたんだ？"
+      "text":"ガチなやつ出てきちゃった。\nアイツが持ち込んだ私物の中で\nおそらく一番ヤバいであろうガチな武器。\nおっかないからロッカーに放置しないでほしい。"
     }
 
   ]

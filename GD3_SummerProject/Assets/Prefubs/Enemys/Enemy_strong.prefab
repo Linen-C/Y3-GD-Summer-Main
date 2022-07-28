@@ -207,7 +207,7 @@ Transform:
   m_GameObject: {fileID: 2495565443134607211}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 3, z: 0}
-  m_LocalScale: {x: 5, y: 2, z: 1}
+  m_LocalScale: {x: 6, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 2495565443195245740}
   m_RootOrder: 1
@@ -323,6 +323,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defTime: 0.3
+  attakingTime: 0
   enemyCTRL: {fileID: 2495565443160729115}
   spriteChanger: {fileID: 2495565441621952001}
 --- !u!1 &2495565443160729114
@@ -492,7 +493,6 @@ MonoBehaviour:
   hpSlider: {fileID: 2472404636007969212}
   stanBar: {fileID: 779700353538689342}
   stanBarFill: {fileID: 3725213032303310487}
-  NonDamageTime: 0
 --- !u!114 &3976107878704391558
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -6,15 +6,15 @@ public class EnemyWepon : MonoBehaviour
 {
     // パブリック変数
     [Header("パブリック変数")]
-    public float defTime;   // 攻撃判定の発生時間
+    [SerializeField] float defTime;   // 攻撃判定の発生時間
+    [SerializeField] public float attakingTime = 0.0f;  // 判定の発生時間
 
     // スクリプト
     [Header("スクリプト")]
-    public EnemyCTRL enemyCTRL;
-    public SpriteChanger spriteChanger;
+    [SerializeField] EnemyCTRL enemyCTRL;
+    [SerializeField] SpriteChanger spriteChanger;
 
     // プライベート変数
-    public float attakingTime = 0.0f;  // 判定の発生時間
     float spriteAlpha = 0.0f;
 
     // コンポーネント
@@ -40,7 +40,7 @@ public class EnemyWepon : MonoBehaviour
         if (spriteAlpha >= 0.0f)
         {
             spriteChanger.ChangeTransparency(spriteAlpha);
-            spriteAlpha -= Time.deltaTime * 2.0f;
+            spriteAlpha -= Time.deltaTime * 3.0f;
         }
 
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //

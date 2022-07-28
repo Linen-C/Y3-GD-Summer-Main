@@ -36,7 +36,7 @@ public class SaveManager : MonoBehaviour
 
         string datas = JsonUtility.ToJson(saveDatas, true);
         
-        Debug.Log("SaveData\n" + datas);
+        //Debug.Log("SaveData\n" + datas);
 
         File.WriteAllText(_equipSavePath, datas);
     }
