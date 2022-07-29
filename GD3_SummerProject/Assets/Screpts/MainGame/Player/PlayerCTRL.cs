@@ -212,12 +212,25 @@ public class PlayerCTRL : MonoBehaviour
     {
         if (collision.gameObject.tag == "EnemyAttack" && (NonDamageTime <= 0.0f))
         {
-            image_DamagePanel_nowalpha = image_DamagePanel_defalpha;
-            NonDamageTime = defNonDamageTime;
-            knockBackCounter = 0.2f;
-            nowHelthPoint -= 1;
-            _anim.SetTrigger("Damage");
+            Damage();
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy" && (NonDamageTime <= 0.0f))
+        {
+            Damage();
+        }
+    }
+
+    private void Damage()
+    {
+        image_DamagePanel_nowalpha = image_DamagePanel_defalpha;
+        NonDamageTime = defNonDamageTime;
+        knockBackCounter = 0.2f;
+        nowHelthPoint -= 1;
+        _anim.SetTrigger("Damage");
     }
 
 }

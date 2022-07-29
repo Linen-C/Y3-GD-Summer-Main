@@ -154,10 +154,10 @@ public class EnemyCTRL : MonoBehaviour
     void FixedUpdate()
     {
         // ステート判定
-        if (!CanMove()) { return; }
         knockBackCounter = _enemyMove.KnockBack(knockBackCounter, body, diff, knockBackPower);
 
-        if (weaponCharge >= (needWeaponCharge - 1) && (needWeaponCharge != -1)) { return; }
+        if (!CanMove()) { return; }
+
         _enemyMove.Move(knockBackCounter, doStanCount, body, diff, moveSpeed);
     }
 
@@ -210,7 +210,8 @@ public class EnemyCTRL : MonoBehaviour
     {
         if (state == State.Dead ||
             state == State.Stop ||
-            weaponCharge == (needWeaponCharge - 1))
+            needWeaponCharge == -1 ||
+            weaponCharge >= (needWeaponCharge - 1) )
         {
             body.velocity = new Vector2(0, 0);
             return false;
@@ -244,9 +245,11 @@ public class EnemyCTRL : MonoBehaviour
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
 
         if (weaponCharge >= (needWeaponCharge - 1) ||
-            (needWeaponCharge == -1)) { return; }
-
-        if (ownWepon.attakingTime > 0) { return; }
+            (needWeaponCharge == -1) ||
+            ownWepon.attakingTime > 0)
+        {
+            return;
+        }
 
         // 回転に代入
         var curRot = Quaternion.FromToRotation(Vector3.up, diff);

@@ -30,7 +30,7 @@ public class PlayerAttack_B : MonoBehaviour
     [SerializeField] int _nowCountDown = 0;
 
     [Header("オーディオ(マニュアル)")]
-    [SerializeField] AudioCTRL _audioCTRL;
+    [SerializeField] MainAudioCTRL _audioCTRL;
     [SerializeField] AudioSource audioSource;   // オーディオソース
     [SerializeField] AudioClip[] audioClip_Gun;
 
@@ -39,7 +39,7 @@ public class PlayerAttack_B : MonoBehaviour
     {
         // オーディオ初期化
         audioSource = GetComponent<AudioSource>();
-        audioSource.volume = _audioCTRL.defVolume;
+        audioSource.volume = _audioCTRL.nowVolume;
         audioClip_Gun = new AudioClip[_audioCTRL.clips_Player_Gun.Length];
         audioClip_Gun = _audioCTRL.clips_Player_Gun;
         //audioClip_Weapon = new AudioClip[_audioCTRL.clips_Player_Weapon.Length];
@@ -55,9 +55,12 @@ public class PlayerAttack_B : MonoBehaviour
 
     public void Attack(PlayerControls playerControls, GC_BpmCTRL bpmCTRL, PlayerWeapon_B playerWeapon)
     {
-        if (playerControls.Player.Attack.triggered && !_plCTRL._orFaild && playerWeapon.nowAttakingTime < 0)
+        if (playerControls.Player.Attack.triggered &&
+            !_plCTRL._orFaild &&
+            playerWeapon.nowAttakingTime < 0)
         {
-            if (bpmCTRL.Signal())
+            if ( bpmCTRL.Signal() ||
+                (_plCTRL.doComboMode && bpmCTRL.HalfSignal() && playerWeapon.GetTypeNum() != 2) )
             {
                 _plCTRL._anim.SetTrigger("Attack");
                 playerWeapon.Attacking(bpmCTRL.Perfect());
@@ -69,6 +72,7 @@ public class PlayerAttack_B : MonoBehaviour
                 _plCTRL._orFaild = true;
                 _plCTRL._orFaildCount = _defPenalty;
             }
+
         }
 
         if (playerWeapon.Combo())

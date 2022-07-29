@@ -49,6 +49,11 @@ public class Menu_Customize : MonoBehaviour
     [Header("ボタンリスト")]
     [SerializeField] Selectable[] _selectable;
     [SerializeField] Button _weaponA;
+    [SerializeField] Button _weaponB;
+    [SerializeField] Button _weaponGun;
+
+    [Header("ボタン")]
+    [SerializeField] Menu_Button _menu_Button;
 
 
     public void EnableMenu()
@@ -84,8 +89,6 @@ public class Menu_Customize : MonoBehaviour
         ButtonErase();
         ShowWeaponData();
         ButtonGenerate();
-
-        EventSystem.current.SetSelectedGameObject(null);
     }
 
     public void SetWeaponChangeB()
@@ -95,14 +98,11 @@ public class Menu_Customize : MonoBehaviour
         ButtonErase();
         ShowWeaponData();
         ButtonGenerate();
-
-        EventSystem.current.SetSelectedGameObject(null);
     }
 
     public void SetGunChange()
     {
         ButtonErase();
-        EventSystem.current.SetSelectedGameObject(null);
     }
 
     void ButtonGenerate()
@@ -149,14 +149,40 @@ public class Menu_Customize : MonoBehaviour
             var nav = _selectable[i].navigation;
             nav.mode = Navigation.Mode.Explicit;
 
+
             if (i != 0) { nav.selectOnLeft = _selectable[i - 1]; }
             if (i != maxNum) { nav.selectOnRight = _selectable[i + 1]; }
             if (i > 3) { nav.selectOnUp = _selectable[i - 4]; }
             if (i < maxNum - 3) { nav.selectOnDown = _selectable[i + 4]; }
 
-            if (i > maxNum - 4)
+
+            if (i == (maxNum - 3))
             {
                 nav.selectOnDown = _weaponA.GetComponent<Selectable>();
+
+                var weaponNav = _weaponA.GetComponent<Selectable>().navigation;
+                weaponNav.selectOnUp = _selectable[i];
+                _weaponA.GetComponent<Selectable>().navigation = weaponNav;
+            }
+            if (i == (maxNum - 2))
+            {
+                nav.selectOnDown = _weaponB.GetComponent<Selectable>();
+
+                var weaponNav = _weaponB.GetComponent<Selectable>().navigation;
+                weaponNav.selectOnUp = _selectable[i];
+                _weaponB.GetComponent<Selectable>().navigation = weaponNav;
+            }
+            if (i == (maxNum - 1))
+            {
+                nav.selectOnDown = _weaponB.GetComponent<Selectable>();
+            }
+            if (i == maxNum)
+            {
+                nav.selectOnDown = _weaponGun.GetComponent<Selectable>();
+
+                var weaponNav = _weaponGun.GetComponent<Selectable>().navigation;
+                weaponNav.selectOnUp = _selectable[i];
+                _weaponGun.GetComponent<Selectable>().navigation = weaponNav;
             }
 
             _selectable[i].navigation = nav;
@@ -222,6 +248,8 @@ public class Menu_Customize : MonoBehaviour
         saveManager.EquipSave();
 
         _stMG.SetWeaponImage();
+        _menu_Button.B_StundbyMG();
+
         _animator.SetBool("Custom_Bool", false);
     }
 

@@ -38,7 +38,7 @@ public class ArenaCTRL : MonoBehaviour
 
     // オーディオ関係
     [Header("オーディオ")]
-    [SerializeField] AudioCTRL _audioCTRL;
+    [SerializeField] MainAudioCTRL _audioCTRL;
     [SerializeField] AudioSource audioSource;   // オーディオソース
     [SerializeField] AudioClip[] audioClip;     // クリップ
 
@@ -52,10 +52,10 @@ public class ArenaCTRL : MonoBehaviour
         
         // オーディオコントロール取得
         var audioCtrlObj = GameObject.FindGameObjectWithTag("AudioController");
-        _audioCTRL = audioCtrlObj.GetComponent<AudioCTRL>();
+        _audioCTRL = audioCtrlObj.GetComponent<MainAudioCTRL>();
         // オーディオ初期化
         audioSource = GetComponent<AudioSource>();
-        audioSource.volume = _audioCTRL.defVolume;
+        audioSource.volume = _audioCTRL.nowVolume;
         audioClip = new AudioClip[_audioCTRL.clips_Progress.Length];
         audioClip = _audioCTRL.clips_Progress;
 

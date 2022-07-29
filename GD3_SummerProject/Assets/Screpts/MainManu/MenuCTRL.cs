@@ -21,9 +21,26 @@ public class MenuCTRL : MonoBehaviour
     [Header("ボタン")]
     [SerializeField] Menu_Button _menu_Button;
 
-    void Awake()
+    [Header("オーディオ")]
+    [SerializeField] MenuAudioCTRL _menu_AudioCTRL;  // オーディオコントロール
+    [SerializeField] AudioSource audioSource;        // オーディオソース
+    [SerializeField] AudioClip[] audioClip;          // クリップ
+
+
+    void Start()
     {
-        //_Option.SetActive(false);
+        // オーディオ初期化
+        audioSource = GetComponent<AudioSource>();
+        audioSource.volume = _menu_AudioCTRL.nowVolume;
+
+        // こんな具合でいけそう
+        //audioSource.PlayOneShot(_menu_AudioCTRL._clips[0]);
+    }
+
+        void Awake()
+    {
+        _menu_Button.B_MainMenu();
+
         _animator.SetBool("Main_Bool", true);
     }
 
@@ -33,12 +50,15 @@ public class MenuCTRL : MonoBehaviour
     {
         _menu_Customize.EnableMenu();
         _animator.SetBool("Custom_Bool", true);
+
+        _menu_Button.B_Custom();
     }
 
     // メイン→セレクト
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     public void Main_to_Select()
     {
+        _menu_Button.B_select();
         _animator.SetBool("Main_Bool", false);
         _animator.SetBool("Select_Bool", true);
     }
@@ -50,6 +70,7 @@ public class MenuCTRL : MonoBehaviour
     {
         _animator.SetBool("Select_Bool", false);
         _animator.SetBool("Main_Bool", true);
+        _menu_Button.B_MainMenu();
     }
 
     // セレクト→メインゲーム
@@ -60,6 +81,8 @@ public class MenuCTRL : MonoBehaviour
 
         _animator.SetBool("Select_Bool", false);
         _animator.SetBool("StMG_Bool", true);
+
+        _menu_Button.B_StundbyMG();
     }
 
 
@@ -69,6 +92,8 @@ public class MenuCTRL : MonoBehaviour
     {
         _animator.SetBool("StMG_Bool", false);
         _animator.SetBool("Select_Bool", true);
+
+        _menu_Button.B_select();
     }
 
 

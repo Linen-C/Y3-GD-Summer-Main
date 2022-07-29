@@ -328,7 +328,7 @@ MonoBehaviour:
   doStanCount: 0
   stanRecoverCount: 4
   moveSpeed: 2
-  needWeaponCharge: 8
+  needWeaponCharge: 6
   knockBackPower: 0
   defNonDamageTime: 0.3
   _enemyMove: {fileID: 7781659906550622949}

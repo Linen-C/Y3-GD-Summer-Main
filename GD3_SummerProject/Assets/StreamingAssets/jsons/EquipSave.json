@@ -1,36 +1,36 @@
 {
     "weaponList": [
         {
-            "number": 0,
-            "name": "バット",
+            "number": 4,
+            "name": "パイプ",
             "typeName": "club",
             "typeNum": 0,
             "trail": "Images/Weapon/Trail/TR_bat",
-            "icon": "Images/Weapon/Icon/WI_bat",
+            "icon": "Images/Weapon/Icon/WI_ironpipe",
             "damage": 3,
             "defknockback": 20,
             "maxknockback": 30,
             "stanpower": 100,
-            "wideth": 5,
-            "height": 3,
-            "offset": 3.0,
-            "text": "どこにでもよくあるバット。\n尖ったところはない\n性能的にも物理的にも。\n木製だったら釘でも打ち込んでいたところだ。"
+            "wideth": 4,
+            "height": 4,
+            "offset": 3.5999999046325685,
+            "text": "もしかするとある種の「正解」かもしれない。\n空洞だから叩くといい音するし。\nこれがホントの打楽器ということか…"
         },
         {
-            "number": 1,
-            "name": "スパイク",
-            "typeName": "small",
-            "typeNum": 1,
-            "trail": "Images/Weapon/Trail/TR_spike",
-            "icon": "Images/Weapon/Icon/WI_spike",
-            "damage": 2,
-            "defknockback": 20,
-            "maxknockback": 20,
-            "stanpower": 25,
-            "wideth": 2,
-            "height": 4,
-            "offset": 3.0,
-            "text": "素手よりマシ程度の性能。\n使い手曰く「敵によく効く」とかなんとか。\n信じない方がいい。実際ウソ。\nなんでこんなもの使ってるんだろう…"
+            "number": 2,
+            "name": "ランス",
+            "typeName": "long",
+            "typeNum": 2,
+            "trail": "Images/Weapon/Trail/TR_lance",
+            "icon": "Images/Weapon/Icon/WI_lance",
+            "damage": 8,
+            "defknockback": 40,
+            "maxknockback": 50,
+            "stanpower": 50,
+            "wideth": 3,
+            "height": 6,
+            "offset": 4.0,
+            "text": "アイツ曰く…\n「殴るなんてそんな野蛮な！」\n「ここは穏便に突き刺しましょう！」\n…ツッコミはナシで。"
         }
     ]
 }

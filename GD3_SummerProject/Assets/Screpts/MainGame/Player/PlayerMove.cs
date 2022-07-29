@@ -107,7 +107,7 @@ public class PlayerMove : MonoBehaviour
     public void Dash(PlayerControls playerControls, GC_BpmCTRL bpmCTRL)
     {
         if (playerControls.Player.Dash.triggered &&
-            bpmCTRL.Signal())
+            (bpmCTRL.Signal() || bpmCTRL.HalfSignal()) )
         {
             dogeTimer = 0.1f;
         }

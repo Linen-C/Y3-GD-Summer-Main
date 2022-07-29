@@ -15,8 +15,6 @@ public class Menu_Button : MonoBehaviour
     [SerializeField] GameObject _Button_select;
     [Header("スタンバイ")]
     [SerializeField] GameObject _Button_standbyMG;
-    //[Header("オプション")]
-    //[SerializeField] GameObject _Button_option;
 
 
     void Awake()
@@ -24,20 +22,22 @@ public class Menu_Button : MonoBehaviour
         B_MainMenu();
     }
 
+    private void Update()
+    {
+        Debug.Log(EventSystem.current.currentSelectedGameObject.name);
+    }
+
     public void B_MainMenu()
     {
-        var padName = Gamepad.current;
-        if (padName == null) { return; }
+        if (PadCheck()) { return; }
 
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(_Button_mainmenu);
-        //_Button_mainmenu.Select();
     }
 
     public void B_Custom()
     {
-        var padName = Gamepad.current;
-        if (padName == null) { return; }
+        if (PadCheck()) { return; }
 
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(_Button_custom);
@@ -45,8 +45,7 @@ public class Menu_Button : MonoBehaviour
 
     public void B_select()
     {
-        var padName = Gamepad.current;
-        if (padName == null) { return; }
+        if (PadCheck()) { return; }
 
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(_Button_select);
@@ -54,21 +53,18 @@ public class Menu_Button : MonoBehaviour
 
     public void B_StundbyMG()
     {
-        var padName = Gamepad.current;
-        if (padName == null) { return; }
+        if (PadCheck()) { return; }
 
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(_Button_standbyMG);
     }
-    
-    /*
-    public void B_Option()
+
+    bool PadCheck()
     {
         var padName = Gamepad.current;
-        if (padName == null) { return; }
+        if (padName == null) { return true; }
 
-        EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(_Button_option);
+        return false;
     }
-    */
+
 }

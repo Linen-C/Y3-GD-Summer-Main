@@ -17,7 +17,7 @@ public class GC_BpmCTRL : MonoBehaviour
 
     // オーディオ関係
     [Header("オーディオ")]
-    [SerializeField] AudioCTRL _audioCTRL;
+    [SerializeField] MainAudioCTRL _audioCTRL;
     [SerializeField] AudioSource audioSource;   // オーディオソース
     [SerializeField] AudioClip[] audioClip;     // クリップ
 
@@ -31,10 +31,11 @@ public class GC_BpmCTRL : MonoBehaviour
     [SerializeField] private float _timing = 0.0f;    // メトロノーム用
     private bool _metronome = false; // メトロノームシグナル
     private bool _metronomeFlap = false;
-    private bool _step = false;       // １拍
+    private bool _halfMetronome = false;       // １拍
     private bool _stepFlip = false;   // シグナル半分
-    private bool _doSignal = false;   // シグナル送信用
-    private bool _perfect = false;    // パーフェクト
+    public bool _doSignal = false;   // シグナル送信用
+    public bool _halfSignal = false;
+    public bool _perfect = false;    // パーフェクト
     private bool _count = false;      // カウント用
     private float _nowImageSize = 0.6f;
     private float _minImageSize = 0.6f;
@@ -47,7 +48,7 @@ public class GC_BpmCTRL : MonoBehaviour
     {
         // オーディオ初期化
         audioSource = GetComponent<AudioSource>();
-        audioSource.volume = _audioCTRL.defVolume;
+        audioSource.volume = _audioCTRL.nowVolume;
         audioClip = new AudioClip[_audioCTRL.clips_BPM.Length];
         audioClip = _audioCTRL.clips_BPM;
 
@@ -78,20 +79,38 @@ public class GC_BpmCTRL : MonoBehaviour
         // カウンター
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
 
+
+        if (_timing <= (_halfValue + _ping) && _halfSignal == false)
+        {
+            _halfSignal = true;
+            //_doSignal = true;
+        }
+
         if (_timing <= _halfValue && _stepFlip == false)
         {
             audioSource.PlayOneShot(audioClip[0]);
             _nowImageSize = _maxImageSize;
-            _step = true;
+            _halfMetronome = true;
             _stepFlip = true;
-
-            //Debug.Log("half");
         }
-        else
+        else 
         {
-            _step = false;
+            _halfMetronome = false;
         }
 
+        if (_timing <= (_halfValue + _halfPing))
+        {
+            _perfect = true;
+        }
+
+        if ( _timing <= _halfValue && _halfSignal == true)
+        {
+            //_doSignal = false;
+            _halfSignal = false;
+            _perfect = false;
+        }
+
+        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
 
         if (_timing <= _ping)
         {
@@ -109,19 +128,11 @@ public class GC_BpmCTRL : MonoBehaviour
             _nowImageSize = _maxImageSize;
             _metronome = true;
             _metronomeFlap = true;
-
-            //Debug.Log("full");
         }
-        else
+        else 
         {
             _metronome = false;
         }
-
-        //if (_timing <= -_halfPing)
-        //{
-        //    _perfect = false;
-        //}
-
         if (_timing <= 0.0f)
         {
             _doSignal = false;
@@ -133,7 +144,7 @@ public class GC_BpmCTRL : MonoBehaviour
 
             BpmReset();
         }
-        else
+        else 
         {
             _count = false;
         }
@@ -169,12 +180,17 @@ public class GC_BpmCTRL : MonoBehaviour
 
     public bool Step()
     {
-        return _step;
+        return _halfMetronome;
     }
 
     public bool Signal()
     {
         return _doSignal;
+    }
+
+    public bool HalfSignal()
+    {
+        return _halfSignal;
     }
 
     public bool Perfect()
@@ -202,5 +218,10 @@ public class GC_BpmCTRL : MonoBehaviour
 
 
         _beatSlider.value = _timing;
+    }
+
+    public void VolumeUpdate(float volume)
+    {
+        audioSource.volume = volume;
     }
 }

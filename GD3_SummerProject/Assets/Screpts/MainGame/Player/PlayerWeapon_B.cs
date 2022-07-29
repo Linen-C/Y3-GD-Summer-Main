@@ -160,6 +160,11 @@ public class PlayerWeapon_B : MonoBehaviour
         return retBool;
     }
 
+    public int GetTypeNum()
+    {
+        return _typeNum;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Enemy")

@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 using TMPro;
 
 public class GC_GameCTRL : MonoBehaviour
@@ -25,6 +25,10 @@ public class GC_GameCTRL : MonoBehaviour
 
     [Header("ポーズメニュー")]
     [SerializeField] Canvas pauseCanvas;
+
+    [Header("オプション")]
+    [SerializeField] Option _option;
+    [SerializeField] GameObject _firstButton;
 
     [Header("スタート時用タイマー")]
     [SerializeField] float countDown;
@@ -163,6 +167,13 @@ public class GC_GameCTRL : MonoBehaviour
         state = State.Pause;
         playerCtrl.state = PlayerCTRL.State.Stop;
 
+        var padName = Gamepad.current;
+        if (padName != null)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(_firstButton);
+        }
+
         DoEnableFalse();
     }
 
@@ -229,4 +240,9 @@ public class GC_GameCTRL : MonoBehaviour
         ReturnMainMenu();
     }
 
+    public void Pause_Option()
+    {
+        EventSystem.current.SetSelectedGameObject(null);
+        Instantiate(_option);
+    }
 }
