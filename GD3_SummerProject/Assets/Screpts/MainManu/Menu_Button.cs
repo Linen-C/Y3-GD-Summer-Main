@@ -24,7 +24,10 @@ public class Menu_Button : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(EventSystem.current.currentSelectedGameObject.name);
+        if (!PadCheck())
+        {
+            Debug.Log(EventSystem.current.currentSelectedGameObject.name);
+        }
     }
 
     public void B_MainMenu()

@@ -1,36 +1,36 @@
 {
     "weaponList": [
         {
-            "number": 4,
-            "name": "パイプ",
-            "typeName": "club",
-            "typeNum": 0,
-            "trail": "Images/Weapon/Trail/TR_bat",
-            "icon": "Images/Weapon/Icon/WI_ironpipe",
-            "damage": 3,
-            "defknockback": 20,
-            "maxknockback": 30,
-            "stanpower": 100,
-            "wideth": 4,
-            "height": 4,
-            "offset": 3.5999999046325685,
-            "text": "もしかするとある種の「正解」かもしれない。\n空洞だから叩くといい音するし。\nこれがホントの打楽器ということか…"
-        },
-        {
-            "number": 2,
-            "name": "ランス",
+            "number": 11,
+            "name": "ハンマー",
             "typeName": "long",
             "typeNum": 2,
-            "trail": "Images/Weapon/Trail/TR_lance",
-            "icon": "Images/Weapon/Icon/WI_lance",
-            "damage": 8,
+            "trail": "Images/Weapon/Trail/TR_11_hammer",
+            "icon": "Images/Weapon/Icon/WI_11_hammer",
+            "damage": 9,
             "defknockback": 40,
             "maxknockback": 50,
             "stanpower": 50,
-            "wideth": 3,
-            "height": 6,
-            "offset": 4.0,
-            "text": "アイツ曰く…\n「殴るなんてそんな野蛮な！」\n「ここは穏便に突き刺しましょう！」\n…ツッコミはナシで。"
+            "wideth": 7,
+            "height": 3,
+            "offset": 8.0,
+            "text": "あまりにも小回りが利かなさすぎる…\n雑魚掃除には全く向いていないだろう。\nこの無駄にデカくて無骨が過ぎる武器で\nアイツは一体何と戦おうと言うのだ…？"
+        },
+        {
+            "number": 12,
+            "name": "ブレード",
+            "typeName": "blade",
+            "typeNum": 3,
+            "trail": "Images/Weapon/Trail/TR_12_blade",
+            "icon": "Images/Weapon/Icon/WI_12_blade",
+            "damage": 7,
+            "defknockback": 20,
+            "maxknockback": 30,
+            "stanpower": 25,
+            "wideth": 6,
+            "height": 5,
+            "offset": 3.0,
+            "text": "ガチなやつ出てきちゃった。\nアイツが持ち込んだ私物の中で\nおそらく一番ヤバいであろうガチな武器。\nおっかないからロッカーに放置しないでほしい。"
         }
     ]
 }

@@ -51,6 +51,8 @@ public class PlayerCTRL : MonoBehaviour
     [SerializeField] float image_DamagePanel_nowalpha = 0.0f;
     [SerializeField] TextMeshProUGUI _comboText;
     [SerializeField] public TextMeshProUGUI _resultText;
+    [SerializeField] Image image_Rock;
+    [SerializeField] TextMeshProUGUI text_RockCount;
 
     // 体力表示
     [Header("体力表示(マニュアル)")]
@@ -68,8 +70,9 @@ public class PlayerCTRL : MonoBehaviour
     float NonDamageTime = 0;     // 無敵時間
     Vector2 _moveDir;             // 移動用ベクトル
 
-    public bool _orFaild = false;
-    public int _orFaildCount = 0;
+    public bool _orFaild = false;   // ロック中かどうか
+    public int _orFaildCount = 0;   // ロック時間
+    [SerializeField] float _rockAlpha = 0.0f;
 
 
     public enum State
@@ -190,6 +193,19 @@ public class PlayerCTRL : MonoBehaviour
             _comboText.alpha = 1.0f;
             _comboText.text = "x" + comboCount;
         }
+
+        // コンボミス
+        if (_orFaild)
+        {
+            _rockAlpha = 1.0f;
+            text_RockCount.text = _orFaildCount.ToString();
+        }
+        else
+        {
+            if (_rockAlpha > 0.0f) { _rockAlpha -= Time.deltaTime * 5.0f;  }
+        }
+        image_Rock.color = new Color(1.0f, 0.0f, 0.0f, _rockAlpha);
+
     }
 
 
