@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using TMPro;
+using System.IO;
 
 public class GC_GameCTRL : MonoBehaviour
 {
@@ -19,9 +21,19 @@ public class GC_GameCTRL : MonoBehaviour
 
     [Header("UI")]
     [SerializeField] GameObject upperPanel;
+    [SerializeField] Image panelImage;
+    [SerializeField] GameObject _centerTextObj;
     [SerializeField] TextMeshProUGUI centerText;
-    [SerializeField] TextMeshProUGUI underText;
     [SerializeField] public TextMeshProUGUI prog_text;
+    [SerializeField] TextMeshProUGUI pointText;
+    [SerializeField] TextMeshProUGUI pointResultText;
+    [SerializeField] TextMeshProUGUI floorResultText;
+    [SerializeField] TextMeshProUGUI underText;
+
+    [Header("スコア")]
+    [SerializeField] int _point;
+    [SerializeField] int _floor;
+    [SerializeField] StageManager _stageManager;
 
     [Header("ポーズメニュー")]
     [SerializeField] Canvas pauseCanvas;
@@ -33,12 +45,21 @@ public class GC_GameCTRL : MonoBehaviour
     [Header("スタート時用タイマー")]
     [SerializeField] float countDown;
 
+    float panelAlpha = 0.0f;
+    float waitTimer = 2.0f;
+    Animator _animator;
+
+    string _fileLocation;
+    int _hiScore_Point;
+    int _hiScore_Floor;
+    HiScore _hiScore;
+
+
     enum State
     {
         Ready,
         Play,
         GameOver,
-        GameClear,
         Pause
     }
     State state;
@@ -47,7 +68,14 @@ public class GC_GameCTRL : MonoBehaviour
 
     private void Awake()
     {
+        _point = 0;
+        AddPoint(0);
+
         uiCtrl = new UIControls();
+
+        ScoreLoad();
+
+        _animator = _centerTextObj.GetComponent<Animator>();
     }
 
     void Start()
@@ -77,12 +105,8 @@ public class GC_GameCTRL : MonoBehaviour
                 break ;
 
             case State.GameOver:
-                if (uiCtrl.InGameUI.Retry.triggered) { ReLoad(); }
+                GameOverUpdate();
                 break ;
-
-            case State.GameClear:
-                if (uiCtrl.InGameUI.Retry.triggered) { ReturnMainMenu(); }
-                break;
 
             case State.Pause:
                 if (uiCtrl.InGameUI.Pause.triggered) { S_Pause_End(); }
@@ -109,7 +133,6 @@ public class GC_GameCTRL : MonoBehaviour
         {
             upperPanel.SetActive(true);
             centerText.text = "Ready...";
-            underText.text = "";
 
             countDown -= Time.deltaTime;
         }
@@ -139,24 +162,37 @@ public class GC_GameCTRL : MonoBehaviour
     {
         upperPanel.SetActive(true);
         centerText.text = "GameOver";
-        underText.text = "[R] キーでリスタート";
+        centerText.fontStyle = FontStyles.Underline;
 
         state = State.GameOver;
+
+        _animator.SetBool("GameOver", true);
+
+        _floor = _stageManager._nowArenaNo + 1;
+
+        pointResultText.text = "=Score=\n今回\n" + _point + "\nハイスコア\n" + _hiScore_Point;
+        floorResultText.text = "=Floor=\n今回\n" + _floor + "\nハイスコア\n" + _hiScore_Floor;
+
+        ScoreSave();
 
         DoEnableFalse();
     }
 
-    // ゲームクリア
-    public void S_GameClear()
+    void GameOverUpdate()
     {
-        upperPanel.SetActive(true);
-        centerText.text = "GameClear";
-        underText.text = "[R] キーでタイトルへ";
+        if (waitTimer > 0) { waitTimer -= Time.deltaTime; }
+        else
+        {
+            if (panelAlpha < 1.0f) { panelAlpha += Time.deltaTime; }
+            panelImage.color = new Color(0, 0, 0, panelAlpha);
+            pointResultText.alpha = panelAlpha;
+            floorResultText.alpha = panelAlpha;
+            underText.alpha = panelAlpha;
 
-        state = State.GameClear;
 
-        playerCtrl.state = PlayerCTRL.State.Stop;
-        DoEnableFalse();
+            if (uiCtrl.InGameUI.Retry.triggered) { ReLoad(); }
+            if (uiCtrl.InGameUI.ToMenu.triggered) { ReturnMainMenu(); }
+        }
     }
 
     // ポーズ
@@ -187,6 +223,34 @@ public class GC_GameCTRL : MonoBehaviour
         S_Play();
     }
 
+
+
+    // スコア処理 //
+    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+    public void AddPoint(int value)
+    {
+        _point += value;
+        pointText.text = "Score：" + _point;
+    }
+
+    void ScoreLoad()
+    {
+        _fileLocation = Application.streamingAssetsPath + "/jsons/HiScore.json";
+        string inputJson = File.ReadAllText(_fileLocation).ToString();
+        _hiScore = JsonUtility.FromJson<HiScore>(inputJson);
+
+        _hiScore_Point = _hiScore.point;
+        _hiScore_Floor = _hiScore.floor;
+    }
+
+    void ScoreSave()
+    {
+        if (_point > _hiScore_Point) { _hiScore.point = _point; }
+        if (_floor > _hiScore_Floor) { _hiScore.floor = _floor; }
+
+        var datas = JsonUtility.ToJson(_hiScore, true);
+        File.WriteAllText(_fileLocation, datas);
+    }
 
 
     // その他処理 //

@@ -469,6 +469,7 @@ MonoBehaviour:
   bullet: {fileID: 0}
   _kockBackResist: 0
   _damageCap: 0
+  _havePoint: 120
   maxHelthPoint: 50
   nowHelthPoint: 0
   maxStan: 150
@@ -481,6 +482,7 @@ MonoBehaviour:
   defNonDamageTime: 0.3
   _enemyMove: {fileID: 3976107878704391558}
   ownWepon: {fileID: 2495565443134607216}
+  _gameCTRL: {fileID: 0}
   bpmCTRL: {fileID: 0}
   _stageManager: {fileID: 0}
   _playerAttack: {fileID: 0}

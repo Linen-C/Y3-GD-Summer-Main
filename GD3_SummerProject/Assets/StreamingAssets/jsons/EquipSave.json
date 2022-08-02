@@ -1,22 +1,6 @@
 {
     "weaponList": [
         {
-            "number": 11,
-            "name": "ハンマー",
-            "typeName": "long",
-            "typeNum": 2,
-            "trail": "Images/Weapon/Trail/TR_11_hammer",
-            "icon": "Images/Weapon/Icon/WI_11_hammer",
-            "damage": 9,
-            "defknockback": 40,
-            "maxknockback": 50,
-            "stanpower": 50,
-            "wideth": 7,
-            "height": 3,
-            "offset": 8.0,
-            "text": "あまりにも小回りが利かなさすぎる…\n雑魚掃除には全く向いていないだろう。\nこの無駄にデカくて無骨が過ぎる武器で\nアイツは一体何と戦おうと言うのだ…？"
-        },
-        {
             "number": 12,
             "name": "ブレード",
             "typeName": "blade",
@@ -31,6 +15,22 @@
             "height": 5,
             "offset": 3.0,
             "text": "ガチなやつ出てきちゃった。\nアイツが持ち込んだ私物の中で\nおそらく一番ヤバいであろうガチな武器。\nおっかないからロッカーに放置しないでほしい。"
+        },
+        {
+            "number": 7,
+            "name": "スピア",
+            "typeName": "long",
+            "typeNum": 2,
+            "trail": "Images/Weapon/Trail/TR_07_spear",
+            "icon": "Images/Weapon/Icon/WI_07_spear",
+            "damage": 7,
+            "defknockback": 40,
+            "maxknockback": 50,
+            "stanpower": 50,
+            "wideth": 2,
+            "height": 3,
+            "offset": 8.5,
+            "text": "柄の長い槍だが、扱いが難しく\n刃の部分が死ぬほど小さい。\n最初は面白く思うだろうが、\nきっとそのうちピーキーさに辟易する。"
         }
     ]
 }

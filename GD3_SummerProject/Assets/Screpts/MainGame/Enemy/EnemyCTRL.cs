@@ -13,6 +13,9 @@ public class EnemyCTRL : MonoBehaviour
     [SerializeField] bool _kockBackResist = false;
     [SerializeField] int _damageCap = 0;
 
+    [Header("得点")]
+    [SerializeField] int _havePoint = 100;
+
     [Header("ステータス")]
     [SerializeField] int maxHelthPoint;      // 最大体力
     [SerializeField] int nowHelthPoint = 0;  // 現在体力
@@ -38,6 +41,7 @@ public class EnemyCTRL : MonoBehaviour
     [Header("スクリプト(マニュアル)")]
     [SerializeField] EnemyWepon ownWepon;  // 所持武器
     [Header("スクリプト(自動取得)")]
+    [SerializeField] GC_GameCTRL _gameCTRL;
     [SerializeField] GC_BpmCTRL bpmCTRL;   // メトロノーム受け取り用
     [SerializeField] StageManager _stageManager;
     [SerializeField] PlayerAttack_B _playerAttack;
@@ -105,8 +109,9 @@ public class EnemyCTRL : MonoBehaviour
         _stageManager = areaObj.GetComponent<StageManager>();
 
         // キレそう
-        var bpmCtrl = GameObject.FindGameObjectWithTag("GameController");
-        bpmCTRL = bpmCtrl.GetComponent<GC_BpmCTRL>();
+        var GC = GameObject.FindGameObjectWithTag("GameController");
+        _gameCTRL = GC.GetComponent<GC_GameCTRL>();
+        bpmCTRL = GC.GetComponent<GC_BpmCTRL>();
 
         // ２回も使いとうなかったわい…
         player = GameObject.FindGameObjectWithTag("Player");
@@ -200,6 +205,8 @@ public class EnemyCTRL : MonoBehaviour
             state = State.Dead;
             _playerAttack.GetCharge();
             Destroy(gameObject, defNonDamageTime + 0.1f);
+
+            _gameCTRL.AddPoint(_havePoint);
 
             return false;
         }

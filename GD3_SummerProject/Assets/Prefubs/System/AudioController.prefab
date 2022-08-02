@@ -60,3 +60,4 @@ MonoBehaviour:
   clips_Damage:
   - {fileID: 8300000, guid: ebe2b5cb20b9ff649815f9a669a79857, type: 3}
   nowVolume: 0.5
+  _GC_BpmCTRL: {fileID: 0}

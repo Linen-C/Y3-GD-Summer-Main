@@ -57,7 +57,7 @@ Transform:
   m_GameObject: {fileID: 5146510215407797599}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 22, y: 7, z: 1}
+  m_LocalScale: {x: 24, y: 8, z: 1}
   m_Children: []
   m_Father: {fileID: 5146510216098385555}
   m_RootOrder: 2
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85488438f0a55fc4cbd9f2315b6b3492, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _defEventTimer: 0
+  _defEventTimer: 0.4
   _player: {fileID: 0}
   _playerMove: {fileID: 0}
 --- !u!1 &5146510215529747496
@@ -382,17 +382,13 @@ MonoBehaviour:
   _nowArenaNo: 0
   _arenas:
   - {fileID: 325881022317399514, guid: 327b81dbc7a79e74bb8cea4c9cc4e53d, type: 3}
-  - {fileID: 711387572296498165, guid: 71b01849c4d20c9419e5baa6a6015105, type: 3}
-  - {fileID: 3856589857841129198, guid: a6914fc9ae40d2f4c921a6e03e6056c8, type: 3}
-  - {fileID: 6880597391400662609, guid: 03c12da2d41bf994f98a6d2746091b43, type: 3}
-  - {fileID: 7068738726072369243, guid: 2981047350faa1742b864e81bbc4eb48, type: 3}
   _cloned: {fileID: 0}
   _defWaitTime: 2
   _nowWaitTime: 0
   _wait: 0
   _panelAnimator: {fileID: 0}
-  _text_MaxStage: {fileID: 0}
-  _text_NowStage: {fileID: 0}
+  _text_NowFloor: {fileID: 0}
+  _text_Floor: {fileID: 0}
   _entryPoint: {fileID: 5146510215407797598}
   _player: {fileID: 0}
   _gameController: {fileID: 0}

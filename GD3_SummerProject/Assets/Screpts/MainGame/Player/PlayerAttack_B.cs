@@ -49,7 +49,9 @@ public class PlayerAttack_B : MonoBehaviour
     private void Update()
     {
         // e
-        _text_Gun.text = _nowGunCharge + " / " + _needGunCharge;
+        if (_nowGunCharge >= _needGunCharge) { _text_Gun.text = "Ready"; }
+        else { _text_Gun.text = _nowGunCharge + " / " + _needGunCharge; }
+        
         _slider_Gun.value = (float)_nowGunCharge / (float)_needGunCharge;
     }
 
@@ -68,7 +70,8 @@ public class PlayerAttack_B : MonoBehaviour
             else
             {
                 _plCTRL._resultText.text = "miss...";
-                _plCTRL._resultText.alpha = 1.0f;
+                _plCTRL._comboText.text = "";
+                _plCTRL._comboTextAlpha = 1.0f;
                 _plCTRL._orFaild = true;
                 _plCTRL._orFaildCount = _defPenalty;
             }

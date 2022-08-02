@@ -31,7 +31,7 @@ public class Bullet : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // 何でもない場合
-        if (collision.tag == owner) { return; }
+        if (collision.tag == owner || collision.tag == gameObject.tag) { return; }
 
 
         // エネミー弾

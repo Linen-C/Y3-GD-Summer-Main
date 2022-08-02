@@ -44,6 +44,15 @@ public partial class @UIControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ToMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""e7a41eda-1dc1-4499-8192-eaa9d87b61a6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -88,6 +97,28 @@ public partial class @UIControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""JoyPad"",
                     ""action"": ""Retry"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7dbff29d-747b-4f02-8cde-7ac1f8acfa52"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""94954090-7145-40f4-948f-9af68f13a7c8"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToMenu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -341,6 +372,7 @@ public partial class @UIControls : IInputActionCollection2, IDisposable
         m_InGameUI = asset.FindActionMap("InGameUI", throwIfNotFound: true);
         m_InGameUI_Pause = m_InGameUI.FindAction("Pause", throwIfNotFound: true);
         m_InGameUI_Retry = m_InGameUI.FindAction("Retry", throwIfNotFound: true);
+        m_InGameUI_ToMenu = m_InGameUI.FindAction("ToMenu", throwIfNotFound: true);
         // MenuUI
         m_MenuUI = asset.FindActionMap("MenuUI", throwIfNotFound: true);
         m_MenuUI_Point = m_MenuUI.FindAction("Point", throwIfNotFound: true);
@@ -414,12 +446,14 @@ public partial class @UIControls : IInputActionCollection2, IDisposable
     private IInGameUIActions m_InGameUIActionsCallbackInterface;
     private readonly InputAction m_InGameUI_Pause;
     private readonly InputAction m_InGameUI_Retry;
+    private readonly InputAction m_InGameUI_ToMenu;
     public struct InGameUIActions
     {
         private @UIControls m_Wrapper;
         public InGameUIActions(@UIControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Pause => m_Wrapper.m_InGameUI_Pause;
         public InputAction @Retry => m_Wrapper.m_InGameUI_Retry;
+        public InputAction @ToMenu => m_Wrapper.m_InGameUI_ToMenu;
         public InputActionMap Get() { return m_Wrapper.m_InGameUI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -435,6 +469,9 @@ public partial class @UIControls : IInputActionCollection2, IDisposable
                 @Retry.started -= m_Wrapper.m_InGameUIActionsCallbackInterface.OnRetry;
                 @Retry.performed -= m_Wrapper.m_InGameUIActionsCallbackInterface.OnRetry;
                 @Retry.canceled -= m_Wrapper.m_InGameUIActionsCallbackInterface.OnRetry;
+                @ToMenu.started -= m_Wrapper.m_InGameUIActionsCallbackInterface.OnToMenu;
+                @ToMenu.performed -= m_Wrapper.m_InGameUIActionsCallbackInterface.OnToMenu;
+                @ToMenu.canceled -= m_Wrapper.m_InGameUIActionsCallbackInterface.OnToMenu;
             }
             m_Wrapper.m_InGameUIActionsCallbackInterface = instance;
             if (instance != null)
@@ -445,6 +482,9 @@ public partial class @UIControls : IInputActionCollection2, IDisposable
                 @Retry.started += instance.OnRetry;
                 @Retry.performed += instance.OnRetry;
                 @Retry.canceled += instance.OnRetry;
+                @ToMenu.started += instance.OnToMenu;
+                @ToMenu.performed += instance.OnToMenu;
+                @ToMenu.canceled += instance.OnToMenu;
             }
         }
     }
@@ -558,6 +598,7 @@ public partial class @UIControls : IInputActionCollection2, IDisposable
     {
         void OnPause(InputAction.CallbackContext context);
         void OnRetry(InputAction.CallbackContext context);
+        void OnToMenu(InputAction.CallbackContext context);
     }
     public interface IMenuUIActions
     {

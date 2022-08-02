@@ -7,7 +7,7 @@ public class StageManager : MonoBehaviour
 {
 
     [Header("現在のエリアナンバー")]
-    [SerializeField] int _nowArenaNo;
+    [SerializeField] public int _nowArenaNo;
     [Header("エリアリスト(マニュアル)")]
     [SerializeField] GameObject[] _arenas;
     [Header("現在のエリア(オート)")]
@@ -18,8 +18,7 @@ public class StageManager : MonoBehaviour
     [SerializeField] bool _wait = false;
     [Header("UI(マニュアル)")]
     [SerializeField] Animator _panelAnimator;
-    [SerializeField] TextMeshProUGUI _text_MaxStage;
-    [SerializeField] TextMeshProUGUI _text_NowStage;
+    [SerializeField] TextMeshProUGUI _text_NowFloor;
     [SerializeField] TextMeshProUGUI _text_Floor;
     [Header("トランスフォーム(マニュアル)")]
     [SerializeField] Transform _entryPoint;
@@ -35,8 +34,6 @@ public class StageManager : MonoBehaviour
 
     void Start()
     {
-        _text_MaxStage.text = "/" + _arenas.Length.ToString();
-        
         _panelAnimator.SetBool("Close", false);
         
         _playerCTRL = _player.GetComponent<PlayerCTRL>();
@@ -71,7 +68,9 @@ public class StageManager : MonoBehaviour
 
     void SetArena()
     {
-        _cloned = Instantiate(_arenas[_nowArenaNo], transform);
+        int nextStage = Random.Range(0, _arenas.Length);
+
+        _cloned = Instantiate(_arenas[nextStage], transform);
     }
 
     public void GetSignal()
@@ -79,13 +78,7 @@ public class StageManager : MonoBehaviour
         Destroy(_cloned);
         _nowArenaNo++;
 
-        _text_NowStage.text = "Stage " + (_nowArenaNo + 1).ToString();
-
-        if (_nowArenaNo == _arenas.Length)
-        {
-            _gameCTRL.S_GameClear();
-            return;
-        }
+        _text_NowFloor.text = (_nowArenaNo + 1).ToString();
 
         _bpmCTRL.ChangePause(true);
 

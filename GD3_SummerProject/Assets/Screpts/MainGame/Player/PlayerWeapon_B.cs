@@ -10,10 +10,11 @@ public class PlayerWeapon_B : MonoBehaviour
     [SerializeField] public float nowAttakingTime = 0.0f;  // 判定の発生時間
 
     // スクリプト
-    [Header("スクリプト")]
+    [Header("スクリプト(マニュアル)")]
     [SerializeField] PlayerCTRL _playerCTRL;
     [SerializeField] PlayerAttack_B _playerAttack;
     [SerializeField] SpriteChanger _spriteChanger;
+    [SerializeField] GC_GameCTRL _gameCTRL;
 
     [Header("パラメータ")]
     [SerializeField] int _damage = 0;
@@ -113,20 +114,9 @@ public class PlayerWeapon_B : MonoBehaviour
 
         // plAttack
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-        switch (_typeNum)
-        {
-            case 1:
-                _playerAttack._defPenalty = 0;
-                break;
-            case 2:
-                _playerAttack._defPenalty = 2;
-                break;
-            default:
-                _playerAttack._defPenalty = 1;
-                break;
-        }
-
-        
+        // ペナルティ長さ
+        if (_typeNum == 2) { _playerAttack._defPenalty = 2; }
+        else { _playerAttack._defPenalty = 1; }
 
         // UI更新
         _playerAttack._image_Wepon.sprite = Resources.Load<Sprite>(wepon[no].icon);
@@ -177,12 +167,16 @@ public class PlayerWeapon_B : MonoBehaviour
             }
 
             int damage = _damage;
-
             if (_typeNum != 2)
             {
                 damage += _playerCTRL.comboCount;
                 if (_isPerfect) { damage += 2; }
             }
+
+            int scoreValue = 5;
+            if (_isPerfect) { scoreValue *= (_playerCTRL.comboCount + 2); }
+            else { scoreValue *= _playerCTRL.comboCount; }
+            _gameCTRL.AddPoint(scoreValue);
 
             collision.gameObject.GetComponent<EnemyCTRL>().TakeDamage(
                 damage,
@@ -191,11 +185,13 @@ public class PlayerWeapon_B : MonoBehaviour
                 _typeNum);
         }
 
-        if (collision.tag == "EnemyAttack")
+        if (collision.tag == "EnemyBullet")
         {
             _playerCTRL.comboCount++;
             _comboFlag = true;
             _hitCoolDown = defAttackingTime;
+
+            _gameCTRL.AddPoint(50);
         }
     }
 }

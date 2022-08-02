@@ -10,7 +10,6 @@ public class PlayerRotation : MonoBehaviour
 
     [Header("ゲームオブジェクト")]
     [SerializeField] GameObject cursor;       // カーソル取得(多分これが一番早い)
-    [SerializeField] GameObject cursorImage;  // カーソルイメージ(TKIH)
 
     public void Rotation(PlayerControls playerControls, SpriteRenderer sprite)
     {
@@ -20,7 +19,6 @@ public class PlayerRotation : MonoBehaviour
 
         if (cursor.transform.eulerAngles.z < 180.0f) { sprite.flipX = true; }
         else { sprite.flipX = false; }
-
     }
 
     // 旋回（キーボード・マウス）

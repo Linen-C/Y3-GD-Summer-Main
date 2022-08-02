@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.InputSystem;
 using TMPro;
 
 public class PlayerCTRL : MonoBehaviour
@@ -21,7 +20,7 @@ public class PlayerCTRL : MonoBehaviour
 
     // スクリプト
     [Header("コンポーネント(マニュアル)")]
-    [SerializeField] GC_GameCTRL gamectrl;  // いろいろ取ってくる用
+    [SerializeField] GameObject gamectrl;  // いろいろ取ってくる用
     
 
     [Header("コンポーネント(オート)")]
@@ -49,10 +48,12 @@ public class PlayerCTRL : MonoBehaviour
     [SerializeField] Image image_DamagePanel;
     [SerializeField] float image_DamagePanel_defalpha = 1.0f;
     [SerializeField] float image_DamagePanel_nowalpha = 0.0f;
-    [SerializeField] TextMeshProUGUI _comboText;
+    [SerializeField] public TextMeshProUGUI _comboText;
     [SerializeField] public TextMeshProUGUI _resultText;
     [SerializeField] Image image_Rock;
     [SerializeField] TextMeshProUGUI text_RockCount;
+    [SerializeField] Image image_half_Hit;
+    [SerializeField] Image image_half_Per;
 
     // 体力表示
     [Header("体力表示(マニュアル)")]
@@ -72,7 +73,11 @@ public class PlayerCTRL : MonoBehaviour
 
     public bool _orFaild = false;   // ロック中かどうか
     public int _orFaildCount = 0;   // ロック時間
-    [SerializeField] float _rockAlpha = 0.0f;
+    float _rockAlpha = 0.0f;
+    
+    public float _comboTextAlpha = 0.0f;
+    float _comboImageAlpha = 0.0f;
+
 
 
     public enum State
@@ -111,9 +116,7 @@ public class PlayerCTRL : MonoBehaviour
 
         // 武器初期化
         equipList = equipLoad.GetList();
-        //maxWeaponCharge = playerWeapon.SwapWeapon(equipList.weaponList, 0);
         playerWeapon.SwapWeapon(equipList.weaponList, 0);
-        //_playerAttack.nowGunCharge = 0;
 
         // UI系初期化
         UIUpdate();
@@ -185,25 +188,33 @@ public class PlayerCTRL : MonoBehaviour
         // コンボ表示
         if (comboCount == 0)
         {
-            if (_comboText.alpha > 0.0f) { _comboText.alpha -= Time.deltaTime; }
-            if (_resultText.alpha > 0.0f) { _resultText.alpha -= Time.deltaTime; }
+            if (_comboTextAlpha > 0.0f) _comboTextAlpha -= Time.deltaTime;
+            if (_comboImageAlpha > 0.0f) _comboImageAlpha-= Time.deltaTime;
         }
         else
         {
-            _comboText.alpha = 1.0f;
+            _comboTextAlpha = 1.0f;
             _comboText.text = "x" + comboCount;
+
+            if(playerWeapon.GetTypeNum() != 2) { _comboImageAlpha = 0.35f; }
         }
+        _comboText.alpha = _comboTextAlpha;
+        _resultText.alpha = _comboTextAlpha;
+        image_half_Hit.color = new Color(1.0f, 0, 0, _comboImageAlpha);
+        image_half_Per.color = new Color(0, 1.0f, 1.0f, _comboImageAlpha);
+
 
         // コンボミス
         if (_orFaild)
         {
-            _rockAlpha = 1.0f;
+            _rockAlpha = 0.6f;
             text_RockCount.text = _orFaildCount.ToString();
         }
         else
         {
             if (_rockAlpha > 0.0f) { _rockAlpha -= Time.deltaTime * 5.0f;  }
         }
+        text_RockCount.alpha = _rockAlpha;
         image_Rock.color = new Color(1.0f, 0.0f, 0.0f, _rockAlpha);
 
     }
@@ -226,7 +237,9 @@ public class PlayerCTRL : MonoBehaviour
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "EnemyAttack" && (NonDamageTime <= 0.0f))
+        if ((collision.gameObject.tag == "EnemyAttack" ||
+            collision.gameObject.tag == "EnemyBullet") &&
+            (NonDamageTime <= 0.0f))
         {
             Damage();
         }

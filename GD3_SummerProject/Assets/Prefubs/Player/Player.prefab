@@ -635,6 +635,7 @@ MonoBehaviour:
   _playerCTRL: {fileID: 7854783003313331793}
   _playerAttack: {fileID: 3399113693741798867}
   _spriteChanger: {fileID: 1047934111}
+  _gameCTRL: {fileID: 0}
   _damage: 0
   _knockBack: 0
   _stanPower: 0
@@ -1057,6 +1058,10 @@ MonoBehaviour:
   image_DamagePanel_nowalpha: 0
   _comboText: {fileID: 0}
   _resultText: {fileID: 0}
+  image_Rock: {fileID: 0}
+  text_RockCount: {fileID: 0}
+  image_half_Hit: {fileID: 0}
+  image_half_Per: {fileID: 0}
   hpSlider: {fileID: 5830687477450192321}
   equipNo: 0
   comboTimeLeft: 0
@@ -1065,6 +1070,7 @@ MonoBehaviour:
   knockBackCounter: 0
   _orFaild: 0
   _orFaildCount: 0
+  _comboTextAlpha: 0
   state: 0
 --- !u!114 &2447405941736732258
 MonoBehaviour:
@@ -1096,7 +1102,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _plCTRL: {fileID: 7854783003313331793}
   cursor: {fileID: 7854783002312811369}
-  cursorImage: {fileID: 7854783003204025895}
 --- !u!114 &3399113693741798867
 MonoBehaviour:
   m_ObjectHideFlags: 0

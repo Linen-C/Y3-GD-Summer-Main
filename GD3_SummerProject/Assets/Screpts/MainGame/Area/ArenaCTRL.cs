@@ -10,7 +10,7 @@ public class ArenaCTRL : MonoBehaviour
     [SerializeField] public int now_Wave;
     [Header("BPMコントロール(オート)")]
     [SerializeField] GC_BpmCTRL bpmCTRL;   // メトロノーム受け取り用
-    [SerializeField] GC_GameCTRL gameCTRL;
+    [SerializeField] TU_GameCTRL gameCTRL;
     [Header("敵管理(マニュアル)")]
     [SerializeField] ArenaEnemyCTRL enemyCtrl;
     [Header("ゲート(マニュアル)")]
@@ -47,7 +47,7 @@ public class ArenaCTRL : MonoBehaviour
     {
         var gameCtrlObj = GameObject.FindGameObjectWithTag("GameController");
         bpmCTRL = gameCtrlObj.GetComponent<GC_BpmCTRL>();
-        gameCTRL = gameCtrlObj.GetComponent<GC_GameCTRL>();
+        gameCTRL = gameCtrlObj.GetComponent<TU_GameCTRL>();
 
         
         // オーディオコントロール取得

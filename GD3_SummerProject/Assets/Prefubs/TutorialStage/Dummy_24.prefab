@@ -938,6 +938,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defTime: 0.3
+  attakingTime: 0
   enemyCTRL: {fileID: 8825447691515861153}
   spriteChanger: {fileID: 8825447693054900411}
 --- !u!1 &8825447691515861152
@@ -1083,6 +1084,7 @@ MonoBehaviour:
   bullet: {fileID: 8518680874773387965, guid: babc9795b0473cb40b1853154f506c23, type: 3}
   _kockBackResist: 0
   _damageCap: 0
+  _havePoint: 0
   maxHelthPoint: 8
   nowHelthPoint: 0
   maxStan: 10
@@ -1095,13 +1097,16 @@ MonoBehaviour:
   defNonDamageTime: 0.1
   _enemyMove: {fileID: -5536215024157495835}
   ownWepon: {fileID: 8825447691338822090}
+  _gameCTRL: {fileID: 0}
   bpmCTRL: {fileID: 0}
   _stageManager: {fileID: 0}
+  _playerAttack: {fileID: 0}
   cursor: {fileID: 8825447691550550553}
   cursorImage: {fileID: 8825447692948861165}
   flashObj: {fileID: 667564154056010388}
   player: {fileID: 0}
   areaObj: {fileID: 0}
+  _renderer: {fileID: 0}
   hpSlider: {fileID: 3036597731051929616}
   stanBar: {fileID: 5959988020899463614}
   stanBarFill: {fileID: 196955111070910921}
