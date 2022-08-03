@@ -972,6 +972,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 9ce00526-28fd-4782-8037-f9350abdbd11
     m_ActionName: MenuUI/Tracked Orientation
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e7a41eda-1dc1-4499-8192-eaa9d87b61a6
+    m_ActionName: InGameUI/ToMenu[/Keyboard/space]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: InGameUI

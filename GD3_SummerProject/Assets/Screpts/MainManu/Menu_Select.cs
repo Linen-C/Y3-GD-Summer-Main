@@ -13,7 +13,7 @@ public class Menu_Select : MonoBehaviour
 
     public void Select_Tutorial()
     {
-        //SceneManager.LoadScene("Tutorial");
+        SceneManager.LoadScene("Tutorial");
     }
 
 }

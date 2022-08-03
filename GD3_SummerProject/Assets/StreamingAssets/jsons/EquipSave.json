@@ -1,36 +1,36 @@
 {
     "weaponList": [
         {
-            "number": 12,
-            "name": "ブレード",
-            "typeName": "blade",
-            "typeNum": 3,
-            "trail": "Images/Weapon/Trail/TR_12_blade",
-            "icon": "Images/Weapon/Icon/WI_12_blade",
-            "damage": 7,
+            "number": 1,
+            "name": "バット",
+            "typeName": "club",
+            "typeNum": 0,
+            "trail": "Images/Weapon/Trail/TR_01_bat",
+            "icon": "Images/Weapon/Icon/WI_01_bat",
+            "damage": 4,
             "defknockback": 20,
             "maxknockback": 30,
-            "stanpower": 25,
-            "wideth": 6,
-            "height": 5,
+            "stanpower": 100,
+            "wideth": 5,
+            "height": 3,
             "offset": 3.0,
-            "text": "ガチなやつ出てきちゃった。\nアイツが持ち込んだ私物の中で\nおそらく一番ヤバいであろうガチな武器。\nおっかないからロッカーに放置しないでほしい。"
+            "text": "どこにでもよくあるバット。\n尖ったところはない\n性能的にも物理的にも。\n木製だったら釘でも打ち込んでいたところだ。"
         },
         {
-            "number": 7,
-            "name": "スピア",
-            "typeName": "long",
-            "typeNum": 2,
-            "trail": "Images/Weapon/Trail/TR_07_spear",
-            "icon": "Images/Weapon/Icon/WI_07_spear",
-            "damage": 7,
-            "defknockback": 40,
-            "maxknockback": 50,
-            "stanpower": 50,
+            "number": 2,
+            "name": "スパイク",
+            "typeName": "small",
+            "typeNum": 1,
+            "trail": "Images/Weapon/Trail/TR_02_spike",
+            "icon": "Images/Weapon/Icon/WI_02_spike",
+            "damage": 4,
+            "defknockback": 20,
+            "maxknockback": 20,
+            "stanpower": 25,
             "wideth": 2,
-            "height": 3,
-            "offset": 8.5,
-            "text": "柄の長い槍だが、扱いが難しく\n刃の部分が死ぬほど小さい。\n最初は面白く思うだろうが、\nきっとそのうちピーキーさに辟易する。"
+            "height": 4,
+            "offset": 3.0,
+            "text": "素手よりマシ程度の性能。\n使い手曰く「敵によく効く」とかなんとか。\n信じない方がいい。実際ウソ。\nなんでこんなもの使ってるんだろう…"
         }
     ]
 }

@@ -6,11 +6,9 @@ using UnityEngine.UI;
 
 public class Tutorials : MonoBehaviour
 {
-    [SerializeField] ArenaCTRL _arenaCTRL;
+    [SerializeField] TutoArenaCTRL _arenaCTRL;
     [SerializeField] GameObject[] _panels;
     [SerializeField] ArenaEnemyCTRL _arenaEnemyCTRL;
-    [SerializeField] Transform _enemyTransform;
-    //[SerializeField] EnemyCTRL _enemyCTRL;
 
     void Start()
     {
@@ -42,11 +40,6 @@ public class Tutorials : MonoBehaviour
         {
             _panels[nowNomber].SetActive(false);
         }
-    }
-
-    void EnemyOverride()
-    {
-
     }
 
 }

@@ -32,7 +32,7 @@ public class EnemyCTRL : MonoBehaviour
 
     [Header("ノックバックと無敵時間")]
     [SerializeField] float knockBackPower;    // かかるノックバックの強さ
-    [SerializeField] float defNonDamageTime = 0.3f;  // デフォルト無敵時間
+    [SerializeField] float defNonDamageTime = 0.2f;  // デフォルト無敵時間
 
     [Header("テスト")]
     [SerializeField] EnemyMove _enemyMove;
@@ -61,6 +61,11 @@ public class EnemyCTRL : MonoBehaviour
     [SerializeField] Slider hpSlider;
     [SerializeField] Slider stanBar;
     [SerializeField] Image stanBarFill;
+
+    [Header("オーディオ(マニュアル)")]
+    [SerializeField] MainAudioCTRL _audioCTRL;
+    [SerializeField] AudioSource audioSource;   // オーディオソース
+    [SerializeField] AudioClip audioClip;
 
     // プライベート変数
     private int weaponCharge = 1;         // 現在クールダウン
@@ -116,6 +121,12 @@ public class EnemyCTRL : MonoBehaviour
         // ２回も使いとうなかったわい…
         player = GameObject.FindGameObjectWithTag("Player");
         _playerAttack = player.GetComponent<PlayerAttack_B>();
+
+        // オーディオ初期化
+        audioSource = GetComponent<AudioSource>();
+        _audioCTRL = GameObject.FindGameObjectWithTag("AudioController").GetComponent<MainAudioCTRL>();
+        audioSource.volume = _audioCTRL.nowVolume;
+        audioClip = _audioCTRL.clips_Damage[0];
 
         // ステート初期化
         state = State.Stop;
@@ -351,7 +362,8 @@ public class EnemyCTRL : MonoBehaviour
 
         NonDamageTime = defNonDamageTime;
         knockBackCounter = 0.1f;
-        
+
+        audioSource.PlayOneShot(audioClip);
         anim.SetTrigger("Damage");
     }
 }

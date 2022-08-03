@@ -10,6 +10,7 @@ public class SpawnPattarn : MonoBehaviour
     [SerializeField] Vector2[] spwanEnemyPos;
     [Header("アリーナ(自動取得)")]
     [SerializeField] ArenaCTRL arenaCtrl;
+    [SerializeField] TutoArenaCTRL tutoArenaCtrl;
     [Header("中心座標")]
     [SerializeField] Vector2 arenaPos;
 
@@ -17,8 +18,17 @@ public class SpawnPattarn : MonoBehaviour
     {
         arenaCtrl = transform.parent.parent.gameObject.GetComponent<ArenaCTRL>();
 
-        arenaPos = new Vector2(arenaCtrl.transform.position.x,
+        if(arenaCtrl != null)
+        {
+            arenaPos = new Vector2(arenaCtrl.transform.position.x,
             arenaCtrl.transform.position.y);
+        }
+        else
+        {
+            tutoArenaCtrl = transform.parent.parent.gameObject.GetComponent<TutoArenaCTRL>();
+            arenaPos = new Vector2(tutoArenaCtrl.transform.position.x,
+            tutoArenaCtrl.transform.position.y);
+        }
     }
 
     public void Spawn()

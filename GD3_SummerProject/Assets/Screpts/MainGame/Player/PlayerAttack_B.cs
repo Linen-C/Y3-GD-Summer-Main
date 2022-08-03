@@ -23,8 +23,8 @@ public class PlayerAttack_B : MonoBehaviour
     [SerializeField] public int _defPenalty = 1;
 
     [Header("遠距離攻撃")]
-    [SerializeField] int _needGunCharge;  // 遠距離攻撃に必要なチャージ
-    [SerializeField] int _nowGunCharge;   // 現在のチャージ
+    [SerializeField] public int _needGunCharge;  // 遠距離攻撃に必要なチャージ
+    [SerializeField] public int _nowGunCharge;   // 現在のチャージ
     [SerializeField] bool _standby = false;
     [SerializeField] int _needCountDown;
     [SerializeField] int _nowCountDown = 0;
@@ -32,6 +32,7 @@ public class PlayerAttack_B : MonoBehaviour
     [Header("オーディオ(マニュアル)")]
     [SerializeField] MainAudioCTRL _audioCTRL;
     [SerializeField] AudioSource audioSource;   // オーディオソース
+    [SerializeField] AudioClip[] audioClip_Weapon;
     [SerializeField] AudioClip[] audioClip_Gun;
 
 
@@ -42,8 +43,8 @@ public class PlayerAttack_B : MonoBehaviour
         audioSource.volume = _audioCTRL.nowVolume;
         audioClip_Gun = new AudioClip[_audioCTRL.clips_Player_Gun.Length];
         audioClip_Gun = _audioCTRL.clips_Player_Gun;
-        //audioClip_Weapon = new AudioClip[_audioCTRL.clips_Player_Weapon.Length];
-        //audioClip_Weapon = _audioCTRL.clips_Player_Weapon;
+        audioClip_Weapon = new AudioClip[_audioCTRL.clips_Player_Weapon.Length];
+        audioClip_Weapon = _audioCTRL.clips_Player_Weapon;
     }
 
     private void Update()
@@ -66,6 +67,7 @@ public class PlayerAttack_B : MonoBehaviour
             {
                 _plCTRL._anim.SetTrigger("Attack");
                 playerWeapon.Attacking(bpmCTRL.Perfect());
+                audioSource.PlayOneShot(audioClip_Weapon[0]);
             }
             else
             {

@@ -14,7 +14,7 @@ public class PlayerWeapon_B : MonoBehaviour
     [SerializeField] PlayerCTRL _playerCTRL;
     [SerializeField] PlayerAttack_B _playerAttack;
     [SerializeField] SpriteChanger _spriteChanger;
-    [SerializeField] GC_GameCTRL _gameCTRL;
+    //[SerializeField] GC_GameCTRL _gameCTRL;
 
     [Header("ÉpÉâÉÅÅ[É^")]
     [SerializeField] int _damage = 0;
@@ -173,16 +173,24 @@ public class PlayerWeapon_B : MonoBehaviour
                 if (_isPerfect) { damage += 2; }
             }
 
-            int scoreValue = 5;
-            if (_isPerfect) { scoreValue *= (_playerCTRL.comboCount + 2); }
-            else { scoreValue *= _playerCTRL.comboCount; }
-            _gameCTRL.AddPoint(scoreValue);
-
-            collision.gameObject.GetComponent<EnemyCTRL>().TakeDamage(
+            if (collision.gameObject.GetComponent<EnemyCTRL>() != null)
+            {
+                collision.gameObject.GetComponent<EnemyCTRL>().TakeDamage(
                 damage,
                 _knockBack,
                 _stanPower,
                 _typeNum);
+            }
+            else if (collision.gameObject.GetComponent<TutoEnemyCTRL>() != null)
+            {
+                collision.gameObject.GetComponent<TutoEnemyCTRL>().TakeDamage(
+                damage,
+                _knockBack,
+                _stanPower,
+                _typeNum);
+            }
+
+            
         }
 
         if (collision.tag == "EnemyBullet")
@@ -190,8 +198,6 @@ public class PlayerWeapon_B : MonoBehaviour
             _playerCTRL.comboCount++;
             _comboFlag = true;
             _hitCoolDown = defAttackingTime;
-
-            _gameCTRL.AddPoint(50);
         }
     }
 }
