@@ -5,13 +5,9 @@ using UnityEngine.UI;
 
 public class EnemyCTRL : MonoBehaviour
 {
-    [Header("遠距離攻撃用")]
-    [SerializeField] bool shootingType = false; // 遠距離攻撃タイプか
-    [SerializeField] GameObject bullet; // 弾丸
-
     [Header("チュートリアル用")]
-    [SerializeField] bool _kockBackResist = false;
     [SerializeField] int _damageCap = 0;
+    [SerializeField] bool _kockBackResist = false;
 
     [Header("得点")]
     [SerializeField] int _havePoint = 100;
@@ -24,39 +20,36 @@ public class EnemyCTRL : MonoBehaviour
     [SerializeField] int doStanCount;        // スタン回復までのテンポ数
     [SerializeField] int stanRecoverCount;   // スタン回復までのデフォルトテンポ数
 
-    [Header("移動")]
-    [SerializeField] float moveSpeed;  // 移動速度
-
     [Header("武器")]
-    [SerializeField] int needWeaponCharge;  // 必要クールダウン
+    [SerializeField] public int _nowWeaponCharge = 1;  // 現在クールダウン
+    [SerializeField] int _needWeaponCharge;            // 必要クールダウン
+
+    [Header("遠距離攻撃の有無")]
+    [SerializeField] bool shootingType = false; // 遠距離攻撃タイプか
 
     [Header("ノックバックと無敵時間")]
     [SerializeField] float knockBackPower;    // かかるノックバックの強さ
-    [SerializeField] float defNonDamageTime = 0.2f;  // デフォルト無敵時間
+    [SerializeField] float defNonDamageTime = 0.2f;  // デフォルト無敵時間4
 
-    [Header("テスト")]
-    [SerializeField] EnemyMove _enemyMove;
-
-    // スクリプト
-    [Header("スクリプト(マニュアル)")]
-    [SerializeField] EnemyWepon ownWepon;  // 所持武器
-    [Header("スクリプト(自動取得)")]
-    [SerializeField] GC_GameCTRL _gameCTRL;
-    [SerializeField] GC_BpmCTRL bpmCTRL;   // メトロノーム受け取り用
-    [SerializeField] StageManager _stageManager;
-    [SerializeField] PlayerAttack_B _playerAttack;
-
-    // ゲームオブジェクト
-    [Header("ゲームオブジェクト(マニュアル)")]
-    [SerializeField] GameObject cursor;    // カーソル取得(多分これが一番早い)
-    [SerializeField] GameObject cursorImage;  // カーソルイメージ(TKIH)
-    [SerializeField] GameObject flashObj;   // フラッシュ用
     [Header("ゲームオブジェクト(自動取得)")]
-    [SerializeField] GameObject player;    // プレイヤー
-    [SerializeField] GameObject areaObj;   // エリアオブジェクト
-    [SerializeField] Renderer _renderer;
+    [SerializeField] GameObject _player;    // プレイヤー
 
-    // 体力表示
+    [Header("コンポーネント")]
+    // 外部
+    [SerializeField] EnemyWepon _ownWepon;  // 所持武器
+    [SerializeField] PlayerAttack_B _playerAttack;
+    [SerializeField] StageManager _stageManager;  // 親のエリア
+    [SerializeField] GC_GameCTRL _gameCTRL;       // ゲームコントローラー
+    [SerializeField] GC_BpmCTRL _bpmCTRL;         // メトロノーム
+    // 内部
+    [SerializeField] EnemyMove _enemyMove;
+    [SerializeField] EnemyRotation _enemyRotation;
+    [SerializeField] EnemyAttack _enemyAttack;
+    [SerializeField] Renderer _renderer;
+    [SerializeField] SpriteRenderer _sprite;
+    [SerializeField] Rigidbody2D _body;
+    [SerializeField] Animator _anim;
+
     [Header("体力表示(マニュアル)")]
     [SerializeField] Slider hpSlider;
     [SerializeField] Slider stanBar;
@@ -68,18 +61,9 @@ public class EnemyCTRL : MonoBehaviour
     [SerializeField] AudioClip audioClip;
 
     // プライベート変数
-    private int weaponCharge = 1;         // 現在クールダウン
-    private bool coolDownReset = false;  // クールダウンのリセットフラグ
-    private Vector2 diff;                // プレイヤーの方向
-    private float knockBackCounter = 0;  // ノックバック時間カウンター
-    private float NonDamageTime = 0;     // 無敵時間
-
-    // コンポーネント
-    SpriteRenderer sprite;
-    Rigidbody2D body;
-    Animator anim;
-    Animator flashAnim;
-    Transform curTrans;
+    float knockBackCounter = 0;  // ノックバック時間カウンター
+    float NonDamageTime = 0;     // 無敵時間
+    Vector2 _diff;                // プレイヤーの方向
 
     public enum State
     {
@@ -88,17 +72,22 @@ public class EnemyCTRL : MonoBehaviour
         Stan,
         Dead
     }
-    State state;
+    State _state;
+
 
     void Awake()
     {
         // コンポーネント取得
-        sprite = GetComponent<SpriteRenderer>();
-        body = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
-        flashAnim = flashObj.GetComponent<Animator>();
-        curTrans = cursor.GetComponent<Transform>();
-        _renderer = GetComponent<Renderer>();
+        // 外部
+        _ownWepon = GetComponentInChildren<EnemyWepon>();
+        // 内部
+        TryGetComponent(out _enemyMove);
+        TryGetComponent(out _enemyRotation);
+        TryGetComponent(out _enemyAttack);
+        TryGetComponent(out _renderer);
+        TryGetComponent(out _sprite);
+        TryGetComponent(out _body);
+        TryGetComponent(out _anim);
     }
 
     void Start()
@@ -107,20 +96,19 @@ public class EnemyCTRL : MonoBehaviour
         hpSlider.value = 1;
         stanBar.value = 1;
 
-        if (!shootingType) { bullet = null; }
+        if (!shootingType) { _enemyAttack.SetBulletNull(); }
 
         // 親エリアコンポーネントの取得
-        areaObj = transform.parent.parent.parent.parent.gameObject;
+        var areaObj = transform.parent.parent.parent.parent.gameObject;
         _stageManager = areaObj.GetComponent<StageManager>();
 
-        // キレそう
-        var GC = GameObject.FindGameObjectWithTag("GameController");
-        _gameCTRL = GC.GetComponent<GC_GameCTRL>();
-        bpmCTRL = GC.GetComponent<GC_BpmCTRL>();
-
-        // ２回も使いとうなかったわい…
-        player = GameObject.FindGameObjectWithTag("Player");
-        _playerAttack = player.GetComponent<PlayerAttack_B>();
+        // タグ検索取得
+        // _gameCTRLと_bpmCTRL
+        _gameCTRL = GameObject.FindGameObjectWithTag("GameController").GetComponent<GC_GameCTRL>();
+        _bpmCTRL = _gameCTRL.GetComponent<GC_BpmCTRL>();
+        // _playerと_PlayerAttack
+        _player = GameObject.FindGameObjectWithTag("Player");
+        _playerAttack = _player.GetComponent<PlayerAttack_B>();
 
         // オーディオ初期化
         audioSource = GetComponent<AudioSource>();
@@ -129,7 +117,7 @@ public class EnemyCTRL : MonoBehaviour
         audioClip = _audioCTRL.clips_Damage[0];
 
         // ステート初期化
-        state = State.Stop;
+        _state = State.Stop;
     }
 
     void Update()
@@ -137,13 +125,13 @@ public class EnemyCTRL : MonoBehaviour
         // 停止判定
         if (!_stageManager.enabled)
         {
-            state = State.Stop;
-            anim.SetBool("Moving", false);
+            _state = State.Stop;
+            _anim.SetBool("Moving", false);
         }
-        else if (state != State.Dead)
+        else if (_state != State.Dead)
         {
-            state = State.Alive;
-            anim.SetBool("Moving", true);
+            _state = State.Alive;
+            _anim.SetBool("Moving", true);
         }
 
         // 体力表示セット
@@ -151,7 +139,7 @@ public class EnemyCTRL : MonoBehaviour
 
         // 死亡判定
         if (!IfIsAlive()) { return; }
-        else { anim.SetBool("Alive", true); }
+        else { _anim.SetBool("Alive", true); }
 
         // 無敵時間
         if (NonDamageTime > 0) { NonDamageTime -= Time.deltaTime; }
@@ -161,20 +149,19 @@ public class EnemyCTRL : MonoBehaviour
 
 
         // 処理
-        TracePlayer();  // プレイヤー補足・追跡
-        CursorRot();    // 旋回
-        Attack();       // 攻撃
-
+        _diff = _enemyRotation.TracePlayer(_player);  // プレイヤー補足・追跡
+        _enemyRotation.CursorRot(_nowWeaponCharge, _needWeaponCharge, _ownWepon.attakingTime, _diff, _sprite);    // 旋回
+        _enemyAttack.Attack(_needWeaponCharge, shootingType, _bpmCTRL, _renderer, _ownWepon, _anim);       // 攻撃
     }
 
     void FixedUpdate()
     {
         // ステート判定
-        knockBackCounter = _enemyMove.KnockBack(knockBackCounter, body, diff, knockBackPower);
+        knockBackCounter = _enemyMove.KnockBack(knockBackCounter, _body, _diff, knockBackPower);
 
-        if (!CanMove()) { return; }
+        if (!_enemyMove.CanMove(_state, _nowWeaponCharge, _needWeaponCharge,_body)) { return; }
 
-        _enemyMove.Move(knockBackCounter, doStanCount, body, diff, moveSpeed);
+        _enemyMove.Move(knockBackCounter, doStanCount, _body, _diff);
     }
 
 
@@ -187,18 +174,18 @@ public class EnemyCTRL : MonoBehaviour
         if (nowStan >= maxStan)
         {
             doStanCount = stanRecoverCount;
-            weaponCharge = 0;
+            _nowWeaponCharge = 0;
             nowStan = 0;
         }
 
         if (doStanCount > 0)
         {
-            if (bpmCTRL.Count()) { doStanCount--; }
+            if (_bpmCTRL.Count()) { doStanCount--; }
             return false;
         }
         else if (nowStan > 0)
         {
-            if (bpmCTRL.Count()) { nowStan -= 5; }
+            if (_bpmCTRL.Count()) { nowStan -= 5; }
         }
 
         if (nowStan < 0) { nowStan = 0; }
@@ -209,11 +196,11 @@ public class EnemyCTRL : MonoBehaviour
     // 死亡判定
     bool IfIsAlive()
     {
-        if (state == State.Dead) { return false; }
+        if (_state == State.Dead) { return false; }
 
-        if (nowHelthPoint <= 0 && state != State.Dead)
+        if (nowHelthPoint <= 0 && _state != State.Dead)
         {
-            state = State.Dead;
+            _state = State.Dead;
             _playerAttack.GetCharge();
             Destroy(gameObject, defNonDamageTime + 0.1f);
 
@@ -222,113 +209,6 @@ public class EnemyCTRL : MonoBehaviour
             return false;
         }
         return true;
-    }
-
-    bool CanMove()
-    {
-        if (state == State.Dead ||
-            state == State.Stop ||
-            needWeaponCharge == -1 ||
-            weaponCharge >= (needWeaponCharge - 1) )
-        {
-            body.velocity = new Vector2(0, 0);
-            return false;
-        }
-        return true;
-    }
-
-    // プレイヤー補足・追跡
-    void TracePlayer()
-    {
-        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-        // プレイヤー方向の補足
-        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-
-        // 自分の位置
-        Vector2 transPos = transform.position;
-
-        // プレイヤー座標
-        Vector2 playerPos = player.transform.position;
-
-        // ベクトルを計算
-        diff = (playerPos - transPos).normalized;
-        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-    }
-
-    // 旋回
-    void CursorRot()
-    {
-        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-        // カーソル回転
-        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-
-        if (weaponCharge >= (needWeaponCharge - 1) ||
-            (needWeaponCharge == -1) ||
-            ownWepon.attakingTime > 0)
-        {
-            return;
-        }
-
-        // 回転に代入
-        var curRot = Quaternion.FromToRotation(Vector3.up, diff);
-
-        // カーソルくんにパス
-        curTrans.rotation = curRot;
-        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-
-        // スプライト反転
-        if (curTrans.eulerAngles.z < 180.0f) { sprite.flipX = true; }
-        else { sprite.flipX = false; }
-    }
-
-    // 攻撃
-    void Attack()
-    {
-        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-        // 攻撃・クールダウン
-        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-
-        if ((weaponCharge == needWeaponCharge) && bpmCTRL.Signal() && coolDownReset == false)
-        {
-            // Debug.Log("ENEMY_ATTACK");
-
-            if (shootingType)
-            {
-                if (_renderer.isVisible)
-                {
-                    Instantiate(
-                    bullet,
-                    new Vector3
-                    (cursorImage.transform.position.x,
-                    cursorImage.transform.position.y,
-                    cursorImage.transform.position.z),
-                    cursor.transform.rotation);
-                }
-            }
-            else { ownWepon.Attacking(); }
-
-            anim.SetTrigger("Attack");
-            coolDownReset = true;
-        }
-
-        if (bpmCTRL.Metronome())
-        {
-            if (coolDownReset == true)
-            {
-                //state = State.Alive;
-                weaponCharge = 1;
-                coolDownReset = false;
-            }
-            else if (weaponCharge < needWeaponCharge) { weaponCharge++; }
-
-            if (weaponCharge == (needWeaponCharge - 1))
-            {
-                anim.SetTrigger("Charge");
-                flashAnim.SetTrigger("FlashTrigger");
-            }
-        }
-
-        // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     }
 
     // 体力表示
@@ -364,6 +244,6 @@ public class EnemyCTRL : MonoBehaviour
         knockBackCounter = 0.1f;
 
         audioSource.PlayOneShot(audioClip);
-        anim.SetTrigger("Damage");
+        _anim.SetTrigger("Damage");
     }
 }

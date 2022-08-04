@@ -169,7 +169,7 @@ public class TutoEnemyCTRL : MonoBehaviour
 
         if (!CanMove()) { return; }
 
-        _enemyMove.Move(knockBackCounter, doStanCount, body, diff, moveSpeed);
+        _enemyMove.Move(knockBackCounter, doStanCount, body, diff);
     }
 
 

@@ -7,8 +7,10 @@ ScriptsOnlyBuild:
     - BoundaryCTRL
     - Bullet
     - CameraCTRL
+    - EnemyAttack
     - EnemyCTRL
     - EnemyMove
+    - EnemyRotation
     - EnemyWepon
     - EquipLoad
     - GC_BpmCTRL
@@ -26,6 +28,7 @@ ScriptsOnlyBuild:
     - PlayerCTRL
     - PlayerMove
     - PlayerRotation
+    - PlayerUI
     - PlayerWeapon_B
     - Portal
     - SaveManager
@@ -79,10 +82,8 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -164,41 +165,45 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 2400}
     - Class: 114
-      Script: {instanceID: 2912}
+      Script: {instanceID: 2490}
     - Class: 114
-      Script: {instanceID: 3118}
+      Script: {instanceID: 2914}
     - Class: 114
-      Script: {instanceID: 3138}
+      Script: {instanceID: 2980}
     - Class: 114
-      Script: {instanceID: 3176}
+      Script: {instanceID: 3122}
     - Class: 114
-      Script: {instanceID: 3434}
+      Script: {instanceID: 3142}
     - Class: 114
-      Script: {instanceID: 3540}
+      Script: {instanceID: 3180}
     - Class: 114
-      Script: {instanceID: 3728}
+      Script: {instanceID: 3438}
     - Class: 114
-      Script: {instanceID: 3730}
+      Script: {instanceID: 3544}
     - Class: 114
-      Script: {instanceID: 3796}
+      Script: {instanceID: 3732}
     - Class: 114
-      Script: {instanceID: 3872}
+      Script: {instanceID: 3734}
     - Class: 114
-      Script: {instanceID: 4010}
+      Script: {instanceID: 3800}
     - Class: 114
-      Script: {instanceID: 4032}
+      Script: {instanceID: 3876}
     - Class: 114
-      Script: {instanceID: 4230}
+      Script: {instanceID: 4014}
     - Class: 114
-      Script: {instanceID: 4294}
+      Script: {instanceID: 4036}
     - Class: 114
-      Script: {instanceID: 4658}
+      Script: {instanceID: 4234}
     - Class: 114
-      Script: {instanceID: 4760}
+      Script: {instanceID: 4298}
     - Class: 114
-      Script: {instanceID: 4810}
+      Script: {instanceID: 4660}
     - Class: 114
-      Script: {instanceID: 4860}
+      Script: {instanceID: 4762}
+    - Class: 114
+      Script: {instanceID: 4812}
+    - Class: 114
+      Script: {instanceID: 4862}
     - Class: 114
       Script: {instanceID: 5138}
     - Class: 114
@@ -212,11 +217,13 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 5892}
     - Class: 114
-      Script: {instanceID: 6210}
+      Script: {instanceID: 6070}
     - Class: 114
-      Script: {instanceID: 6230}
+      Script: {instanceID: 6212}
     - Class: 114
-      Script: {instanceID: 6266}
+      Script: {instanceID: 6232}
+    - Class: 114
+      Script: {instanceID: 6268}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -277,29 +284,29 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 2400}
     - Class: 114
-      Script: {instanceID: 2912}
+      Script: {instanceID: 2914}
     - Class: 114
-      Script: {instanceID: 3118}
+      Script: {instanceID: 3122}
     - Class: 114
-      Script: {instanceID: 3132}
+      Script: {instanceID: 3136}
     - Class: 114
-      Script: {instanceID: 3176}
+      Script: {instanceID: 3180}
     - Class: 114
-      Script: {instanceID: 3324}
+      Script: {instanceID: 3328}
     - Class: 114
-      Script: {instanceID: 3526}
+      Script: {instanceID: 3530}
     - Class: 114
-      Script: {instanceID: 3540}
+      Script: {instanceID: 3544}
     - Class: 114
-      Script: {instanceID: 3796}
+      Script: {instanceID: 3800}
     - Class: 114
-      Script: {instanceID: 4230}
+      Script: {instanceID: 4234}
     - Class: 114
-      Script: {instanceID: 4484}
+      Script: {instanceID: 4488}
     - Class: 114
-      Script: {instanceID: 4810}
+      Script: {instanceID: 4812}
     - Class: 114
-      Script: {instanceID: 4860}
+      Script: {instanceID: 4862}
     - Class: 114
       Script: {instanceID: 5284}
     - Class: 114
@@ -360,15 +367,15 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 2408}
     - Class: 114
-      Script: {instanceID: 2912}
+      Script: {instanceID: 2914}
     - Class: 114
-      Script: {instanceID: 3118}
+      Script: {instanceID: 3122}
     - Class: 114
-      Script: {instanceID: 3176}
+      Script: {instanceID: 3180}
     - Class: 114
-      Script: {instanceID: 4230}
+      Script: {instanceID: 4234}
     - Class: 114
-      Script: {instanceID: 4810}
+      Script: {instanceID: 4812}
     - Class: 114
       Script: {instanceID: 4896}
     - Class: 114
@@ -453,41 +460,41 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 2400}
     - Class: 114
-      Script: {instanceID: 2580}
+      Script: {instanceID: 2582}
     - Class: 114
-      Script: {instanceID: 2912}
+      Script: {instanceID: 2914}
     - Class: 114
-      Script: {instanceID: 3118}
+      Script: {instanceID: 3122}
     - Class: 114
-      Script: {instanceID: 3176}
+      Script: {instanceID: 3180}
     - Class: 114
-      Script: {instanceID: 3434}
+      Script: {instanceID: 3438}
     - Class: 114
-      Script: {instanceID: 3540}
+      Script: {instanceID: 3544}
     - Class: 114
-      Script: {instanceID: 3728}
+      Script: {instanceID: 3732}
     - Class: 114
-      Script: {instanceID: 3730}
+      Script: {instanceID: 3734}
     - Class: 114
-      Script: {instanceID: 3796}
+      Script: {instanceID: 3800}
     - Class: 114
-      Script: {instanceID: 4010}
+      Script: {instanceID: 4014}
     - Class: 114
-      Script: {instanceID: 4230}
+      Script: {instanceID: 4234}
     - Class: 114
-      Script: {instanceID: 4294}
+      Script: {instanceID: 4298}
     - Class: 114
-      Script: {instanceID: 4328}
+      Script: {instanceID: 4332}
     - Class: 114
-      Script: {instanceID: 4658}
+      Script: {instanceID: 4660}
     - Class: 114
-      Script: {instanceID: 4752}
+      Script: {instanceID: 4754}
     - Class: 114
-      Script: {instanceID: 4770}
+      Script: {instanceID: 4772}
     - Class: 114
-      Script: {instanceID: 4810}
+      Script: {instanceID: 4812}
     - Class: 114
-      Script: {instanceID: 4860}
+      Script: {instanceID: 4862}
     - Class: 114
       Script: {instanceID: 5138}
     - Class: 114
@@ -511,9 +518,9 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 6058}
     - Class: 114
-      Script: {instanceID: 6230}
+      Script: {instanceID: 6232}
     - Class: 114
-      Script: {instanceID: 6266}
+      Script: {instanceID: 6268}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -607,7 +614,7 @@ ScriptsOnlyBuild:
     className: SpriteSkin
   - hash:
       serializedVersion: 2
-      Hash: 3e7cc30f4205f196358a0819d3fc80e3
+      Hash: 40e8828ce1f2386e4d5815476c744517
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: EnemyCTRL
@@ -643,7 +650,7 @@ ScriptsOnlyBuild:
     className: Selectable
   - hash:
       serializedVersion: 2
-      Hash: 2cda6db3702343354220cea0aafae568
+      Hash: a3cd358d0e97106fc8bae6a5d505f124
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerCTRL
@@ -721,6 +728,12 @@ ScriptsOnlyBuild:
     className: PlaymodeTestsController
   - hash:
       serializedVersion: 2
+      Hash: 610d6ad31b4605d90a6be63a2df4e8d3
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: EnemyRotation
+  - hash:
+      serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Unity.2D.PixelPerfect.dll
     namespaceName: UnityEngine.U2D
@@ -761,6 +774,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: CanvasScaler
+  - hash:
+      serializedVersion: 2
+      Hash: 91254c80aae06a3538d1c408679f1d05
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: EnemyAttack
   - hash:
       serializedVersion: 2
       Hash: cf9f5cf2c3145a37ac07f00e50e460f9
@@ -823,7 +842,7 @@ ScriptsOnlyBuild:
     className: TestRunCallbackListener
   - hash:
       serializedVersion: 2
-      Hash: 728bd254771f19aa9d01404c544676b8
+      Hash: bb790ab59faae9f8e3c9348db0fc3557
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerAttack_B
@@ -907,7 +926,7 @@ ScriptsOnlyBuild:
     className: SpawnPattarn
   - hash:
       serializedVersion: 2
-      Hash: 95d2e34d65b41e5f0b3f1666709828da
+      Hash: 91c26578009fdf0a33ca26d6703ae69b
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerRotation
@@ -1015,7 +1034,7 @@ ScriptsOnlyBuild:
     className: PlayableTrack
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: 8bde088c3603087093c000784e5911fb
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: EnemyMove
@@ -1219,7 +1238,7 @@ ScriptsOnlyBuild:
     className: InputDebuggerWindow
   - hash:
       serializedVersion: 2
-      Hash: cbe0fd52051b663b3567e7e57c1334e2
+      Hash: c7dee684e8594b619e68151e9301e4f4
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerWeapon_B
@@ -1423,6 +1442,12 @@ ScriptsOnlyBuild:
     className: TutoPortal
   - hash:
       serializedVersion: 2
+      Hash: 694c0f9669e23d5728a74e390381554a
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: PlayerUI
+  - hash:
+      serializedVersion: 2
       Hash: 285f5d7c369d870b93f4a2cbcec118e4
     assemblyName: Unity.InputSystem.dll
     namespaceName: UnityEngine.InputSystem.Editor
@@ -1506,4 +1531,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/MainGame.unity
   - Assets/Scenes/Tutorial.unity
   playerPath: C:/Users/2016002/Desktop/UnityWork/GameDEV/Builds/release/Beat and
-    Strike_ver0.91/BeatAndStrike.exe
+    Strike_ver0.92/BeatAndStrike.exe

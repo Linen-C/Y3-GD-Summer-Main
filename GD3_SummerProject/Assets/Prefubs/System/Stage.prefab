@@ -382,6 +382,10 @@ MonoBehaviour:
   _nowArenaNo: 0
   _arenas:
   - {fileID: 325881022317399514, guid: 327b81dbc7a79e74bb8cea4c9cc4e53d, type: 3}
+  - {fileID: 711387572296498165, guid: 71b01849c4d20c9419e5baa6a6015105, type: 3}
+  - {fileID: 3856589857841129198, guid: a6914fc9ae40d2f4c921a6e03e6056c8, type: 3}
+  - {fileID: 6880597391400662609, guid: 03c12da2d41bf994f98a6d2746091b43, type: 3}
+  - {fileID: 7068738726072369243, guid: 2981047350faa1742b864e81bbc4eb48, type: 3}
   _cloned: {fileID: 0}
   _defWaitTime: 2
   _nowWaitTime: 0

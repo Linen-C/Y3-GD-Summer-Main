@@ -568,26 +568,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 895136248591659088, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
-      propertyPath: _gameCTRL
-      value: 
-      objectReference: {fileID: 2017294181}
-    - target: {fileID: 3399113693741798867, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
-      propertyPath: _text_Gun
-      value: 
-      objectReference: {fileID: 943190063}
     - target: {fileID: 3399113693741798867, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
       propertyPath: _audioCTRL
       value: 
       objectReference: {fileID: 1331429722}
-    - target: {fileID: 3399113693741798867, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
-      propertyPath: _slider_Gun
-      value: 
-      objectReference: {fileID: 90009833}
-    - target: {fileID: 3399113693741798867, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
-      propertyPath: _image_Wepon
-      value: 
-      objectReference: {fileID: 45823888}
     - target: {fileID: 5641307234752981239, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -641,41 +625,65 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7854783003313331793, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
-      propertyPath: gamectrl
+      propertyPath: _gameCTRL
       value: 
       objectReference: {fileID: 2017294177}
     - target: {fileID: 7854783003313331793, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
-      propertyPath: _comboText
+      propertyPath: _playerUI
       value: 
-      objectReference: {fileID: 1908371071}
+      objectReference: {fileID: 0}
     - target: {fileID: 7854783003313331793, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
-      propertyPath: image_Rock
+      propertyPath: _playerAttack
       value: 
-      objectReference: {fileID: 1781297534}
+      objectReference: {fileID: 0}
     - target: {fileID: 7854783003313331793, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
-      propertyPath: _resultText
+      propertyPath: _playerRotation
       value: 
-      objectReference: {fileID: 1538071258}
-    - target: {fileID: 7854783003313331793, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
-      propertyPath: image_half_Hit
-      value: 
-      objectReference: {fileID: 801194991}
-    - target: {fileID: 7854783003313331793, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
-      propertyPath: image_half_Per
-      value: 
-      objectReference: {fileID: 1563909265}
-    - target: {fileID: 7854783003313331793, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
-      propertyPath: text_RockCount
-      value: 
-      objectReference: {fileID: 1589915518}
-    - target: {fileID: 7854783003313331793, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
-      propertyPath: image_DamagePanel
-      value: 
-      objectReference: {fileID: 298175041}
+      objectReference: {fileID: 0}
     - target: {fileID: 7854783003313331794, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 9014096024715883514, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
+      propertyPath: _text_Gun
+      value: 
+      objectReference: {fileID: 943190063}
+    - target: {fileID: 9014096024715883514, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
+      propertyPath: _comboText
+      value: 
+      objectReference: {fileID: 1908371071}
+    - target: {fileID: 9014096024715883514, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
+      propertyPath: image_Rock
+      value: 
+      objectReference: {fileID: 1781297534}
+    - target: {fileID: 9014096024715883514, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
+      propertyPath: _resultText
+      value: 
+      objectReference: {fileID: 1538071258}
+    - target: {fileID: 9014096024715883514, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
+      propertyPath: _slider_Gun
+      value: 
+      objectReference: {fileID: 90009833}
+    - target: {fileID: 9014096024715883514, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
+      propertyPath: _image_Wepon
+      value: 
+      objectReference: {fileID: 45823888}
+    - target: {fileID: 9014096024715883514, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
+      propertyPath: image_half_Hit
+      value: 
+      objectReference: {fileID: 801194991}
+    - target: {fileID: 9014096024715883514, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
+      propertyPath: image_half_Per
+      value: 
+      objectReference: {fileID: 1563909265}
+    - target: {fileID: 9014096024715883514, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
+      propertyPath: text_RockCount
+      value: 
+      objectReference: {fileID: 1589915518}
+    - target: {fileID: 9014096024715883514, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
+      propertyPath: image_DamagePanel
+      value: 
+      objectReference: {fileID: 298175041}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92e7dee90c560604382896b5adcc203a, type: 3}
 --- !u!114 &1781297534 stripped

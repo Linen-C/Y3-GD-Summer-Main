@@ -12,11 +12,11 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] float dashPower;  // ダッシュパワー
 
     [Header("ノックバック強さ")]
-    [SerializeField] float knockBackPower;    // かかるノックバックの強さ
+    [SerializeField] float knockBackPower;  // かかるノックバックの強さ
 
-    private float dogeTimer = 0;         // 回避用のタイマー
+    float dogeTimer = 0;           // 回避用のタイマー
+    float _eventMoveTimer = 0.0f;  // イベント移動用のタイマー
 
-    float _eventMoveTimer = 0.0f;
 
     public void Move(Vector2 moveDir, Rigidbody2D body)
     {

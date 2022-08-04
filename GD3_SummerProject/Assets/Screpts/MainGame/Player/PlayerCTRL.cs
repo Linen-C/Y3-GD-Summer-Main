@@ -6,80 +6,46 @@ using TMPro;
 
 public class PlayerCTRL : MonoBehaviour
 {
-    // 変数
     [Header("ステータス")]
-    [SerializeField] int maxHelthPoint;      // 最大体力
-    [SerializeField] int nowHelthPoint = 0;  // 現在体力
+    [SerializeField] int _maxHelthPoint;      // 最大体力
+    [SerializeField] int _nowHelthPoint = 0;  // 現在体力
+    [SerializeField] public float _defNonDamageTime = 0.5f;  // デフォルト無敵時間
 
-    [Header("無敵時間")]
-    [SerializeField] public float defNonDamageTime;  // デフォルト無敵時間
-
-    // ゲームオブジェクト
     [Header("ゲームオブジェクト(マニュアル)")]
-    [SerializeField] GameObject flashObj;   // フラッシュ用
-
-    // スクリプト
-    [Header("コンポーネント(マニュアル)")]
-    [SerializeField] GameObject gamectrl;  // いろいろ取ってくる用
-    
+    [SerializeField] GameObject _flashObj;  // フラッシュ用
+    [SerializeField] GameObject _gameCTRL;  // いろいろ取ってくる用
 
     [Header("コンポーネント(オート)")]
-    [SerializeField] GC_BpmCTRL _bpmCTRL;        // BPMコントローラー
-    [SerializeField] PlayerWeapon_B playerWeapon;  // 攻撃用
-    [SerializeField] EquipLoad equipLoad;       // 装備武器取得
+    // 外部
+    [SerializeField] GC_BpmCTRL _bpmCTRL;             // BPMコントローラー
+    [SerializeField] EquipLoad _equipLoad;            // 装備武器取得
+    [SerializeField] PlayerWeapon_B _playerWeapon;    // 武器
+    [SerializeField] public Animator _flashAnim;      // フラッシュアニメーション
+    [SerializeField] PlayerControls _playerControls;  // コントローラー
+    // 内部
+    [SerializeField] PlayerMove _playerMove;          // 移動
+    [SerializeField] PlayerRotation _playerRotation;  // 旋回
+    [SerializeField] PlayerAttack_B _playerAttack;    // 攻撃
+    [SerializeField] PlayerUI _playerUI;              // UI表示
+    [SerializeField] SpriteRenderer _sprite;          // スプライト
+    [SerializeField] Rigidbody2D _body;               // 2Rリジッドボディ
+    [SerializeField] public Animator _anim;           // アニメーション
 
-    [Header("コンポーネント(マニュアル)")]
-    [SerializeField] PlayerMove _playerMove;
-    [SerializeField] PlayerRotation _playerRotation;
-    [SerializeField] PlayerAttack_B _playerAttack;
-
-    // エンジン依存コンポーネント
-    [Header("コンポーネント(オート)")]
-    [SerializeField] SpriteRenderer _sprite;
-    [SerializeField] Rigidbody2D _body;
-    [SerializeField] public Animator _anim;
-    [SerializeField] public Animator _flashAnim;
-    [SerializeField] PlayerControls _playerControls;
-
-    public JsonData equipList; // 自動取得
-
-    // キャンパス
-    [Header("キャンバスUI(マニュアル)")]
-    [SerializeField] Image image_DamagePanel;
-    [SerializeField] float image_DamagePanel_defalpha = 1.0f;
-    [SerializeField] float image_DamagePanel_nowalpha = 0.0f;
-    [SerializeField] public TextMeshProUGUI _comboText;
-    [SerializeField] public TextMeshProUGUI _resultText;
-    [SerializeField] Image image_Rock;
-    [SerializeField] TextMeshProUGUI text_RockCount;
-    [SerializeField] Image image_half_Hit;
-    [SerializeField] Image image_half_Per;
-
-    // 体力表示
-    [Header("体力表示(マニュアル)")]
-    [SerializeField] Slider hpSlider;
-
-    // プライベート変数
-    [Header("プライベート変数だったもの")]
-    public int equipNo = 0;            // 所持している武器番号(0～2)
+    [Header("その他変数")]
+    public JsonData equipList;  // 武器リスト
+    public int equipNo = 0;    // 所持している武器番号(0～2)
 
     public int comboTimeLeft = 0;     // コンボ継続カウンター
-    public bool doComboMode = false;  // コンボモード
     public int comboCount = 0;        // コンボ回数カウンター
+    public bool doComboMode = false;  // コンボモード
 
     public float knockBackCounter = 0;  // ノックバック時間カウンター
-    float NonDamageTime = 0;     // 無敵時間
-    Vector2 _moveDir;             // 移動用ベクトル
+    float NonDamageTime = 0;            // 無敵時間
+    Vector2 _moveDir;                   // 移動用ベクトル
 
-    public bool _orFaild = false;   // ロック中かどうか
-    public int _orFaildCount = 0;   // ロック時間
-    float _rockAlpha = 0.0f;
+    public int _orFaildCount = 0;  // ロック時間
+    public bool _orFaild = false;  // ロック中かどうか
     
-    public float _comboTextAlpha = 0.0f;
-    float _comboImageAlpha = 0.0f;
-
-
-
     public enum State
     {
         Stop,
@@ -92,34 +58,34 @@ public class PlayerCTRL : MonoBehaviour
     void Awake()
     {
         // コンポーネント取得
-        playerWeapon = GetComponentInChildren<PlayerWeapon_B>();
-        _bpmCTRL = gamectrl.transform.GetComponent<GC_BpmCTRL>();
-        equipLoad = gamectrl.transform.GetComponent<EquipLoad>();
-
-        _playerMove = GetComponent<PlayerMove>();
-
-        TryGetComponent(out _body);
-        TryGetComponent(out _sprite);
-        TryGetComponent(out _anim);
-        _flashAnim = flashObj.GetComponent<Animator>();
+        // 外部
+        _bpmCTRL = _gameCTRL.transform.GetComponent<GC_BpmCTRL>();
+        _equipLoad = _gameCTRL.transform.GetComponent<EquipLoad>();
+        _playerWeapon = GetComponentInChildren<PlayerWeapon_B>();
+        _flashAnim = _flashObj.GetComponent<Animator>();
         _playerControls = new PlayerControls();
-
-
-        image_DamagePanel.color = new Color(1.0f, 1.0f, 1.0f, 0.0f);
+        // 内部
+        TryGetComponent(out _playerMove);
+        TryGetComponent(out _playerRotation);
+        TryGetComponent(out _playerAttack);
+        TryGetComponent(out _playerUI);
+        TryGetComponent(out _sprite);
+        TryGetComponent(out _body);
+        TryGetComponent(out _anim);
     }
 
     void Start()
     {
         // 体力(と表示)初期化
-        nowHelthPoint = maxHelthPoint;
-        hpSlider.value = 1;
+        _nowHelthPoint = _maxHelthPoint;
+        _playerUI.HelthSetStart();
 
         // 武器初期化
-        equipList = equipLoad.GetList();
-        playerWeapon.SwapWeapon(equipList.weaponList, 0);
+        equipList = _equipLoad.GetList();
+        _playerWeapon.SwapWeapon(equipList.weaponList, 0);
 
         // UI系初期化
-        UIUpdate();
+        _playerUI.UIUpdate(_nowHelthPoint, _maxHelthPoint, comboCount, _orFaild, _orFaildCount, _playerWeapon);
 
         // ステート初期化
         state = State.Stop;
@@ -135,7 +101,7 @@ public class PlayerCTRL : MonoBehaviour
         _moveDir = _playerControls.Player.Move.ReadValue<Vector2>();
 
         // UI更新
-        UIUpdate();
+        _playerUI.UIUpdate(_nowHelthPoint, _maxHelthPoint, comboCount, _orFaild, _orFaildCount, _playerWeapon);
 
         // 死亡判定
         IsDead();
@@ -154,11 +120,13 @@ public class PlayerCTRL : MonoBehaviour
         if (NonDamageTime > 0) { NonDamageTime -= Time.deltaTime; }
 
 
-        // 処理
-        _playerRotation.Rotation(_playerControls, _sprite);             // 旋回系
-        _playerAttack.Attack(_playerControls, _bpmCTRL, playerWeapon);  // 攻撃
-        _playerAttack.SwapingWeapon(_playerControls, playerWeapon);     // 武器交換
+        // 旋回系
+        _playerRotation.Rotation(_playerControls, _sprite);             // 旋回
+        // 攻撃系
+        _playerAttack.Attack(_playerControls, _bpmCTRL, _playerWeapon);  // 攻撃
+        _playerAttack.SwapingWeapon(_playerControls, _playerWeapon);     // 武器交換
         _playerAttack.Shooting(_playerControls, _bpmCTRL);              // 遠距離攻撃
+        // 移動系
         _playerMove.Dash(_playerControls, _bpmCTRL);                    // ダッシュ入力
 
     }
@@ -168,73 +136,20 @@ public class PlayerCTRL : MonoBehaviour
         // ステート判定
         if (state != State.Alive) { return; }
 
+        // 移動反映
         _playerMove.Move(_moveDir, _body);
     }
 
 
-
-    // UI更新
-    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-    void UIUpdate()
-    {
-        // 体力表示
-        hpSlider.value = (float)nowHelthPoint / (float)maxHelthPoint;
-
-        // ダメージ表示
-        if (image_DamagePanel_nowalpha > 0.0f) { image_DamagePanel_nowalpha -= Time.deltaTime; }
-        image_DamagePanel.color = new Color(1.0f, 1.0f, 1.0f, image_DamagePanel_nowalpha);
-
-
-        // コンボ表示
-        if (comboCount == 0)
-        {
-            if (_comboTextAlpha > 0.0f) _comboTextAlpha -= Time.deltaTime;
-            if (_comboImageAlpha > 0.0f) _comboImageAlpha-= Time.deltaTime;
-        }
-        else
-        {
-            _comboTextAlpha = 1.0f;
-            _comboText.text = "x" + comboCount;
-
-            if(playerWeapon.GetTypeNum() != 2) { _comboImageAlpha = 0.35f; }
-        }
-        _comboText.alpha = _comboTextAlpha;
-        _resultText.alpha = _comboTextAlpha;
-        image_half_Hit.color = new Color(1.0f, 0, 0, _comboImageAlpha);
-        image_half_Per.color = new Color(0, 1.0f, 1.0f, _comboImageAlpha);
-
-
-        // コンボミス
-        if (_orFaild)
-        {
-            _rockAlpha = 0.6f;
-            text_RockCount.text = _orFaildCount.ToString();
-        }
-        else
-        {
-            if (_rockAlpha > 0.0f) { _rockAlpha -= Time.deltaTime * 5.0f;  }
-        }
-        text_RockCount.alpha = _rockAlpha;
-        image_Rock.color = new Color(1.0f, 0.0f, 0.0f, _rockAlpha);
-
-    }
-
-
-    // 死亡判定
-    // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
     void IsDead()
     {
-        if (nowHelthPoint <= 0)
-        {
-            //hpText.text = "HP：" + nowHelthPoint.ToString();
-            state = State.Dead;
-        }
+        if (_nowHelthPoint <= 0) { state = State.Dead; }
     }
-
 
 
     // 被ダメージ判定
     // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
+    // 攻撃
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if ((collision.gameObject.tag == "EnemyAttack" ||
@@ -245,6 +160,7 @@ public class PlayerCTRL : MonoBehaviour
         }
     }
 
+    // 接触
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Enemy" && (NonDamageTime <= 0.0f))
@@ -253,12 +169,14 @@ public class PlayerCTRL : MonoBehaviour
         }
     }
 
+    // ダメージ反映
     private void Damage()
     {
-        image_DamagePanel_nowalpha = image_DamagePanel_defalpha;
-        NonDamageTime = defNonDamageTime;
+        _playerUI.DamagePanelAlphaSet();
+
+        NonDamageTime = _defNonDamageTime;
         knockBackCounter = 0.2f;
-        nowHelthPoint -= 1;
+        _nowHelthPoint -= 1;
         _anim.SetTrigger("Damage");
     }
 

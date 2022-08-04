@@ -21,7 +21,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: Scene
   m_RootView: {fileID: 2}
-  m_MinSize: {x: 875, y: 300}
+  m_MinSize: {x: 875, y: 542}
   m_MaxSize: {x: 10000, y: 10000}
   m_Maximized: 1
 --- !u!114 &2
@@ -46,7 +46,7 @@ MonoBehaviour:
     y: 0
     width: 1536
     height: 781
-  m_MinSize: {x: 875, y: 300}
+  m_MinSize: {x: 875, y: 542}
   m_MaxSize: {x: 10000, y: 10000}
   m_UseTopView: 1
   m_TopViewHeight: 30
@@ -122,7 +122,7 @@ MonoBehaviour:
   m_MinSize: {x: 678, y: 492}
   m_MaxSize: {x: 14001, y: 14042}
   vertical: 0
-  controlID: 140
+  controlID: 23
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -147,7 +147,7 @@ MonoBehaviour:
   m_MinSize: {x: 403, y: 492}
   m_MaxSize: {x: 10001, y: 14042}
   vertical: 1
-  controlID: 65
+  controlID: 24
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -172,7 +172,7 @@ MonoBehaviour:
   m_MinSize: {x: 403, y: 221}
   m_MaxSize: {x: 8003, y: 4021}
   vertical: 0
-  controlID: 66
+  controlID: 25
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -409,7 +409,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 04baffff1ebaffff5cbbfffff0bdffff1abeffff2abeffffd6beffffbcc7ffffc2e4ffffd6e4ffffd8e4ffff44effffff8f1ffff2ef2ffff5afbffffba460000244700003c470000f247000008480000205800008a580000a2580000585900006e590000
+      m_ExpandedIDs: 8671fffffa71ffff2c72ffff0c73ffff2873ffff8474ffffca74ffff1c75ffff4675ffff56ebffff5cebffff1cecffff2ef2ffffd4f2ffffdaf2ffff9af3ffffeaf5ffffd0f6ffffd6f6ffff96f7fffff0faffff5afbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -469,9 +469,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 714.2922, y: 522.3489, z: -319.05478}
+    m_Target: {x: 1.4939909, y: -0.3483637, z: -570.61115}
     speed: 2
-    m_Value: {x: 714.2922, y: 522.3489, z: -319.05478}
+    m_Value: {x: 1.4939909, y: -0.3483637, z: -570.61115}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -522,9 +522,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 543.00934
+    m_Target: 52.345795
     speed: 2
-    m_Value: 543.00934
+    m_Value: 52.345795
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -1284,22 +1284,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Resources/Images/Weapon/Icon
+    - Assets/Prefubs/Stages
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 59
   m_LastFolders:
-  - Assets/Resources/Images/Weapon/Icon
+  - Assets/Prefubs/Stages
   m_LastFoldersGridSize: 59
   m_LastProjectPath: C:\Users\2016002\Desktop\UnityWork\GameDEV\GD-4GA3-Summer-Main\GD3_SummerProject
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 252.6}
-    m_SelectedIDs: 8c4e0000
-    m_LastClickedID: 20108
-    m_ExpandedIDs: 00000000ea4c0000ec4c0000ee4c0000f04c0000144d000000ca9a3b
+    scrollPos: {x: 0, y: 191}
+    m_SelectedIDs: e24f0000
+    m_LastClickedID: 20450
+    m_ExpandedIDs: 00000000a44f0000a64f0000a84f0000aa4f0000bc4f000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1327,7 +1327,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 42520000
     m_LastClickedID: 21058
-    m_ExpandedIDs: 00000000ea4c0000ec4c0000ee4c0000f04c0000
+    m_ExpandedIDs: 00000000a44f0000a64f0000a84f0000aa4f0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1354,7 +1354,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 1
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: 5647000000470000fa46000030600000c8480000165a0000384c0000d41c0000041f0000001f0000fc1e0000b64f000000000000de4e0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -1421,22 +1421,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets
+    - Assets/Prefubs/Enemys
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 60
   m_LastFolders:
-  - Assets
+  - Assets/Prefubs/Enemys
   m_LastFoldersGridSize: 60
   m_LastProjectPath: C:\Users\2016002\Desktop\UnityWork\GameDEV\GD-4GA3-Summer-Main\GD3_SummerProject
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 79}
-    m_SelectedIDs: ea4c0000
-    m_LastClickedID: 19690
-    m_ExpandedIDs: 00000000ea4c0000ec4c0000ee4c0000f04c0000f84c0000e44d000000ca9a3b
+    m_SelectedIDs: de4f0000
+    m_LastClickedID: 20446
+    m_ExpandedIDs: 00000000a44f0000a64f0000a84f0000aa4f0000bc4f000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1464,7 +1464,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000ea4c0000ec4c0000ee4c0000f04c0000
+    m_ExpandedIDs: 00000000a44f0000a64f0000a84f0000aa4f0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1489,9 +1489,9 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: ac590000
-    m_LastClickedInstanceID: 22956
-    m_HadKeyboardFocusLastEvent: 1
+    m_SelectedInstanceIDs: 
+    m_LastClickedInstanceID: 0
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: aa4f0000001f0000fc1e00007e4700008647000000000000264b0000de4e0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -1570,10 +1570,10 @@ MonoBehaviour:
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 173}
-    m_SelectedIDs: 184d0000
-    m_LastClickedID: 19736
-    m_ExpandedIDs: 00000000ea4c0000ec4c0000ee4c0000f04c000000ca9a3b
+    scrollPos: {x: 0, y: 173.20001}
+    m_SelectedIDs: d64f0000
+    m_LastClickedID: 20438
+    m_ExpandedIDs: 00000000a44f0000a64f0000a84f0000aa4f000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1601,7 +1601,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 40520000
     m_LastClickedID: 21056
-    m_ExpandedIDs: 00000000ea4c0000ec4c0000ee4c0000f04c0000
+    m_ExpandedIDs: 00000000a44f0000a64f0000a84f0000aa4f0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1695,22 +1695,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Prefubs/TutorialStage
+    - Assets/Screpts/MainGame/Enemy
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 60
   m_LastFolders:
-  - Assets/Prefubs/TutorialStage
+  - Assets/Screpts/MainGame/Enemy
   m_LastFoldersGridSize: 60
   m_LastProjectPath: C:\Users\2016002\Desktop\UnityWork\GameDEV\GD-4GA3-Summer-Main\GD3_SummerProject
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 79}
-    m_SelectedIDs: 6e4e0000
-    m_LastClickedID: 20078
-    m_ExpandedIDs: 00000000ea4c0000ec4c0000ee4c0000f04c0000fe4c00001a4d0000f64d000000ca9a3b
+    scrollPos: {x: 0, y: 333}
+    m_SelectedIDs: 62590000
+    m_LastClickedID: 22882
+    m_ExpandedIDs: 00000000a44f0000a64f0000a84f0000aa4f0000bc4f0000d84f0000f45e000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1738,7 +1738,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000ea4c0000ec4c0000ee4c0000f04c0000
+    m_ExpandedIDs: 00000000a44f0000a64f0000a84f0000aa4f0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1765,7 +1765,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 1
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: 041f0000001f0000fc1e0000b64f0000844700000000000092540000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -2043,7 +2043,7 @@ MonoBehaviour:
   m_ViewDataDictionary: {fileID: 0}
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: -7536
+  m_LastSelectedObjectID: -1296
 --- !u!114 &24
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -2897,7 +2897,7 @@ MonoBehaviour:
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
   m_LastInspectedObjectInstanceID: -1
-  m_LastVerticalScrollValue: 992.8
+  m_LastVerticalScrollValue: 43.19995
   m_GlobalObjectId: 
   m_LockTracker:
     m_IsLocked: 0

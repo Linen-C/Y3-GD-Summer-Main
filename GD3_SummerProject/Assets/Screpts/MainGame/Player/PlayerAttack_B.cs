@@ -8,16 +8,12 @@ public class PlayerAttack_B : MonoBehaviour
 {
     [Header("PlayerCTRL")]
     [SerializeField] PlayerCTRL _plCTRL;
+    [SerializeField] PlayerUI _plUI;
 
     [Header("ゲームオブジェクト(マニュアル)")]
     [SerializeField] GameObject _cursor;
     [SerializeField] GameObject _cursorImage;
     [SerializeField] GameObject _bullet;
-
-    [Header("キャンバスUI(マニュアル)")]
-    [SerializeField] public Image _image_Wepon;
-    [SerializeField] TextMeshProUGUI _text_Gun;
-    [SerializeField] Slider _slider_Gun;
 
     [Header("パラメータ")]
     [SerializeField] public int _defPenalty = 1;
@@ -45,16 +41,14 @@ public class PlayerAttack_B : MonoBehaviour
         audioClip_Gun = _audioCTRL.clips_Player_Gun;
         audioClip_Weapon = new AudioClip[_audioCTRL.clips_Player_Weapon.Length];
         audioClip_Weapon = _audioCTRL.clips_Player_Weapon;
+
+        _plUI.GunUIUpdate(_nowGunCharge, _needGunCharge);
     }
 
-    private void Update()
-    {
-        // 銃
-        if (_nowGunCharge >= _needGunCharge) { _text_Gun.text = "Ready"; }
-        else { _text_Gun.text = _nowGunCharge + " / " + _needGunCharge; }
-        
-        _slider_Gun.value = (float)_nowGunCharge / (float)_needGunCharge;
-    }
+    //private void Update()
+    //{
+    //    _plUI.GunUIUpdate(_nowGunCharge, _needGunCharge);
+    //}
 
     public void Attack(PlayerControls playerControls, GC_BpmCTRL bpmCTRL, PlayerWeapon_B playerWeapon)
     {
@@ -71,9 +65,9 @@ public class PlayerAttack_B : MonoBehaviour
             }
             else
             {
-                _plCTRL._resultText.text = "miss...";
-                _plCTRL._comboText.text = "";
-                _plCTRL._comboTextAlpha = 1.0f;
+                _plUI._resultText.text = "miss...";
+                _plUI._comboText.text = "";
+                _plUI._comboTextAlpha = 1.0f;
                 _plCTRL._orFaild = true;
                 _plCTRL._orFaildCount = _defPenalty;
             }
@@ -82,10 +76,10 @@ public class PlayerAttack_B : MonoBehaviour
 
         if (playerWeapon.Combo())
         {
-            if(playerWeapon.IsPerfect()) { _plCTRL._resultText.text = "PERFECT!"; }
-            else { _plCTRL._resultText.text = "HIT!"; }
-            
-            _plCTRL._resultText.alpha = 1.0f;
+            if(playerWeapon.IsPerfect()) { _plUI._resultText.text = "PERFECT!"; }
+            else { _plUI._resultText.text = "HIT!"; }
+
+            _plUI._resultText.alpha = 1.0f;
             _plCTRL.doComboMode = true;
             _plCTRL.comboTimeLeft = 2;
         }
@@ -107,15 +101,8 @@ public class PlayerAttack_B : MonoBehaviour
 
             if (_plCTRL._orFaild)
             {
-                if (_plCTRL._orFaildCount >= 1)
-                {
-                    _plCTRL._orFaildCount--;
-                }
-
-                if (_plCTRL._orFaildCount <= 0)
-                {
-                    _plCTRL._orFaild = false;
-                }
+                if (_plCTRL._orFaildCount >= 1) { _plCTRL._orFaildCount--; }
+                if (_plCTRL._orFaildCount <= 0) { _plCTRL._orFaild = false;  }
             }
         }
 
@@ -193,6 +180,7 @@ public class PlayerAttack_B : MonoBehaviour
     public void GetCharge()
     {
         if (_nowGunCharge < _needGunCharge) { _nowGunCharge++; }
+        _plUI.GunUIUpdate(_nowGunCharge, _needGunCharge);
     }
 
 }

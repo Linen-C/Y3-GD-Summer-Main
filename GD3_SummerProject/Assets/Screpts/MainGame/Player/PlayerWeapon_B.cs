@@ -14,7 +14,7 @@ public class PlayerWeapon_B : MonoBehaviour
     [SerializeField] PlayerCTRL _playerCTRL;
     [SerializeField] PlayerAttack_B _playerAttack;
     [SerializeField] SpriteChanger _spriteChanger;
-    //[SerializeField] GC_GameCTRL _gameCTRL;
+    [SerializeField] PlayerUI _playerUI;
 
     [Header("パラメータ")]
     [SerializeField] int _damage = 0;
@@ -24,7 +24,7 @@ public class PlayerWeapon_B : MonoBehaviour
 
     // プライベート変数
     float _spriteAlpha = 0.0f;
-    [SerializeField] float _hitCoolDown = 0.0f;
+    float _hitCoolDown = 0.0f;
     bool _comboFlag = false;
     bool _isPerfect = false;
 
@@ -75,15 +75,12 @@ public class PlayerWeapon_B : MonoBehaviour
 
         // Tags
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-        // テキスト変更
-        //weponNameText.text = wepon[no].name;
-
         // スプライト切り替えのためパス
         Sprite inImage = Resources.Load<Sprite>(wepon[no].trail);
         _spriteChanger.ChangeSprite(inImage, wepon[no].offset);
 
-        // ここにアイコンも追加するかも
-        // (Empty)
+        // アイコン切り替え
+        _playerUI._image_Wepon.sprite = Resources.Load<Sprite>(wepon[no].icon);
 
         // タイプ
         _typeNum = wepon[no].typeNum;
@@ -114,12 +111,9 @@ public class PlayerWeapon_B : MonoBehaviour
 
         // plAttack
         // ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ ＝＝＝＝＝ //
-        // ペナルティ長さ
+        // ペナルティ長さ設定
         if (_typeNum == 2) { _playerAttack._defPenalty = 2; }
         else { _playerAttack._defPenalty = 1; }
-
-        // UI更新
-        _playerAttack._image_Wepon.sprite = Resources.Load<Sprite>(wepon[no].icon);
     }
 
     public bool Combo()

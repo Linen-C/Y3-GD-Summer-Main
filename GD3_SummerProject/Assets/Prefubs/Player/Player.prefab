@@ -635,7 +635,7 @@ MonoBehaviour:
   _playerCTRL: {fileID: 7854783003313331793}
   _playerAttack: {fileID: 3399113693741798867}
   _spriteChanger: {fileID: 1047934111}
-  _gameCTRL: {fileID: 0}
+  _playerUI: {fileID: 9014096024715883514}
   _damage: 0
   _knockBack: 0
   _stanPower: 0
@@ -835,6 +835,7 @@ GameObject:
   - component: {fileID: 2447405941736732258}
   - component: {fileID: 424716756123729601}
   - component: {fileID: 3399113693741798867}
+  - component: {fileID: 9014096024715883514}
   - component: {fileID: 1744843459}
   - component: {fileID: 1946777321}
   m_Layer: 7
@@ -1036,33 +1037,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5138dd43f17b0d49837004d934a854e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHelthPoint: 8
-  nowHelthPoint: 0
-  defNonDamageTime: 0.5
-  flashObj: {fileID: 2029939891}
-  gamectrl: {fileID: 0}
+  _maxHelthPoint: 8
+  _nowHelthPoint: 0
+  _defNonDamageTime: 0.5
+  _flashObj: {fileID: 2029939891}
+  _gameCTRL: {fileID: 0}
   _bpmCTRL: {fileID: 0}
-  playerWeapon: {fileID: 0}
-  equipLoad: {fileID: 0}
-  _playerMove: {fileID: 2447405941736732258}
+  _equipLoad: {fileID: 0}
+  _playerWeapon: {fileID: 0}
+  _playerMove: {fileID: 0}
   _playerRotation: {fileID: 424716756123729601}
   _playerAttack: {fileID: 3399113693741798867}
+  _playerUI: {fileID: 9014096024715883514}
   _sprite: {fileID: 0}
   _body: {fileID: 0}
   _anim: {fileID: 0}
   _flashAnim: {fileID: 0}
   equipList:
     weaponList: []
-  image_DamagePanel: {fileID: 0}
-  image_DamagePanel_defalpha: 1
-  image_DamagePanel_nowalpha: 0
-  _comboText: {fileID: 0}
-  _resultText: {fileID: 0}
-  image_Rock: {fileID: 0}
-  text_RockCount: {fileID: 0}
-  image_half_Hit: {fileID: 0}
-  image_half_Per: {fileID: 0}
-  hpSlider: {fileID: 5830687477450192321}
   equipNo: 0
   comboTimeLeft: 0
   doComboMode: 0
@@ -1070,7 +1062,6 @@ MonoBehaviour:
   knockBackCounter: 0
   _orFaild: 0
   _orFaildCount: 0
-  _comboTextAlpha: 0
   state: 0
 --- !u!114 &2447405941736732258
 MonoBehaviour:
@@ -1100,7 +1091,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b01a151b06b9df4eae83f617424c167, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _plCTRL: {fileID: 7854783003313331793}
   cursor: {fileID: 7854783002312811369}
 --- !u!114 &3399113693741798867
 MonoBehaviour:
@@ -1115,12 +1105,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _plCTRL: {fileID: 7854783003313331793}
+  _plUI: {fileID: 9014096024715883514}
   _cursor: {fileID: 7854783002312811369}
   _cursorImage: {fileID: 7854783003204025895}
   _bullet: {fileID: 8019057332981992899, guid: 9b682da5b8be13141b6f68167fa8fc24, type: 3}
-  _image_Wepon: {fileID: 0}
-  _text_Gun: {fileID: 0}
-  _slider_Gun: {fileID: 0}
   _defPenalty: 1
   _needGunCharge: 4
   _nowGunCharge: 0
@@ -1129,7 +1117,36 @@ MonoBehaviour:
   _nowCountDown: 0
   _audioCTRL: {fileID: 0}
   audioSource: {fileID: 1744843459}
+  audioClip_Weapon: []
   audioClip_Gun: []
+--- !u!114 &9014096024715883514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7854783003313331794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d639058d587ea4047bf04170f3f24d35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  image_DamagePanel: {fileID: 0}
+  image_DamagePanel_defalpha: 1
+  image_DamagePanel_nowalpha: 0
+  _comboText: {fileID: 0}
+  _resultText: {fileID: 0}
+  _comboTextAlpha: 0
+  text_RockCount: {fileID: 0}
+  image_Rock: {fileID: 0}
+  _rockAlpha: 0
+  image_half_Hit: {fileID: 0}
+  image_half_Per: {fileID: 0}
+  _halfGaugeAlpha: 0
+  hpSlider: {fileID: 5830687477450192321}
+  _image_Wepon: {fileID: 0}
+  _text_Gun: {fileID: 0}
+  _slider_Gun: {fileID: 0}
 --- !u!82 &1744843459
 AudioSource:
   m_ObjectHideFlags: 0

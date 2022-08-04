@@ -5,11 +5,9 @@ using UnityEngine.InputSystem;
 
 public class PlayerRotation : MonoBehaviour
 {
-    [Header("PlayerCTRL")]
-    [SerializeField] PlayerCTRL _plCTRL;
-
-    [Header("ゲームオブジェクト")]
+    [Header("カーソルオブジェクト")]
     [SerializeField] GameObject cursor;       // カーソル取得(多分これが一番早い)
+
 
     public void Rotation(PlayerControls playerControls, SpriteRenderer sprite)
     {
@@ -20,6 +18,7 @@ public class PlayerRotation : MonoBehaviour
         if (cursor.transform.eulerAngles.z < 180.0f) { sprite.flipX = true; }
         else { sprite.flipX = false; }
     }
+
 
     // 旋回（キーボード・マウス）
     void CursorRotMouse(PlayerControls playerControls)
@@ -38,8 +37,9 @@ public class PlayerRotation : MonoBehaviour
         var curRot = Quaternion.FromToRotation(Vector3.up, diff);
 
         // カーソルにパス
-        cursor.GetComponent<Transform>().rotation = curRot;
+        cursor.transform.rotation = curRot;
     }
+
 
     // 旋回（スティック）
     void CursorRotStick(PlayerControls playerControls)
