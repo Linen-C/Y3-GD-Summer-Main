@@ -5,7 +5,6 @@ using TMPro;
 
 public class StageManager : MonoBehaviour
 {
-
     [Header("現在のエリアナンバー")]
     [SerializeField] public int _nowArenaNo;
     [Header("エリアリスト(マニュアル)")]
@@ -37,7 +36,6 @@ public class StageManager : MonoBehaviour
         _panelAnimator.SetBool("Close", false);
         
         _playerCTRL = _player.GetComponent<PlayerCTRL>();
-
         _gameCTRL = _gameController.GetComponent<GC_GameCTRL>();
         _bpmCTRL = _gameController.GetComponent<GC_BpmCTRL>();
 
@@ -48,6 +46,7 @@ public class StageManager : MonoBehaviour
 
     void Update()
     {
+        // 画面切り替え終了
         if (WaitFlip() && _wait)
         {
             SetArena();
@@ -68,13 +67,14 @@ public class StageManager : MonoBehaviour
 
     void SetArena()
     {
+        // リストからランダム生成
         int nextStage = Random.Range(0, _arenas.Length);
-
         _cloned = Instantiate(_arenas[nextStage], transform);
     }
 
     public void GetSignal()
     {
+        // 階層の変更とか、ウェイト画面表示とか、画面切り替え開始とか
         Destroy(_cloned);
         _nowArenaNo++;
 
@@ -90,6 +90,7 @@ public class StageManager : MonoBehaviour
 
     bool WaitFlip()
     {
+        // ウェイト画面切り替え
         if (0 < _nowWaitTime)
         {
             _nowWaitTime -= Time.deltaTime;

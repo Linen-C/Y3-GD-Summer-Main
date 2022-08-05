@@ -56,6 +56,7 @@ MonoBehaviour:
   - {x: 30, y: 4}
   - {x: 30, y: -4}
   arenaCtrl: {fileID: 0}
+  tutoArenaCtrl: {fileID: 0}
   arenaPos: {x: 0, y: 0}
 --- !u!1 &1561222473062264408
 GameObject:
@@ -111,6 +112,7 @@ MonoBehaviour:
   - {x: 0, y: 13}
   - {x: 0, y: -13}
   arenaCtrl: {fileID: 0}
+  tutoArenaCtrl: {fileID: 0}
   arenaPos: {x: 0, y: 0}
 --- !u!1 &7068738724303230935
 GameObject:
@@ -956,8 +958,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pinMax: {fileID: 7068738725560753485}
   pinMin: {fileID: 7068738725259263125}
-  downToUp: 1
-  setCenter: 0
   camera: {fileID: 0}
 --- !u!1 &7068738724960427674
 GameObject:
@@ -1319,8 +1319,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pinMax: {fileID: 7068738725560753485}
   pinMin: {fileID: 7068738725259263125}
-  downToUp: 0
-  setCenter: 0
   camera: {fileID: 0}
 --- !u!1 &7068738725259263125
 GameObject:
@@ -1514,6 +1512,7 @@ MonoBehaviour:
   - {x: 30, y: 0}
   - {x: -30, y: 0}
   arenaCtrl: {fileID: 0}
+  tutoArenaCtrl: {fileID: 0}
   arenaPos: {x: 0, y: 0}
 --- !u!1 &7068738725560753485
 GameObject:
@@ -1597,6 +1596,7 @@ MonoBehaviour:
   - {x: 0, y: 13}
   - {x: 20, y: 0}
   arenaCtrl: {fileID: 0}
+  tutoArenaCtrl: {fileID: 0}
   arenaPos: {x: 0, y: 0}
 --- !u!1 &7068738725765769985
 GameObject:
@@ -2094,30 +2094,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec773b03c7c965141be540fb7f43b89b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  max_Wave: 0
-  now_Wave: 0
-  bpmCTRL: {fileID: 0}
-  gameCTRL: {fileID: 0}
-  enemyCtrl: {fileID: 7068738724303230937}
-  gate_N: {fileID: 7068738726298406054}
-  gate_S: {fileID: 7068738726018938233}
-  interval_MaxCount_Nomal: 4
-  interval_MaxCount_Clear: 2
-  interval_NowCount: 0
-  doInterval_Nomal: 0
-  doInterval_Clear: 0
-  prog_text: {fileID: 0}
+  _max_Wave: 0
+  _now_Wave: 0
+  _bpmCTRL: {fileID: 0}
+  _gameCTRL: {fileID: 0}
+  _enemyCtrl: {fileID: 7068738724303230937}
+  _gate_N: {fileID: 7068738726298406054}
+  _gate_S: {fileID: 7068738726018938233}
+  _interval_MaxCount_Nomal: 4
+  _interval_MaxCount_Clear: 2
+  _interval_NowCount: 0
+  _doInterval_Nomal: 0
+  _doInterval_Clear: 0
+  _prog_text: {fileID: 0}
   text_nomal1: Destroy
   text_nomal2: All
   text_nomal3: Enemys
   text_nomal4: Wave
   text_clear1: Arena
   text_clear2: Clear
-  isEndStage: 0
-  inWave: 0
+  _isEndStage: 0
+  _inWave: 0
   _audioCTRL: {fileID: 0}
-  audioSource: {fileID: 2632025272573154205}
-  audioClip: []
+  _audioSource: {fileID: 0}
+  _audioClip: []
 --- !u!82 &2632025272573154205
 AudioSource:
   m_ObjectHideFlags: 0

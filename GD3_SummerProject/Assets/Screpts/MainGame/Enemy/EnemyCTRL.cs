@@ -20,6 +20,9 @@ public class EnemyCTRL : MonoBehaviour
     [SerializeField] int doStanCount;        // スタン回復までのテンポ数
     [SerializeField] int stanRecoverCount;   // スタン回復までのデフォルトテンポ数
 
+    [Header("スポーン関係")]
+    [SerializeField] float _spawnTime = 1.0f;   // スポーンにかかる時間
+
     [Header("武器")]
     [SerializeField] public int _nowWeaponCharge = 1;  // 現在クールダウン
     [SerializeField] int _needWeaponCharge;            // 必要クールダウン
@@ -48,6 +51,7 @@ public class EnemyCTRL : MonoBehaviour
     [SerializeField] Renderer _renderer;
     [SerializeField] SpriteRenderer _sprite;
     [SerializeField] Rigidbody2D _body;
+    [SerializeField] CapsuleCollider2D _cCollider;
     [SerializeField] Animator _anim;
 
     [Header("体力表示(マニュアル)")]
@@ -67,6 +71,7 @@ public class EnemyCTRL : MonoBehaviour
 
     public enum State
     {
+        Spawn,
         Stop,
         Alive,
         Stan,
@@ -87,6 +92,7 @@ public class EnemyCTRL : MonoBehaviour
         TryGetComponent(out _renderer);
         TryGetComponent(out _sprite);
         TryGetComponent(out _body);
+        TryGetComponent(out _cCollider);
         TryGetComponent(out _anim);
     }
 
@@ -117,11 +123,25 @@ public class EnemyCTRL : MonoBehaviour
         audioClip = _audioCTRL.clips_Damage[0];
 
         // ステート初期化
-        _state = State.Stop;
+        _state = State.Spawn;
+        _cCollider.enabled = false;
     }
 
     void Update()
     {
+        // スポーン
+        if (_spawnTime > 0)
+        {
+            _spawnTime -= Time.deltaTime;
+            return;
+        }
+        else if (_cCollider.enabled == false)
+        {
+            _state = State.Alive;
+            _cCollider.enabled = true;
+        }
+
+
         // 停止判定
         if (!_stageManager.enabled)
         {
@@ -150,8 +170,8 @@ public class EnemyCTRL : MonoBehaviour
 
         // 処理
         _diff = _enemyRotation.TracePlayer(_player);  // プレイヤー補足・追跡
-        _enemyRotation.CursorRot(_nowWeaponCharge, _needWeaponCharge, _ownWepon.attakingTime, _diff, _sprite);    // 旋回
-        _enemyAttack.Attack(_needWeaponCharge, shootingType, _bpmCTRL, _renderer, _ownWepon, _anim);       // 攻撃
+        _enemyRotation.CursorRot(_nowWeaponCharge, _needWeaponCharge, _ownWepon.attakingTime, _diff, _sprite);  // 旋回
+        _enemyAttack.Attack(_needWeaponCharge, shootingType, _bpmCTRL, _renderer, _ownWepon, _anim);  // 攻撃
     }
 
     void FixedUpdate()
@@ -163,7 +183,6 @@ public class EnemyCTRL : MonoBehaviour
 
         _enemyMove.Move(knockBackCounter, doStanCount, _body, _diff);
     }
-
 
 
     // スタン
@@ -229,7 +248,7 @@ public class EnemyCTRL : MonoBehaviour
 
 
     // ダメージを受ける
-    public void TakeDamage(int damage,int knockback, int stanPower,int typeNum)
+    public void TakeDamage(int damage, int knockback, int stanPower, int typeNum)
     {
         if (NonDamageTime > 0) { return; }
         if (_damageCap >= damage) { damage = 0; }

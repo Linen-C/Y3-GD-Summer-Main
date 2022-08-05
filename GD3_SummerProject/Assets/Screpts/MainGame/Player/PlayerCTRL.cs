@@ -121,13 +121,13 @@ public class PlayerCTRL : MonoBehaviour
 
 
         // ù‰ñŒn
-        _playerRotation.Rotation(_playerControls, _sprite);             // ù‰ñ
+        _playerRotation.Rotation(_playerControls, _sprite);  // ù‰ñ
         // UŒ‚Œn
         _playerAttack.Attack(_playerControls, _bpmCTRL, _playerWeapon);  // UŒ‚
         _playerAttack.SwapingWeapon(_playerControls, _playerWeapon);     // •ŠíŒğŠ·
-        _playerAttack.Shooting(_playerControls, _bpmCTRL);              // ‰“‹——£UŒ‚
+        _playerAttack.Shooting(_playerControls, _bpmCTRL);               // ‰“‹——£UŒ‚
         // ˆÚ“®Œn
-        _playerMove.Dash(_playerControls, _bpmCTRL);                    // ƒ_ƒbƒVƒ…“ü—Í
+        _playerMove.Dash(_playerControls, _bpmCTRL);  // ƒ_ƒbƒVƒ…“ü—Í
 
     }
 

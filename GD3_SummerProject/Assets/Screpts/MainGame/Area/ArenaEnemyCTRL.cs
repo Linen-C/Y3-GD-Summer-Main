@@ -31,15 +31,15 @@ public class ArenaEnemyCTRL : MonoBehaviour
     {
         if (running)
         {
-            enemyList = GetEnemyList(transform.GetChild(arenaCtrl.now_Wave - 1));
+            enemyList = GetEnemyList(transform.GetChild(arenaCtrl._now_Wave - 1));
         }
     }
 
 
     public void WavaStart()
     {
-        spawn_pattarn[arenaCtrl.now_Wave - 1].Spawn();
-        enemyList = GetEnemyList(transform.GetChild(arenaCtrl.now_Wave - 1));
+        spawn_pattarn[arenaCtrl._now_Wave - 1].Spawn();
+        enemyList = GetEnemyList(transform.GetChild(arenaCtrl._now_Wave - 1));
         running = true;
     }
 

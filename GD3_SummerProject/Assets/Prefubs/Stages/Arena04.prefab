@@ -72,8 +72,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pinMax: {fileID: 6880597391962385223}
   pinMin: {fileID: 6880597390049217183}
-  downToUp: 0
-  setCenter: 0
   camera: {fileID: 0}
 --- !u!1 &6880597389863123692
 GameObject:
@@ -433,8 +431,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pinMax: {fileID: 6880597391962385223}
   pinMin: {fileID: 6880597390049217183}
-  downToUp: 1
-  setCenter: 0
   camera: {fileID: 0}
 --- !u!1 &6880597390344005996
 GameObject:
@@ -1926,30 +1922,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec773b03c7c965141be540fb7f43b89b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  max_Wave: 0
-  now_Wave: 0
-  bpmCTRL: {fileID: 0}
-  gameCTRL: {fileID: 0}
-  enemyCtrl: {fileID: 6880597390736843219}
-  gate_N: {fileID: 6880597390956264108}
-  gate_S: {fileID: 6880597391236055923}
-  interval_MaxCount_Nomal: 4
-  interval_MaxCount_Clear: 2
-  interval_NowCount: 0
-  doInterval_Nomal: 0
-  doInterval_Clear: 0
-  prog_text: {fileID: 0}
+  _max_Wave: 0
+  _now_Wave: 0
+  _bpmCTRL: {fileID: 0}
+  _gameCTRL: {fileID: 0}
+  _enemyCtrl: {fileID: 6880597390736843219}
+  _gate_N: {fileID: 6880597390956264108}
+  _gate_S: {fileID: 6880597391236055923}
+  _interval_MaxCount_Nomal: 4
+  _interval_MaxCount_Clear: 2
+  _interval_NowCount: 0
+  _doInterval_Nomal: 0
+  _doInterval_Clear: 0
+  _prog_text: {fileID: 0}
   text_nomal1: Destroy
   text_nomal2: All
   text_nomal3: Enemys
   text_nomal4: Wave
   text_clear1: Arena
   text_clear2: Clear
-  isEndStage: 0
-  inWave: 0
+  _isEndStage: 0
+  _inWave: 0
   _audioCTRL: {fileID: 0}
-  audioSource: {fileID: -3289217945291337273}
-  audioClip: []
+  _audioSource: {fileID: 0}
+  _audioClip: []
 --- !u!82 &-3289217945291337273
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2424,6 +2420,7 @@ MonoBehaviour:
   - {x: -18, y: -15}
   - {x: 18, y: -15}
   arenaCtrl: {fileID: 0}
+  tutoArenaCtrl: {fileID: 0}
   arenaPos: {x: 0, y: 0}
 --- !u!1 &6880597391938946023
 GameObject:
@@ -2483,6 +2480,7 @@ MonoBehaviour:
   - {x: 0, y: 16}
   - {x: 0, y: -16}
   arenaCtrl: {fileID: 0}
+  tutoArenaCtrl: {fileID: 0}
   arenaPos: {x: 0, y: 0}
 --- !u!1 &6880597391962385223
 GameObject:
